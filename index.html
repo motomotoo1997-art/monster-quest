@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Монстро-Квест — приключение</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="game">
+  <div class="topbar">
+    <h1>⚔️ Монстро-Квест</h1>
+    <div class="badges" id="badges" hidden>
+      <span class="badge">🪙 <b id="b-money">0</b></span>
+      <span class="badge">🧪 <b id="b-potions">3</b></span>
+      <span class="badge">⚪ <b id="b-balls">5</b></span>
+      <span class="badge">🏅 <b id="b-trainers">0/3</b></span>
+    </div>
+    <button id="btn-sound" title="Звук вкл/выкл" aria-label="Звук">🔊</button>
+  </div>
+
+  <!-- START -->
+  <section class="screen active" id="screen-start">
+    <div class="panel">
+      <h2>Добро пожаловать в долину Нексо!</h2>
+      <p class="sub">Исследуйте карту, ищите диких монстров в кустах 🌿, ловите их монстроболами, побеждайте тренеров и бросьте вызов чемпиону на вершине горы.</p>
+      <div class="continue-row" id="continue-row" hidden>
+        <button class="btn primary wide" id="btn-continue" style="text-align:center">▶️ Продолжить приключение</button>
+      </div>
+      <p class="sub" style="margin-bottom:12px"><b style="color:var(--text)">Новая игра:</b> выберите стартового монстра</p>
+      <div class="starters" id="starters"></div>
+      <div class="rules">
+        <b>Стихии:</b> 🔥 огонь силён против 🌿 травы · 💧 вода против 🔥 огня и 🪨 камня · 🌿 трава против 💧 воды и 🪨 камня · ⚡ электро против 💧 воды.<br>
+        <b>Мир:</b> луг, лес, озеро и горы — в каждой зоне свои монстры. Фонтан ⛲ лечит команду. На карте спрятаны зелья и монстроболы. Стартовые монстры эволюционируют на 10-м уровне!
+      </div>
+    </div>
+  </section>
+
+  <!-- WORLD -->
+  <section class="screen" id="screen-world">
+    <div class="world-wrap">
+      <canvas id="world" width="720" height="468"></canvas>
+      <div class="hud" id="hud"></div>
+      <button id="btn-dex">📖 Нексопедия</button>
+      <button id="btn-team">👥 Команда</button>
+      <div class="dpad" id="dpad">
+        <button class="empty" tabindex="-1"></button><button data-dir="up" aria-label="Вверх">▲</button><button class="empty" tabindex="-1"></button>
+        <button data-dir="left" aria-label="Влево">◀</button><button class="empty" tabindex="-1"></button><button data-dir="right" aria-label="Вправо">▶</button>
+        <button class="empty" tabindex="-1"></button><button data-dir="down" aria-label="Вниз">▼</button><button class="empty" tabindex="-1"></button>
+      </div>
+      <div id="msg"></div>
+      <div id="flash"></div>
+    </div>
+    <div class="hint">🎮 Стрелки / WASD или кнопки на экране — ходить · тёмные кусты 🌿 — там прячутся дикие монстры · подойдите вплотную к тренеру — начнётся бой · фонтан ⛲ лечит команду</div>
+  </section>
+
+  <!-- BATTLE -->
+  <section class="screen" id="screen-battle">
+    <div class="arena" id="arena">
+      <span class="deco" style="top:12px; right:24px; font-size:34px;">☀️</span>
+      <span class="deco" style="top:22px; left:270px;">☁️</span>
+      <span class="deco" style="top:52px; left:400px; font-size:20px;">☁️</span>
+      <div class="plate enemy"></div>
+      <div class="plate player"></div>
+      <div class="sprite-holder enemy" id="enemy-sprite">❔</div>
+      <div class="sprite-holder player" id="player-sprite">❔</div>
+      <div class="infocard enemy">
+        <div class="row">
+          <span class="mon-name" id="enemy-name">—</span>
+          <span class="lvl" id="enemy-lvl">ур. 1</span>
+        </div>
+        <div class="row" style="margin-bottom:8px"><span class="type normal" id="enemy-type">—</span><span class="dots" id="enemy-dots"></span></div>
+        <div class="hpbar"><div class="fill" id="enemy-hp"></div></div>
+        <div class="hptext" id="enemy-hptext">—</div>
+      </div>
+      <div class="infocard player">
+        <div class="row">
+          <span class="mon-name" id="player-name">—</span>
+          <span class="lvl" id="player-lvl">ур. 1</span>
+        </div>
+        <div class="row" style="margin-bottom:8px"><span class="type normal" id="player-type">—</span></div>
+        <div class="hpbar"><div class="fill" id="player-hp"></div></div>
+        <div class="hptext" id="player-hptext">—</div>
+        <div class="expbar"><div class="fill" id="player-exp" style="width:0%"></div></div>
+      </div>
+      <div id="fx"></div>
+    </div>
+    <div class="log" id="log" role="log" aria-live="polite"></div>
+    <div class="controls" id="controls"></div>
+  </section>
+
+  <!-- END -->
+  <section class="screen" id="screen-end">
+    <div class="panel" style="text-align:center">
+      <span class="end-emoji" id="end-emoji">🏆</span>
+      <h2 id="end-title">Победа!</h2>
+      <p class="sub" id="end-text"></p>
+      <div class="team-line" id="end-team"></div>
+      <div class="end-btns">
+        <button class="btn primary" style="text-align:center" id="btn-continue-world">🌍 Продолжить исследование</button>
+        <button class="btn" style="text-align:center" id="btn-newgame">Новая игра</button>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM MODAL -->
+  <div id="modal" hidden>
+    <div class="modal-panel">
+      <h3 id="modal-title">👥 Ваша команда</h3>
+      <div id="modal-list"></div>
+      <button class="modal-close" id="modal-close">Закрыть</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/world.js"></script>
+<script src="js/audio-fx.js"></script>
+<script src="js/battle.js"></script>
+</body>
+</html>
