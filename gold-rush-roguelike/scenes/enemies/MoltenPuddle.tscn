@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/molten_puddle.gd" id="1_puddle"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_puddle"]
+radius = 35.0
+
+[node name="MoltenPuddle" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+monitoring = true
+monitorable = false
+script = ExtResource("1_puddle")
+
+[node name="Visual" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-35, -7, -24, -24, -4, -31, 21, -24, 34, -8, 31, 14, 12, 29, -13, 27, -31, 13)
+color = Color(1, 0.48, 0.04, 0.48)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_puddle")
