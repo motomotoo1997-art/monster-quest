@@ -10,6 +10,7 @@ signal leveled_up
 @export var reserve_ammo: int = 56
 @export_file("*.png") var atlas_path := "res://assets/characters/vitya_atlas.png"
 @export var atlas_scale := 0.58
+@export var camera_shake_decay: float = 28.0
 
 var health: int
 var ammo: int
@@ -23,6 +24,7 @@ var dash_time := 0.0
 var reloading := false
 var dead := false
 var last_aim := Vector2.DOWN
+var camera_shake_strength: float = 0.0
 var shot_stream: AudioStream
 var level_stream: AudioStream
 
@@ -32,6 +34,7 @@ const AtlasAnimator = preload("res://scripts/atlas_animator.gd")
 
 @onready var static_sprite: Sprite2D = $Sprite
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var camera: Camera2D = $Camera2D
 
 func _ready() -> void:
 	health = max_health
@@ -57,6 +60,7 @@ func _configure_visuals() -> void:
 func _physics_process(delta: float) -> void:
 	if dead:
 		return
+	_update_camera_shake(delta)
 	fire_clock = maxf(0.0, fire_clock - delta)
 	dash_clock = maxf(0.0, dash_clock - delta)
 	dash_time = maxf(0.0, dash_time - delta)
@@ -83,6 +87,20 @@ func _physics_process(delta: float) -> void:
 		_try_shoot(last_aim)
 	if Input.is_key_pressed(KEY_R) and not reloading:
 		_reload()
+
+func _update_camera_shake(delta: float) -> void:
+	camera_shake_strength = move_toward(camera_shake_strength, 0.0, camera_shake_decay * delta)
+	if camera_shake_strength <= 0.01:
+		camera_shake_strength = 0.0
+		camera.offset = Vector2.ZERO
+		return
+	camera.offset = Vector2(
+		randf_range(-camera_shake_strength, camera_shake_strength),
+		randf_range(-camera_shake_strength, camera_shake_strength)
+	)
+
+func add_camera_shake(amount: float) -> void:
+	camera_shake_strength = maxf(camera_shake_strength, maxf(0.0, amount))
 
 func _update_animation(input_dir: Vector2) -> void:
 	if not animated_sprite.visible:
@@ -118,6 +136,7 @@ func _try_shoot(aim_direction: Vector2) -> void:
 	flash.rotation = aim_direction.angle()
 	get_tree().current_scene.add_child(flash)
 	_play_sfx(shot_stream, -3.0)
+	add_camera_shake(5.0)
 	var visual: Node2D = _visual_node()
 	var base_position: Vector2 = visual.position
 	var tween := create_tween()
@@ -141,6 +160,7 @@ func take_damage(amount: int) -> void:
 	if dead:
 		return
 	health = maxi(0, health - amount)
+	add_camera_shake(3.0)
 	var visual: Node2D = _visual_node()
 	var tween := create_tween()
 	tween.tween_property(visual, "modulate", Color(1.0, 0.28, 0.28), 0.06)
@@ -153,6 +173,7 @@ func _die() -> void:
 	velocity = Vector2.ZERO
 	set_physics_process(false)
 	$CollisionShape2D.set_deferred("disabled", true)
+	camera.offset = Vector2.ZERO
 	var visual: Node2D = _visual_node()
 	var tween := create_tween()
 	tween.parallel().tween_property(visual, "modulate:a", 0.0, 0.42)
