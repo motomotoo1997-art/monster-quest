@@ -1,0 +1,92 @@
+[gd_scene load_steps=4 format=3]
+
+[sub_resource type="RectangleShape2D" id="BuildShape"]
+size = Vector2(1120, 560)
+
+[sub_resource type="CircleShape2D" id="PillarShape"]
+radius = 42.0
+
+[sub_resource type="RectangleShape2D" id="GateShape"]
+size = Vector2(95, 155)
+
+[node name="Arena05" type="Node2D"]
+y_sort_enabled = true
+
+[node name="Ground" type="Polygon2D" parent="."]
+z_index = -20
+polygon = PackedVector2Array(0, 0, 1280, 0, 1280, 720, 0, 720)
+color = Color(0.43, 0.24, 0.14, 1)
+
+[node name="InnerSand" type="Polygon2D" parent="."]
+z_index = -19
+polygon = PackedVector2Array(50, 50, 1230, 50, 1230, 670, 50, 670)
+color = Color(0.68, 0.44, 0.22, 1)
+
+[node name="BossRing" type="Polygon2D" parent="."]
+z_index = -18
+polygon = PackedVector2Array(725, 120, 1000, 135, 1160, 360, 1000, 585, 725, 600, 575, 360)
+color = Color(0.56, 0.34, 0.17, 1)
+
+[node name="BuildZone" type="Area2D" parent="." groups=["build_zone"]]
+position = Vector2(640, 360)
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+monitorable = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildZone"]
+shape = SubResource("BuildShape")
+
+[node name="PlayerSpawn" type="Marker2D" parent="." groups=["player_spawn"]]
+position = Vector2(260, 360)
+
+[node name="CoreSpawn" type="Marker2D" parent="." groups=["core_spawn"]]
+position = Vector2(430, 360)
+
+[node name="EnemySpawnNorth" type="Marker2D" parent="." groups=["enemy_spawn"]]
+position = Vector2(860, 100)
+
+[node name="EnemySpawnEast" type="Marker2D" parent="." groups=["enemy_spawn"]]
+position = Vector2(1170, 360)
+
+[node name="EnemySpawnSouth" type="Marker2D" parent="." groups=["enemy_spawn"]]
+position = Vector2(860, 620)
+
+[node name="BossSpawn" type="Marker2D" parent="." groups=["boss_spawn"]]
+position = Vector2(900, 360)
+
+[node name="PillarNorth" type="StaticBody2D" parent="."]
+position = Vector2(650, 175)
+collision_layer = 1
+collision_mask = 1
+
+[node name="Visual" type="Polygon2D" parent="PillarNorth"]
+polygon = PackedVector2Array(-40, -8, -27, -39, 18, -43, 43, -15, 36, 34, -20, 42, -44, 10)
+color = Color(0.27, 0.18, 0.14, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PillarNorth"]
+shape = SubResource("PillarShape")
+
+[node name="PillarSouth" type="StaticBody2D" parent="."]
+position = Vector2(650, 545)
+collision_layer = 1
+collision_mask = 1
+
+[node name="Visual" type="Polygon2D" parent="PillarSouth"]
+polygon = PackedVector2Array(-40, -8, -27, -39, 18, -43, 43, -15, 36, 34, -20, 42, -44, 10)
+color = Color(0.27, 0.18, 0.14, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PillarSouth"]
+shape = SubResource("PillarShape")
+
+[node name="MineGate" type="StaticBody2D" parent="."]
+position = Vector2(1100, 360)
+collision_layer = 1
+collision_mask = 1
+
+[node name="Visual" type="Polygon2D" parent="MineGate"]
+polygon = PackedVector2Array(-48, -79, 48, -79, 48, 79, 25, 79, 25, -42, -25, -42, -25, 79, -48, 79)
+color = Color(0.24, 0.17, 0.13, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MineGate"]
+shape = SubResource("GateShape")
