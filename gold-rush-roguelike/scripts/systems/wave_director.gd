@@ -47,7 +47,7 @@ func start_wave(definition: Array[Dictionary]) -> void:
 		var interval := maxf(float(entry.get("interval", 0.4)), 0.02)
 		if scene == null or count <= 0:
 			continue
-		for i in count:
+		for _i in range(count):
 			_spawn_queue.append({"scene": scene, "interval": interval})
 	wave_number += 1
 	_wave_active = true
