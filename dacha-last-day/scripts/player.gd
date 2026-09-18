@@ -118,8 +118,8 @@ func _try_shoot(aim_direction: Vector2) -> void:
 	flash.rotation = aim_direction.angle()
 	get_tree().current_scene.add_child(flash)
 	_play_sfx(shot_stream, -3.0)
-	var visual := _visual_node()
-	var base_position := visual.position
+	var visual: Node2D = _visual_node()
+	var base_position: Vector2 = visual.position
 	var tween := create_tween()
 	tween.tween_property(visual, "position", base_position - aim_direction * 4.0, 0.035)
 	tween.tween_property(visual, "position", base_position, 0.075)
@@ -141,7 +141,7 @@ func take_damage(amount: int) -> void:
 	if dead:
 		return
 	health = maxi(0, health - amount)
-	var visual := _visual_node()
+	var visual: Node2D = _visual_node()
 	var tween := create_tween()
 	tween.tween_property(visual, "modulate", Color(1.0, 0.28, 0.28), 0.06)
 	tween.tween_property(visual, "modulate", Color.WHITE, 0.12)
@@ -153,7 +153,7 @@ func _die() -> void:
 	velocity = Vector2.ZERO
 	set_physics_process(false)
 	$CollisionShape2D.set_deferred("disabled", true)
-	var visual := _visual_node()
+	var visual: Node2D = _visual_node()
 	var tween := create_tween()
 	tween.parallel().tween_property(visual, "modulate:a", 0.0, 0.42)
 	tween.parallel().tween_property(visual, "rotation", 0.35, 0.42)
@@ -190,7 +190,7 @@ func perk_speed() -> void:
 func perk_heal() -> void:
 	heal(35)
 
-func _visual_node() -> CanvasItem:
+func _visual_node() -> Node2D:
 	return animated_sprite if animated_sprite.visible else static_sprite
 
 func _play_sfx(stream: AudioStream, volume_db: float) -> void:
