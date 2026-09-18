@@ -17,6 +17,9 @@ attack_interval = 1.2
 charge_when_close = true
 xp_value = 70
 scrap_value = 28
+atlas_path = "res://assets/characters/boar_atlas.png"
+atlas_scale = 0.78
+visual_tint = Color(1.0, 0.72, 0.54, 1.0)
 [node name="Shadow" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(-62, 15, 0, 31, 62, 15, 0, 2)
 color = Color(0, 0, 0, 0.32)
@@ -24,7 +27,9 @@ color = Color(0, 0, 0, 0.32)
 position = Vector2(0, -58)
 texture = ExtResource("2")
 scale = Vector2(0.68, 0.68)
-modulate = Color(1.0, 0.72, 0.54, 1.0)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(0, -61)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -22)
 shape = SubResource("Capsule")

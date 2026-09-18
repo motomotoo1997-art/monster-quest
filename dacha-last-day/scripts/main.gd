@@ -119,9 +119,13 @@ func _update_atmosphere() -> void:
 	world.modulate = Color.WHITE.lerp(target_tint, progress)
 
 func _update_hud() -> void:
-	%HealthLabel.text = "Здоровье %d / %d" % [player.health, player.max_health]
-	%AmmoLabel.text = "Дробовик %d / %d%s" % [player.ammo, player.reserve_ammo, "  ПЕРЕЗАРЯДКА" if player.reloading else ""]
-	%XPLabel.text = "Ур. %d   XP %d / %d   Лом %d" % [player.level, player.xp, player.xp_needed, player.scrap]
+	%HealthBar.max_value = player.max_health
+	%HealthBar.value = player.health
+	%XPBar.max_value = player.xp_needed
+	%XPBar.value = player.xp
+	%HealthLabel.text = "HP %d / %d" % [player.health, player.max_health]
+	%AmmoLabel.text = "ДРОБОВИК  %d / %d%s" % [player.ammo, player.reserve_ammo, "  •  ПЕРЕЗАРЯДКА" if player.reloading else ""]
+	%XPLabel.text = "Ур. %d   •   Лом %d" % [player.level, player.scrap]
 	if build_phase:
 		%WaveLabel.text = "СТРОЙКА %.0fс  •  T турель  G мангал  F холодильник  B баррикада" % build_time
 	elif defense_wave_active:

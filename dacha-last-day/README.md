@@ -1,26 +1,33 @@
-# Дача: Last Day — Prototype 0.3
+# Дача: Last Day — Prototype 0.4
 
-Godot 4.7.2 2D survival roguelike + tower defence vertical slice.
+Godot 4.7.2 vertical slice: 2D isometric Survival + Tower Defence.
 
-## Управление
-- WASD — движение
-- ЛКМ — стрельба
-- R — перезарядка
-- Shift — рывок
-- Во время фазы строительства: T турель, G мангал, F холодильник, B баррикада
+## Current gameplay
+- WASD movement, mouse aim/fire, R reload, Shift dash.
+- Survival waves: psycho chickens, charging boars, ranged neighbors.
+- XP, levels and 3 perk choices.
+- Scrap economy.
+- Every third wave opens a build phase, followed by a real DachaCore defense wave.
+- Four structures: potato turret, brazier, healing fridge and barricade.
+- King Boar miniboss every fifth wave.
+- Day/evening/defense atmosphere tint.
+- Muzzle flash and impact VFX.
+- HUD health/XP bars and boss readout.
 
-## Игровой цикл
-Survival → XP/лом/перки → после каждой третьей волны 12 секунд строительства → следующая волна становится настоящей обороной дачи: враги переключают цель на DachaCore. Баррикады физически задерживают ближних врагов и разрушаются от атак.
+## Production sprite pipeline
+Character scenes support 4x8 atlases: 4 animation frames for each of 8 directions, 192x192 per frame. Put these optional production PNGs into `res://assets/characters/`:
 
-## Контент
-- Дядя Витя: движение, дробовик, reload, dash, HP/XP
-- Курица-псих, кабан-таран, сосед-стрелок
-- Царь-Кабан каждые 5 волн
-- 3 перка; выбор перка ставит игру на паузу
-- 4 TD-постройки: турель, мангал, лечащий холодильник, разрушаемая баррикада
-- DachaCore 500 HP как цель TD-волн
-- день→ночь tint и более тёмный оттенок оборонительной волны
-- enemy cap для защиты от бесконечного накопления врагов
+- `vitya_atlas.png`
+- `chicken_atlas.png`
+- `boar_atlas.png`
+- `neighbor_atlas.png`
 
-## Проверка
-GitHub Actions скачивает Godot 4.7.2, импортирует проект в headless editor и запускает `tests/smoke_test.gd`.
+When an atlas is absent the project automatically falls back to the vector placeholder for CI/source checkouts. The packaged art build contains the normalized atlases.
+
+Optional audio files in `res://audio/`:
+- `shotgun.wav`
+- `hit.wav`
+- `level_up.wav`
+
+## Validation
+GitHub Actions downloads Godot 4.7.2, imports/parses the project, runs the gameplay smoke test, renders a real 1280x720 preview under Xvfb, and uploads both the screenshot and source ZIP as artifacts.

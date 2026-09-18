@@ -30,6 +30,10 @@ func _run() -> void:
 	_check(player != null, "player missing from main scene")
 	_check(core != null, "DachaCore missing from main scene")
 	_check(core != null and not core.active, "DachaCore should start inactive")
+	_check(player.get_node_or_null("AnimatedSprite2D") != null, "player animation node missing")
+	_check(instance.get_node_or_null("UI/Status/VBox/HealthBar") != null, "health bar missing")
+	_check(load("res://scenes/vfx/muzzle_flash.tscn") != null, "muzzle VFX scene missing")
+	_check(load("res://scenes/vfx/impact_fx.tscn") != null, "impact VFX scene missing")
 
 	if player != null:
 		var start_health: int = player.health
@@ -61,6 +65,7 @@ func _run() -> void:
 			var node := scene.instantiate()
 			_check(node != null, "failed to instantiate " + scene_path)
 			if node != null:
+				_check(node.get_node_or_null("AnimatedSprite2D") != null or not node.is_in_group("enemy"), "enemy animation node missing in " + scene_path)
 				node.queue_free()
 
 	instance.call("_begin_wave", 4, true)
@@ -76,7 +81,7 @@ func _run() -> void:
 		_check(boss.is_in_group("enemy"), "boss must also be in enemy group")
 
 	if failures.is_empty():
-		print("SMOKE_OK: gameplay systems, perk pause, TD objective and boss spawn passed")
+		print("SMOKE_OK: Prototype 0.4 systems, VFX nodes, HUD, TD objective and boss spawn passed")
 		instance.queue_free()
 		quit(0)
 	else:

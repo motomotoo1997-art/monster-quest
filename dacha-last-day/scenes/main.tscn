@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/player.tscn" id="2"]
@@ -6,6 +6,43 @@
 [ext_resource type="Texture2D" path="res://assets/greenhouse.svg" id="4"]
 [ext_resource type="Texture2D" path="res://assets/tree.svg" id="5"]
 [ext_resource type="PackedScene" path="res://scenes/dacha_core.tscn" id="6"]
+
+[sub_resource type="StyleBoxFlat" id="StatusPanel"]
+bg_color = Color(0.025, 0.04, 0.04, 0.9)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.28, 0.38, 0.34, 0.9)
+corner_radius_top_left = 9
+corner_radius_top_right = 9
+corner_radius_bottom_right = 9
+corner_radius_bottom_left = 9
+content_margin_left = 14.0
+content_margin_top = 10.0
+content_margin_right = 14.0
+content_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="BarBackground"]
+bg_color = Color(0.08, 0.11, 0.1, 0.95)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="HealthFill"]
+bg_color = Color(0.76, 0.16, 0.12, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="XPFill"]
+bg_color = Color(0.13, 0.62, 0.84, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1")
@@ -51,50 +88,77 @@ texture = ExtResource("5")
 scale = Vector2(0.6, 0.6)
 [node name="Player" parent="World" instance=ExtResource("2")]
 position = Vector2(0, 80)
+
 [node name="UI" type="CanvasLayer" parent="."]
 [node name="Status" type="PanelContainer" parent="UI"]
 offset_left = 18.0
 offset_top = 16.0
-offset_right = 390.0
-offset_bottom = 128.0
+offset_right = 380.0
+offset_bottom = 156.0
+theme_override_styles/panel = SubResource("StatusPanel")
 [node name="VBox" type="VBoxContainer" parent="UI/Status"]
+theme_override_constants/separation = 4
 [node name="HealthLabel" type="Label" parent="UI/Status/VBox"]
 unique_name_in_owner = true
-text = "Здоровье 100 / 100"
-theme_override_font_sizes/font_size = 18
+text = "HP 100 / 100"
+theme_override_font_sizes/font_size = 17
+[node name="HealthBar" type="ProgressBar" parent="UI/Status/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 13)
+show_percentage = false
+max_value = 100.0
+value = 100.0
+theme_override_styles/background = SubResource("BarBackground")
+theme_override_styles/fill = SubResource("HealthFill")
 [node name="AmmoLabel" type="Label" parent="UI/Status/VBox"]
 unique_name_in_owner = true
-text = "Дробовик 8 / 56"
-theme_override_font_sizes/font_size = 18
+text = "ДРОБОВИК  8 / 56"
+theme_override_font_sizes/font_size = 17
 [node name="XPLabel" type="Label" parent="UI/Status/VBox"]
 unique_name_in_owner = true
-text = "Ур. 1   XP 0 / 30   Лом 40"
-theme_override_font_sizes/font_size = 16
+text = "Ур. 1   •   Лом 40"
+theme_override_font_sizes/font_size = 15
+[node name="XPBar" type="ProgressBar" parent="UI/Status/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 8)
+show_percentage = false
+max_value = 30.0
+theme_override_styles/background = SubResource("BarBackground")
+theme_override_styles/fill = SubResource("XPFill")
 [node name="WaveLabel" type="Label" parent="UI"]
 unique_name_in_owner = true
-offset_left = 395.0
-offset_top = 18.0
-offset_right = 1160.0
+offset_left = 400.0
+offset_top = 20.0
+offset_right = 1165.0
 offset_bottom = 60.0
 text = "Волна 1"
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.75)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
 theme_override_font_sizes/font_size = 21
 [node name="BossLabel" type="Label" parent="UI"]
 unique_name_in_owner = true
 visible = false
-offset_left = 490.0
+offset_left = 470.0
 offset_top = 64.0
-offset_right = 820.0
+offset_right = 830.0
 offset_bottom = 104.0
 text = "ЦАРЬ-КАБАН"
 horizontal_alignment = 1
 theme_override_colors/font_color = Color(1, 0.46, 0.28, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
 theme_override_font_sizes/font_size = 23
 [node name="Controls" type="Label" parent="UI"]
 offset_left = 18.0
-offset_top = 662.0
-offset_right = 930.0
-offset_bottom = 704.0
-text = "WASD движение • ЛКМ огонь • R перезарядка • Shift рывок • Стройка: T/G/F/B"
+offset_top = 675.0
+offset_right = 1030.0
+offset_bottom = 712.0
+text = "WASD движение  •  ЛКМ огонь  •  R перезарядка  •  Shift рывок  •  стройка T/G/F/B"
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.78)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
 theme_override_font_sizes/font_size = 16
 [node name="PerkPanel" type="PanelContainer" parent="UI"]
 unique_name_in_owner = true
@@ -102,6 +166,7 @@ offset_left = 370.0
 offset_top = 220.0
 offset_right = 910.0
 offset_bottom = 480.0
+theme_override_styles/panel = SubResource("StatusPanel")
 [node name="VBox" type="VBoxContainer" parent="UI/PerkPanel"]
 [node name="Title" type="Label" parent="UI/PerkPanel/VBox"]
 text = "НОВЫЙ УРОВЕНЬ — выбери улучшение"
