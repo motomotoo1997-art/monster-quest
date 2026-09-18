@@ -37,6 +37,13 @@ func _run() -> void:
 	_check(load("res://scenes/vfx/impact_fx.tscn") != null, "impact VFX scene missing")
 
 	if player != null:
+		var camera := player.get_node_or_null("Camera2D") as Camera2D
+		_check(camera != null, "player camera missing")
+		_check(player.has_method("add_camera_shake"), "player camera shake method missing")
+		if player.has_method("add_camera_shake"):
+			player.call("add_camera_shake", 6.0)
+			_check(float(player.get("camera_shake_strength")) >= 5.9, "camera shake strength did not increase")
+
 		var start_health: int = player.health
 		player.take_damage(15)
 		_check(player.health == start_health - 15, "player damage handling is wrong")
@@ -93,7 +100,7 @@ func _run() -> void:
 
 	paused = false
 	if failures.is_empty():
-		print("SMOKE_OK: Prototype 0.4 systems, VFX nodes, HUD, TD objective and boss spawn passed")
+		print("SMOKE_OK: Prototype 0.4 systems, camera feedback, VFX nodes, HUD, TD objective and boss spawn passed")
 		instance.queue_free()
 		quit(0)
 	else:
