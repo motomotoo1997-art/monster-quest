@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/gold_hopper.gd" id="1_enemy"]
+[ext_resource type="Script" path="res://scripts/components/health_component.gd" id="2_health"]
+[ext_resource type="Script" path="res://scripts/components/team_component.gd" id="3_team"]
+[ext_resource type="Script" path="res://scripts/components/hurtbox_component.gd" id="4_hurtbox"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_enemy"]
+radius = 14.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_enemy"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"move",
+"speed": 8.0
+}]
+
+[node name="GoldHopper" type="CharacterBody2D" groups=["enemies"]]
+collision_layer = 1
+collision_mask = 1
+script = ExtResource("1_enemy")
+move_speed = 108.0
+contact_damage = 11.0
+attack_range = 30.0
+attack_cooldown = 0.9
+gold_value = 6
+prefer_core_weight = 0.45
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_enemy")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(0, 13)
+modulate = Color(0, 0, 0, 0.25)
+scale = Vector2(1.2, 0.4)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_enemy")
+animation = &"idle"
+
+[node name="PlaceholderVisual" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-13, 8, -15, -4, -7, -15, 7, -14, 15, -4, 13, 9, 0, 15)
+color = Color(1, 0.66, 0.05, 1)
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_health")
+max_health = 36.0
+
+[node name="TeamComponent" type="Node" parent="."]
+script = ExtResource("3_team")
+team = 1
+
+[node name="HurtboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component_path", "team_component_path")]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+monitorable = true
+script = ExtResource("4_hurtbox")
+health_component_path = NodePath("../HealthComponent")
+team_component_path = NodePath("../TeamComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_enemy")
