@@ -9,6 +9,7 @@ class_name GoldRushMain
 @onready var run_controller: RunController = $RunController
 @onready var arena_controller: ArenaController = $ArenaController
 @onready var wave_director: WaveDirector = $WaveDirector
+@onready var build_controller: BuildController = $BuildController
 @onready var player: Prospector = $Actors/Prospector
 @onready var core: GoldCore = $Actors/GoldCore
 
@@ -33,6 +34,10 @@ func advance_after_upgrade() -> void:
 
 
 func _on_arena_started(index: int) -> void:
+	if index >= 2:
+		build_controller.unlock_defense(1)
+	if index >= 3:
+		build_controller.unlock_defense(3)
 	_position_persistent_actors()
 	_start_arena_wave(index)
 
