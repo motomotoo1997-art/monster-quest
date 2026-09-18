@@ -35,6 +35,9 @@ func _run() -> void:
 	_check(instance.get_node_or_null("UI/Status/VBox/HealthBar") != null, "health bar missing")
 	_check(load("res://scenes/vfx/muzzle_flash.tscn") != null, "muzzle VFX scene missing")
 	_check(load("res://scenes/vfx/impact_fx.tscn") != null, "impact VFX scene missing")
+	_check(instance.get_node_or_null("World/AmbientModulate") is CanvasModulate, "ambient CanvasModulate missing")
+	_check(instance.get_node_or_null("World/HouseWarmLight") is PointLight2D, "house PointLight2D missing")
+	_check(instance.get_node_or_null("World/YardWarmLight") is PointLight2D, "yard PointLight2D missing")
 
 	if player != null:
 		var camera := player.get_node_or_null("Camera2D") as Camera2D
@@ -100,7 +103,7 @@ func _run() -> void:
 
 	paused = false
 	if failures.is_empty():
-		print("SMOKE_OK: Prototype 0.4 systems, camera feedback, VFX nodes, HUD, TD objective and boss spawn passed")
+		print("SMOKE_OK: Prototype 0.4 systems, camera feedback, 2D lighting, VFX, HUD, TD objective and boss spawn passed")
 		instance.queue_free()
 		quit(0)
 	else:
