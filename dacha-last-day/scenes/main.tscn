@@ -87,19 +87,31 @@ theme_override_font_sizes/font_size = 16
 
 [node name="WaveLabel" type="Label" parent="UI"]
 unique_name_in_owner = true
-offset_left = 455.0
+offset_left = 420.0
 offset_top = 18.0
-offset_right = 900.0
+offset_right = 1100.0
 offset_bottom = 60.0
 text = "Волна 1"
 theme_override_font_sizes/font_size = 21
 
+[node name="BossLabel" type="Label" parent="UI"]
+unique_name_in_owner = true
+visible = false
+offset_left = 490.0
+offset_top = 64.0
+offset_right = 820.0
+offset_bottom = 104.0
+text = "ЦАРЬ-КАБАН"
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(1, 0.46, 0.28, 1)
+theme_override_font_sizes/font_size = 23
+
 [node name="Controls" type="Label" parent="UI"]
 offset_left = 18.0
 offset_top = 662.0
-offset_right = 780.0
+offset_right = 930.0
 offset_bottom = 704.0
-text = "WASD — движение   •   ЛКМ — огонь   •   R — перезарядка   •   Shift — рывок"
+text = "WASD движение • ЛКМ огонь • R перезарядка • Shift рывок • Стройка: T/G/F/B"
 theme_override_font_sizes/font_size = 16
 
 [node name="PerkPanel" type="PanelContainer" parent="UI"]
@@ -118,15 +130,15 @@ theme_override_font_sizes/font_size = 23
 
 [node name="PerkDamage" type="Button" parent="UI/PerkPanel/VBox"]
 unique_name_in_owner = true
-text = "💥 Больше урона  +25%"
+text = "Больше урона  +25%"
 custom_minimum_size = Vector2(0, 52)
 
 [node name="PerkSpeed" type="Button" parent="UI/PerkPanel/VBox"]
 unique_name_in_owner = true
-text = "🥾 Скорость  +15%"
+text = "Скорость  +15%"
 custom_minimum_size = Vector2(0, 52)
 
 [node name="PerkHeal" type="Button" parent="UI/PerkPanel/VBox"]
 unique_name_in_owner = true
-text = "❤️ Лечение  +35 HP"
+text = "Лечение  +35 HP"
 custom_minimum_size = Vector2(0, 52)

@@ -97,6 +97,9 @@ func take_damage(amount: int) -> void:
 	if health <= 0:
 		get_tree().reload_current_scene()
 
+func heal(amount: int) -> void:
+	health = mini(max_health, health + maxi(0, amount))
+
 func gain_xp(amount: int) -> void:
 	xp += amount
 	while xp >= xp_needed:
@@ -121,4 +124,4 @@ func perk_speed() -> void:
 	move_speed *= 1.15
 
 func perk_heal() -> void:
-	health = mini(max_health, health + 35)
+	heal(35)
