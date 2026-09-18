@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3]
+[gd_scene load_steps=25 format=3]
 
 [ext_resource type="Script" path="res://scripts/main/main.gd" id="1_main"]
 [ext_resource type="Script" path="res://scripts/systems/run_controller.gd" id="2_run"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" path="res://scenes/combat/GoldPickup.tscn" id="21_gold"]
 [ext_resource type="Script" path="res://scripts/systems/upgrade_controller.gd" id="22_upgrade_controller"]
 [ext_resource type="PackedScene" path="res://scenes/ui/UpgradeOverlay.tscn" id="23_upgrade_overlay"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/GoldBarTank.tscn" id="24_boss"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_main")
@@ -30,6 +31,7 @@ hopper_scene = ExtResource("14_hopper")
 sentinel_scene = ExtResource("15_sentinel")
 disc_scene = ExtResource("16_disc")
 slime_scene = ExtResource("17_slime")
+boss_scene = ExtResource("24_boss")
 
 [node name="ArenaLayer" type="Node2D" parent="."]
 
