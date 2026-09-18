@@ -4,6 +4,7 @@ class_name BuildController
 signal selection_changed(slot: int)
 signal preview_validity_changed(valid: bool)
 signal defense_built(defense: DefenseBase)
+signal defense_unlocked(slot: int)
 
 @export var economy_path: NodePath
 @export var defense_scenes: Array[PackedScene] = []
@@ -12,6 +13,7 @@ signal defense_built(defense: DefenseBase)
 
 var selected_slot: int = 0
 var preview_instance: DefenseBase
+var unlocked_slots: Array[int] = [2]
 var _last_preview_valid := false
 var economy: EconomyController
 
@@ -48,12 +50,24 @@ func _process(_delta: float) -> void:
 
 
 func select_defense(slot: int) -> void:
-	if slot < 1 or slot > defense_scenes.size():
+	if slot < 1 or slot > defense_scenes.size() or not is_unlocked(slot):
 		selected_slot = 0
 		selection_changed.emit(selected_slot)
 		return
 	selected_slot = slot
 	selection_changed.emit(selected_slot)
+
+
+func unlock_defense(slot: int) -> void:
+	if slot < 1 or slot > defense_scenes.size() or unlocked_slots.has(slot):
+		return
+	unlocked_slots.append(slot)
+	unlocked_slots.sort()
+	defense_unlocked.emit(slot)
+
+
+func is_unlocked(slot: int) -> bool:
+	return unlocked_slots.has(slot)
 
 
 func begin_preview() -> void:
@@ -109,13 +123,15 @@ func cancel_build() -> void:
 
 
 func trigger_tnt() -> void:
+	if not is_unlocked(3):
+		return
 	for defense in get_tree().get_nodes_in_group("defenses"):
 		if defense is TNTBarrel:
 			(defense as TNTBarrel).trigger()
 
 
 func _get_selected_scene() -> PackedScene:
-	if selected_slot < 1 or selected_slot > defense_scenes.size():
+	if selected_slot < 1 or selected_slot > defense_scenes.size() or not is_unlocked(selected_slot):
 		return null
 	return defense_scenes[selected_slot - 1]
 
