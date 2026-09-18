@@ -2,14 +2,12 @@
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1"]
 [ext_resource type="Texture2D" path="res://assets/neighbor.svg" id="2"]
-
 [sub_resource type="CapsuleShape2D" id="Capsule"]
 radius = 18.0
 height = 48.0
-
 [node name="Neighbor" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 2
-collision_mask = 17
+collision_mask = 49
 script = ExtResource("1")
 max_health = 68
 speed = 78.0
@@ -19,16 +17,13 @@ ranged = true
 attack_range = 410.0
 xp_value = 12
 scrap_value = 3
-
 [node name="Shadow" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(-28, 9, 0, 17, 28, 9, 0, 3)
 color = Color(0, 0, 0, 0.26)
-
 [node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(0, -36)
 texture = ExtResource("2")
 scale = Vector2(0.41, 0.41)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -14)
 shape = SubResource("Capsule")

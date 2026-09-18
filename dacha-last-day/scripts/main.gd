@@ -11,12 +11,14 @@ const BARRICADE := preload("res://scenes/td/barricade.tscn")
 
 @onready var world: Node2D = $World
 @onready var player: CharacterBody2D = $World/Player
+@onready var core = $World/DachaCore
 @onready var perk_panel: Control = %PerkPanel
 
 var wave := 1
 var wave_time := 42.0
 var spawn_clock := 0.2
 var build_phase := false
+var defense_wave_active := false
 var build_time := 0.0
 var perk_open := false
 var build_key_state: Dictionary = {}
@@ -28,6 +30,8 @@ func _ready() -> void:
 	%PerkSpeed.pressed.connect(_perk_speed)
 	%PerkHeal.pressed.connect(_perk_heal)
 	perk_panel.visible = false
+	perk_panel.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+	core.set_active(false)
 
 func _process(delta: float) -> void:
 	_update_atmosphere()
@@ -37,25 +41,30 @@ func _process(delta: float) -> void:
 		_handle_build_input()
 		if build_time <= 0.0:
 			build_phase = false
-			_begin_wave(wave + 1)
+			_begin_wave(wave + 1, true)
 		return
 
 	wave_time -= delta
 	spawn_clock -= delta
-	if spawn_clock <= 0.0:
+	var enemy_cap := 20 + wave * 4
+	if spawn_clock <= 0.0 and get_tree().get_nodes_in_group("enemy").size() < enemy_cap:
 		_spawn_enemy()
 		spawn_clock = maxf(0.34, 1.25 - wave * 0.055)
 	if wave_time <= 0.0:
 		if wave % 3 == 0:
 			build_phase = true
+			defense_wave_active = false
+			core.set_active(false)
 			build_time = 12.0
 		else:
-			_begin_wave(wave + 1)
+			_begin_wave(wave + 1, false)
 
-func _begin_wave(next_wave: int) -> void:
+func _begin_wave(next_wave: int, defense_mode: bool = false) -> void:
 	wave = next_wave
 	wave_time = 42.0
 	spawn_clock = 0.15
+	defense_wave_active = defense_mode
+	core.set_active(defense_mode)
 	if wave >= 5 and wave % 5 == 0 and boss_spawned_wave != wave:
 		boss_spawned_wave = wave
 		_spawn_boss()
@@ -106,7 +115,8 @@ func _update_atmosphere() -> void:
 		world.modulate = Color(1.0, 0.9, 0.74, 1.0)
 		return
 	var progress := clampf(1.0 - wave_time / 42.0, 0.0, 1.0)
-	world.modulate = Color.WHITE.lerp(Color(0.58, 0.68, 0.92, 1.0), progress)
+	var target_tint := Color(0.46, 0.56, 0.82, 1.0) if defense_wave_active else Color(0.58, 0.68, 0.92, 1.0)
+	world.modulate = Color.WHITE.lerp(target_tint, progress)
 
 func _update_hud() -> void:
 	%HealthLabel.text = "Здоровье %d / %d" % [player.health, player.max_health]
@@ -114,6 +124,8 @@ func _update_hud() -> void:
 	%XPLabel.text = "Ур. %d   XP %d / %d   Лом %d" % [player.level, player.xp, player.xp_needed, player.scrap]
 	if build_phase:
 		%WaveLabel.text = "СТРОЙКА %.0fс  •  T турель  G мангал  F холодильник  B баррикада" % build_time
+	elif defense_wave_active:
+		%WaveLabel.text = "ОБОРОНА ДАЧИ • Волна %d • %.0fс • Дача %d/%d" % [wave, wave_time, core.health, core.max_health]
 	else:
 		%WaveLabel.text = "Волна %d  •  %.0fс  •  врагов %d" % [wave, wave_time, get_tree().get_nodes_in_group("enemy").size()]
 	var bosses := get_tree().get_nodes_in_group("boss")
@@ -125,10 +137,12 @@ func _update_hud() -> void:
 func _show_perks() -> void:
 	perk_open = true
 	perk_panel.visible = true
+	get_tree().paused = true
 
 func _hide_perks() -> void:
 	perk_open = false
 	perk_panel.visible = false
+	get_tree().paused = false
 
 func _perk_damage() -> void:
 	player.perk_damage()

@@ -2,14 +2,12 @@
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1"]
 [ext_resource type="Texture2D" path="res://assets/boar.svg" id="2"]
-
 [sub_resource type="CapsuleShape2D" id="Capsule"]
 radius = 25.0
 height = 64.0
-
 [node name="Boar" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 2
-collision_mask = 17
+collision_mask = 49
 script = ExtResource("1")
 max_health = 110
 speed = 82.0
@@ -19,16 +17,13 @@ attack_interval = 1.05
 charge_when_close = true
 xp_value = 15
 scrap_value = 4
-
 [node name="Shadow" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(-38, 9, 0, 20, 38, 9, 0, 2)
 color = Color(0, 0, 0, 0.28)
-
 [node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(0, -35)
 texture = ExtResource("2")
 scale = Vector2(0.42, 0.42)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -14)
 shape = SubResource("Capsule")
