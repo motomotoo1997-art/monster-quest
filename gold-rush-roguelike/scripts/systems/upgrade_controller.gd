@@ -3,7 +3,11 @@ class_name UpgradeController
 
 signal upgrade_selected(id: StringName)
 
-const DEFAULT_UPGRADES: Array[UpgradeDefinition] = [
+@export var player_path: NodePath
+@export var economy_path: NodePath
+@export var build_controller_path: NodePath
+
+var upgrade_definitions: Array[UpgradeDefinition] = [
 	preload("res://data/upgrades/weapon_damage.tres"),
 	preload("res://data/upgrades/fire_rate.tres"),
 	preload("res://data/upgrades/projectile_speed.tres"),
@@ -15,12 +19,6 @@ const DEFAULT_UPGRADES: Array[UpgradeDefinition] = [
 	preload("res://data/upgrades/gold_pickup_value.tres"),
 	preload("res://data/upgrades/crit_chance.tres"),
 ]
-
-@export var player_path: NodePath
-@export var economy_path: NodePath
-@export var build_controller_path: NodePath
-
-var upgrade_definitions: Array[UpgradeDefinition] = DEFAULT_UPGRADES.duplicate()
 var rng := RandomNumberGenerator.new()
 var turret_damage_multiplier := 1.0
 var turret_fire_rate_multiplier := 1.0
@@ -47,11 +45,11 @@ func roll_choices(count: int = 3) -> Array[UpgradeDefinition]:
 	var result: Array[UpgradeDefinition] = []
 	if count <= 0 or upgrade_definitions.is_empty():
 		return result
-	var pool := upgrade_definitions.duplicate()
+	var pool: Array[UpgradeDefinition] = upgrade_definitions.duplicate()
 	var chosen_ids: Dictionary = {}
 	while result.size() < count and not pool.is_empty():
 		var index := rng.randi_range(0, pool.size() - 1)
-		var definition := pool.pop_at(index) as UpgradeDefinition
+		var definition := pool.pop_at(index)
 		if definition == null or definition.id == StringName() or chosen_ids.has(definition.id):
 			continue
 		chosen_ids[definition.id] = true
@@ -81,13 +79,13 @@ func apply_upgrade(id: StringName) -> void:
 				player.multiply_dash_recovery(definition.amount)
 		&"turret_damage":
 			turret_damage_multiplier *= definition.amount
-			_for_each_defense(func(defense: DefenseBase) -> void: defense.multiply_damage(definition.amount))
+			_multiply_existing_defense_damage(definition.amount)
 		&"turret_fire_rate":
 			turret_fire_rate_multiplier *= definition.amount
-			_for_each_defense(func(defense: DefenseBase) -> void: defense.multiply_fire_rate(definition.amount))
+			_multiply_existing_defense_fire_rate(definition.amount)
 		&"defense_max_hp":
 			defense_health_multiplier *= definition.amount
-			_for_each_defense(func(defense: DefenseBase) -> void: defense.multiply_max_health(definition.amount))
+			_multiply_existing_defense_health(definition.amount)
 		&"gold_pickup_value":
 			if economy != null:
 				economy.multiply_pickup_value(definition.amount)
@@ -106,10 +104,22 @@ func _find_definition(id: StringName) -> UpgradeDefinition:
 	return null
 
 
-func _for_each_defense(callback: Callable) -> void:
+func _multiply_existing_defense_damage(multiplier: float) -> void:
 	for node in get_tree().get_nodes_in_group("defenses"):
 		if node is DefenseBase:
-			callback.call(node as DefenseBase)
+			(node as DefenseBase).multiply_damage(multiplier)
+
+
+func _multiply_existing_defense_fire_rate(multiplier: float) -> void:
+	for node in get_tree().get_nodes_in_group("defenses"):
+		if node is DefenseBase:
+			(node as DefenseBase).multiply_fire_rate(multiplier)
+
+
+func _multiply_existing_defense_health(multiplier: float) -> void:
+	for node in get_tree().get_nodes_in_group("defenses"):
+		if node is DefenseBase:
+			(node as DefenseBase).multiply_max_health(multiplier)
 
 
 func _on_defense_built(defense: DefenseBase) -> void:
