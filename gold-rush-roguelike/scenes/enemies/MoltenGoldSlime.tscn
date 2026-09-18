@@ -1,0 +1,73 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/molten_gold_slime.gd" id="1_enemy"]
+[ext_resource type="Script" path="res://scripts/components/health_component.gd" id="2_health"]
+[ext_resource type="Script" path="res://scripts/components/team_component.gd" id="3_team"]
+[ext_resource type="Script" path="res://scripts/components/hurtbox_component.gd" id="4_hurtbox"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/MoltenPuddle.tscn" id="5_puddle"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_enemy"]
+radius = 19.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_enemy"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"move",
+"speed": 6.0
+}]
+
+[node name="MoltenGoldSlime" type="CharacterBody2D" groups=["enemies"]]
+collision_layer = 1
+collision_mask = 1
+script = ExtResource("1_enemy")
+move_speed = 66.0
+contact_damage = 12.0
+attack_range = 34.0
+attack_cooldown = 1.15
+gold_value = 12
+prefer_core_weight = 0.66
+puddle_scene = ExtResource("5_puddle")
+puddle_interval = 1.5
+puddle_damage = 5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_enemy")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(0, 16)
+modulate = Color(0, 0, 0, 0.24)
+scale = Vector2(1.45, 0.48)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_enemy")
+animation = &"idle"
+
+[node name="PlaceholderVisual" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-20, 11, -22, -2, -14, -15, -2, -20, 12, -15, 21, -2, 18, 12, 4, 18, -10, 17)
+color = Color(1, 0.48, 0.04, 1)
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_health")
+max_health = 88.0
+
+[node name="TeamComponent" type="Node" parent="."]
+script = ExtResource("3_team")
+team = 1
+
+[node name="HurtboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component_path", "team_component_path")]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+monitorable = true
+script = ExtResource("4_hurtbox")
+health_component_path = NodePath("../HealthComponent")
+team_component_path = NodePath("../TeamComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_enemy")
