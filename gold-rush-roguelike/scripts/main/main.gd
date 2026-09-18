@@ -18,6 +18,8 @@ class_name GoldRushMain
 @onready var upgrade_controller: UpgradeController = $UpgradeController
 @onready var camera_effects: CameraEffectsController = $CameraEffectsController
 @onready var hud: GoldRushHUD = $HUD
+@onready var title_overlay: TitleOverlay = $TitleOverlay
+@onready var pause_overlay: PauseOverlay = $PauseOverlay
 @onready var upgrade_overlay: UpgradeOverlay = $UpgradeOverlay
 @onready var run_end_overlay: RunEndOverlay = $RunEndOverlay
 @onready var player: Prospector = $Actors/Prospector
@@ -36,18 +38,21 @@ func _ready() -> void:
 	wave_director.enemy_spawned.connect(_bind_enemy_feedback)
 	build_controller.defense_built.connect(_bind_defense_feedback)
 	upgrade_overlay.choice_made.connect(_on_upgrade_chosen)
+	title_overlay.start_requested.connect(_on_start_requested)
 	player.player_died.connect(func() -> void: run_controller.fail_run("Prospector down"))
 	core.core_destroyed.connect(func() -> void: run_controller.fail_run("Gold Core destroyed"))
 	player.dash_started.connect(_on_player_dash)
 	player.hurtbox_component.hit_received.connect(_on_actor_hit.bind(player))
-	core.get_node("HurtboxComponent").hit_received.connect(_on_actor_hit.bind(core))
+	var core_hurtbox := core.get_node_or_null("HurtboxComponent") as HurtboxComponent
+	if core_hurtbox != null:
+		core_hurtbox.hit_received.connect(_on_actor_hit.bind(core))
 	player.weapon_component.fired.connect(_on_projectile_fired)
 	hud.bind_player(player)
 	hud.bind_core(core)
 	hud.bind_economy($EconomyController)
 	hud.bind_build_controller(build_controller)
-	run_controller.start_new_run()
-	arena_controller.load_arena(1)
+	player.set_input_enabled(false)
+	pause_overlay.set_pause_enabled(false)
 
 
 func advance_after_upgrade() -> void:
@@ -55,6 +60,16 @@ func advance_after_upgrade() -> void:
 		return
 	_waiting_for_arena_advance = false
 	arena_controller.load_next_arena()
+
+
+func _on_start_requested() -> void:
+	if run_controller.is_run_active:
+		return
+	title_overlay.dismiss()
+	pause_overlay.set_pause_enabled(true)
+	player.set_input_enabled(true)
+	run_controller.start_new_run()
+	arena_controller.load_arena(1)
 
 
 func _on_arena_started(index: int) -> void:
@@ -159,8 +174,7 @@ func _on_boss_died() -> void:
 func _bind_enemy_feedback(enemy: EnemyBase) -> void:
 	if enemy == null:
 		return
-	if not enemy.hurtbox_component.hit_received.is_connected(_on_actor_hit.bind(enemy)):
-		enemy.hurtbox_component.hit_received.connect(_on_actor_hit.bind(enemy))
+	enemy.hurtbox_component.hit_received.connect(_on_actor_hit.bind(enemy))
 	var weapon := enemy.get_node_or_null("WeaponComponent") as WeaponComponent
 	if weapon != null:
 		weapon.fired.connect(_on_projectile_fired)
@@ -217,11 +231,13 @@ func _spawn_vfx(scene: PackedScene, world_position: Vector2) -> Node2D:
 
 func _on_run_failed(reason: String) -> void:
 	wave_director.stop_spawning()
+	pause_overlay.set_pause_enabled(false)
 	player.set_input_enabled(false)
 	run_end_overlay.show_failure(reason)
 
 
 func _on_run_won() -> void:
 	wave_director.stop_spawning()
+	pause_overlay.set_pause_enabled(false)
 	player.set_input_enabled(false)
 	run_end_overlay.show_victory()
