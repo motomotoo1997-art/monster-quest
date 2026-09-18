@@ -6,6 +6,7 @@ var _all_arenas_completed := false
 func _init() -> void:
 	_test_enemy_target_fallback()
 	_test_arena_progression()
+	_test_boss_phase_transition()
 	quit(0)
 
 
@@ -47,6 +48,23 @@ func _test_arena_progression() -> void:
 	assert(controller.current_arena_index == 5)
 	controller.queue_free()
 	container.queue_free()
+
+
+func _test_boss_phase_transition() -> void:
+	var scene := load("res://scenes/enemies/GoldBarTank.tscn") as PackedScene
+	assert(scene != null)
+	var boss := scene.instantiate() as GoldBarTank
+	assert(boss != null)
+	root.add_child(boss)
+	assert(boss.phase == 1)
+	assert(boss.state >= GoldBarTank.State.INTRO and boss.state <= GoldBarTank.State.DEAD)
+	boss.health_component.damage(500.0)
+	assert(boss.phase == 2, "Boss must enter phase two below 66% HP")
+	assert(boss.state != GoldBarTank.State.DEAD)
+	boss.health_component.damage(500.0)
+	assert(boss.phase == 3, "Boss must enter phase three below 33% HP")
+	assert(boss.state >= GoldBarTank.State.INTRO and boss.state <= GoldBarTank.State.DEAD)
+	boss.queue_free()
 
 
 func _make_test_arenas(count: int) -> Array[PackedScene]:
