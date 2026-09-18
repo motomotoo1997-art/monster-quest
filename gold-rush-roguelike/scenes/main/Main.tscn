@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3]
+[gd_scene load_steps=33 format=3]
 
 [ext_resource type="Script" path="res://scripts/main/main.gd" id="1_main"]
 [ext_resource type="Script" path="res://scripts/systems/run_controller.gd" id="2_run"]
@@ -24,6 +24,14 @@
 [ext_resource type="Script" path="res://scripts/systems/upgrade_controller.gd" id="22_upgrade_controller"]
 [ext_resource type="PackedScene" path="res://scenes/ui/UpgradeOverlay.tscn" id="23_upgrade_overlay"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/GoldBarTank.tscn" id="24_boss"]
+[ext_resource type="Script" path="res://scripts/systems/camera_effects_controller.gd" id="25_camera_fx"]
+[ext_resource type="Script" path="res://scripts/systems/audio_controller.gd" id="26_audio"]
+[ext_resource type="PackedScene" path="res://scenes/ui/HUD.tscn" id="27_hud"]
+[ext_resource type="PackedScene" path="res://scenes/ui/RunEndOverlay.tscn" id="28_run_end"]
+[ext_resource type="PackedScene" path="res://scenes/vfx/HitFlash.tscn" id="29_hit"]
+[ext_resource type="PackedScene" path="res://scenes/vfx/Explosion.tscn" id="30_explosion"]
+[ext_resource type="PackedScene" path="res://scenes/vfx/MuzzleFlash.tscn" id="31_muzzle"]
+[ext_resource type="PackedScene" path="res://scenes/vfx/DustBurst.tscn" id="32_dust"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_main")
@@ -32,6 +40,10 @@ sentinel_scene = ExtResource("15_sentinel")
 disc_scene = ExtResource("16_disc")
 slime_scene = ExtResource("17_slime")
 boss_scene = ExtResource("24_boss")
+hit_flash_scene = ExtResource("29_hit")
+explosion_scene = ExtResource("30_explosion")
+muzzle_flash_scene = ExtResource("31_muzzle")
+dust_burst_scene = ExtResource("32_dust")
 
 [node name="ArenaLayer" type="Node2D" parent="."]
 
@@ -41,6 +53,11 @@ y_sort_enabled = true
 [node name="Prospector" parent="Actors" instance=ExtResource("7_player")]
 
 [node name="GoldCore" parent="Actors" instance=ExtResource("8_core")]
+
+[node name="GameCamera" type="Camera2D" parent="."]
+position = Vector2(640, 360)
+enabled = true
+position_smoothing_enabled = false
 
 [node name="RunController" type="Node" parent="."]
 script = ExtResource("2_run")
@@ -72,4 +89,24 @@ player_path = NodePath("../Actors/Prospector")
 economy_path = NodePath("../EconomyController")
 build_controller_path = NodePath("../BuildController")
 
+[node name="CameraEffectsController" type="Node" parent="." node_paths=PackedStringArray("camera_path")]
+script = ExtResource("25_camera_fx")
+camera_path = NodePath("../GameCamera")
+
+[node name="AudioController" type="Node" parent="."]
+script = ExtResource("26_audio")
+
+[node name="Music" type="AudioStreamPlayer" parent="AudioController"]
+bus = &"Music"
+
+[node name="SFX" type="AudioStreamPlayer" parent="AudioController"]
+bus = &"SFX"
+
+[node name="UI" type="AudioStreamPlayer" parent="AudioController"]
+bus = &"UI"
+
+[node name="HUD" parent="." instance=ExtResource("27_hud")]
+
 [node name="UpgradeOverlay" parent="." instance=ExtResource("23_upgrade_overlay")]
+
+[node name="RunEndOverlay" parent="." instance=ExtResource("28_run_end")]
