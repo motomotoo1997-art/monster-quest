@@ -1,8 +1,63 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=21 format=3]
 
-[ext_resource type="Script" path="res://scripts/systems/run_controller.gd" id="1_run"]
+[ext_resource type="Script" path="res://scripts/main/main.gd" id="1_main"]
+[ext_resource type="Script" path="res://scripts/systems/run_controller.gd" id="2_run"]
+[ext_resource type="Script" path="res://scripts/systems/arena_controller.gd" id="3_arena_controller"]
+[ext_resource type="Script" path="res://scripts/systems/wave_director.gd" id="4_wave"]
+[ext_resource type="Script" path="res://scripts/systems/economy_controller.gd" id="5_economy"]
+[ext_resource type="Script" path="res://scripts/systems/build_controller.gd" id="6_build"]
+[ext_resource type="PackedScene" path="res://scenes/player/Prospector.tscn" id="7_player"]
+[ext_resource type="PackedScene" path="res://scenes/objectives/GoldCore.tscn" id="8_core"]
+[ext_resource type="PackedScene" path="res://scenes/arenas/Arena01.tscn" id="9_arena1"]
+[ext_resource type="PackedScene" path="res://scenes/arenas/Arena02.tscn" id="10_arena2"]
+[ext_resource type="PackedScene" path="res://scenes/arenas/Arena03.tscn" id="11_arena3"]
+[ext_resource type="PackedScene" path="res://scenes/arenas/Arena04.tscn" id="12_arena4"]
+[ext_resource type="PackedScene" path="res://scenes/arenas/Arena05.tscn" id="13_arena5"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/GoldHopper.tscn" id="14_hopper"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/GoldCoinSentinel.tscn" id="15_sentinel"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/FlyingGoldDisc.tscn" id="16_disc"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/MoltenGoldSlime.tscn" id="17_slime"]
+[ext_resource type="PackedScene" path="res://scenes/defenses/MagneticTurret.tscn" id="18_magnetic"]
+[ext_resource type="PackedScene" path="res://scenes/defenses/CactusSentry.tscn" id="19_cactus"]
+[ext_resource type="PackedScene" path="res://scenes/defenses/TNTBarrel.tscn" id="20_tnt"]
+[ext_resource type="PackedScene" path="res://scenes/combat/GoldPickup.tscn" id="21_gold"]
 
 [node name="Main" type="Node"]
+script = ExtResource("1_main")
+hopper_scene = ExtResource("14_hopper")
+sentinel_scene = ExtResource("15_sentinel")
+disc_scene = ExtResource("16_disc")
+slime_scene = ExtResource("17_slime")
+
+[node name="ArenaLayer" type="Node2D" parent="."]
+
+[node name="Actors" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Prospector" parent="Actors" instance=ExtResource("7_player")]
+
+[node name="GoldCore" parent="Actors" instance=ExtResource("8_core")]
 
 [node name="RunController" type="Node" parent="."]
-script = ExtResource("1_run")
+script = ExtResource("2_run")
+
+[node name="ArenaController" type="Node" parent="." node_paths=PackedStringArray("arena_container_path")]
+script = ExtResource("3_arena_controller")
+arena_scenes = Array[PackedScene]([ExtResource("9_arena1"), ExtResource("10_arena2"), ExtResource("11_arena3"), ExtResource("12_arena4"), ExtResource("13_arena5")])
+arena_container_path = NodePath("../ArenaLayer")
+
+[node name="WaveDirector" type="Node" parent="." node_paths=PackedStringArray("arena_controller_path", "player_path", "core_path")]
+script = ExtResource("4_wave")
+arena_controller_path = NodePath("../ArenaController")
+player_path = NodePath("../Actors/Prospector")
+core_path = NodePath("../Actors/GoldCore")
+gold_pickup_scene = ExtResource("21_gold")
+
+[node name="EconomyController" type="Node" parent="."]
+script = ExtResource("5_economy")
+starting_gold = 65
+
+[node name="BuildController" type="Node" parent="." node_paths=PackedStringArray("economy_path")]
+script = ExtResource("6_build")
+economy_path = NodePath("../EconomyController")
+defense_scenes = Array[PackedScene]([ExtResource("18_magnetic"), ExtResource("19_cactus"), ExtResource("20_tnt")])
