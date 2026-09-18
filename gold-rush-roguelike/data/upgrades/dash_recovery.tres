@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="UpgradeDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/systems/upgrade_definition.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"dash_recovery"
+display_name = "Dust Step"
+description = "-15% dash cooldown"
+stat_key = &"dash_recovery"
+operation = 1
+amount = 0.85
