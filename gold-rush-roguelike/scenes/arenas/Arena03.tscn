@@ -1,0 +1,75 @@
+[gd_scene load_steps=4 format=3]
+
+[sub_resource type="RectangleShape2D" id="BuildShape"]
+size = Vector2(1120, 560)
+
+[sub_resource type="RectangleShape2D" id="RockH"]
+size = Vector2(180, 60)
+
+[sub_resource type="RectangleShape2D" id="RockV"]
+size = Vector2(65, 160)
+
+[node name="Arena03" type="Node2D"]
+y_sort_enabled = true
+
+[node name="Ground" type="Polygon2D" parent="."]
+z_index = -20
+polygon = PackedVector2Array(0, 0, 1280, 0, 1280, 720, 0, 720)
+color = Color(0.58, 0.34, 0.17, 1)
+
+[node name="InnerSand" type="Polygon2D" parent="."]
+z_index = -19
+polygon = PackedVector2Array(60, 60, 1220, 60, 1220, 660, 60, 660)
+color = Color(0.81, 0.59, 0.3, 1)
+
+[node name="BuildZone" type="Area2D" parent="." groups=["build_zone"]]
+position = Vector2(640, 360)
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+monitorable = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildZone"]
+shape = SubResource("BuildShape")
+
+[node name="PlayerSpawn" type="Marker2D" parent="." groups=["player_spawn"]]
+position = Vector2(320, 420)
+
+[node name="CoreSpawn" type="Marker2D" parent="." groups=["core_spawn"]]
+position = Vector2(500, 420)
+
+[node name="EnemySpawnN" type="Marker2D" parent="." groups=["enemy_spawn"]]
+position = Vector2(640, 100)
+
+[node name="EnemySpawnNE" type="Marker2D" parent="." groups=["enemy_spawn"]]
+position = Vector2(1115, 135)
+
+[node name="EnemySpawnE" type="Marker2D" parent="." groups=["enemy_spawn"]]
+position = Vector2(1160, 420)
+
+[node name="EnemySpawnS" type="Marker2D" parent="." groups=["enemy_spawn"]]
+position = Vector2(760, 615)
+
+[node name="RockHorizontal" type="StaticBody2D" parent="."]
+position = Vector2(730, 310)
+collision_layer = 1
+collision_mask = 1
+
+[node name="Visual" type="Polygon2D" parent="RockHorizontal"]
+polygon = PackedVector2Array(-92, -24, -74, -37, 64, -34, 91, -16, 83, 28, -70, 31)
+color = Color(0.36, 0.23, 0.16, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RockHorizontal"]
+shape = SubResource("RockH")
+
+[node name="RockVertical" type="StaticBody2D" parent="."]
+position = Vector2(870, 475)
+collision_layer = 1
+collision_mask = 1
+
+[node name="Visual" type="Polygon2D" parent="RockVertical"]
+polygon = PackedVector2Array(-30, -82, 24, -78, 37, -50, 30, 76, -24, 83, -38, 41)
+color = Color(0.39, 0.25, 0.17, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RockVertical"]
+shape = SubResource("RockV")
