@@ -1,0 +1,72 @@
+extends Node
+class_name ArenaController
+
+signal arena_started(index: int)
+signal arena_completed(index: int)
+signal all_arenas_completed
+
+@export var arena_scenes: Array[PackedScene] = []
+@export var arena_container_path: NodePath
+
+var current_arena_index: int = 0
+var current_arena: Node2D
+
+
+func load_arena(index: int) -> bool:
+	if index < 1 or index > arena_scenes.size():
+		return false
+	if current_arena != null and is_instance_valid(current_arena):
+		current_arena.queue_free()
+		current_arena = null
+	var scene := arena_scenes[index - 1]
+	if scene == null:
+		return false
+	var instance := scene.instantiate() as Node2D
+	if instance == null:
+		return false
+	var container := _get_arena_container()
+	if container == null:
+		instance.free()
+		return false
+	container.add_child(instance)
+	current_arena = instance
+	current_arena_index = index
+	arena_started.emit(index)
+	return true
+
+
+func complete_current_arena() -> void:
+	if current_arena_index <= 0:
+		return
+	arena_completed.emit(current_arena_index)
+	if current_arena_index >= arena_scenes.size():
+		all_arenas_completed.emit()
+
+
+func load_next_arena() -> bool:
+	var next_index := current_arena_index + 1
+	if next_index > arena_scenes.size():
+		all_arenas_completed.emit()
+		return false
+	return load_arena(next_index)
+
+
+func get_markers(group_name: StringName) -> Array[Node2D]:
+	var result: Array[Node2D] = []
+	if current_arena == null:
+		return result
+	for node in get_tree().get_nodes_in_group(group_name):
+		if node is Node2D and current_arena.is_ancestor_of(node):
+			result.append(node as Node2D)
+	return result
+
+
+func get_first_marker(group_name: StringName) -> Node2D:
+	var markers := get_markers(group_name)
+	return markers[0] if not markers.is_empty() else null
+
+
+func _get_arena_container() -> Node:
+	if not arena_container_path.is_empty():
+		return get_node_or_null(arena_container_path)
+	return get_parent()
