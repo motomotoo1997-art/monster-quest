@@ -1,0 +1,84 @@
+[gd_scene load_steps=4 format=3]
+
+[sub_resource type="RectangleShape2D" id="BuildShape"]
+size = Vector2(1120, 560)
+
+[sub_resource type="RectangleShape2D" id="LongRock"]
+size = Vector2(70, 190)
+
+[sub_resource type="CircleShape2D" id="PillarShape"]
+radius = 34.0
+
+[node name="Arena02" type="Node2D"]
+y_sort_enabled = true
+
+[node name="Ground" type="Polygon2D" parent="."]
+z_index = -20
+polygon = PackedVector2Array(0, 0, 1280, 0, 1280, 720, 0, 720)
+color = Color(0.54, 0.31, 0.17, 1)
+
+[node name="InnerSand" type="Polygon2D" parent="."]
+z_index = -19
+polygon = PackedVector2Array(65, 65, 1215, 65, 1215, 655, 65, 655)
+color = Color(0.77, 0.54, 0.28, 1)
+
+[node name="BuildZone" type="Area2D" parent="." groups=["build_zone"]]
+position = Vector2(640, 360)
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+monitorable = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildZone"]
+shape = SubResource("BuildShape")
+
+[node name="PlayerSpawn" type="Marker2D" parent="." groups=["player_spawn"]]
+position = Vector2(315, 360)
+
+[node name="CoreSpawn" type="Marker2D" parent="." groups=["core_spawn"]]
+position = Vector2(475, 360)
+
+[node name="EnemySpawnNE" type="Marker2D" parent="." groups=["enemy_spawn"]]
+position = Vector2(1110, 135)
+
+[node name="EnemySpawnE" type="Marker2D" parent="." groups=["enemy_spawn"]]
+position = Vector2(1170, 360)
+
+[node name="EnemySpawnSE" type="Marker2D" parent="." groups=["enemy_spawn"]]
+position = Vector2(1110, 585)
+
+[node name="RockWall" type="StaticBody2D" parent="."]
+position = Vector2(720, 360)
+collision_layer = 1
+collision_mask = 1
+
+[node name="Visual" type="Polygon2D" parent="RockWall"]
+polygon = PackedVector2Array(-31, -96, 22, -94, 38, -52, 28, 92, -23, 96, -40, 43)
+color = Color(0.34, 0.22, 0.16, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RockWall"]
+shape = SubResource("LongRock")
+
+[node name="PillarNorth" type="StaticBody2D" parent="."]
+position = Vector2(900, 220)
+collision_layer = 1
+collision_mask = 1
+
+[node name="Visual" type="Polygon2D" parent="PillarNorth"]
+polygon = PackedVector2Array(-32, -12, -20, -31, 15, -34, 34, -11, 28, 26, -18, 33, -35, 12)
+color = Color(0.42, 0.27, 0.18, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PillarNorth"]
+shape = SubResource("PillarShape")
+
+[node name="PillarSouth" type="StaticBody2D" parent="."]
+position = Vector2(900, 500)
+collision_layer = 1
+collision_mask = 1
+
+[node name="Visual" type="Polygon2D" parent="PillarSouth"]
+polygon = PackedVector2Array(-32, -12, -20, -31, 15, -34, 34, -11, 28, 26, -18, 33, -35, 12)
+color = Color(0.42, 0.27, 0.18, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PillarSouth"]
+shape = SubResource("PillarShape")
