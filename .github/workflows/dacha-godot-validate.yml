@@ -13,6 +13,7 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - name: Download Godot 4.7.2
@@ -21,13 +22,13 @@ jobs:
           unzip -q godot.zip
           chmod +x Godot_v4.7.2-stable_linux.x86_64
       - name: Import and parse project
-        run: ./Godot_v4.7.2-stable_linux.x86_64 --headless --editor --path dacha-last-day --quit
+        run: timeout 45s ./Godot_v4.7.2-stable_linux.x86_64 --headless --editor --path dacha-last-day --quit
       - name: Smoke test
-        run: ./Godot_v4.7.2-stable_linux.x86_64 --headless --path dacha-last-day --script res://tests/smoke_test.gd
+        run: timeout 45s ./Godot_v4.7.2-stable_linux.x86_64 --headless --path dacha-last-day --script res://tests/smoke_test.gd
       - name: Install virtual display
         run: sudo apt-get update -qq && sudo apt-get install -y -qq xvfb
       - name: Render visual preview
-        run: xvfb-run -a ./Godot_v4.7.2-stable_linux.x86_64 --path dacha-last-day --script res://tests/screenshot_test.gd
+        run: timeout 60s xvfb-run -a ./Godot_v4.7.2-stable_linux.x86_64 --path dacha-last-day --script res://tests/screenshot_test.gd
       - name: Upload visual preview
         uses: actions/upload-artifact@v4
         with:
