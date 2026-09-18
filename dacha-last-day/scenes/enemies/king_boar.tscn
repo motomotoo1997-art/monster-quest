@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/boar.svg" id="2"]
+[sub_resource type="CapsuleShape2D" id="Capsule"]
+radius = 42.0
+height = 102.0
+[node name="KingBoar" type="CharacterBody2D" groups=["enemy", "boss"]]
+collision_layer = 2
+collision_mask = 49
+script = ExtResource("1")
+max_health = 420
+speed = 70.0
+touch_damage = 32
+attack_distance = 78.0
+attack_interval = 1.2
+charge_when_close = true
+xp_value = 70
+scrap_value = 28
+atlas_path = "res://assets/characters/boar_atlas.png"
+atlas_scale = 0.78
+visual_tint = Color(1.0, 0.72, 0.54, 1.0)
+[node name="Shadow" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-62, 15, 0, 31, 62, 15, 0, 2)
+color = Color(0, 0, 0, 0.32)
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -58)
+texture = ExtResource("2")
+scale = Vector2(0.68, 0.68)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(0, -61)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -22)
+shape = SubResource("Capsule")
+rotation = 1.5708

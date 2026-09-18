@@ -1,0 +1,201 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="2"]
+[ext_resource type="Texture2D" path="res://assets/house.svg" id="3"]
+[ext_resource type="Texture2D" path="res://assets/greenhouse.svg" id="4"]
+[ext_resource type="Texture2D" path="res://assets/tree.svg" id="5"]
+[ext_resource type="PackedScene" path="res://scenes/dacha_core.tscn" id="6"]
+[ext_resource type="Texture2D" path="res://assets/light_radial.svg" id="7"]
+
+[sub_resource type="StyleBoxFlat" id="StatusPanel"]
+bg_color = Color(0.025, 0.04, 0.04, 0.9)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.28, 0.38, 0.34, 0.9)
+corner_radius_top_left = 9
+corner_radius_top_right = 9
+corner_radius_bottom_right = 9
+corner_radius_bottom_left = 9
+content_margin_left = 14.0
+content_margin_top = 10.0
+content_margin_right = 14.0
+content_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="BarBackground"]
+bg_color = Color(0.08, 0.11, 0.1, 0.95)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="HealthFill"]
+bg_color = Color(0.76, 0.16, 0.12, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="XPFill"]
+bg_color = Color(0.13, 0.62, 0.84, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1")
+[node name="World" type="Node2D" parent="."]
+y_sort_enabled = true
+[node name="AmbientModulate" type="CanvasModulate" parent="World"]
+color = Color(0.74, 0.79, 0.9, 1)
+[node name="Ground" type="Polygon2D" parent="World"]
+polygon = PackedVector2Array(-1300, 0, 0, -700, 1300, 0, 0, 700)
+color = Color(0.22, 0.39, 0.18, 1)
+z_index = -20
+[node name="Road" type="Polygon2D" parent="World"]
+polygon = PackedVector2Array(-900, -110, 900, 520, 1030, 455, -770, -175)
+color = Color(0.34, 0.29, 0.22, 1)
+z_index = -18
+[node name="Yard" type="Polygon2D" parent="World"]
+polygon = PackedVector2Array(-700, -320, -80, -520, 390, -180, -240, 40)
+color = Color(0.33, 0.46, 0.2, 1)
+z_index = -17
+[node name="House" type="Sprite2D" parent="World"]
+position = Vector2(-390, -160)
+texture = ExtResource("3")
+scale = Vector2(0.62, 0.62)
+[node name="HouseWarmLight" type="PointLight2D" parent="World"]
+position = Vector2(-350, -112)
+texture = ExtResource("7")
+texture_scale = 2.7
+energy = 1.35
+color = Color(1, 0.63, 0.31, 1)
+[node name="DachaCore" parent="World" instance=ExtResource("6")]
+position = Vector2(-390, -45)
+[node name="Greenhouse" type="Sprite2D" parent="World"]
+position = Vector2(250, -165)
+texture = ExtResource("4")
+scale = Vector2(0.52, 0.52)
+[node name="YardWarmLight" type="PointLight2D" parent="World"]
+position = Vector2(70, -25)
+texture = ExtResource("7")
+texture_scale = 2.1
+energy = 0.85
+color = Color(1, 0.76, 0.42, 1)
+[node name="Tree1" type="Sprite2D" parent="World"]
+position = Vector2(-760, -90)
+texture = ExtResource("5")
+scale = Vector2(0.55, 0.55)
+[node name="Tree2" type="Sprite2D" parent="World"]
+position = Vector2(700, -230)
+texture = ExtResource("5")
+scale = Vector2(0.63, 0.63)
+[node name="Tree3" type="Sprite2D" parent="World"]
+position = Vector2(680, 350)
+texture = ExtResource("5")
+scale = Vector2(0.58, 0.58)
+[node name="Tree4" type="Sprite2D" parent="World"]
+position = Vector2(-650, 390)
+texture = ExtResource("5")
+scale = Vector2(0.6, 0.6)
+[node name="Player" parent="World" instance=ExtResource("2")]
+position = Vector2(0, 80)
+
+[node name="UI" type="CanvasLayer" parent="."]
+[node name="Status" type="PanelContainer" parent="UI"]
+offset_left = 18.0
+offset_top = 16.0
+offset_right = 380.0
+offset_bottom = 156.0
+theme_override_styles/panel = SubResource("StatusPanel")
+[node name="VBox" type="VBoxContainer" parent="UI/Status"]
+theme_override_constants/separation = 4
+[node name="HealthLabel" type="Label" parent="UI/Status/VBox"]
+unique_name_in_owner = true
+text = "HP 100 / 100"
+theme_override_font_sizes/font_size = 17
+[node name="HealthBar" type="ProgressBar" parent="UI/Status/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 13)
+show_percentage = false
+max_value = 100.0
+value = 100.0
+theme_override_styles/background = SubResource("BarBackground")
+theme_override_styles/fill = SubResource("HealthFill")
+[node name="AmmoLabel" type="Label" parent="UI/Status/VBox"]
+unique_name_in_owner = true
+text = "ДРОБОВИК  8 / 56"
+theme_override_font_sizes/font_size = 17
+[node name="XPLabel" type="Label" parent="UI/Status/VBox"]
+unique_name_in_owner = true
+text = "Ур. 1   •   Лом 40"
+theme_override_font_sizes/font_size = 15
+[node name="XPBar" type="ProgressBar" parent="UI/Status/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 8)
+show_percentage = false
+max_value = 30.0
+theme_override_styles/background = SubResource("BarBackground")
+theme_override_styles/fill = SubResource("XPFill")
+[node name="WaveLabel" type="Label" parent="UI"]
+unique_name_in_owner = true
+offset_left = 400.0
+offset_top = 20.0
+offset_right = 1165.0
+offset_bottom = 60.0
+text = "Волна 1"
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.75)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 21
+[node name="BossLabel" type="Label" parent="UI"]
+unique_name_in_owner = true
+visible = false
+offset_left = 470.0
+offset_top = 64.0
+offset_right = 830.0
+offset_bottom = 104.0
+text = "ЦАРЬ-КАБАН"
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(1, 0.46, 0.28, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 23
+[node name="Controls" type="Label" parent="UI"]
+offset_left = 18.0
+offset_top = 675.0
+offset_right = 1030.0
+offset_bottom = 712.0
+text = "WASD движение  •  ЛКМ огонь  •  R перезарядка  •  Shift рывок  •  стройка T/G/F/B"
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.78)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 16
+[node name="PerkPanel" type="PanelContainer" parent="UI"]
+unique_name_in_owner = true
+offset_left = 370.0
+offset_top = 220.0
+offset_right = 910.0
+offset_bottom = 480.0
+theme_override_styles/panel = SubResource("StatusPanel")
+[node name="VBox" type="VBoxContainer" parent="UI/PerkPanel"]
+[node name="Title" type="Label" parent="UI/PerkPanel/VBox"]
+text = "НОВЫЙ УРОВЕНЬ — выбери улучшение"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 23
+[node name="PerkDamage" type="Button" parent="UI/PerkPanel/VBox"]
+unique_name_in_owner = true
+text = "Больше урона  +25%"
+custom_minimum_size = Vector2(0, 52)
+[node name="PerkSpeed" type="Button" parent="UI/PerkPanel/VBox"]
+unique_name_in_owner = true
+text = "Скорость  +15%"
+custom_minimum_size = Vector2(0, 52)
+[node name="PerkHeal" type="Button" parent="UI/PerkPanel/VBox"]
+unique_name_in_owner = true
+text = "Лечение  +35 HP"
+custom_minimum_size = Vector2(0, 52)

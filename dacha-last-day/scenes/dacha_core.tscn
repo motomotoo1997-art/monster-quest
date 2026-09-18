@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/dacha_core.gd" id="1"]
+
+[sub_resource type="RectangleShape2D" id="Rect"]
+size = Vector2(170, 110)
+
+[node name="DachaCore" type="StaticBody2D" groups=["defense_target"]]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -30)
+shape = SubResource("Rect")
+
+[node name="CoreVisual" type="Polygon2D" parent="."]
+visible = false
+position = Vector2(0, -62)
+polygon = PackedVector2Array(0, -44, 38, -18, 29, 31, 0, 52, -29, 31, -38, -18)
+color = Color(0.3, 0.84, 1, 0.28)
