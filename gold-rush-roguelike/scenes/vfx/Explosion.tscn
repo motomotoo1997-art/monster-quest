@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/vfx/simple_burst.gd" id="1"]
+
+[node name="Explosion" type="Node2D"]
+script = ExtResource("1")
+duration = 0.42
+end_scale = 2.3
+
+[node name="Outer" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, -26, 8, -13, 22, -17, 18, -5, 30, 4, 16, 10, 19, 24, 6, 18, -3, 31, -10, 17, -25, 21, -18, 7, -31, -1, -17, -9, -21, -23, -7, -18)
+color = Color(1, 0.44, 0.04, 0.82)
+
+[node name="Core" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, -14, 10, -9, 15, 1, 8, 12, -4, 14, -14, 7, -15, -5, -8, -13)
+color = Color(1, 0.86, 0.24, 0.95)
