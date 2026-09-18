@@ -10,6 +10,8 @@ class_name GoldRushMain
 @onready var arena_controller: ArenaController = $ArenaController
 @onready var wave_director: WaveDirector = $WaveDirector
 @onready var build_controller: BuildController = $BuildController
+@onready var upgrade_controller: UpgradeController = $UpgradeController
+@onready var upgrade_overlay: UpgradeOverlay = $UpgradeOverlay
 @onready var player: Prospector = $Actors/Prospector
 @onready var core: GoldCore = $Actors/GoldCore
 
@@ -20,6 +22,7 @@ func _ready() -> void:
 	run_controller.run_failed.connect(_on_run_failed)
 	arena_controller.arena_started.connect(_on_arena_started)
 	wave_director.wave_completed.connect(_on_wave_completed)
+	upgrade_overlay.choice_made.connect(_on_upgrade_chosen)
 	player.player_died.connect(func() -> void: run_controller.fail_run("Prospector down"))
 	core.core_destroyed.connect(func() -> void: run_controller.fail_run("Gold Core destroyed"))
 	run_controller.start_new_run()
@@ -94,7 +97,14 @@ func _on_wave_completed(_number: int) -> void:
 	if arena_controller.current_arena_index >= arena_controller.arena_scenes.size():
 		return
 	_waiting_for_arena_advance = true
-	# Task 7 will pause here for the 1-of-3 upgrade overlay. Until then advance immediately.
+	var choices := upgrade_controller.roll_choices(3)
+	if choices.is_empty():
+		advance_after_upgrade()
+		return
+	upgrade_overlay.present(choices)
+
+
+func _on_upgrade_chosen(_id: StringName) -> void:
 	advance_after_upgrade()
 
 
