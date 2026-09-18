@@ -19,6 +19,10 @@ func _process(delta: float) -> void:
 		return
 	if _shake_remaining <= 0.0:
 		_camera.offset = _camera.offset.lerp(Vector2.ZERO, minf(delta * 18.0, 1.0))
+		if _camera.offset.length_squared() < 0.01:
+			_camera.offset = Vector2.ZERO
+			_shake_strength = 0.0
+			_shake_duration = 0.0
 		return
 	_shake_remaining = maxf(_shake_remaining - delta, 0.0)
 	var ratio := _shake_remaining / maxf(_shake_duration, 0.001)
