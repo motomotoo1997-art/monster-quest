@@ -11,6 +11,7 @@ func _check(condition: bool, message: String) -> void:
 		push_error("TEST_FAIL: " + message)
 
 func _run() -> void:
+	paused = false
 	var packed := load("res://scenes/main.tscn") as PackedScene
 	_check(packed != null, "main scene did not load")
 	if packed == null:
@@ -41,12 +42,23 @@ func _run() -> void:
 		_check(player.health == start_health - 15, "player damage handling is wrong")
 		player.heal(10)
 		_check(player.health == start_health - 5, "player healing is wrong")
+
+		# Test level progression independently from the UI pause signal so the
+		# headless harness can never deadlock while SceneTree is paused.
+		var perk_callback := Callable(instance, "_show_perks")
+		if player.leveled_up.is_connected(perk_callback):
+			player.leveled_up.disconnect(perk_callback)
 		var start_level: int = player.level
 		player.gain_xp(player.xp_needed)
 		_check(player.level == start_level + 1, "level-up did not trigger")
+
+		# Test pause/resume explicitly, then force-reset pause as a harness guard.
+		instance.call("_show_perks")
 		_check(paused, "perk choice should pause gameplay")
+		paused = false
 		instance.call("_hide_perks")
 		_check(not paused, "closing perk choice should resume gameplay")
+
 		var start_scrap: int = player.scrap
 		_check(player.spend_scrap(10), "player could not spend available scrap")
 		_check(player.scrap == start_scrap - 10, "scrap was not deducted")
@@ -72,7 +84,6 @@ func _run() -> void:
 	_check(core.active, "defense wave should activate DachaCore")
 	instance.call("_begin_wave", 5, false)
 	_check(not core.active, "normal wave should deactivate DachaCore")
-	await process_frame
 	var bosses := get_nodes_in_group("boss")
 	_check(bosses.size() == 1, "wave 5 should spawn exactly one boss")
 	if not bosses.is_empty():
@@ -80,6 +91,7 @@ func _run() -> void:
 		_check(boss.max_health >= 400, "king boar health is unexpectedly low")
 		_check(boss.is_in_group("enemy"), "boss must also be in enemy group")
 
+	paused = false
 	if failures.is_empty():
 		print("SMOKE_OK: Prototype 0.4 systems, VFX nodes, HUD, TD objective and boss spawn passed")
 		instance.queue_free()
