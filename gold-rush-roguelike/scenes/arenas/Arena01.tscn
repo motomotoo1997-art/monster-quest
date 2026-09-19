@@ -1,116 +1,104 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/environment/CactusProp.tscn" id="1_cactus"]
 [ext_resource type="PackedScene" path="res://scenes/environment/RockClusterProp.tscn" id="2_rocks"]
 [ext_resource type="PackedScene" path="res://scenes/environment/MineCartProp.tscn" id="3_cart"]
 [ext_resource type="PackedScene" path="res://scenes/environment/GoldVeinProp.tscn" id="4_gold"]
+[ext_resource type="Texture2D" path="res://assets/environment/arena01_backdrop_v2.svg" id="5_backdrop"]
 
 [sub_resource type="RectangleShape2D" id="BuildShape"]
-size = Vector2(1120, 560)
-
+size = Vector2(1120,560)
 [sub_resource type="RectangleShape2D" id="RockShape"]
-size = Vector2(110, 55)
-
+size = Vector2(110,55)
 [sub_resource type="RectangleShape2D" id="RockShape2"]
-size = Vector2(80, 90)
+size = Vector2(80,90)
 
 [node name="Arena01" type="Node2D"]
 y_sort_enabled = true
 
-[node name="Ground" type="Polygon2D" parent="."]
-z_index = -30
-polygon = PackedVector2Array(0, 0, 1280, 0, 1280, 720, 0, 720)
-color = Color(0.43, 0.23, 0.13, 1)
+[node name="IllustratedBackdrop" type="Sprite2D" parent="."]
+z_index = -50
+position = Vector2(640,360)
+texture = ExtResource("5_backdrop")
 
-[node name="CanyonFloor" type="Polygon2D" parent="."]
-z_index = -29
-polygon = PackedVector2Array(54, 62, 1225, 52, 1238, 664, 61, 670)
-color = Color(0.76, 0.50, 0.25, 1)
-
-[node name="DustPath" type="Polygon2D" parent="."]
-z_index = -28
-polygon = PackedVector2Array(118, 309, 530, 280, 795, 300, 1189, 236, 1207, 456, 804, 416, 520, 444, 118, 419)
-color = Color(0.87, 0.67, 0.36, 0.56)
-
-[node name="CanyonNorth" type="Polygon2D" parent="."]
-z_index = -27
-polygon = PackedVector2Array(0,0,1280,0,1280,54,1150,73,1030,51,910,78,780,54,660,83,530,55,420,76,290,52,170,79,55,61,0,82)
-color = Color(0.34, 0.18, 0.12, 1)
-
-[node name="CanyonSouth" type="Polygon2D" parent="."]
-z_index = -27
-polygon = PackedVector2Array(0,635,70,658,180,640,300,674,430,647,560,683,690,653,820,681,950,649,1080,678,1195,649,1280,664,1280,720,0,720)
-color = Color(0.36, 0.19, 0.12, 1)
+[node name="DustPathHighlight" type="Polygon2D" parent="."]
+z_index = -20
+polygon = PackedVector2Array(134,326,504,299,785,319,1169,263,1182,425,800,392,516,421,135,403)
+color = Color(1,0.86,0.58,0.10)
 
 [node name="BuildZone" type="Area2D" parent="." groups=["build_zone"]]
-position = Vector2(640, 360)
+position = Vector2(640,360)
 collision_layer = 16
 collision_mask = 0
 monitoring = false
 monitorable = true
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BuildZone"]
 shape = SubResource("BuildShape")
 
 [node name="PlayerSpawn" type="Marker2D" parent="." groups=["player_spawn"]]
-position = Vector2(360, 360)
-
+position = Vector2(360,360)
 [node name="CoreSpawn" type="Marker2D" parent="." groups=["core_spawn"]]
-position = Vector2(520, 360)
-
+position = Vector2(520,360)
 [node name="EnemySpawnNorth" type="Marker2D" parent="." groups=["enemy_spawn"]]
-position = Vector2(870, 105)
-
+position = Vector2(870,105)
 [node name="EnemySpawnEast" type="Marker2D" parent="." groups=["enemy_spawn"]]
-position = Vector2(1160, 360)
-
+position = Vector2(1160,360)
 [node name="EnemySpawnSouth" type="Marker2D" parent="." groups=["enemy_spawn"]]
-position = Vector2(870, 615)
+position = Vector2(870,615)
 
 [node name="RockA" type="StaticBody2D" parent="."]
-position = Vector2(760, 250)
+position = Vector2(760,250)
 collision_layer = 1
 collision_mask = 1
-
-[node name="Visual" type="Polygon2D" parent="RockA"]
-polygon = PackedVector2Array(-55, -22, -37, -35, 29, -28, 55, -12, 45, 26, -35, 27)
-color = Color(0.38, 0.25, 0.18, 1)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RockA"]
 shape = SubResource("RockShape")
 
 [node name="RockB" type="StaticBody2D" parent="."]
-position = Vector2(760, 485)
+position = Vector2(760,485)
 collision_layer = 1
 collision_mask = 1
-
-[node name="Visual" type="Polygon2D" parent="RockB"]
-polygon = PackedVector2Array(-35, -40, 23, -45, 40, -8, 31, 42, -33, 39, -42, 3)
-color = Color(0.41, 0.28, 0.19, 1)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RockB"]
 shape = SubResource("RockShape2")
 
-[node name="CactusNW" parent="." instance=ExtResource("1_cactus")]
-position = Vector2(175, 178)
-scale = Vector2(0.82, 0.82)
+[node name="RocksMidA" parent="." instance=ExtResource("2_rocks")]
+position = Vector2(760,250)
+scale = Vector2(1.05,1.05)
+[node name="RocksMidB" parent="." instance=ExtResource("2_rocks")]
+position = Vector2(760,485)
+rotation = 0.24
+scale = Vector2(0.92,0.92)
 
+[node name="CactusNW" parent="." instance=ExtResource("1_cactus")]
+position = Vector2(175,202)
+scale = Vector2(0.96,0.96)
+[node name="CactusWest" parent="." instance=ExtResource("1_cactus")]
+position = Vector2(95,468)
+scale = Vector2(0.72,0.72)
 [node name="CactusSouth" parent="." instance=ExtResource("1_cactus")]
-position = Vector2(1045, 560)
-scale = Vector2(0.72, 0.72)
+position = Vector2(1085,558)
+scale = Vector2(0.86,0.86)
+[node name="CactusEast" parent="." instance=ExtResource("1_cactus")]
+position = Vector2(1180,230)
+scale = Vector2(0.68,0.68)
 
 [node name="RocksNorth" parent="." instance=ExtResource("2_rocks")]
-position = Vector2(600, 130)
-scale = Vector2(0.88, 0.88)
-
+position = Vector2(600,145)
+scale = Vector2(0.95,0.95)
 [node name="RocksEast" parent="." instance=ExtResource("2_rocks")]
-position = Vector2(1100, 485)
-scale = Vector2(0.72, 0.72)
+position = Vector2(1100,485)
+scale = Vector2(0.82,0.82)
+[node name="RocksWest" parent="." instance=ExtResource("2_rocks")]
+position = Vector2(245,278)
+rotation = -0.18
+scale = Vector2(0.68,0.68)
 
 [node name="MineCart" parent="." instance=ExtResource("3_cart")]
-position = Vector2(235, 535)
+position = Vector2(245,545)
 rotation = -0.10
-
+scale = Vector2(1.08,1.08)
 [node name="GoldVein" parent="." instance=ExtResource("4_gold")]
-position = Vector2(966, 165)
-scale = Vector2(0.78, 0.78)
+position = Vector2(975,170)
+scale = Vector2(0.92,0.92)
+[node name="GoldVeinSouth" parent="." instance=ExtResource("4_gold")]
+position = Vector2(915,590)
+scale = Vector2(0.62,0.62)
