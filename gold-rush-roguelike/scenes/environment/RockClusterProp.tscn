@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/environment/desert_props.svg" id="1_props"]
+
+[sub_resource type="AtlasTexture" id="Atlas_rocks"]
+atlas = ExtResource("1_props")
+region = Rect2(160, 0, 160, 160)
+
+[node name="RockClusterProp" type="Node2D"]
+
+[node name="Shadow" type="Polygon2D" parent="."]
+position = Vector2(0, 23)
+polygon = PackedVector2Array(-34, 0, -23, -7, 23, -7, 34, 0, 23, 7, -23, 7)
+color = Color(0.05, 0.03, 0.02, 0.18)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -18)
+texture = SubResource("Atlas_rocks")
+scale = Vector2(0.72, 0.72)
