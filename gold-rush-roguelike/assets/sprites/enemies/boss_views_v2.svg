@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2048" height="384" viewBox="0 0 2048 384">
+<defs>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff6a1"/><stop offset=".27" stop-color="#f1c441"/><stop offset=".6" stop-color="#ba7911"/><stop offset="1" stop-color="#633805"/></linearGradient>
+ <linearGradient id="steel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8fa1aa"/><stop offset=".5" stop-color="#46565f"/><stop offset="1" stop-color="#1c292f"/></linearGradient>
+ <radialGradient id="cyan"><stop stop-color="#f2ffff"/><stop offset=".28" stop-color="#65edff"/><stop offset="1" stop-color="#096c82"/></radialGradient>
+ <radialGradient id="hot"><stop stop-color="#fff8b0"/><stop offset=".35" stop-color="#ffbc36"/><stop offset=".72" stop-color="#ff5125"/><stop offset="1" stop-color="#ff3814" stop-opacity="0"/></radialGradient>
+ <filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ <g id="base">
+  <ellipse cx="256" cy="332" rx="152" ry="24" fill="#24150a" opacity=".30"/>
+  <path d="M153 250 L108 317 M186 269 L164 342 M326 269 L350 342 M358 250 L405 317" stroke="#323c41" stroke-width="28" stroke-linecap="round"/>
+  <path d="M109 316 l-35 16 42 8 20-15 M165 338 l-31 14 42 6 17-14 M349 338 l30 14-42 6-17-14 M405 316 l35 16-42 8-20-15" fill="none" stroke="#1c2529" stroke-width="19" stroke-linecap="round"/>
+  <path d="M137 192 L160 129 Q169 103 198 97 H322 Q350 103 359 130 L380 193 L354 273 Q345 298 316 303 H197 Q168 298 158 272Z" fill="url(#gold)" stroke="#603704" stroke-width="13"/>
+  <path d="M166 145 H348 L363 193 L345 215 H167 L149 193Z" fill="#f4c747" opacity=".34"/>
+  <path d="M180 231 H333 M192 264 H319" stroke="#fff0a0" stroke-width="7" opacity=".46"/>
+  <path d="M201 123 L221 81 H297 L317 123" fill="url(#steel)" stroke="#172128" stroke-width="11"/>
+  <rect x="213" y="94" width="92" height="68" rx="24" fill="url(#steel)" stroke="#182329" stroke-width="11"/>
+  <circle cx="259" cy="127" r="23" fill="url(#cyan)" stroke="#164855" stroke-width="7" filter="url(#glow)"/>
+  <circle cx="252" cy="120" r="7" fill="#fff" opacity=".9"/>
+  <path d="M299 103 L411 65 L424 84 L313 130Z" fill="url(#steel)" stroke="#172127" stroke-width="11"/>
+  <path d="M406 64 L447 55 L458 78 L421 88Z" fill="#273840" stroke="#111a1e" stroke-width="8"/>
+  <circle cx="455" cy="67" r="15" fill="#194f60" stroke="#112d35" stroke-width="6"/>
+  <path d="M169 184 L116 164 L105 191 L155 213 M350 181 L402 160 L413 189 L365 214" fill="none" stroke="#756019" stroke-width="21" stroke-linecap="round"/>
+  <g fill="#d9a22d" stroke="#5c3b0b" stroke-width="4"><circle cx="188" cy="180" r="8"/><circle cx="329" cy="180" r="8"/><circle cx="196" cy="283" r="7"/><circle cx="319" cy="283" r="7"/></g>
+ </g>
+</defs>
+<!-- idle -->
+<g transform="translate(0 0)"><use href="#base"/><path d="M199 211 Q258 235 318 210" fill="none" stroke="#fff2a0" stroke-width="6" opacity=".65"/></g>
+<!-- laser prep -->
+<g transform="translate(512 0)"><use href="#base"/><circle cx="456" cy="67" r="48" fill="url(#hot)" filter="url(#glow)"/><circle cx="456" cy="67" r="27" fill="none" stroke="#ffd55e" stroke-width="7"/><circle cx="456" cy="67" r="39" fill="none" stroke="#ff592d" stroke-width="5"/><path d="M430 36l-13-18M470 30l8-23M486 61l24-7M428 91l-18 16" stroke="#ffd358" stroke-width="6" stroke-linecap="round"/><circle cx="259" cy="127" r="32" fill="#5cecff" opacity=".25" filter="url(#glow)"/></g>
+<!-- damaged -->
+<g transform="translate(1024 0)"><use href="#base"/><path d="M197 134 L218 164 L205 194 L232 219 L219 251 L241 282" fill="none" stroke="#4b2906" stroke-width="9"/><path d="M330 150 L306 177 L320 201 L292 229 L306 258" fill="none" stroke="#563007" stroke-width="8"/><path d="M183 213l-22 19M337 224l25 18M226 268l-14 20" stroke="#ff6b35" stroke-width="8" stroke-linecap="round" filter="url(#glow)"/><circle cx="259" cy="127" r="23" fill="#ff7448" stroke="#72321f" stroke-width="7"/><g fill="#514640" opacity=".55"><circle cx="175" cy="90" r="16"/><circle cx="153" cy="70" r="11"/><circle cx="137" cy="53" r="7"/></g></g>
+<!-- firing recoil -->
+<g transform="translate(1536 0)"><g transform="translate(-12 7) rotate(1 256 190)"><use href="#base"/></g><circle cx="443" cy="70" r="53" fill="url(#hot)" filter="url(#glow)"/><path d="M447 58 L507 38 L512 91 L447 78Z" fill="#fff9bd"/><path d="M448 49 L511 18 M451 87 L511 112" stroke="#ff8c2c" stroke-width="11" stroke-linecap="round"/><path d="M190 214 Q256 245 323 212" fill="none" stroke="#fff3a2" stroke-width="8" opacity=".75"/></g>
+</svg>
