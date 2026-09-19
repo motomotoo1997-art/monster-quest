@@ -22,7 +22,7 @@ func _capture() -> void:
 	main.player.set_input_enabled(false)
 
 	# Capture an actual combat composition instead of an empty opening frame.
-	var waited := 0.0
+	var waited: float = 0.0
 	while root.get_nodes_in_group("enemies").size() < MIN_ENEMIES_FOR_PREVIEW and waited < MAX_WAIT_SECONDS:
 		await create_timer(0.25).timeout
 		waited += 0.25
@@ -31,16 +31,16 @@ func _capture() -> void:
 	await process_frame
 	await RenderingServer.frame_post_draw
 
-	var enemy_count := root.get_nodes_in_group("enemies").size()
+	var enemy_count: int = root.get_nodes_in_group("enemies").size()
 	if enemy_count < MIN_ENEMIES_FOR_PREVIEW:
 		_fail("Gameplay preview never reached battle density: %d enemies" % enemy_count)
 		return
 
-	var image := root.get_texture().get_image()
+	var image: Image = root.get_texture().get_image()
 	if image == null or image.is_empty():
 		_fail("Viewport capture returned no image")
 		return
-	var err := image.save_png(OUTPUT_PATH)
+	var err: Error = image.save_png(OUTPUT_PATH)
 	if err != OK:
 		_fail("Could not save gameplay preview: %s" % error_string(err))
 		return
