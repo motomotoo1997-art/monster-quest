@@ -13,12 +13,15 @@ signal dash_cooldown_changed(remaining: float, maximum: float)
 @export_range(0.1, 10.0, 0.05) var dash_cooldown: float = 1.1
 @export_range(0.0, 2.0, 0.01) var dash_invulnerability: float = 0.18
 @export_range(0.02, 1.0, 0.01) var attack_pose_hold: float = 0.12
+@export_range(0.02, 1.0, 0.01) var hit_pose_hold: float = 0.18
 
 var _input_enabled := true
 var _dash_remaining := 0.0
 var _dash_cooldown_remaining := 0.0
 var _invulnerability_remaining := 0.0
 var _attack_pose_remaining := 0.0
+var _hit_pose_remaining := 0.0
+var _last_health := 0.0
 var _dash_direction := Vector2.RIGHT
 var _dash_cooldown_multiplier := 1.0
 var _visual_time := 0.0
@@ -36,8 +39,10 @@ var _body_base_scale := Vector2.ONE
 
 func _ready() -> void:
 	health_component.died.connect(_on_health_died)
+	health_component.health_changed.connect(_on_health_changed)
 	hurtbox_component.knockback_requested.connect(_on_knockback_requested)
 	weapon_component.fired.connect(_on_weapon_fired)
+	_last_health = health_component.current_health
 	_body_base_position = body_visual.position
 	_body_base_scale = body_visual.scale
 	body_visual.play(&"idle")
@@ -146,13 +151,24 @@ func _update_aim() -> void:
 
 func _update_body_visual(input_dir: Vector2, delta: float) -> void:
 	_visual_time += delta
-	if _attack_pose_remaining > 0.0:
+	if _hit_pose_remaining > 0.0:
+		if body_visual.animation != &"hit":
+			body_visual.play(&"hit")
+	elif _attack_pose_remaining > 0.0:
 		if body_visual.animation != &"attack":
 			body_visual.play(&"attack")
 	else:
 		var next_animation: StringName = &"move" if not input_dir.is_zero_approx() else &"idle"
 		if body_visual.animation != next_animation:
 			body_visual.play(next_animation)
+
+	if _hit_pose_remaining > 0.0:
+		var hit_pulse := 0.5 + 0.5 * sin(_visual_time * 34.0)
+		body_visual.position = _body_base_position + Vector2(-3.0 + hit_pulse * 6.0, -1.0)
+		body_visual.scale = Vector2(_body_base_scale.x * 1.03, _body_base_scale.y * 0.97)
+		body_visual.modulate = Color(1.0, 0.78 + hit_pulse * 0.12, 0.68 + hit_pulse * 0.16, 1.0)
+		return
+	body_visual.modulate = Color.WHITE
 
 	if _dash_remaining > 0.0:
 		var dash_pulse := 0.5 + 0.5 * sin(_visual_time * 24.0)
@@ -182,10 +198,20 @@ func _update_timers(delta: float) -> void:
 			hurtbox_component.monitorable = true
 	if _attack_pose_remaining > 0.0:
 		_attack_pose_remaining = maxf(_attack_pose_remaining - delta, 0.0)
+	if _hit_pose_remaining > 0.0:
+		_hit_pose_remaining = maxf(_hit_pose_remaining - delta, 0.0)
 
 
 func _on_weapon_fired(_projectile: Node2D) -> void:
 	_attack_pose_remaining = attack_pose_hold
+	body_visual.play(&"attack")
+
+
+func _on_health_changed(current: float, _maximum: float) -> void:
+	if current < _last_health and current > 0.0:
+		_hit_pose_remaining = hit_pose_hold
+		body_visual.play(&"hit")
+	_last_health = current
 
 
 func _on_health_died() -> void:
