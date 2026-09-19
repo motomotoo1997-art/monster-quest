@@ -3,10 +3,23 @@
 [ext_resource type="Script" path="res://scripts/vfx/simple_burst.gd" id="1"]
 
 [node name="HitFlash" type="Node2D"]
+z_index = 22
 script = ExtResource("1")
-duration = 0.18
-end_scale = 1.55
+duration = 0.20
+end_scale = 1.75
+
+[node name="Aura" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0,-19,5,-6,18,-12,9,1,22,8,7,8,5,22,-3,9,-17,16,-10,3,-24,-4,-8,-8,-7,-21)
+color = Color(0.08,0.83,1,0.28)
 
 [node name="Burst" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(0, -11, 4, -4, 12, -2, 5, 3, 7, 11, 0, 6, -7, 11, -5, 3, -12, -2, -4, -4)
-color = Color(1, 0.86, 0.3, 0.95)
+polygon = PackedVector2Array(0,-13,4,-4,13,-7,7,1,15,5,5,5,3,14,-2,6,-11,10,-7,2,-15,-3,-5,-5,-4,-14)
+color = Color(0.22,0.94,1,0.96)
+
+[node name="Core" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0,-7,5,-3,8,2,3,7,-3,7,-8,2,-5,-4)
+color = Color(1,1,1,1)
+
+[node name="GoldSpark" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(3,-1,22,-4,10,2,22,8,4,4)
+color = Color(1,0.80,0.20,0.92)
