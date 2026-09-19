@@ -1,12 +1,19 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/vfx/simple_burst.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/vfx/radial_energy_light.svg" id="2_light"]
 
 [node name="Explosion" type="Node2D"]
 z_index = 24
 script = ExtResource("1")
 duration = 0.48
 end_scale = 2.65
+
+[node name="ExplosionLight" type="PointLight2D" parent="."]
+texture = ExtResource("2_light")
+texture_scale = 1.15
+energy = 2.35
+color = Color(1,0.58,0.13,1)
 
 [node name="Shockwave" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(0,-43,16,-39,31,-30,40,-16,44,0,40,16,31,30,16,39,0,43,-16,39,-31,30,-40,16,-44,0,-40,-16,-31,-30,-16,-39)
