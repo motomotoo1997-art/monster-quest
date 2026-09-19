@@ -44,6 +44,14 @@ shape = SubResource("CircleShape2D_enemy")
 position = Vector2(0,15)
 polygon = PackedVector2Array(-24,0,-16,-6,16,-6,24,0,16,6,-16,6)
 color = Color(0.04,0.025,0.015,0.29)
+[node name="EliteAura" type="Polygon2D" parent="."]
+visible = false
+z_index = -1
+position = Vector2(0,14)
+polygon = PackedVector2Array(0,-30,21,-21,30,0,21,21,0,30,-21,21,-30,0,-21,-21)
+color = Color(0.18,0.92,1,0.28)
+show_behind_parent = true
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0,-40)
 sprite_frames = SubResource("SpriteFrames_enemy")
