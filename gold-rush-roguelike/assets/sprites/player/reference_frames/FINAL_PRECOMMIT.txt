@@ -1,0 +1,1 @@
+Final precommit marker only. The next operation must be the atomic Git tree commit that attaches frame blobs and rewrites Prospector.tscn.
