@@ -111,6 +111,20 @@ func _run_test() -> void:
 	if depth == null or depth.texture == null or depth.texture.get_width() < 1000:
 		_fail("Arena01 must contain a full-width illustrated CanyonDepth layer")
 		return
+	var ground_detail := arena.get_node_or_null("GroundDetail") as Sprite2D
+	if ground_detail == null or ground_detail.texture == null or ground_detail.texture.get_width() < 1000:
+		_fail("Arena01 must contain a full-width illustrated GroundDetail layer")
+		return
+	if not ground_detail.texture.resource_path.ends_with("arena01_ground_detail_v3.svg"):
+		_fail("Arena01 GroundDetail must use the v3 authored detail layer")
+		return
+	var foreground_depth := arena.get_node_or_null("ForegroundDepth") as Sprite2D
+	if foreground_depth == null or foreground_depth.texture == null or foreground_depth.texture.get_width() < 1000:
+		_fail("Arena01 must contain a full-width illustrated ForegroundDepth layer")
+		return
+	if not foreground_depth.texture.resource_path.ends_with("arena01_foreground_depth_v3.svg"):
+		_fail("Arena01 ForegroundDepth must use the v3 authored depth layer")
+		return
 	var dust := arena.get_node_or_null("AmbientDust") as CPUParticles2D
 	if dust == null:
 		_fail("Arena01 must contain AmbientDust CPUParticles2D atmosphere")
@@ -163,7 +177,7 @@ func _run_test() -> void:
 	hud.queue_free()
 	await process_frame
 
-	print("PASS: actors, containment animation, crowd spacing, arena art, atmosphere and compact HUD remain readable")
+	print("PASS: actors, containment animation, crowd spacing, layered arena art, atmosphere and compact HUD remain readable")
 	quit(0)
 
 func _fail(message: String) -> void:
