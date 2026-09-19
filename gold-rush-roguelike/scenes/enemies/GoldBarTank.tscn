@@ -51,6 +51,30 @@ shape = SubResource("BodyShape")
 position = Vector2(0,52)
 polygon = PackedVector2Array(-100,0,-73,-22,73,-22,100,0,73,22,-73,22)
 color = Color(0.04,0.025,0.015,0.40)
+
+[node name="PhaseAura" type="Node2D" parent="."]
+position = Vector2(0,-30)
+visible = false
+show_behind_parent = true
+z_index = -1
+[node name="PhaseLight" type="PointLight2D" parent="PhaseAura"]
+texture = ExtResource("10_light")
+texture_scale = 1.70
+energy = 0.95
+color = Color(0.18,0.88,1,1)
+[node name="PhaseRing" type="Line2D" parent="PhaseAura"]
+points = PackedVector2Array(0,-88,62,-62,88,0,62,62,0,88,-62,62,-88,0,-62,-62)
+width = 6.0
+default_color = Color(0.18,0.90,1,0.78)
+closed = true
+antialiased = true
+[node name="PhaseInnerRing" type="Line2D" parent="PhaseAura"]
+points = PackedVector2Array(0,-66,47,-47,66,0,47,47,0,66,-47,47,-66,0,-47,-47)
+width = 3.5
+default_color = Color(1,0.70,0.12,0.66)
+closed = true
+antialiased = true
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0,-79)
 sprite_frames = SubResource("BossFrames")
