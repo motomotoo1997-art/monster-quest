@@ -192,12 +192,14 @@ tests/                           visual/runtime regression contracts
 - Consumes: all prior visual tasks.
 - Produces: verified release-candidate captures and Windows x86_64 artifact.
 
-- [ ] **Step 1: Add/extend capture coverage for the spec-required benchmark images.**
-- [ ] **Step 2: Run the complete headless suite.** Expected: every test exits 0, no parser/missing-resource errors.
-- [ ] **Step 3: Inspect gameplay and boss captures for crop rectangles, floating shadows, unreadable silhouettes, HUD overlap and excessive VFX.
-- [ ] **Step 4: Fix only demonstrated Critical/Important visual regressions with RED→GREEN tests.
-- [ ] **Step 5: Export Windows x86_64 and verify artifact creation.
-- [ ] **Step 6: Commit.** `chore: verify visual overhaul release candidate`
+- [x] **Step 1: Add/extend capture coverage for the spec-required benchmark images.**
+- [x] **Step 2: Run the complete headless suite.** Expected: every test exits 0, no parser/missing-resource errors.
+- [x] **Step 3: Inspect gameplay and boss captures for crop rectangles, floating shadows, unreadable silhouettes, HUD overlap and excessive VFX.
+- [x] **Step 4: Fix only demonstrated Critical/Important visual regressions with RED→GREEN tests.
+- [x] **Step 5: Export Windows x86_64 and verify artifact creation.
+- [x] **Step 6: Commit.** `chore: verify visual overhaul release candidate`
+
+**Release-candidate evidence:** RED slam-readability gate `35468250853` failed as expected; corrected outline/low-opacity telegraph passed the complete CI suite in run `35468285852`, including four production captures and Windows x86_64 export.
 
 ## Self-Review
 
