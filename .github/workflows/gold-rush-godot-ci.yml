@@ -7,12 +7,10 @@ on:
     paths:
       - 'gold-rush-roguelike/**'
       - '.github/workflows/gold-rush-godot-ci.yml'
-      - '.github/scripts/materialize_gold_rush_assets.py'
-      - '.gold-rush-payloads/**'
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   godot-tests:
@@ -21,27 +19,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Materialize and validate Gold Rush sprite atlases
-        shell: bash
-        run: |
-          set -euo pipefail
-          python .github/scripts/materialize_gold_rush_assets.py
-
-      - name: Persist migrated sprite assets
-        shell: bash
-        run: |
-          set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A gold-rush-roguelike/assets/sprites gold-rush-roguelike/scenes
-          if compgen -G '.gold-rush-payloads/*' > /dev/null; then
-            git rm -f .gold-rush-payloads/*
-          fi
-          if ! git diff --cached --quiet; then
-            git commit -m "art: finalize Gold Rush PNG atlas migration"
-            git push origin HEAD:feature/gold-rush-vertical-slice
-          fi
 
       - name: Install Godot 4.7.2
         shell: bash
