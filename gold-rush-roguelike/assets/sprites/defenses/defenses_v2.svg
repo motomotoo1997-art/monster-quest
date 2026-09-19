@@ -1,41 +1,71 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1344" height="448" viewBox="0 0 1344 448">
 <defs>
- <linearGradient id="iron" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#a0abb0"/><stop offset=".45" stop-color="#546169"/><stop offset="1" stop-color="#232d32"/></linearGradient>
- <linearGradient id="rust" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#c27936"/><stop offset=".55" stop-color="#7a3e22"/><stop offset="1" stop-color="#3c2118"/></linearGradient>
- <linearGradient id="green" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#9fda55"/><stop offset=".5" stop-color="#4d982f"/><stop offset="1" stop-color="#22561f"/></linearGradient>
- <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#b86a35"/><stop offset="1" stop-color="#5b2e20"/></linearGradient>
- <radialGradient id="cyan"><stop stop-color="#edffff"/><stop offset=".35" stop-color="#5eeaff"/><stop offset="1" stop-color="#087089"/></radialGradient>
- <filter id="glow" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#76d4ff"/><stop offset=".32" stop-color="#328bc2"/><stop offset=".68" stop-color="#245b8d"/><stop offset="1" stop-color="#16334f"/></linearGradient>
+ <linearGradient id="steel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d7e2e7"/><stop offset=".38" stop-color="#7c8f99"/><stop offset="1" stop-color="#2c3940"/></linearGradient>
+ <linearGradient id="rust" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#c87936"/><stop offset=".52" stop-color="#82431f"/><stop offset="1" stop-color="#3e2117"/></linearGradient>
+ <linearGradient id="green" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#a8dd5b"/><stop offset=".45" stop-color="#559d35"/><stop offset="1" stop-color="#24591f"/></linearGradient>
+ <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#c47b3c"/><stop offset="1" stop-color="#61321f"/></linearGradient>
+ <radialGradient id="cyan"><stop stop-color="#ffffff"/><stop offset=".24" stop-color="#94f8ff"/><stop offset=".58" stop-color="#2bd9f2"/><stop offset="1" stop-color="#08748a"/></radialGradient>
+ <filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
 </defs>
-<!-- Magnetic turret -->
-<g transform="translate(0 0)">
- <ellipse cx="224" cy="395" rx="115" ry="19" fill="#23160f" opacity=".26"/>
- <path d="M111 339 L129 375 H318 L339 339" fill="none" stroke="#302d2b" stroke-width="14"/><circle cx="151" cy="378" r="28" fill="#34383b" stroke="#181b1c" stroke-width="9"/><circle cx="300" cy="378" r="28" fill="#34383b" stroke="#181b1c" stroke-width="9"/><circle cx="151" cy="378" r="10" fill="#78838a"/><circle cx="300" cy="378" r="10" fill="#78838a"/>
- <rect x="117" y="296" width="218" height="62" rx="15" fill="url(#rust)" stroke="#39241b" stroke-width="9"/><path d="M132 318h188M160 299v58M294 299v58" stroke="#d28c47" stroke-width="5" opacity=".6"/>
- <path d="M166 299 L154 205 Q151 163 180 143 L197 143 L204 235 L244 235 L252 143 L269 143 Q300 164 295 205 L282 299Z" fill="url(#iron)" stroke="#1f292e" stroke-width="10"/>
- <path d="M154 203 L122 176 Q109 162 119 146 L146 117 L171 142 L151 164 L180 190" fill="none" stroke="#ad3e31" stroke-width="28" stroke-linecap="round"/><path d="M295 203 L327 176 Q340 162 330 146 L303 117 L278 142 L298 164 L269 190" fill="none" stroke="#3763a0" stroke-width="28" stroke-linecap="round"/>
- <path d="M116 142 L142 113" stroke="#f7b8a5" stroke-width="8"/><path d="M333 142 L307 113" stroke="#b8d4ff" stroke-width="8"/>
- <circle cx="224" cy="232" r="55" fill="#26343a" stroke="#151f23" stroke-width="9"/><circle cx="224" cy="232" r="30" fill="url(#cyan)" stroke="#145367" stroke-width="7" filter="url(#glow)"/>
- <g fill="#dca850" stroke="#654014" stroke-width="3"><circle cx="167" cy="320" r="7"/><circle cx="283" cy="320" r="7"/><circle cx="224" cy="333" r="7"/></g>
+<!-- MAGNETIC TURRET: blue sci-fi gun platform matching battle reference -->
+<g>
+ <ellipse cx="224" cy="397" rx="122" ry="20" fill="#1c1410" opacity=".28"/>
+ <!-- feet -->
+ <g fill="url(#blue)" stroke="#17314a" stroke-width="9"><path d="M126 333 L92 380 L140 391 L169 351Z"/><path d="M322 333 L356 380 L308 391 L279 351Z"/><path d="M175 348 L162 402 L203 405 L217 357Z"/><path d="M273 348 L286 402 L245 405 L231 357Z"/></g>
+ <!-- base -->
+ <ellipse cx="224" cy="334" rx="104" ry="54" fill="url(#blue)" stroke="#17314a" stroke-width="10"/>
+ <ellipse cx="224" cy="326" rx="72" ry="34" fill="#1e4264" stroke="#142c43" stroke-width="7"/>
+ <circle cx="224" cy="327" r="28" fill="url(#cyan)" stroke="#0f4d60" stroke-width="7" filter="url(#glow)"/>
+ <!-- rotating head -->
+ <path d="M164 283 Q174 230 224 220 Q274 230 284 283 L273 315 H175Z" fill="url(#steel)" stroke="#27343b" stroke-width="10"/>
+ <path d="M176 278 Q190 245 224 240 Q258 245 272 278" fill="none" stroke="#72cfff" stroke-width="8" opacity=".75"/>
+ <circle cx="185" cy="286" r="9" fill="#33dcf4"/><circle cx="263" cy="286" r="9" fill="#33dcf4"/>
+ <!-- cannon housing -->
+ <path d="M205 242 L219 153 L264 145 L283 238Z" fill="#40515b" stroke="#26343b" stroke-width="10"/>
+ <path d="M233 158 L264 153 L267 232 L222 236Z" fill="#728690" opacity=".72"/>
+ <!-- barrel -->
+ <path d="M252 157 L315 119 L337 139 L282 189Z" fill="url(#steel)" stroke="#25333a" stroke-width="10"/>
+ <path d="M315 119 L365 102 L391 131 L340 155Z" fill="url(#blue)" stroke="#17314a" stroke-width="10"/>
+ <rect x="360" y="105" width="46" height="39" rx="12" fill="#203f59" stroke="#122838" stroke-width="8"/>
+ <ellipse cx="404" cy="124" rx="17" ry="20" fill="url(#cyan)" stroke="#0d5365" stroke-width="6" filter="url(#glow)"/>
+ <!-- cables and gold fasteners -->
+ <path d="M184 300 Q139 272 147 235 Q151 217 169 210" fill="none" stroke="#284b66" stroke-width="10"/>
+ <path d="M264 303 Q304 282 302 249" fill="none" stroke="#2aa8cf" stroke-width="7"/>
+ <g fill="#e6ad2c" stroke="#68450e" stroke-width="3"><circle cx="149" cy="342" r="7"/><circle cx="299" cy="342" r="7"/><circle cx="224" cy="370" r="7"/></g>
 </g>
-<!-- Cactus sentry -->
+<!-- CACTUS SENTRY -->
 <g transform="translate(448 0)">
- <ellipse cx="224" cy="394" rx="98" ry="18" fill="#1e160d" opacity=".24"/>
- <path d="M194 354 Q186 300 190 232 L155 254 Q135 266 119 247 L102 216 Q95 201 110 193 Q124 186 133 201 L146 222 L190 194 L191 146 Q191 108 224 108 Q257 108 257 146 L258 205 L299 180 L310 150 Q316 135 331 140 Q346 145 341 161 L330 199 Q326 212 315 219 L259 250 Q260 304 253 354Z" fill="url(#green)" stroke="#21491e" stroke-width="10"/>
- <g fill="#e7dd9b"><circle cx="211" cy="142" r="3"/><circle cx="238" cy="167" r="3"/><circle cx="208" cy="217" r="3"/><circle cx="239" cy="276" r="3"/><circle cx="129" cy="219" r="3"/><circle cx="316" cy="182" r="3"/></g>
- <path d="M166 289 L118 320 L132 350 L188 329" fill="url(#wood)" stroke="#3b281c" stroke-width="8"/><path d="M282 294 L337 317 L326 350 L257 330" fill="url(#wood)" stroke="#3b281c" stroke-width="8"/>
- <circle cx="224" cy="211" r="42" fill="#5b692c" stroke="#26331d" stroke-width="8"/><circle cx="224" cy="211" r="25" fill="#a5b84c" stroke="#405020" stroke-width="6"/><path d="M224 179v64M192 211h64M201 188l46 46M247 188l-46 46" stroke="#3c4c20" stroke-width="6"/>
- <path d="M224 205 L307 179" stroke="#4f5350" stroke-width="19" stroke-linecap="round"/><path d="M294 168 L345 159 L349 181 L302 191Z" fill="url(#iron)" stroke="#202b30" stroke-width="7"/><circle cx="348" cy="170" r="9" fill="#ffb53b"/>
- <path d="M147 339 Q224 374 301 339 L288 382 H160Z" fill="url(#rust)" stroke="#3a2519" stroke-width="9"/><g fill="#d9b44c"><rect x="172" y="348" width="10" height="22" rx="3"/><rect x="188" y="352" width="10" height="22" rx="3"/><rect x="204" y="355" width="10" height="22" rx="3"/></g>
+ <ellipse cx="224" cy="397" rx="103" ry="18" fill="#1e160d" opacity=".25"/>
+ <path d="M190 355 Q181 300 187 235 L151 255 Q130 267 114 247 L96 214 Q88 197 105 188 Q121 180 132 199 L145 220 L187 193 L188 142 Q188 101 224 101 Q260 101 260 142 L260 202 L300 179 L311 147 Q317 129 334 135 Q351 141 345 160 L333 200 Q329 215 316 223 L261 254 Q263 306 254 355Z" fill="url(#green)" stroke="#21491e" stroke-width="10"/>
+ <g fill="#f1e7a8"><circle cx="207" cy="134" r="3"/><circle cx="240" cy="162" r="3"/><circle cx="207" cy="215" r="3"/><circle cx="240" cy="278" r="3"/><circle cx="126" cy="216" r="3"/><circle cx="319" cy="181" r="3"/></g>
+ <!-- armored belt -->
+ <path d="M170 275 Q224 295 278 275 L273 318 Q224 337 175 318Z" fill="#3e4a46" stroke="#222e2c" stroke-width="8"/>
+ <circle cx="224" cy="294" r="23" fill="url(#cyan)" stroke="#155264" stroke-width="6" filter="url(#glow)"/>
+ <!-- gun -->
+ <path d="M224 224 L291 193" stroke="#505f65" stroke-width="21" stroke-linecap="round"/>
+ <path d="M280 181 L342 166 L348 192 L293 207Z" fill="url(#steel)" stroke="#202c32" stroke-width="8"/>
+ <ellipse cx="349" cy="179" rx="10" ry="13" fill="url(#cyan)" filter="url(#glow)"/>
+ <!-- ammo pods -->
+ <path d="M160 315 L116 338 L130 372 L181 347" fill="url(#wood)" stroke="#3b281c" stroke-width="8"/><path d="M288 315 L338 336 L326 372 L266 349" fill="url(#wood)" stroke="#3b281c" stroke-width="8"/>
+ <path d="M146 346 Q224 381 302 346 L291 391 H158Z" fill="url(#rust)" stroke="#3a2519" stroke-width="9"/>
+ <g fill="#e0b945"><rect x="175" y="356" width="9" height="20" rx="3"/><rect x="190" y="360" width="9" height="20" rx="3"/><rect x="205" y="363" width="9" height="20" rx="3"/></g>
 </g>
-<!-- TNT barrel -->
+<!-- TNT BARREL -->
 <g transform="translate(896 0)">
- <ellipse cx="224" cy="397" rx="87" ry="17" fill="#24140d" opacity=".25"/>
- <rect x="148" y="174" width="152" height="202" rx="27" fill="#a72e25" stroke="#4a1816" stroke-width="11"/><path d="M154 215h140M151 326h146" stroke="#462b27" stroke-width="17"/><path d="M168 192h112M168 355h112" stroke="#d55b43" stroke-width="5" opacity=".55"/>
- <rect x="170" y="229" width="108" height="78" rx="8" fill="#e9d8a4" stroke="#513d28" stroke-width="6"/><text x="224" y="278" text-anchor="middle" font-family="sans-serif" font-weight="900" font-size="42" fill="#782118">TNT</text>
- <path d="M214 171 Q200 133 228 111 Q258 90 283 119" fill="none" stroke="#3d3328" stroke-width="8"/><path d="M276 116 Q292 89 315 104 Q337 120 325 143" fill="none" stroke="#ad6b2c" stroke-width="7"/>
- <circle cx="325" cy="145" r="14" fill="#ffd353" filter="url(#glow)"/><circle cx="325" cy="145" r="6" fill="#fff6be"/>
- <rect x="122" y="126" width="80" height="57" rx="9" fill="url(#rust)" stroke="#39261d" stroke-width="8"/><circle cx="143" cy="153" r="11" fill="#27363d"/><circle cx="180" cy="153" r="11" fill="#27363d"/><path d="M151 153h21" stroke="#6beeff" stroke-width="5" filter="url(#glow)"/>
- <path d="M197 144 Q232 119 268 145" fill="none" stroke="#343d41" stroke-width="8"/><path d="M116 177 L87 204 L104 227 L139 192" fill="none" stroke="#675038" stroke-width="9"/>
+ <ellipse cx="224" cy="399" rx="89" ry="17" fill="#24140d" opacity=".26"/>
+ <rect x="146" y="175" width="156" height="202" rx="29" fill="#a93226" stroke="#4a1816" stroke-width="11"/>
+ <path d="M151 215h146M149 327h150" stroke="#462b27" stroke-width="17"/><path d="M166 192h116M166 355h116" stroke="#e06447" stroke-width="5" opacity=".55"/>
+ <rect x="169" y="230" width="110" height="79" rx="9" fill="#ead9a7" stroke="#513d28" stroke-width="6"/><text x="224" y="280" text-anchor="middle" font-family="sans-serif" font-weight="900" font-size="43" fill="#782118">TNT</text>
+ <!-- detonator tech box -->
+ <rect x="116" y="126" width="86" height="59" rx="10" fill="#34536a" stroke="#1d303e" stroke-width="8"/>
+ <circle cx="141" cy="154" r="12" fill="#17262e"/><circle cx="177" cy="154" r="12" fill="#17262e"/><circle cx="141" cy="154" r="6" fill="#34def2" filter="url(#glow)"/><circle cx="177" cy="154" r="6" fill="#f4b830"/>
+ <path d="M201 146 Q233 119 269 145" fill="none" stroke="#343d41" stroke-width="8"/>
+ <!-- fuse -->
+ <path d="M214 173 Q202 134 229 111 Q258 87 284 118" fill="none" stroke="#3d3328" stroke-width="8"/><path d="M277 116 Q294 86 319 102 Q342 118 330 143" fill="none" stroke="#ad6b2c" stroke-width="7"/>
+ <circle cx="330" cy="145" r="16" fill="#ffb52d" filter="url(#glow)"/><circle cx="330" cy="145" r="7" fill="#fff7b5"/>
+ <!-- straps / feet -->
+ <path d="M158 368 L137 397 H174 L189 374 M290 368 L311 397 H274 L259 374" fill="#344248" stroke="#202a2e" stroke-width="7"/>
+ <g fill="#e9bb43"><circle cx="165" cy="211" r="6"/><circle cx="282" cy="211" r="6"/><circle cx="165" cy="334" r="6"/><circle cx="282" cy="334" r="6"/></g>
 </g>
 </svg>
