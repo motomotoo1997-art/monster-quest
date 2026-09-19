@@ -1,21 +1,30 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=14 format=3]
 
 [ext_resource type="Script" path="res://scripts/enemies/molten_gold_slime.gd" id="1_enemy"]
 [ext_resource type="Script" path="res://scripts/components/health_component.gd" id="2_health"]
 [ext_resource type="Script" path="res://scripts/components/team_component.gd" id="3_team"]
 [ext_resource type="Script" path="res://scripts/components/hurtbox_component.gd" id="4_hurtbox"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/MoltenPuddle.tscn" id="5_puddle"]
-[ext_resource type="Texture2D" path="res://assets/sprites/enemies/enemies_v2.svg" id="6_texture"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/enemies_animation_v3.svg" id="6_texture"]
 [ext_resource type="Script" path="res://scripts/components/gold_drop_component.gd" id="7_gold_drop"]
 [ext_resource type="PackedScene" path="res://scenes/combat/GoldPickup.tscn" id="8_gold_pickup"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_enemy"]
 radius = 22.0
-[sub_resource type="AtlasTexture" id="AtlasTexture_enemy"]
+[sub_resource type="AtlasTexture" id="Slime0"]
 atlas = ExtResource("6_texture")
-region = Rect2(1152,0,384,384)
+region = Rect2(0,1152,384,384)
+[sub_resource type="AtlasTexture" id="Slime1"]
+atlas = ExtResource("6_texture")
+region = Rect2(384,1152,384,384)
+[sub_resource type="AtlasTexture" id="Slime2"]
+atlas = ExtResource("6_texture")
+region = Rect2(768,1152,384,384)
+[sub_resource type="AtlasTexture" id="Slime3"]
+atlas = ExtResource("6_texture")
+region = Rect2(1152,1152,384,384)
 [sub_resource type="SpriteFrames" id="SpriteFrames_enemy"]
-animations = [{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_enemy")}],"loop":true,"name":&"idle","speed":4.0},{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_enemy")}],"loop":true,"name":&"move","speed":6.0}]
+animations = [{"frames":[{"duration":1.0,"texture":SubResource("Slime0")},{"duration":1.0,"texture":SubResource("Slime1")},{"duration":1.0,"texture":SubResource("Slime2")}],"loop":true,"name":&"idle","speed":6.0},{"frames":[{"duration":1.0,"texture":SubResource("Slime0")},{"duration":1.0,"texture":SubResource("Slime1")},{"duration":1.0,"texture":SubResource("Slime2")},{"duration":1.0,"texture":SubResource("Slime3")}],"loop":true,"name":&"move","speed":8.0}]
 
 [node name="MoltenGoldSlime" type="CharacterBody2D" groups=["enemies"]]
 z_index = 5
