@@ -1,5 +1,65 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1024" height="213" viewBox="0 0 1024 213">
-<defs><linearGradient id="bgold" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff093"/><stop offset=".43" stop-color="#e7ad2a"/><stop offset="1" stop-color="#8d5008"/></linearGradient><linearGradient id="armor"><stop stop-color="#59697a"/><stop offset="1" stop-color="#26313b"/></linearGradient></defs>
-<g id="tank"><ellipse cx="128" cy="186" rx="88" ry="15" fill="#25160b" opacity=".22"/><path d="M61 157 L38 185 M80 163 L67 197 M176 163 L189 197 M195 157 L218 185" stroke="#3a454f" stroke-width="13" stroke-linecap="round"/><rect x="65" y="101" width="126" height="67" rx="24" fill="url(#bgold)" stroke="#6e3c05" stroke-width="8"/><rect x="90" y="79" width="76" height="49" rx="18" fill="url(#armor)" stroke="#17212a" stroke-width="7"/><circle cx="128" cy="105" r="13" fill="#5be8ff" stroke="#153d4d" stroke-width="5"/><path d="M159 91 L231 64 L238 77 L166 105Z" fill="#3d4b58" stroke="#17212a" stroke-width="7"/><circle cx="238" cy="70" r="9" fill="#ff7d2b"/></g>
-<use href="#tank" x="0"/><use href="#tank" x="256"/><use href="#tank" x="512"/><use href="#tank" x="768"/>
+  <defs>
+    <linearGradient id="bgold" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#fff093"/>
+      <stop offset=".43" stop-color="#e7ad2a"/>
+      <stop offset="1" stop-color="#8d5008"/>
+    </linearGradient>
+    <linearGradient id="armor" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#6d7f91"/>
+      <stop offset="1" stop-color="#26313b"/>
+    </linearGradient>
+    <radialGradient id="chargeGlow">
+      <stop stop-color="#fff7b0" stop-opacity="1"/>
+      <stop offset=".45" stop-color="#ff9e2d" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#ff3c19" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <g id="tank-base">
+    <ellipse cx="128" cy="186" rx="88" ry="15" fill="#25160b" opacity=".22"/>
+    <path d="M61 157 L38 185 M80 163 L67 197 M176 163 L189 197 M195 157 L218 185" stroke="#3a454f" stroke-width="13" stroke-linecap="round"/>
+    <rect x="65" y="101" width="126" height="67" rx="24" fill="url(#bgold)" stroke="#6e3c05" stroke-width="8"/>
+    <rect x="90" y="79" width="76" height="49" rx="18" fill="url(#armor)" stroke="#17212a" stroke-width="7"/>
+    <circle cx="128" cy="105" r="13" fill="#5be8ff" stroke="#153d4d" stroke-width="5"/>
+    <path d="M159 91 L231 64 L238 77 L166 105Z" fill="#3d4b58" stroke="#17212a" stroke-width="7"/>
+    <circle cx="238" cy="70" r="9" fill="#ff7d2b"/>
+  </g>
+
+  <!-- 0: idle -->
+  <g>
+    <use href="#tank-base"/>
+    <path d="M102 118 Q128 128 154 118" fill="none" stroke="#fff3a8" stroke-width="4" opacity=".55"/>
+  </g>
+
+  <!-- 1: charge -->
+  <g transform="translate(256 0)">
+    <use href="#tank-base"/>
+    <circle cx="239" cy="70" r="34" fill="url(#chargeGlow)"/>
+    <circle cx="239" cy="70" r="19" fill="none" stroke="#ffcf4d" stroke-width="4" opacity=".85"/>
+    <circle cx="239" cy="70" r="27" fill="none" stroke="#ff5b2d" stroke-width="3" opacity=".65"/>
+    <path d="M210 47 L198 36 M212 91 L199 103 M246 36 L250 21" stroke="#ffd75a" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="128" cy="105" r="19" fill="#5be8ff" opacity=".25"/>
+  </g>
+
+  <!-- 2: damaged -->
+  <g transform="translate(512 0)">
+    <use href="#tank-base"/>
+    <path d="M104 102 L117 117 L109 132 L127 145 L119 164" fill="none" stroke="#4b2807" stroke-width="5"/>
+    <path d="M162 109 L149 124 L158 139 L143 151" fill="none" stroke="#5d3107" stroke-width="4"/>
+    <path d="M83 136 L96 128 M171 148 L185 137" stroke="#ff7738" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="78" cy="86" r="10" fill="#43362f" opacity=".65"/>
+    <circle cx="69" cy="72" r="7" fill="#51453e" opacity=".45"/>
+    <circle cx="61" cy="60" r="5" fill="#665950" opacity=".3"/>
+    <circle cx="128" cy="105" r="13" fill="#ff7846" stroke="#71301e" stroke-width="5"/>
+  </g>
+
+  <!-- 3: fire -->
+  <g transform="translate(768 0)">
+    <use href="#tank-base"/>
+    <circle cx="239" cy="70" r="30" fill="url(#chargeGlow)"/>
+    <path d="M238 66 L256 58 L256 82 L238 75Z" fill="#fff7b0"/>
+    <path d="M235 59 L256 43 M237 80 L256 95" stroke="#ff8c28" stroke-width="6" stroke-linecap="round"/>
+    <path d="M102 118 Q128 132 154 118" fill="none" stroke="#fff3a8" stroke-width="5" opacity=".75"/>
+  </g>
 </svg>
