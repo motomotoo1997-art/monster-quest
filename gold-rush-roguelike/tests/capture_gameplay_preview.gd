@@ -16,13 +16,12 @@ func _capture() -> void:
 		return
 	root.add_child(main)
 	await process_frame
-	main.title_overlay.dismiss()
-	main._on_title_start_requested()
+	main._on_start_requested()
 	main.player.set_input_enabled(false)
-	# Let Arena01 load and enough of wave one spawn to prove enemy readability.
-	await create_timer(2.2).timeout
+	# Let Arena01 load and several Gold Hoppers enter the playable viewport.
+	await create_timer(2.6).timeout
 	await process_frame
-	await process_frame
+	await RenderingServer.frame_post_draw
 	var image := root.get_texture().get_image()
 	if image == null or image.is_empty():
 		_fail("Viewport capture returned no image")
