@@ -1,6 +1,8 @@
 extends SceneTree
 
 const OUTPUT_PATH := "/tmp/gold-rush-gameplay-preview.png"
+const MIN_ENEMIES_FOR_PREVIEW := 6
+const MAX_WAIT_SECONDS := 8.0
 
 func _init() -> void:
 	call_deferred("_capture")
@@ -18,10 +20,22 @@ func _capture() -> void:
 	await process_frame
 	main._on_start_requested()
 	main.player.set_input_enabled(false)
-	# Let Arena01 load and several Gold Hoppers enter the playable viewport.
-	await create_timer(2.6).timeout
+
+	# Capture an actual combat composition instead of an empty opening frame.
+	var waited := 0.0
+	while root.get_nodes_in_group("enemies").size() < MIN_ENEMIES_FOR_PREVIEW and waited < MAX_WAIT_SECONDS:
+		await create_timer(0.25).timeout
+		waited += 0.25
+	# Let the spawned enemies advance far enough into the central combat lane.
+	await create_timer(1.0).timeout
 	await process_frame
 	await RenderingServer.frame_post_draw
+
+	var enemy_count := root.get_nodes_in_group("enemies").size()
+	if enemy_count < MIN_ENEMIES_FOR_PREVIEW:
+		_fail("Gameplay preview never reached battle density: %d enemies" % enemy_count)
+		return
+
 	var image := root.get_texture().get_image()
 	if image == null or image.is_empty():
 		_fail("Viewport capture returned no image")
@@ -30,7 +44,7 @@ func _capture() -> void:
 	if err != OK:
 		_fail("Could not save gameplay preview: %s" % error_string(err))
 		return
-	print("PASS: gameplay preview saved to %s (%dx%d)" % [OUTPUT_PATH,image.get_width(),image.get_height()])
+	print("PASS: gameplay preview saved with %d enemies to %s (%dx%d)" % [enemy_count,OUTPUT_PATH,image.get_width(),image.get_height()])
 	main.queue_free()
 	quit(0)
 
