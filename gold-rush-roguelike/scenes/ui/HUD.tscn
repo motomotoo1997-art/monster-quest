@@ -227,7 +227,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.75, 0.17, 1)
 theme_override_font_sizes/font_size = 15
-text = "GOLD BAR TANK"
+text = "FRONTIER JUGGERNAUT"
 horizontal_alignment = 1
 
 [node name="BossHP" type="ProgressBar" parent="Root/BossPanel/VBox"]
