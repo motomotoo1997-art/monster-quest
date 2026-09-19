@@ -1,7 +1,7 @@
 extends SceneTree
 
 const OUTPUT_PATH := "/tmp/gold-rush-gameplay-preview.png"
-const MIN_ENEMIES_FOR_PREVIEW := 10
+const MIN_ENEMIES_FOR_PREVIEW := 9
 const MAX_SPAWN_ATTEMPTS := 14
 
 func _init() -> void:
