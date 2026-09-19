@@ -17,6 +17,7 @@ var _persistent_staging: Node2D
 
 
 func _ready() -> void:
+	add_to_group("arena_controller")
 	_persistent_staging = _resolve_persistent_staging()
 	_register_staged_persistent_actors()
 
@@ -112,14 +113,10 @@ func _attach_persistent_actors(arena: Node2D) -> void:
 
 
 func _resolve_persistent_staging() -> Node2D:
-	# Editor-provided path is preferred when valid.
 	if not persistent_staging_path.is_empty():
 		var configured := get_node_or_null(persistent_staging_path) as Node2D
 		if configured != null:
 			return configured
-	# Main-scene fallback: ArenaController and Actors are siblings. Keeping this
-	# lookup here makes scene serialization quirks harmless and is still easy to
-	# override for tests or future alternate Main scenes.
 	var parent := get_parent()
 	if parent != null:
 		return parent.get_node_or_null("Actors") as Node2D
@@ -127,13 +124,10 @@ func _resolve_persistent_staging() -> Node2D:
 
 
 func _get_arena_container() -> Node:
-	# Prefer an explicit container when it resolves successfully.
 	if not arena_container_path.is_empty():
 		var configured := get_node_or_null(arena_container_path)
 		if configured != null:
 			return configured
-	# Main-scene fallback keeps active arenas under ArenaLayer instead of the
-	# scene root, which also makes the runtime tree deterministic in tests.
 	var parent := get_parent()
 	if parent != null:
 		var arena_layer := parent.get_node_or_null("ArenaLayer")
