@@ -27,6 +27,29 @@ position = Vector2(0,-42)
 polygon = PackedVector2Array(0,-66,48,-48,66,0,48,48,0,66,-48,48,-66,0,-48,-48)
 color = Color(0.12,0.86,0.94,0.10)
 
+[node name="EnergyRings" type="Node2D" parent="."]
+z_index = 1
+position = Vector2(0,-58)
+
+[node name="OuterRing" type="Line2D" parent="EnergyRings"]
+points = PackedVector2Array(-62,0,-54,-17,-32,-29,0,-34,32,-29,54,-17,62,0,54,17,32,29,0,34,-32,29,-54,17,-62,0)
+width = 4.0
+default_color = Color(0.24,0.92,1,0.78)
+closed = true
+antialiased = true
+
+[node name="InnerRing" type="Line2D" parent="EnergyRings"]
+rotation = 0.12
+points = PackedVector2Array(-44,0,-38,-12,-23,-20,0,-23,23,-20,38,-12,44,0,38,12,23,20,0,23,-23,20,-38,12,-44,0)
+width = 2.5
+default_color = Color(0.67,0.98,1,0.92)
+closed = true
+antialiased = true
+
+[node name="CoreSpark" type="Polygon2D" parent="EnergyRings"]
+polygon = PackedVector2Array(0,-12,5,-4,14,0,5,4,0,12,-5,4,-14,0,-5,-4)
+color = Color(0.76,1,1,0.34)
+
 [node name="Visual" type="Sprite2D" parent="."]
 position = Vector2(0,-58)
 texture = ExtResource("5_visual")
