@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" path="res://scenes/combat/Projectile.tscn" id="6_projectile"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/GoldHopper.tscn" id="7_hopper"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/FlyingGoldDisc.tscn" id="8_disc"]
-[ext_resource type="Texture2D" path="res://assets/sprites/enemies/boss_views.webp" id="9_texture"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/boss_views.svg" id="9_texture"]
 
 [sub_resource type="RectangleShape2D" id="BodyShape"]
 size = Vector2(92,62)
