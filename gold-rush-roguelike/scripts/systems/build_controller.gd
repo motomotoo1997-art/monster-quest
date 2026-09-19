@@ -196,11 +196,23 @@ func _on_arena_will_unload(_arena: Node2D) -> void:
 
 func _resolve_economy() -> EconomyController:
 	if not economy_path.is_empty():
-		return get_node_or_null(economy_path) as EconomyController
-	return get_tree().get_first_node_in_group("economy_controller") as EconomyController
+		var configured := get_node_or_null(economy_path) as EconomyController
+		if configured != null:
+			return configured
+	var grouped := get_tree().get_first_node_in_group("economy_controller") as EconomyController
+	if grouped != null:
+		return grouped
+	var parent := get_parent()
+	return parent.get_node_or_null("EconomyController") as EconomyController if parent != null else null
 
 
 func _resolve_arena_controller() -> ArenaController:
 	if not arena_controller_path.is_empty():
-		return get_node_or_null(arena_controller_path) as ArenaController
-	return get_tree().get_first_node_in_group("arena_controller") as ArenaController
+		var configured := get_node_or_null(arena_controller_path) as ArenaController
+		if configured != null:
+			return configured
+	var grouped := get_tree().get_first_node_in_group("arena_controller") as ArenaController
+	if grouped != null:
+		return grouped
+	var parent := get_parent()
+	return parent.get_node_or_null("ArenaController") as ArenaController if parent != null else null
