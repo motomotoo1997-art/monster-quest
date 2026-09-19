@@ -74,6 +74,10 @@ func _capture() -> void:
 	boss.phase = 1
 	boss._attack_index = 0
 	boss._choose_next_attack(main.player)
+	# Freeze behavior after entering the real production state so CI frame rate cannot
+	# advance the short telegraph window before the screenshot is read back.
+	boss._update_visual(0.016)
+	boss.set_physics_process(false)
 	if boss.state != GoldBarTank.State.CHARGE_TELEGRAPH or not boss.charge_telegraph.visible:
 		_fail("Boss preview could not enter the production laser telegraph state")
 		return
