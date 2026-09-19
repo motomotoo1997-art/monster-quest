@@ -27,6 +27,9 @@ var _visual_base_scale := Vector2.ONE
 
 
 func _ready() -> void:
+	# Ground combatants must share Z=0 with arena props so the active arena's
+	# Y-sort can decide front/back order. Airborne subclasses may override it.
+	z_index = 0
 	add_to_group("enemies")
 	health_component.died.connect(_on_health_died)
 	hurtbox_component.knockback_requested.connect(_on_knockback_requested)
