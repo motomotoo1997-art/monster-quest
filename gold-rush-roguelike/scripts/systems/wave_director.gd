@@ -47,15 +47,21 @@ func start_wave(entries: Array[Dictionary]) -> void:
 		for _i in range(count):
 			_spawn_queue.append(entry.duplicate())
 	_spawning_enabled = not _spawn_queue.is_empty()
-	_spawn_timer = 0.05
+	_spawn_timer = 0.30
 	wave_started.emit(current_wave_number)
-	# Put a readable threat group on screen immediately. This avoids an empty-looking
-	# arena at wave start while the remaining queue still uses authored spawn intervals.
+	# arena_started is emitted from inside ArenaController.load_arena(). Defer the opening
+	# burst one idle turn so every authored spawn marker has fully entered the SceneTree.
+	call_deferred("_spawn_opening_burst")
+	if not _spawning_enabled:
+		_check_wave_complete()
+
+
+func _spawn_opening_burst() -> void:
+	if not _spawning_enabled or _spawn_queue.is_empty():
+		return
 	var opening_count := mini(initial_spawn_burst, _spawn_queue.size())
 	for _i in range(opening_count):
 		_spawn_next()
-	if not _spawning_enabled:
-		_check_wave_complete()
 
 
 func stop_spawning() -> void:
