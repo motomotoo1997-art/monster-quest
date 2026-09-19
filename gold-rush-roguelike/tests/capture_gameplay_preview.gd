@@ -63,8 +63,15 @@ func _capture() -> void:
 		await process_frame
 		spawn_attempts += 1
 
-	# Let targeting, sentry fire, projectile trails, y-sort and ambient VFX settle.
-	for _i in range(48):
+	# Let both halves of the hybrid loop fight through their real production weapon paths.
+	# Direct try_fire calls are used only because a --script preview has no physical mouse;
+	# damage, cooldown, projectile spawning, animation signal and VFX all remain production code.
+	for frame_index in range(48):
+		if frame_index % 7 == 0:
+			var target := _nearest_enemy_to(main.player.global_position)
+			if target != null:
+				var direction := main.player.muzzle.global_position.direction_to(target.global_position)
+				main.player.weapon_component.try_fire(main.player.muzzle.global_position, direction, main.player.team_component.team)
 		await process_frame
 	await RenderingServer.frame_post_draw
 
@@ -85,9 +92,21 @@ func _capture() -> void:
 	if err != OK:
 		_fail("Could not save gameplay preview: %s" % error_string(err))
 		return
-	print("PASS: gameplay preview saved with %d enemies and %d production-built defenses to %s (%dx%d)" % [enemy_count,defenses.size(),OUTPUT_PATH,image.get_width(),image.get_height()])
+	print("PASS: gameplay preview saved with %d enemies, active Prospector fire and %d production-built defenses to %s (%dx%d)" % [enemy_count,defenses.size(),OUTPUT_PATH,image.get_width(),image.get_height()])
 	main.queue_free()
 	quit(0)
+
+func _nearest_enemy_to(origin: Vector2) -> Node2D:
+	var nearest: Node2D
+	var nearest_distance := INF
+	for node in get_nodes_in_group("enemies"):
+		if node is Node2D and is_instance_valid(node):
+			var candidate := node as Node2D
+			var distance := origin.distance_squared_to(candidate.global_position)
+			if distance < nearest_distance:
+				nearest_distance = distance
+				nearest = candidate
+	return nearest
 
 func _fail(message: String) -> void:
 	push_error("FAIL: " + message)
