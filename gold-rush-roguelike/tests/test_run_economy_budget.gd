@@ -24,10 +24,19 @@ func _run_test() -> void:
 	if economy == null:
 		_fail("EconomyController must exist")
 		return
-	var cheapest_defense := mini(
-		main.build_controller.get_defense_cost(0),
-		mini(main.build_controller.get_defense_cost(1), main.build_controller.get_defense_cost(3))
-	)
+	var cheapest_defense := 999999
+	for defense_scene in main.build_controller.defense_scenes:
+		if defense_scene == null:
+			continue
+		var defense := defense_scene.instantiate() as DefenseBase
+		if defense == null:
+			_fail("Configured defense scene must instantiate as DefenseBase")
+			return
+		cheapest_defense = mini(cheapest_defense, defense.get_build_cost())
+		defense.free()
+	if cheapest_defense == 999999:
+		_fail("At least one defense scene must be configured")
+		return
 	if economy.starting_gold < cheapest_defense:
 		_fail("Starting gold must afford at least one defense")
 		return
