@@ -125,6 +125,36 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
+      - name: Capture Arena05 boss slam preview
+        shell: bash
+        run: |
+          set -euo pipefail
+          timeout 35s xvfb-run -a godot --path gold-rush-roguelike --rendering-method gl_compatibility --script res://tests/capture_boss_slam_preview.gd
+          test -s /tmp/gold-rush-boss-slam-preview.png
+
+      - name: Upload Arena05 boss slam preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: GoldRushRoguelike-Boss-Slam-Preview
+          path: /tmp/gold-rush-boss-slam-preview.png
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Capture upgrade UI preview
+        shell: bash
+        run: |
+          set -euo pipefail
+          timeout 35s xvfb-run -a godot --path gold-rush-roguelike --rendering-method gl_compatibility --script res://tests/capture_upgrade_preview.gd
+          test -s /tmp/gold-rush-upgrade-preview.png
+
+      - name: Upload upgrade UI preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: GoldRushRoguelike-Upgrade-Preview
+          path: /tmp/gold-rush-upgrade-preview.png
+          if-no-files-found: error
+          retention-days: 14
+
       - name: Install Godot export templates
         shell: bash
         run: |
