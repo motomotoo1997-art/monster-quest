@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://scripts/enemies/gold_hopper.gd" id="1_enemy"]
 [ext_resource type="Script" path="res://scripts/components/health_component.gd" id="2_health"]
 [ext_resource type="Script" path="res://scripts/components/team_component.gd" id="3_team"]
 [ext_resource type="Script" path="res://scripts/components/hurtbox_component.gd" id="4_hurtbox"]
 [ext_resource type="Texture2D" path="res://assets/sprites/enemies/enemies.svg" id="5_texture"]
+[ext_resource type="Script" path="res://scripts/components/gold_drop_component.gd" id="6_gold_drop"]
+[ext_resource type="PackedScene" path="res://scenes/combat/GoldPickup.tscn" id="7_gold_pickup"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_enemy"]
 radius = 14.0
@@ -60,3 +62,8 @@ team_component_path = NodePath("../TeamComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 shape = SubResource("CircleShape2D_enemy")
+
+[node name="GoldDropComponent" type="Node" parent="."]
+script = ExtResource("6_gold_drop")
+gold_amount = 6
+pickup_scene = ExtResource("7_gold_pickup")
