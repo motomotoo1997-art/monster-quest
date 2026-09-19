@@ -3,10 +3,26 @@
 [ext_resource type="Script" path="res://scripts/vfx/simple_burst.gd" id="1"]
 
 [node name="MuzzleFlash" type="Node2D"]
+z_index = 20
 script = ExtResource("1")
-duration = 0.1
-end_scale = 1.35
+duration = 0.12
+end_scale = 1.55
+
+[node name="Aura" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-4,-13,10,-8,30,-14,20,-4,42,0,20,4,30,14,10,8,-4,13,2,0)
+color = Color(0.05,0.78,1,0.24)
 
 [node name="Flash" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(0, 0, 15, -8, 10, 0, 18, 7, 3, 4, -2, 9, -1, 2)
-color = Color(1, 0.86, 0.27, 1)
+polygon = PackedVector2Array(0,-8,12,-5,28,-9,19,-2,35,0,19,3,28,9,12,5,0,8,4,0)
+color = Color(0.15,0.92,1,0.92)
+
+[node name="Core" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0,-3,12,-2,27,0,12,2,0,3,5,0)
+color = Color(0.95,1,1,1)
+
+[node name="SparkA" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(6,-2,20,-13,13,-3)
+color = Color(0.55,0.96,1,0.9)
+[node name="SparkB" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(7,2,22,12,14,3)
+color = Color(0.55,0.96,1,0.9)
