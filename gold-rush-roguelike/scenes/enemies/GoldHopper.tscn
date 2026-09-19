@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/components/health_component.gd" id="2_health"]
 [ext_resource type="Script" path="res://scripts/components/team_component.gd" id="3_team"]
 [ext_resource type="Script" path="res://scripts/components/hurtbox_component.gd" id="4_hurtbox"]
-[ext_resource type="Texture2D" path="res://assets/sprites/enemies/enemies_reference_v5.svg" id="5_texture"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/enemies_frontier_v6.svg" id="5_texture"]
 [ext_resource type="Script" path="res://scripts/components/gold_drop_component.gd" id="6_gold_drop"]
 [ext_resource type="PackedScene" path="res://scenes/combat/GoldPickup.tscn" id="7_gold_pickup"]
 
@@ -48,7 +48,7 @@ color = Color(0.04,0.025,0.015,0.29)
 position = Vector2(0,-40)
 sprite_frames = SubResource("SpriteFrames_enemy")
 animation = &"idle"
-scale = Vector2(0.34,0.34)
+scale = Vector2(0.48,0.48)
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_health")
 max_health = 36.0
