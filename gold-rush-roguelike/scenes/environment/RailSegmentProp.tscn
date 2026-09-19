@@ -1,0 +1,38 @@
+[gd_scene format=3]
+
+[node name="RailSegmentProp" type="Node2D"]
+z_index = -2
+
+[node name="Shadow" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-84,10,84,10,84,20,-84,20)
+color = Color(0.10,0.055,0.035,0.24)
+
+[node name="TieA" type="Polygon2D" parent="."]
+position = Vector2(-56,0)
+polygon = PackedVector2Array(-8,-19,8,-19,8,19,-8,19)
+color = Color(0.29,0.16,0.10,1)
+[node name="TieB" type="Polygon2D" parent="."]
+position = Vector2(-20,0)
+polygon = PackedVector2Array(-8,-19,8,-19,8,19,-8,19)
+color = Color(0.31,0.17,0.10,1)
+[node name="TieC" type="Polygon2D" parent="."]
+position = Vector2(20,0)
+polygon = PackedVector2Array(-8,-19,8,-19,8,19,-8,19)
+color = Color(0.31,0.17,0.10,1)
+[node name="TieD" type="Polygon2D" parent="."]
+position = Vector2(56,0)
+polygon = PackedVector2Array(-8,-19,8,-19,8,19,-8,19)
+color = Color(0.29,0.16,0.10,1)
+
+[node name="RailTop" type="Polygon2D" parent="."]
+position = Vector2(0,-11)
+polygon = PackedVector2Array(-86,-3,86,-3,86,3,-86,3)
+color = Color(0.22,0.23,0.23,1)
+[node name="RailBottom" type="Polygon2D" parent="."]
+position = Vector2(0,11)
+polygon = PackedVector2Array(-86,-3,86,-3,86,3,-86,3)
+color = Color(0.22,0.23,0.23,1)
+[node name="HighlightTop" type="Polygon2D" parent="."]
+position = Vector2(0,-13)
+polygon = PackedVector2Array(-84,-1,84,-1,84,1,-84,1)
+color = Color(0.52,0.50,0.45,0.65)
