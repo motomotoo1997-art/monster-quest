@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="213" viewBox="0 0 1024 213">
+<defs><linearGradient id="bgold" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff093"/><stop offset=".43" stop-color="#e7ad2a"/><stop offset="1" stop-color="#8d5008"/></linearGradient><linearGradient id="armor"><stop stop-color="#59697a"/><stop offset="1" stop-color="#26313b"/></linearGradient></defs>
+<g id="tank"><ellipse cx="128" cy="186" rx="88" ry="15" fill="#25160b" opacity=".22"/><path d="M61 157 L38 185 M80 163 L67 197 M176 163 L189 197 M195 157 L218 185" stroke="#3a454f" stroke-width="13" stroke-linecap="round"/><rect x="65" y="101" width="126" height="67" rx="24" fill="url(#bgold)" stroke="#6e3c05" stroke-width="8"/><rect x="90" y="79" width="76" height="49" rx="18" fill="url(#armor)" stroke="#17212a" stroke-width="7"/><circle cx="128" cy="105" r="13" fill="#5be8ff" stroke="#153d4d" stroke-width="5"/><path d="M159 91 L231 64 L238 77 L166 105Z" fill="#3d4b58" stroke="#17212a" stroke-width="7"/><circle cx="238" cy="70" r="9" fill="#ff7d2b"/></g>
+<use href="#tank" x="0"/><use href="#tank" x="256"/><use href="#tank" x="512"/><use href="#tank" x="768"/>
+</svg>
