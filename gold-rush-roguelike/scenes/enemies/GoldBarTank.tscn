@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=15 format=3]
 
 [ext_resource type="Script" path="res://scripts/enemies/gold_bar_tank.gd" id="1_boss"]
 [ext_resource type="Script" path="res://scripts/components/health_component.gd" id="2_health"]
@@ -8,35 +8,21 @@
 [ext_resource type="PackedScene" path="res://scenes/combat/Projectile.tscn" id="6_projectile"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/GoldHopper.tscn" id="7_hopper"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/FlyingGoldDisc.tscn" id="8_disc"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/boss_views.webp" id="9_texture"]
 
 [sub_resource type="RectangleShape2D" id="BodyShape"]
-size = Vector2(92, 62)
-
+size = Vector2(92,62)
 [sub_resource type="RectangleShape2D" id="HurtShape"]
-size = Vector2(88, 58)
-
+size = Vector2(88,58)
 [sub_resource type="CircleShape2D" id="SlamShape"]
 radius = 155.0
-
+[sub_resource type="AtlasTexture" id="AtlasTexture_boss"]
+atlas = ExtResource("9_texture")
+region = Rect2(768,0,256,213)
 [sub_resource type="SpriteFrames" id="BossFrames"]
-animations = [{
-"frames": [],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"move",
-"speed": 8.0
-}, {
-"frames": [],
-"loop": false,
-"name": &"attack",
-"speed": 10.0
-}]
+animations = [{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_boss")}],"loop":true,"name":&"idle","speed":5.0},{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_boss")}],"loop":true,"name":&"move","speed":8.0},{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_boss")}],"loop":false,"name":&"attack","speed":10.0}]
 
-[node name="GoldBarTank" type="CharacterBody2D" groups=["enemies", "boss"]]
+[node name="GoldBarTank" type="CharacterBody2D" groups=["enemies","boss"]]
 collision_layer = 1
 collision_mask = 1
 script = ExtResource("1_boss")
@@ -47,77 +33,46 @@ attack_cooldown = 0.7
 gold_value = 100
 prefer_core_weight = 0.5
 separation_radius = 54.0
-add_scenes = Array[PackedScene]([ExtResource("7_hopper"), ExtResource("8_disc")])
-
+add_scenes = Array[PackedScene]([ExtResource("7_hopper"),ExtResource("8_disc")])
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("BodyShape")
-
 [node name="Shadow" type="Polygon2D" parent="."]
-position = Vector2(0, 38)
-scale = Vector2(1.25, 0.4)
-polygon = PackedVector2Array(-52, 0, -40, -16, 40, -16, 52, 0, 40, 16, -40, 16)
-color = Color(0, 0, 0, 0.28)
-
-[node name="BodyVisual" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(-47, -30, 34, -30, 48, -17, 48, 25, 35, 34, -37, 34, -49, 18)
-color = Color(0.95, 0.64, 0.05, 1)
-
-[node name="TopBar" type="Polygon2D" parent="."]
-position = Vector2(2, -25)
-polygon = PackedVector2Array(-29, -9, 27, -9, 36, 0, 26, 10, -30, 10, -37, 0)
-color = Color(1, 0.79, 0.16, 1)
-
-[node name="TrackLeft" type="Polygon2D" parent="."]
-position = Vector2(-28, 29)
-polygon = PackedVector2Array(-20, -8, 20, -8, 23, 8, -23, 8)
-color = Color(0.17, 0.16, 0.15, 1)
-
-[node name="TrackRight" type="Polygon2D" parent="."]
-position = Vector2(28, 29)
-polygon = PackedVector2Array(-20, -8, 20, -8, 23, 8, -23, 8)
-color = Color(0.17, 0.16, 0.15, 1)
-
+position = Vector2(0,38)
+polygon = PackedVector2Array(-58,0,-43,-14,43,-14,58,0,43,14,-43,14)
+color = Color(0.06,0.035,0.02,0.28)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0,-42)
 sprite_frames = SubResource("BossFrames")
 animation = &"idle"
-
+scale = Vector2(0.60,0.60)
 [node name="Muzzle" type="Marker2D" parent="."]
-position = Vector2(50, -5)
-
+position = Vector2(50,-5)
 [node name="ChargeTelegraph" type="Node2D" parent="."]
 visible = false
-
 [node name="Beam" type="Polygon2D" parent="ChargeTelegraph"]
-position = Vector2(190, 0)
-polygon = PackedVector2Array(0, -18, 380, -8, 380, 8, 0, 18)
-color = Color(1, 0.22, 0.04, 0.26)
-
+position = Vector2(190,0)
+polygon = PackedVector2Array(0,-18,380,-8,380,8,0,18)
+color = Color(1,0.22,0.04,0.26)
 [node name="SlamTelegraph" type="Node2D" parent="."]
 visible = false
-
 [node name="Ring" type="Polygon2D" parent="SlamTelegraph"]
-polygon = PackedVector2Array(0, -155, 109, -109, 155, 0, 109, 109, 0, 155, -109, 109, -155, 0, -109, -109)
-color = Color(1, 0.32, 0.04, 0.22)
+polygon = PackedVector2Array(0,-155,109,-109,155,0,109,109,0,155,-109,109,-155,0,-109,-109)
+color = Color(1,0.32,0.04,0.22)
 show_behind_parent = true
-
 [node name="SlamArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
 monitoring = true
 monitorable = false
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SlamArea"]
 shape = SubResource("SlamShape")
-
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_health")
 max_health = 1250.0
-
 [node name="TeamComponent" type="Node" parent="."]
 script = ExtResource("3_team")
 team = 1
-
-[node name="HurtboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component_path", "team_component_path")]
+[node name="HurtboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component_path","team_component_path")]
 collision_layer = 2
 collision_mask = 0
 monitoring = false
@@ -125,10 +80,8 @@ monitorable = true
 script = ExtResource("4_hurtbox")
 health_component_path = NodePath("../HealthComponent")
 team_component_path = NodePath("../TeamComponent")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 shape = SubResource("HurtShape")
-
 [node name="WeaponComponent" type="Node" parent="."]
 script = ExtResource("5_weapon")
 projectile_scene = ExtResource("6_projectile")
