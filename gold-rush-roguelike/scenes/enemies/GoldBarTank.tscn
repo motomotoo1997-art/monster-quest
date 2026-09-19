@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3]
+[gd_scene load_steps=19 format=3]
 
 [ext_resource type="Script" path="res://scripts/enemies/gold_bar_tank.gd" id="1_boss"]
 [ext_resource type="Script" path="res://scripts/components/health_component.gd" id="2_health"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" path="res://scenes/enemies/GoldHopper.tscn" id="7_hopper"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/FlyingGoldDisc.tscn" id="8_disc"]
 [ext_resource type="Texture2D" path="res://assets/sprites/enemies/boss_views_v2.svg" id="9_texture"]
+[ext_resource type="Texture2D" path="res://assets/vfx/radial_energy_light.svg" id="10_light"]
 
 [sub_resource type="RectangleShape2D" id="BodyShape"]
 size = Vector2(104,68)
@@ -60,6 +61,11 @@ position = Vector2(142,-95)
 [node name="ChargeTelegraph" type="Node2D" parent="."]
 position = Vector2(142,-95)
 visible = false
+[node name="ChargeLight" type="PointLight2D" parent="ChargeTelegraph"]
+texture = ExtResource("10_light")
+texture_scale = 0.95
+energy = 1.45
+color = Color(1,0.28,0.06,1)
 [node name="BeamAura" type="Polygon2D" parent="ChargeTelegraph"]
 polygon = PackedVector2Array(0,-27,520,-15,520,15,0,27)
 color = Color(0.08,0.88,1,0.18)
@@ -71,6 +77,12 @@ polygon = PackedVector2Array(0,-5,520,-4,520,4,0,5)
 color = Color(0.88,1,1,0.96)
 [node name="SlamTelegraph" type="Node2D" parent="."]
 visible = false
+[node name="SlamLight" type="PointLight2D" parent="SlamTelegraph"]
+position = Vector2(0,-18)
+texture = ExtResource("10_light")
+texture_scale = 1.45
+energy = 1.25
+color = Color(1,0.58,0.08,1)
 [node name="Ring" type="Polygon2D" parent="SlamTelegraph"]
 polygon = PackedVector2Array(0,-155,109,-109,155,0,109,109,0,155,-109,109,-155,0,-109,-109)
 color = Color(1,0.58,0.06,0.24)
