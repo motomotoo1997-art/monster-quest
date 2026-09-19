@@ -9,7 +9,8 @@ signal all_arenas_completed
 @export var arena_scenes: Array[PackedScene] = []
 @export var arena_container_path: NodePath
 @export var persistent_staging_path: NodePath
-@export var persistent_actor_paths: Array[NodePath] = []
+@export var player_actor_path: NodePath
+@export var core_actor_path: NodePath
 
 var current_arena_index: int = 0
 var current_arena: Node2D
@@ -19,10 +20,8 @@ var _persistent_staging: Node2D
 
 func _ready() -> void:
 	_persistent_staging = get_node_or_null(persistent_staging_path) as Node2D
-	for actor_path in persistent_actor_paths:
-		var actor := get_node_or_null(actor_path) as Node2D
-		if actor != null:
-			_persistent_actors.append(actor)
+	_register_persistent_actor(player_actor_path)
+	_register_persistent_actor(core_actor_path)
 
 
 func load_arena(index: int) -> bool:
@@ -83,6 +82,14 @@ func get_markers(group_name: StringName) -> Array[Node2D]:
 func get_first_marker(group_name: StringName) -> Node2D:
 	var markers := get_markers(group_name)
 	return markers[0] if not markers.is_empty() else null
+
+
+func _register_persistent_actor(actor_path: NodePath) -> void:
+	if actor_path.is_empty():
+		return
+	var actor := get_node_or_null(actor_path) as Node2D
+	if actor != null and not _persistent_actors.has(actor):
+		_persistent_actors.append(actor)
 
 
 func _stage_persistent_actors() -> void:
