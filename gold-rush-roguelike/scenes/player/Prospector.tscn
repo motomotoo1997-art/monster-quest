@@ -6,48 +6,29 @@
 [ext_resource type="Script" path="res://scripts/components/hurtbox_component.gd" id="4_hurtbox"]
 [ext_resource type="Script" path="res://scripts/components/weapon_component.gd" id="5_weapon"]
 [ext_resource type="PackedScene" path="res://scenes/combat/Projectile.tscn" id="6_projectile"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/prospector.svg" id="7_texture"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/prospector_v2.svg" id="7_texture"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_player"]
-radius = 11.0
-height = 30.0
+radius = 13.0
+height = 34.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_idle"]
 atlas = ExtResource("7_texture")
-region = Rect2(0, 0, 192, 192)
+region = Rect2(0, 0, 384, 384)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aim"]
 atlas = ExtResource("7_texture")
-region = Rect2(192, 0, 192, 192)
+region = Rect2(384, 0, 384, 384)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dynamite"]
 atlas = ExtResource("7_texture")
-region = Rect2(384, 0, 192, 192)
+region = Rect2(768, 0, 384, 384)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_player"]
-animations = [{
-"frames": [{"duration": 1.0, "texture": SubResource("AtlasTexture_idle")}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{"duration": 1.0, "texture": SubResource("AtlasTexture_idle")}],
-"loop": true,
-"name": &"move",
-"speed": 8.0
-}, {
-"frames": [{"duration": 1.0, "texture": SubResource("AtlasTexture_aim")}],
-"loop": false,
-"name": &"attack",
-"speed": 8.0
-}, {
-"frames": [{"duration": 1.0, "texture": SubResource("AtlasTexture_dynamite")}],
-"loop": false,
-"name": &"ability",
-"speed": 6.0
-}]
+animations = [{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_idle")}],"loop":true,"name":&"idle","speed":5.0},{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_idle")}],"loop":true,"name":&"move","speed":8.0},{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_aim")}],"loop":false,"name":&"attack","speed":8.0},{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_dynamite")}],"loop":false,"name":&"ability","speed":6.0}]
 
 [node name="Prospector" type="CharacterBody2D" groups=["player"]]
+z_index = 4
 collision_layer = 1
 collision_mask = 1
 script = ExtResource("1_player")
@@ -57,20 +38,20 @@ position = Vector2(0, 5)
 shape = SubResource("CapsuleShape2D_player")
 
 [node name="Shadow" type="Polygon2D" parent="."]
-position = Vector2(0, 17)
-polygon = PackedVector2Array(-20, 0, -13, -6, 13, -6, 20, 0, 13, 6, -13, 6)
-color = Color(0.06, 0.035, 0.02, 0.24)
+position = Vector2(0, 20)
+polygon = PackedVector2Array(-27,0,-18,-8,18,-8,27,0,18,8,-18,8)
+color = Color(0.04,0.025,0.015,0.30)
 
 [node name="BodyVisual" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -35)
+position = Vector2(0, -58)
 sprite_frames = SubResource("SpriteFrames_player")
 animation = &"idle"
-scale = Vector2(0.58, 0.58)
+scale = Vector2(0.48, 0.48)
 
 [node name="VisualPivot" type="Node2D" parent="."]
 
 [node name="Muzzle" type="Marker2D" parent="VisualPivot"]
-position = Vector2(34, -2)
+position = Vector2(47, -8)
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_health")
@@ -90,7 +71,7 @@ health_component_path = NodePath("../HealthComponent")
 team_component_path = NodePath("../TeamComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
-position = Vector2(0, 5)
+position = Vector2(0,5)
 shape = SubResource("CapsuleShape2D_player")
 
 [node name="WeaponComponent" type="Node" parent="."]
