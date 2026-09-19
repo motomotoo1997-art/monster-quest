@@ -61,7 +61,7 @@ show_behind_parent = true
 position = Vector2(0,-45)
 sprite_frames = SubResource("SpriteFrames_enemy")
 animation = &"idle"
-scale = Vector2(0.44,0.44)
+scale = Vector2(0.30,0.30)
 [node name="Muzzle" type="Marker2D" parent="."]
 position = Vector2(0,-43)
 [node name="HealthComponent" type="Node" parent="."]
