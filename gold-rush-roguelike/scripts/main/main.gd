@@ -161,7 +161,8 @@ func _build_arena_waves(index: int) -> Array:
 				],
 				[
 					{"scene": hopper_scene, "count": 8, "interval": 0.42},
-					{"scene": sentinel_scene, "count": 5, "interval": 0.62},
+					{"scene": sentinel_scene, "count": 4, "interval": 0.62},
+					{"scene": sentinel_scene, "count": 1, "interval": 0.72, "elite": true},
 					{"scene": disc_scene, "count": 5, "interval": 0.56},
 				],
 			]
@@ -173,13 +174,16 @@ func _build_arena_waves(index: int) -> Array:
 					{"scene": disc_scene, "count": 3, "interval": 0.64},
 				],
 				[
-					{"scene": slime_scene, "count": 5, "interval": 0.84},
+					{"scene": slime_scene, "count": 4, "interval": 0.84},
+					{"scene": slime_scene, "count": 1, "interval": 0.96, "elite": true},
 					{"scene": sentinel_scene, "count": 4, "interval": 0.64},
 					{"scene": disc_scene, "count": 4, "interval": 0.58},
 				],
 				[
-					{"scene": slime_scene, "count": 6, "interval": 0.78},
-					{"scene": sentinel_scene, "count": 5, "interval": 0.58},
+					{"scene": slime_scene, "count": 5, "interval": 0.78},
+					{"scene": slime_scene, "count": 1, "interval": 0.92, "elite": true},
+					{"scene": sentinel_scene, "count": 4, "interval": 0.58},
+					{"scene": sentinel_scene, "count": 1, "interval": 0.70, "elite": true},
 					{"scene": disc_scene, "count": 5, "interval": 0.52},
 				],
 			]
