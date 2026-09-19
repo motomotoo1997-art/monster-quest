@@ -64,13 +64,11 @@ position_smoothing_enabled = false
 [node name="RunController" type="Node" parent="."]
 script = ExtResource("2_run")
 
-[node name="ArenaController" type="Node" parent="." node_paths=PackedStringArray("arena_container_path", "persistent_staging_path", "player_actor_path", "core_actor_path")]
+[node name="ArenaController" type="Node" parent="." node_paths=PackedStringArray("arena_container_path", "persistent_staging_path")]
 script = ExtResource("3_arena_controller")
 arena_scenes = Array[PackedScene]([ExtResource("9_arena1"), ExtResource("10_arena2"), ExtResource("11_arena3"), ExtResource("12_arena4"), ExtResource("13_arena5")])
 arena_container_path = NodePath("../ArenaLayer")
 persistent_staging_path = NodePath("../Actors")
-player_actor_path = NodePath("../Actors/Prospector")
-core_actor_path = NodePath("../Actors/GoldCore")
 
 [node name="WaveDirector" type="Node" parent="." node_paths=PackedStringArray("arena_controller_path", "player_path", "core_path")]
 script = ExtResource("4_wave")
