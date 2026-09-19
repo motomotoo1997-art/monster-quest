@@ -26,9 +26,13 @@ func spawn_drop(world_position: Vector2) -> GoldPickup:
 	if target_parent == null:
 		pickup.free()
 		return null
-	target_parent.add_child(pickup)
-	pickup.global_position = world_position
+
+	# A death can be emitted from Area2D.area_entered while PhysicsServer2D is flushing
+	# queries. Adding the pickup immediately would enable its collision shape during that
+	# flush and trigger a Godot physics error. Configure it now, but insert it next idle turn.
+	pickup.position = world_position
 	pickup.configure(gold_amount)
+	target_parent.add_child.call_deferred(pickup)
 	return pickup
 
 
