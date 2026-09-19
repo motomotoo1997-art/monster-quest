@@ -115,8 +115,7 @@ func _queue_strike(world_position: Vector2) -> void:
 func _create_telegraph(world_position: Vector2, radius: float) -> Node2D:
 	var root_node := Node2D.new()
 	root_node.name = "ArenaHazardTelegraph"
-	root_node.add_to_group("arena_hazard_telegraph")
-	root_node.global_position = world_position
+	root_node.position = world_position
 	root_node.z_index = 8
 
 	var fill := Polygon2D.new()
@@ -147,6 +146,8 @@ func _create_telegraph(world_position: Vector2, radius: float) -> Node2D:
 	root_node.add_child(cross)
 
 	arena_controller.current_arena.add_child(root_node)
+	root_node.add_to_group("arena_hazard_telegraph")
+	root_node.global_position = world_position
 	return root_node
 
 func _tick_pending_strikes(delta: float) -> void:
