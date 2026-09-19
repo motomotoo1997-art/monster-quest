@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="512" viewBox="0 0 1024 512">
+<defs>
+ <linearGradient id="steel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8b9796"/><stop offset=".38" stop-color="#4c5758"/><stop offset="1" stop-color="#202829"/></linearGradient>
+ <linearGradient id="iron" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#51433d"/><stop offset="1" stop-color="#241e1c"/></linearGradient>
+ <linearGradient id="molten" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff09a"/><stop offset=".25" stop-color="#ffc431"/><stop offset=".62" stop-color="#f36b0b"/><stop offset="1" stop-color="#9b2c0a"/></linearGradient>
+ <radialGradient id="hot"><stop stop-color="#fff9c7"/><stop offset=".28" stop-color="#ffd44b"/><stop offset=".7" stop-color="#f3700a"/><stop offset="1" stop-color="#8b2509"/></radialGradient>
+</defs>
+<!-- furnace, left half -->
+<g transform="translate(256 280)" stroke="#211c1a" stroke-width="9" stroke-linejoin="round">
+ <ellipse cy="140" rx="185" ry="24" fill="#161313" opacity=".38" stroke="none"/>
+ <path d="M-150 120L-132-85-90-130H90L132-85 150 120Z" fill="url(#iron)"/>
+ <path d="M-100 112L-90-42Q0-86 90-42L100 112Z" fill="url(#steel)"/>
+ <path d="M-65 96L-58-12Q0-43 58-12L65 96Z" fill="#211b19"/>
+ <path d="M-45 86L-40 2Q0-19 40 2L45 86Z" fill="url(#hot)" stroke="#6f280b" stroke-width="6"/>
+ <path d="M-128-75H128M-112-110H112" fill="none" stroke="#7d8682"/>
+ <circle cx="-105" cy="-91" r="10" fill="#c68421"/><circle cx="105" cy="-91" r="10" fill="#c68421"/>
+ <path d="M-168 110H168V140H-168Z" fill="url(#steel)"/>
+ <path d="M-86 120v34m172-34v34" fill="none"/>
+ <path d="M-38-122V-168H38V-122" fill="url(#iron)"/>
+ <path d="M-28-158H28" stroke="#c5a154" stroke-width="5"/>
+</g>
+<!-- gantry, right half -->
+<g transform="translate(768 282)" stroke="#211d1b" stroke-width="9" stroke-linejoin="round">
+ <ellipse cy="142" rx="205" ry="22" fill="#151313" opacity=".34" stroke="none"/>
+ <path d="M-170 130L-118-126M170 130L118-126" fill="none"/>
+ <path d="M-130-105H130V-74H-130Z" fill="url(#steel)"/>
+ <path d="M-110-74L-78 25M110-74L78 25M-92-15H92M-75 36H75" fill="none"/>
+ <rect x="-46" y="-94" width="92" height="54" rx="8" fill="url(#iron)"/>
+ <circle cy="-67" r="19" fill="url(#molten)"/>
+ <path d="M0-40V52" fill="none"/>
+ <path d="M-38 48H38L52 92H-52Z" fill="url(#steel)"/>
+ <path d="M-25 61H25L31 80H-31Z" fill="url(#molten)" stroke="#742a0c" stroke-width="5"/>
+ <path d="M-185 128H185V151H-185Z" fill="url(#steel)"/>
+ <circle cx="-142" cy="112" r="16" fill="#8b5d2b"/><circle cx="142" cy="112" r="16" fill="#8b5d2b"/>
+</g>
+</svg>
