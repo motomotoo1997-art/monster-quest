@@ -64,10 +64,26 @@ func _capture() -> void:
 		_fail("Boss preview could not build Cactus through production BuildController")
 		return
 
-	# Let boss presentation, foundry particles and defense targeting animate before capture.
-	for _i in range(30):
+	# Let foundry atmosphere and defense targeting settle first.
+	for _i in range(18):
 		await process_frame
 
+	# Put the real boss into the first production attack in its phase-1 pattern. The first
+	# pattern entry is CHARGE_TELEGRAPH, so the CI artifact now proves the authored laser
+	# warning beam and its dynamic local light instead of capturing a quiet idle frame.
+	boss.phase = 1
+	boss._attack_index = 0
+	boss._choose_next_attack(main.player)
+	if boss.state != GoldBarTank.State.CHARGE_TELEGRAPH or not boss.charge_telegraph.visible:
+		_fail("Boss preview could not enter the production laser telegraph state")
+		return
+	for _i in range(8):
+		await process_frame
+	if boss.charge_light.energy < 1.2:
+		_fail("Boss preview telegraph light is not active enough for visual QA")
+		return
+
+	# Fire one real player shot immediately before capture so both sides of combat are active.
 	var direction := main.player.muzzle.global_position.direction_to(boss.global_position)
 	main.player.weapon_component.try_fire(
 		main.player.muzzle.global_position,
@@ -75,7 +91,7 @@ func _capture() -> void:
 		main.player.team_component.team
 	)
 	await physics_frame
-	for _i in range(8):
+	for _i in range(4):
 		await process_frame
 	await RenderingServer.frame_post_draw
 
@@ -84,6 +100,9 @@ func _capture() -> void:
 		return
 	if not boss.is_alive():
 		_fail("Gold Bar Tank must remain alive in boss preview")
+		return
+	if boss.state != GoldBarTank.State.CHARGE_TELEGRAPH:
+		_fail("Boss preview must capture the Gold Bar Tank during its laser warning")
 		return
 	var defenses := get_nodes_in_group("defenses")
 	if defenses.is_empty():
@@ -98,7 +117,7 @@ func _capture() -> void:
 	if err != OK:
 		_fail("Could not save boss preview: %s" % error_string(err))
 		return
-	print("PASS: production Arena05 boss preview saved with Gold Bar Tank and %d defense(s) to %s (%dx%d)" % [defenses.size(),OUTPUT_PATH,image.get_width(),image.get_height()])
+	print("PASS: production Arena05 boss preview saved during laser telegraph with Gold Bar Tank and %d defense(s) to %s (%dx%d)" % [defenses.size(),OUTPUT_PATH,image.get_width(),image.get_height()])
 	main.queue_free()
 	quit(0)
 
