@@ -12,7 +12,7 @@ signal dash_cooldown_changed(remaining: float, maximum: float)
 @export_range(0.05, 2.0, 0.01) var dash_duration: float = 0.16
 @export_range(0.1, 10.0, 0.05) var dash_cooldown: float = 1.1
 @export_range(0.0, 2.0, 0.01) var dash_invulnerability: float = 0.18
-@export_range(0.02, 1.0, 0.01) var attack_pose_hold: float = 0.12
+@export_range(0.02, 1.0, 0.01) var attack_pose_hold: float = 0.22
 @export_range(0.02, 1.0, 0.01) var hit_pose_hold: float = 0.18
 @export_range(0.2, 2.0, 0.05) var death_visual_duration: float = 0.78
 
@@ -207,14 +207,20 @@ func _update_body_visual(input_dir: Vector2, delta: float) -> void:
 		body_visual.rotation = clampf(_dash_direction.y * 0.10, -0.10, 0.10)
 		return
 
-	if not input_dir.is_zero_approx():
+	if _attack_pose_remaining > 0.0:
+		# Shooting uses authored recoil frames only. Keep the character anchor perfectly
+		# stable so repeated shots do not make the whole Prospector twitch on the floor.
+		body_visual.position = _body_base_position
+		body_visual.scale = _body_base_scale
+	elif not input_dir.is_zero_approx():
+		# Preserve the run motion the user approved.
 		var step := sin(_visual_time * 13.0)
 		body_visual.position = _body_base_position + Vector2(0.0, -absf(step) * 2.7)
 		body_visual.scale = Vector2(_body_base_scale.x * (1.0 + absf(step) * 0.025), _body_base_scale.y * (1.0 - absf(step) * 0.025))
 	else:
-		var breath := sin(_visual_time * 3.2)
-		body_visual.position = _body_base_position + Vector2(0.0, breath * 0.55)
-		body_visual.scale = Vector2(_body_base_scale.x * (1.0 - breath * 0.008), _body_base_scale.y * (1.0 + breath * 0.008))
+		# A true planted idle: no breathing translation or squash/stretch.
+		body_visual.position = _body_base_position
+		body_visual.scale = _body_base_scale
 
 
 func _update_timers(delta: float) -> void:
