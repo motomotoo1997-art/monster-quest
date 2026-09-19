@@ -13,6 +13,13 @@ const EXPECTED := [
 	{"scene":"res://scenes/objectives/GoldCore.tscn","visual":"Visual","min_width":256.0,"min_scale":0.25,"max_scale":0.55},
 ]
 
+const ARENA_BACKDROPS := [
+	{"scene":"res://scenes/arenas/Arena02.tscn","texture":"arena02_backdrop_v2.svg"},
+	{"scene":"res://scenes/arenas/Arena03.tscn","texture":"arena03_backdrop_v2.svg"},
+	{"scene":"res://scenes/arenas/Arena04.tscn","texture":"arena04_backdrop_v2.svg"},
+	{"scene":"res://scenes/arenas/Arena05.tscn","texture":"arena05_backdrop_v2.svg"},
+]
+
 func _init() -> void:
 	call_deferred("_run_test")
 
@@ -78,22 +85,26 @@ func _run_test() -> void:
 	arena.queue_free()
 	await process_frame
 
-	var arena2_packed := load("res://scenes/arenas/Arena02.tscn") as PackedScene
-	if arena2_packed == null:
-		_fail("Arena02 visual scene must load")
-		return
-	var arena2 := arena2_packed.instantiate()
-	root.add_child(arena2)
-	await process_frame
-	var arena2_backdrop := arena2.get_node_or_null("IllustratedBackdrop") as Sprite2D
-	if arena2_backdrop == null or arena2_backdrop.texture == null:
-		_fail("Arena02 must contain an illustrated backdrop")
-		return
-	if not arena2_backdrop.texture.resource_path.ends_with("arena02_backdrop_v2.svg"):
-		_fail("Arena02 must use its unique canyon backdrop instead of reusing Arena01")
-		return
-	arena2.queue_free()
-	await process_frame
+	for arena_entry in ARENA_BACKDROPS:
+		var late_arena_packed := load(arena_entry.scene) as PackedScene
+		if late_arena_packed == null:
+			_fail("Arena visual scene must load: %s" % arena_entry.scene)
+			return
+		var late_arena := late_arena_packed.instantiate()
+		root.add_child(late_arena)
+		await process_frame
+		var backdrop := late_arena.get_node_or_null("IllustratedBackdrop") as Sprite2D
+		if backdrop == null or backdrop.texture == null:
+			_fail("Arena must contain an illustrated backdrop: %s" % arena_entry.scene)
+			return
+		if not backdrop.texture.resource_path.ends_with(arena_entry.texture):
+			_fail("Arena must use unique late-run backdrop: %s" % arena_entry.texture)
+			return
+		if backdrop.texture.get_width() < 1000:
+			_fail("Late-run backdrop must remain full-width: %s" % arena_entry.texture)
+			return
+		late_arena.queue_free()
+		await process_frame
 
 	var hud_packed := load("res://scenes/ui/HUD.tscn") as PackedScene
 	if hud_packed == null:
@@ -116,7 +127,7 @@ func _run_test() -> void:
 	hud.queue_free()
 	await process_frame
 
-	print("PASS: reference-matched actors, unique arena art, atmosphere and compact HUD remain readable")
+	print("PASS: actors, all unique arena art, atmosphere and compact HUD remain readable")
 	quit(0)
 
 func _fail(message: String) -> void:
