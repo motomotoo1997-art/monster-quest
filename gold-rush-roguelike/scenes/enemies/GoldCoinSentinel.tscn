@@ -26,7 +26,7 @@ move_speed = 88.0
 contact_damage = 7.0
 attack_range = 430.0
 attack_cooldown = 1.0
-gold_value = 10
+gold_value = 5
 prefer_core_weight = 0.58
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_enemy")
@@ -71,5 +71,5 @@ projectile_damage = 7.0
 projectile_lifetime = 3.0
 [node name="GoldDropComponent" type="Node" parent="."]
 script = ExtResource("8_gold_drop")
-gold_amount = 10
+gold_amount = 5
 pickup_scene = ExtResource("9_gold_pickup")
