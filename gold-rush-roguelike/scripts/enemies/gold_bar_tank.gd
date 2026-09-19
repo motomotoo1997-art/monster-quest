@@ -145,7 +145,7 @@ func _choose_next_attack(target: Node2D) -> void:
 	_attack_index += 1
 	match next_state:
 		State.CHARGE_TELEGRAPH:
-			_charge_direction = global_position.direction_to(target.global_position)
+			_charge_direction = muzzle.global_position.direction_to(target.global_position)
 			_laser_has_fired = false
 			_set_state(State.CHARGE_TELEGRAPH, charge_telegraph_time * _phase_time_scale())
 			charge_telegraph.rotation = _charge_direction.angle()
@@ -180,7 +180,7 @@ func _tick_charge(delta: float) -> void:
 
 
 func _fire_laser() -> void:
-	var origin := global_position
+	var origin := muzzle.global_position
 	var end := origin + _charge_direction * laser_range
 	var query := PhysicsRayQueryParameters2D.create(origin, end, 2)
 	query.collide_with_areas = true
