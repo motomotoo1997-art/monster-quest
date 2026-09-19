@@ -17,11 +17,32 @@ func _capture() -> void:
 		_fail("Main scene must instantiate for screenshot capture")
 		return
 	root.add_child(main)
+	current_scene = main
 	await process_frame
 	main._on_start_requested()
 	paused = false
 	main.player.set_input_enabled(false)
 	await process_frame
+	await physics_frame
+	await physics_frame
+
+	# Build the starting Cactus through the real production build/economy path so the
+	# screenshot represents the shooter + tower-defense loop instead of staging a fake prop.
+	main.build_controller.select_defense(2)
+	var built_defense := false
+	var build_candidates: Array[Vector2] = [
+		Vector2(645, 505),
+		Vector2(625, 535),
+		Vector2(930, 430),
+	]
+	for candidate in build_candidates:
+		if main.build_controller.confirm_build(candidate):
+			built_defense = true
+			break
+	if not built_defense:
+		_fail("Gameplay preview could not place the unlocked Cactus through BuildController")
+		return
+	await physics_frame
 
 	# A --script SceneTree is not the normal project launcher, so explicitly mirror the
 	# WaveDirector dependencies that its _ready() owns during a standard game launch.
@@ -41,14 +62,18 @@ func _capture() -> void:
 		await process_frame
 		spawn_attempts += 1
 
-	# Let y-sort, enemy visual animation and the viewport render settle.
-	for _i in range(22):
+	# Let targeting, sentry fire, y-sort and VFX settle into a genuine battle frame.
+	for _i in range(28):
 		await process_frame
 	await RenderingServer.frame_post_draw
 
 	var enemy_count: int = main.wave_director.get_alive_enemy_count()
 	if enemy_count < MIN_ENEMIES_FOR_PREVIEW:
 		_fail("Gameplay preview never reached battle density: %d enemies (wave %d, attempts %d, markers %d)" % [enemy_count,main.wave_director.current_wave_number,spawn_attempts,markers.size()])
+		return
+	var defenses := get_nodes_in_group("defenses")
+	if defenses.is_empty():
+		_fail("Gameplay preview lost its production-built defense before capture")
 		return
 
 	var image: Image = root.get_texture().get_image()
@@ -59,7 +84,7 @@ func _capture() -> void:
 	if err != OK:
 		_fail("Could not save gameplay preview: %s" % error_string(err))
 		return
-	print("PASS: gameplay preview saved with %d enemies after %d spawn attempts to %s (%dx%d)" % [enemy_count,spawn_attempts,OUTPUT_PATH,image.get_width(),image.get_height()])
+	print("PASS: gameplay preview saved with %d enemies and %d production-built defenses to %s (%dx%d)" % [enemy_count,defenses.size(),OUTPUT_PATH,image.get_width(),image.get_height()])
 	main.queue_free()
 	quit(0)
 
