@@ -45,7 +45,6 @@ func _run_test() -> void:
 	main.arena_controller.load_arena(3)
 	await process_frame
 	events.call("start_wave_event",3,2)
-	await process_frame
 	if StringName(events.get("active_event_id")) != &"dynamite_rain":
 		_fail("Starting Arena03 wave 2 must activate dynamite rain")
 		return
