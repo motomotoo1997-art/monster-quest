@@ -87,6 +87,8 @@ jobs:
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_defense_visual_overhaul.gd
       - name: Combat impact and death VFX regression
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_combat_vfx_contract.gd
+      - name: Visual feedback v6 regression
+        run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_visual_feedback_v6.gd
       - name: Boss climax VFX regression
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_boss_climax_vfx.gd
       - name: Main scene smoke test
