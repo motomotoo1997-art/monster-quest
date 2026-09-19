@@ -4,7 +4,7 @@ A Godot 4.7.2 top-down roguelike shooter with real-time tower-defense constructi
 
 ## Current vertical slice
 
-The first playable slice contains one Prospector, a protected Gold Core, five handcrafted desert/mining arenas, four normal gold-enemy archetypes, three buildable defenses, run-scoped 1-of-3 upgrades, and the Gold Bar Tank boss.
+The playable slice contains one Prospector, a protected Gold Core, five handcrafted desert/mining arenas, four normal gold-enemy archetypes, three buildable defenses, run-scoped 1-of-3 upgrades, and the Gold Bar Tank boss.
 
 ### Core loop
 
@@ -16,19 +16,29 @@ The first playable slice contains one Prospector, a protected Gold Core, five ha
 6. Advance through five arenas.
 7. Defeat the Gold Bar Tank while keeping the Prospector and Gold Core alive.
 
-## Requirements
+## Ready-to-run Windows build
+
+Every successful CI run on `feature/gold-rush-vertical-slice` exports a Windows x86_64 build using the official Godot 4.7.2 export templates.
+
+In GitHub Actions, open the latest successful **Gold Rush Godot CI** run and download the artifact:
+
+`GoldRushRoguelike-Windows-x86_64`
+
+The artifact contains `GoldRushRoguelike.exe`. The project uses an embedded PCK, so the executable is self-contained for this vertical slice.
+
+## Requirements for editor development
 
 - Godot **4.7.2** (standard GDScript build)
 - Windows, Linux, or macOS editor supported by Godot
-- Python 3 + Pillow only if regenerating sprite assets with the optional sheet slicer
+- Python 3 + Pillow only when using the optional reference-sheet slicer
 
-## Launch
+## Launch in Godot
 
-Open `project.godot` in Godot 4.7.2 and run the project with `F6/F5` as appropriate. The configured main scene is:
+Open `project.godot` in Godot 4.7.2 and run the project. The configured main scene is:
 
 `res://scenes/main/Main.tscn`
 
-Command-line smoke launch:
+Command-line launch:
 
 ```bash
 godot --path .
@@ -48,23 +58,23 @@ godot --path .
 | R | Trigger placed TNT when available |
 | Esc | Pause |
 
-Defense progression in the current slice starts with Cactus Sentry. Magnetic Turret unlocks from Arena 2 and TNT Barrel from Arena 3.
+The run starts with **Cactus Sentry** (slot 2). **Magnetic Turret** (slot 1) unlocks from Arena 2 and **TNT Barrel** (slot 3) unlocks from Arena 3.
 
 ## Enemies
 
-- **Gold Hopper** — aggressive short-range chaser.
+- **Gold Hopper** — short-range chaser with an actual hop movement cycle and squash/stretch presentation.
 - **Gold Coin Sentinel** — ranged enemy with a visible attack telegraph.
-- **Flying Gold Disc** — fast hovering ranged harasser that ignores ground-body collision.
-- **Molten Gold Slime** — durable pursuer that leaves damaging molten puddles.
+- **Flying Gold Disc** — fast hovering ranged harasser with strafe movement and hover/bank presentation.
+- **Molten Gold Slime** — durable pursuer that leaves damaging molten puddles and visibly squashes while moving.
 - **Gold Bar Tank** — multi-phase boss with charge, projectile burst, ground slam, and add-spawn attacks.
 
 ## Defenses
 
-- **Cactus Sentry** — inexpensive short-range automatic defense.
-- **Magnetic Turret** — longer-range automatic turret.
-- **TNT Barrel** — disposable area-damage trap with automatic or manual triggering.
+- **Cactus Sentry** — inexpensive short-range automatic defense with firing recoil.
+- **Magnetic Turret** — longer-range automatic turret with idle magnetic hum/recoil motion.
+- **TNT Barrel** — disposable area-damage trap with automatic or manual triggering and an armed pulse.
 
-All build costs and most combat tuning values are exported in scenes/scripts so the balance pass does not require architecture changes.
+All build costs and most combat tuning values are exported in scenes/scripts, so balance changes do not require architecture changes.
 
 ## Roguelike upgrades
 
@@ -72,11 +82,21 @@ Current run-scoped upgrade pool includes weapon damage, fire rate, projectile sp
 
 There is no permanent metaprogression in this vertical slice.
 
-## Art pipeline
+## Visual pipeline
 
-Prototype character/enemy/defense visuals are derived from the concept/reference sheets supplied for this project. The integrated atlases have edge-connected background removal and bottom-centered alignment rather than rectangular white-background crops.
+The supplied JPEG concept sheets are the visual direction for the game. The currently integrated runtime atlases are clean, transparent **SVG game assets redrawn from those references** so Godot can import them reliably and the repository does not depend on white-background concept-sheet crops.
 
-The reusable preprocessing tool is:
+Current runtime art:
+
+- `assets/sprites/player/prospector.svg`
+- `assets/sprites/enemies/enemies.svg`
+- `assets/sprites/enemies/boss_views.svg`
+- `assets/sprites/defenses/defenses.svg`
+- `assets/environment/desert_props.svg`
+
+Environment dressing remains scene-editable: cactus, rock cluster, mine cart, and gold-vein props are individual `.tscn` scenes placed in each arena rather than baked into a screenshot background.
+
+The optional concept-sheet preprocessing utility remains available for future high-resolution replacement art:
 
 ```bash
 python tools/slice_reference_sheets.py \
@@ -85,13 +105,11 @@ python tools/slice_reference_sheets.py \
   --prefix example
 ```
 
-Useful tuning options include `--threshold`, `--max-chroma`, `--min-area`, `--padding`, `--feather`, and `--canvas`.
+It removes only border-connected near-background pixels and normalizes extracted sprites to a shared bottom-center anchor. Any regenerated strip still needs visual QA before replacing the current runtime atlas.
 
-The current integration deliberately uses a single approved frame where a clean animation strip has not yet passed visual QA. It does not duplicate one frame into fake motion sequences.
+## Automated tests and export
 
-## Automated tests
-
-From the directory containing this Godot project:
+From the Godot project directory:
 
 ```bash
 godot --headless --editor --path . --quit
@@ -103,19 +121,22 @@ godot --headless --path . --script res://tests/test_run_flow.gd
 godot --headless --path . --script res://tests/smoke_main_scene.gd
 ```
 
-GitHub Actions runs the same headless checks on `feature/gold-rush-vertical-slice` using Godot 4.7.2.
+The CI pipeline runs all of these checks with Godot 4.7.2, installs the matching official export templates, exports the `Windows Desktop` preset, verifies that the executable is non-empty, and uploads it as a GitHub Actions artifact.
 
 ## Project layout
 
-- `scenes/` — editable gameplay, arena, UI, defense, enemy, and VFX scenes.
+- `scenes/arenas/` — five editable encounter layouts with separate collision and decoration.
+- `scenes/environment/` — movable environment props.
+- `scenes/player/`, `scenes/enemies/`, `scenes/defenses/` — gameplay actor scenes.
+- `scenes/ui/`, `scenes/vfx/` — HUD, overlays, and effects.
 - `scripts/components/` — reusable combat/data components.
 - `scripts/systems/` — run, arena, economy, build, upgrade, camera, and wave coordination.
-- `scripts/player/`, `scripts/enemies/`, `scripts/defenses/` — focused actor controllers.
 - `data/upgrades/` — run-upgrade definitions.
-- `assets/sprites/` — processed game-ready art atlases.
-- `tools/` — offline art preprocessing utilities.
+- `assets/` — runtime vector art and environment assets.
+- `tools/` — optional offline art preprocessing utilities.
 - `tests/` — headless regression/smoke tests.
+- `export_presets.cfg` — Windows x86_64 export preset.
 
 ## Scope boundary
 
-This slice intentionally excludes online multiplayer, procedural world generation, permanent meta-progression, multiple playable heroes, a large inventory system, and mobile/console-specific ports.
+This vertical slice intentionally excludes online multiplayer, procedural world generation, permanent meta-progression, multiple playable heroes, a large inventory system, and mobile/console-specific ports.
