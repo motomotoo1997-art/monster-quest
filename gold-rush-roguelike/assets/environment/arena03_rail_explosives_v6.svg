@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#d79b55"/><stop offset="1" stop-color="#9e5634"/></linearGradient><linearGradient id="r" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#7c4333"/><stop offset="1" stop-color="#352524"/></linearGradient><pattern id="p" width="94" height="72" patternUnits="userSpaceOnUse"><circle cx="20" cy="18" r="2" fill="#6b402b" opacity=".18"/><path d="M52 56l20-5" stroke="#7e4b30" stroke-width="2" opacity=".18"/></pattern></defs>
+<rect width="1280" height="720" fill="url(#g)"/><path d="M0 0H1280V100L1195 70 1110 105 1020 73 930 108 835 76 740 112 650 78 555 109 455 73 355 108 260 72 165 103 75 69 0 94Z" fill="url(#r)"/><rect width="1280" height="720" fill="url(#p)"/>
+<path d="M60 350Q340 310 570 352T1220 330" fill="none" stroke="#e8b975" stroke-width="120" opacity=".18"/>
+<g stroke="#473229" stroke-width="8"><path d="M80 345H1200M80 385H1200"/><path d="M135 337v57m80-57v57m80-57v57m80-57v57m80-57v57m80-57v57m80-57v57m80-57v57m80-57v57m80-57v57m80-57v57m80-57v57m80-57v57m80-57v57m80-57v57"/></g>
+<g stroke="#4a3429" stroke-width="7"><path d="M610 110v500M650 110v500"/><path d="M600 155h60m-60 78h60m-60 78h60m-60 78h60m-60 78h60m-60 78h60"/></g>
+<g transform="translate(1040 155)"><rect x="-130" y="-35" width="260" height="120" fill="#72412d" stroke="#33251f" stroke-width="8"/><path d="M-145-35L0-92 145-35Z" fill="#4d3429" stroke="#33251f" stroke-width="8"/><rect x="-92" y="4" width="72" height="81" fill="#4b2e24"/><rect x="35" y="-2" width="62" height="46" fill="#9b5a36" stroke="#34251e" stroke-width="6"/></g>
+<g fill="#ad3d2c" stroke="#3b251d" stroke-width="6"><rect x="905" y="250" width="38" height="58" rx="8"/><rect x="952" y="245" width="38" height="63" rx="8"/><rect x="999" y="252" width="38" height="56" rx="8"/></g>
+<g fill="#65402e" stroke="#39281f" stroke-width="5"><path d="M55 545q46-52 94 0l-22 42H79Z"/><path d="M1110 540q54-60 110 0l-25 45h-60Z"/><rect x="210" y="130" width="90" height="66"/><rect x="310" y="150" width="72" height="46"/></g>
+</svg>
