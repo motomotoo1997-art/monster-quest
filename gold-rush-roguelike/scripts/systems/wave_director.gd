@@ -103,6 +103,8 @@ func _spawn_next() -> void:
 		return
 	arena_controller.current_arena.add_child(enemy)
 	enemy.global_position = _get_spawn_position(markers)
+	if bool(entry.get("elite", false)):
+		enemy.apply_elite_modifier()
 	enemy.set_targets(player, core)
 	_active_enemies.append(enemy)
 	enemy_spawned.emit(enemy)
