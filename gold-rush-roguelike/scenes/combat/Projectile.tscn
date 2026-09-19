@@ -1,6 +1,11 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/components/projectile_component.gd" id="1_projectile"]
+[ext_resource type="Texture2D" path="res://assets/vfx/combat_feedback_v6.svg" id="2_v6"]
+
+[sub_resource type="AtlasTexture" id="V6BoltTexture"]
+atlas = ExtResource("2_v6")
+region = Rect2(0,0,256,256)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_projectile"]
 radius = 4.0
@@ -15,6 +20,10 @@ script = ExtResource("1_projectile")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_projectile")
+
+[node name="V6Bolt" type="Sprite2D" parent="."]
+texture = SubResource("V6BoltTexture")
+scale = Vector2(0.20,0.20)
 
 [node name="TrailSoft" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(-36,-7,5,-5,13,0,5,5,-36,7,-23,0)
