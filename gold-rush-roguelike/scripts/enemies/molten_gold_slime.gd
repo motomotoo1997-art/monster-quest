@@ -26,6 +26,21 @@ func _tick_behavior(delta: float) -> void:
 	move_and_slide()
 
 
+func _update_visual(delta: float) -> void:
+	if visual_sprite == null:
+		return
+	_visual_time += delta
+	if absf(velocity.x) > 2.0:
+		visual_sprite.flip_h = velocity.x < 0.0
+	var wave := sin(_visual_time * 4.8)
+	var move_factor := clampf(velocity.length() / maxf(move_speed, 1.0), 0.0, 1.0)
+	visual_sprite.position = _visual_base_position + Vector2(0.0, wave * 2.0 - move_factor * 1.5)
+	visual_sprite.scale = Vector2(
+		_visual_base_scale.x * (1.0 + wave * 0.07 + move_factor * 0.04),
+		_visual_base_scale.y * (1.0 - wave * 0.07 - move_factor * 0.02)
+	)
+
+
 func _spawn_puddle() -> void:
 	if puddle_scene == null:
 		return
