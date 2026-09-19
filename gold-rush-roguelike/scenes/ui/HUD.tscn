@@ -213,12 +213,14 @@ text = "3  LOCKED"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BossPanel" type="VBoxContainer" parent="Root"]
+[node name="BossPanel" type="PanelContainer" parent="Root"]
 layout_mode = 0
 offset_left = 440.0
 offset_top = 76.0
 offset_right = 840.0
-offset_bottom = 122.0
+offset_bottom = 126.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("PanelStyle")
 
 [node name="VBox" type="VBoxContainer" parent="Root/BossPanel"]
 layout_mode = 2
