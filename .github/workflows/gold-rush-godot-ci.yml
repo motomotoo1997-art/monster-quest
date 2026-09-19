@@ -51,6 +51,9 @@ jobs:
       - name: Gold Bar Tank laser regression
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_boss_laser.gd
 
+      - name: Gold Bar Tank presentation regression
+        run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_boss_presentation.gd
+
       - name: Main scene smoke test
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/smoke_main_scene.gd
 
