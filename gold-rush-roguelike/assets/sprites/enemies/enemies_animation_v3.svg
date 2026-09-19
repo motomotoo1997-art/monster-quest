@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1536" viewBox="0 0 1536 1536">
+<defs>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff6aa"/><stop offset=".22" stop-color="#ffd84f"/><stop offset=".58" stop-color="#d99817"/><stop offset="1" stop-color="#74400a"/></linearGradient>
+ <linearGradient id="coin" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff09a"/><stop offset=".45" stop-color="#d79519"/><stop offset="1" stop-color="#6f3e09"/></linearGradient>
+ <linearGradient id="hot" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff8a9"/><stop offset=".28" stop-color="#ffd72f"/><stop offset=".64" stop-color="#ff8c15"/><stop offset="1" stop-color="#ae3507"/></linearGradient>
+ <radialGradient id="cyan"><stop stop-color="#ffffff"/><stop offset=".22" stop-color="#95f9ff"/><stop offset=".56" stop-color="#27d8ef"/><stop offset="1" stop-color="#08758d"/></radialGradient>
+ <filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+
+ <g id="hopper">
+  <ellipse cx="192" cy="326" rx="70" ry="13" fill="#301b10" opacity=".27"/>
+  <g fill="none" stroke="#4f351d" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+   <path d="M145 245L112 267L91 300L66 309"/><path d="M149 257L117 287L110 320L88 332"/><path d="M162 262L147 301L151 330"/>
+   <path d="M239 245L272 267L293 300L318 309"/><path d="M235 257L267 287L274 320L296 332"/><path d="M222 262L237 301L233 330"/>
+  </g>
+  <path d="M105 223L122 159L160 118L215 111L271 145L286 200L257 253L205 279L145 265Z" fill="url(#gold)" stroke="#5b350d" stroke-width="9"/>
+  <path d="M122 160L161 118L177 166L214 111L231 167L271 145L251 195L286 200L239 223L257 253L205 237L205 279L173 238L145 265L151 218L105 223L139 190Z" fill="#ffdc5b" opacity=".25"/>
+  <ellipse cx="164" cy="193" rx="18" ry="15" fill="url(#cyan)" stroke="#184f5a" stroke-width="5" filter="url(#glow)"/><ellipse cx="224" cy="193" rx="18" ry="15" fill="url(#cyan)" stroke="#184f5a" stroke-width="5" filter="url(#glow)"/>
+  <path d="M171 230Q192 243 215 229" fill="none" stroke="#65390e" stroke-width="7" stroke-linecap="round"/>
+ </g>
+
+ <g id="sentinel">
+  <ellipse cx="192" cy="329" rx="75" ry="14" fill="#29180e" opacity=".27"/>
+  <g fill="none" stroke="#4e3b22" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+   <path d="M146 180L102 205L78 243L46 252"/><path d="M145 211L108 239L91 277L57 285"/>
+   <path d="M238 180L282 205L306 243L338 252"/><path d="M239 211L276 239L293 277L327 285"/>
+   <path d="M165 283L151 318L132 332M219 283L233 318L252 332"/>
+  </g>
+  <g stroke="#60400e" stroke-width="6"><ellipse cx="192" cy="270" rx="57" ry="18" fill="url(#coin)"/><ellipse cx="192" cy="249" rx="57" ry="18" fill="url(#coin)"/><ellipse cx="192" cy="228" rx="57" ry="18" fill="url(#coin)"/><ellipse cx="192" cy="207" rx="57" ry="18" fill="url(#coin)"/><ellipse cx="192" cy="186" rx="57" ry="18" fill="url(#coin)"/><ellipse cx="192" cy="165" rx="57" ry="18" fill="url(#coin)"/><ellipse cx="192" cy="144" rx="57" ry="18" fill="url(#coin)"/><ellipse cx="192" cy="123" rx="57" ry="18" fill="url(#coin)"/></g>
+  <path d="M139 123Q192 88 245 123" fill="url(#gold)" stroke="#60400e" stroke-width="7"/>
+  <ellipse cx="170" cy="151" rx="13" ry="11" fill="url(#cyan)" filter="url(#glow)"/><ellipse cx="214" cy="151" rx="13" ry="11" fill="url(#cyan)" filter="url(#glow)"/>
+  <circle cx="46" cy="252" r="10" fill="#d89b20" stroke="#553b15" stroke-width="5"/><circle cx="338" cy="252" r="10" fill="#d89b20" stroke="#553b15" stroke-width="5"/>
+ </g>
+
+ <g id="disc">
+  <ellipse cx="192" cy="317" rx="92" ry="12" fill="#23160d" opacity=".18"/>
+  <g transform="translate(192 190)">
+   <path d="M-145 0L-175 -21L-147 -39L-170 -73L-125 -70L-132 -108L-88 -91L-64 -128L-36 -99L0 -140L36 -99L64 -128L88 -91L132 -108L125 -70L170 -73L147 -39L175 -21L145 0L175 21L147 39L170 73L125 70L132 108L88 91L64 128L36 99L0 140L-36 99L-64 128L-88 91L-132 108L-125 70L-170 73L-147 39L-175 21Z" fill="url(#coin)" stroke="#5d3a0b" stroke-width="7"/>
+   <ellipse cx="0" cy="0" rx="135" ry="65" fill="url(#gold)" stroke="#6a430d" stroke-width="9"/>
+   <ellipse cx="0" cy="0" rx="62" ry="49" fill="#303d42" stroke="#6a4b16" stroke-width="8"/>
+   <ellipse cx="0" cy="0" rx="31" ry="26" fill="url(#cyan)" stroke="#154f5d" stroke-width="6" filter="url(#glow)"/>
+   <circle cx="-86" cy="18" r="9" fill="#45e8ff" filter="url(#glow)"/><circle cx="86" cy="18" r="9" fill="#45e8ff" filter="url(#glow)"/>
+  </g>
+ </g>
+
+ <g id="slime">
+  <ellipse cx="190" cy="330" rx="97" ry="16" fill="#8c3009" opacity=".24"/>
+  <path d="M82 312Q110 283 104 244Q96 194 124 158Q143 133 164 145Q175 105 196 137Q213 95 232 143Q265 144 282 185Q297 220 280 259Q319 265 338 291Q303 281 278 296Q247 344 213 315Q186 354 160 317Q126 342 103 315Z" fill="url(#hot)" stroke="#8d3309" stroke-width="10"/>
+  <path d="M112 268Q137 249 152 286Q171 260 188 305Q207 266 224 302Q245 267 272 287" fill="none" stroke="#fff18a" stroke-width="8" opacity=".48"/>
+  <ellipse cx="158" cy="216" rx="18" ry="14" fill="url(#cyan)" stroke="#155364" stroke-width="4" filter="url(#glow)"/><ellipse cx="226" cy="216" rx="18" ry="14" fill="url(#cyan)" stroke="#155364" stroke-width="4" filter="url(#glow)"/>
+  <path d="M165 258Q192 276 221 257" fill="none" stroke="#813009" stroke-width="9" stroke-linecap="round"/>
+  <path d="M286 259Q328 236 357 248Q331 265 313 290Q293 305 271 301" fill="url(#hot)" stroke="#8d3309" stroke-width="8"/>
+ </g>
+</defs>
+
+<!-- row 0: Gold Hopper - crouch, launch, air, land -->
+<g transform="translate(0 0)"><g transform="translate(0 8) scale(1.05 .95)"><use href="#hopper"/></g></g>
+<g transform="translate(384 0)"><g transform="translate(0 -7) scale(.96 1.05)"><use href="#hopper"/></g><path d="M87 337q18-11 36 0M259 337q18-11 36 0" fill="none" stroke="#d8a65a" stroke-width="7" opacity=".6"/></g>
+<g transform="translate(768 0)"><g transform="translate(0 -25) scale(.91 1.11)"><use href="#hopper"/></g><path d="M106 340l-12 13M278 340l12 13" stroke="#d8a65a" stroke-width="6" opacity=".55"/></g>
+<g transform="translate(1152 0)"><g transform="translate(0 4) scale(1.10 .92)"><use href="#hopper"/></g><g fill="#d7ad70" opacity=".65"><circle cx="104" cy="340" r="7"/><circle cx="278" cy="342" r="9"/><circle cx="315" cy="330" r="5"/></g></g>
+
+<!-- row 1: Coin Sentinel - sway left, neutral, sway right, charged fire -->
+<g transform="translate(0 384)"><g transform="rotate(-3 192 320) translate(-5 0)"><use href="#sentinel"/></g></g>
+<g transform="translate(384 384)"><g transform="translate(0 -4)"><use href="#sentinel"/></g><path d="M135 291Q192 308 249 291" fill="none" stroke="#fff0a0" stroke-width="5" opacity=".5"/></g>
+<g transform="translate(768 384)"><g transform="rotate(3 192 320) translate(5 0)"><use href="#sentinel"/></g></g>
+<g transform="translate(1152 384)"><use href="#sentinel"/><circle cx="192" cy="151" r="48" fill="none" stroke="#5aefff" stroke-width="8" opacity=".68" filter="url(#glow)"/><path d="M255 151h74" stroke="#b8ffff" stroke-width="9" filter="url(#glow)"/></g>
+
+<!-- row 2: Flying Disc - four spin/tilt states -->
+<g transform="translate(0 768)"><use href="#disc"/><path d="M62 151l24-19M298 151l24-19" stroke="#fff4a4" stroke-width="6" opacity=".65"/></g>
+<g transform="translate(384 768)"><g transform="rotate(9 192 190) scale(1 .94)"><use href="#disc"/></g><path d="M57 215h43M284 215h43" stroke="#4beaff" stroke-width="7" opacity=".55"/></g>
+<g transform="translate(768 768)"><g transform="rotate(18 192 190) scale(.96 1.02)"><use href="#disc"/></g><circle cx="192" cy="190" r="45" fill="none" stroke="#7af4ff" stroke-width="8" opacity=".52" filter="url(#glow)"/></g>
+<g transform="translate(1152 768)"><g transform="rotate(27 192 190) scale(1.02 .96)"><use href="#disc"/></g><path d="M315 190h48" stroke="#d9ffff" stroke-width="10" filter="url(#glow)"/><path d="M70 285q122 31 244 0" fill="none" stroke="#d8a95a" stroke-width="5" opacity=".3"/></g>
+
+<!-- row 3: Molten Slime - ooze, squash, stretch, surge -->
+<g transform="translate(0 1152)"><g transform="translate(0 4) scale(1.03 .97)"><use href="#slime"/></g></g>
+<g transform="translate(384 1152)"><g transform="translate(0 11) scale(1.10 .90)"><use href="#slime"/></g><circle cx="111" cy="327" r="11" fill="#ffbe27"/><circle cx="292" cy="329" r="8" fill="#ffeb6f"/></g>
+<g transform="translate(768 1152)"><g transform="translate(0 -10) scale(.94 1.08)"><use href="#slime"/></g><path d="M76 319q31-18 56-1" fill="none" stroke="#ffbd2d" stroke-width="8" opacity=".7"/></g>
+<g transform="translate(1152 1152)"><g transform="translate(12 2) scale(1.08 .95)"><use href="#slime"/></g><path d="M280 301q58 6 83 31q-54-4-83 9" fill="#ff9716" stroke="#923609" stroke-width="7"/><g fill="#ffe86e"><circle cx="330" cy="286" r="7"/><circle cx="349" cy="305" r="5"/></g></g>
+</svg>
