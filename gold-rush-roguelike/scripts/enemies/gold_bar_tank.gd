@@ -49,6 +49,10 @@ var _death_announced := false
 @onready var slam_telegraph: Node2D = $SlamTelegraph
 @onready var slam_light: PointLight2D = $SlamTelegraph/SlamLight
 @onready var slam_area: Area2D = $SlamArea
+@onready var phase_aura: Node2D = $PhaseAura
+@onready var phase_light: PointLight2D = $PhaseAura/PhaseLight
+@onready var phase_ring: Line2D = $PhaseAura/PhaseRing
+@onready var phase_inner_ring: Line2D = $PhaseAura/PhaseInnerRing
 
 
 func _ready() -> void:
@@ -56,6 +60,7 @@ func _ready() -> void:
 	add_to_group("boss")
 	charge_telegraph.visible = false
 	slam_telegraph.visible = false
+	phase_aura.visible = false
 	health_component.health_changed.connect(_on_health_changed)
 	health_component.died.connect(_on_boss_health_died)
 	boss_phase_changed.emit(phase)
@@ -101,11 +106,33 @@ func _update_visual(delta: float) -> void:
 		visual_sprite.play(presentation)
 	if absf(velocity.x) > 2.0:
 		visual_sprite.flip_h = velocity.x < 0.0
+
 	var phase_tint := Color.WHITE
 	if phase == 2:
 		phase_tint = Color(1.0, 0.90, 0.70, 1.0)
 	elif phase >= 3:
 		phase_tint = Color(1.0, 0.72, 0.55, 1.0)
+
+	var aura_pulse := 0.5 + 0.5 * sin(_visual_time * 5.4)
+	phase_aura.visible = phase >= 2 and state != State.DEAD
+	if phase == 2:
+		phase_light.energy = 1.02 + aura_pulse * 0.16
+		phase_light.texture_scale = 1.62 + aura_pulse * 0.12
+		phase_light.color = Color(0.18, 0.88, 1.0, 1.0)
+		phase_ring.default_color = Color(0.18, 0.91, 1.0, 0.72 + aura_pulse * 0.16)
+		phase_inner_ring.default_color = Color(1.0, 0.73, 0.14, 0.54 + aura_pulse * 0.14)
+	elif phase >= 3:
+		phase_light.energy = 1.62 + aura_pulse * 0.32
+		phase_light.texture_scale = 1.78 + aura_pulse * 0.16
+		phase_light.color = Color(1.0, 0.38, 0.08, 1.0)
+		phase_ring.default_color = Color(1.0, 0.34, 0.06, 0.80 + aura_pulse * 0.16)
+		phase_inner_ring.default_color = Color(0.22, 0.92, 1.0, 0.62 + aura_pulse * 0.18)
+	else:
+		phase_light.energy = 0.0
+	phase_aura.scale = Vector2.ONE * (0.96 + aura_pulse * 0.07)
+	phase_ring.rotation += delta * (0.42 + 0.10 * float(phase))
+	phase_inner_ring.rotation -= delta * (0.68 + 0.12 * float(phase))
+
 	var bob := sin(_visual_time * 3.6) * 1.2
 	var target_scale := _visual_base_scale
 	match state:
@@ -321,6 +348,7 @@ func _on_boss_health_died() -> void:
 		return
 	_death_announced = true
 	state = State.DEAD
+	phase_aura.visible = false
 	charge_telegraph.visible = false
 	slam_telegraph.visible = false
 	boss_died.emit()
