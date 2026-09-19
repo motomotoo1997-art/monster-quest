@@ -1,0 +1,1 @@
+The split-frame set is ready to attach by Git tree. No further migration notes should be added before the atomic asset+scene commit.
