@@ -2,8 +2,8 @@ extends SceneTree
 
 const OUTPUT_PATH := "/tmp/gold-rush-gameplay-preview.png"
 const MIN_ENEMIES_FOR_PREVIEW := 9
-const TARGET_ENEMIES_FOR_PREVIEW := 10
-const MAX_SPAWN_ATTEMPTS := 14
+const TARGET_ENEMIES_FOR_PREVIEW := 12
+const MAX_SPAWN_ATTEMPTS := 18
 
 func _init() -> void:
 	call_deferred("_capture")
@@ -56,14 +56,31 @@ func _capture() -> void:
 		_fail("Arena01 must expose enemy_spawn markers to the production WaveDirector")
 		return
 
+	# The regular opening wave contains exactly ten enemies. This visual QA fixture also
+	# requires a live firing defense and one guaranteed production enemy death, so ten gives
+	# no casualty margin and flakes between 8/9 survivors depending on Cactus timing. Keep
+	# gameplay balance untouched and use a preview-only wave through the same production
+	# WaveDirector/start_wave/spawn-marker path.
+	var preview_wave: Array[Dictionary] = [
+		{"scene": main.hopper_scene, "count": 8, "interval": 0.12},
+		{"scene": main.sentinel_scene, "count": 3, "interval": 0.16},
+		{"scene": main.disc_scene, "count": 3, "interval": 0.14},
+	]
+	main.wave_director.start_wave(preview_wave)
+	await process_frame
+
 	var spawn_attempts: int = 0
 	while main.wave_director.get_alive_enemy_count() < TARGET_ENEMIES_FOR_PREVIEW and spawn_attempts < MAX_SPAWN_ATTEMPTS:
 		main.wave_director._spawn_next()
 		await process_frame
 		spawn_attempts += 1
 
-	# Let the production Cactus acquire a target and visibly fire, but keep this window short
-	# enough that the 10-enemy opening composition is not thinned before the intentional QA kill.
+	if main.wave_director.get_alive_enemy_count() < TARGET_ENEMIES_FOR_PREVIEW:
+		_fail("Gameplay preview could not seed deterministic battle density before combat: %d enemies after %d attempts" % [main.wave_director.get_alive_enemy_count(), spawn_attempts])
+		return
+
+	# Let the production Cactus acquire a target and visibly fire while the preview-specific
+	# wave leaves enough density headroom for one deliberate death plus incidental damage.
 	for _i in range(20):
 		await process_frame
 
