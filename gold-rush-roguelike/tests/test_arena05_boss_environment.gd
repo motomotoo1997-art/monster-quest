@@ -62,6 +62,17 @@ func _run_test() -> void:
 	if slam_ring == null or slam_ring.color.a < 0.20:
 		_fail("Boss slam warning must remain readable on the foundry floor")
 		return
+	boss.state = GoldBarTank.State.SLAM
+	boss.slam_telegraph.visible = true
+	var max_slam_energy := 0.0
+	var max_slam_scale := 0.0
+	for _frame in range(120):
+		boss._update_visual(0.016)
+		max_slam_energy = maxf(max_slam_energy, boss.slam_light.energy)
+		max_slam_scale = maxf(max_slam_scale, boss.slam_light.texture_scale)
+	if max_slam_energy > 1.72 or max_slam_scale > 1.38:
+		_fail("Boss slam warning must not wash out the Juggernaut silhouette")
+		return
 	boss.queue_free()
 	print("PASS: Arena05 foundry preserves boss clearance and Frontier Juggernaut attack readability")
 	quit(0)
