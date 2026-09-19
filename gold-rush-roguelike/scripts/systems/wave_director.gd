@@ -8,12 +8,14 @@ signal enemy_spawned(enemy: EnemyBase)
 @export var arena_controller_path: NodePath
 @export var player_path: NodePath
 @export var core_path: NodePath
+@export_range(0.0, 80.0, 1.0) var spawn_spread_radius: float = 24.0
 
 var current_wave_number: int = 0
 var _spawn_queue: Array[Dictionary] = []
 var _spawn_timer := 0.0
 var _spawning_enabled := false
 var _active_enemies: Array[EnemyBase] = []
+var _spawn_sequence := 0
 
 var arena_controller: ArenaController
 var player: Node2D
@@ -61,6 +63,7 @@ func clear_wave() -> void:
 		if enemy != null and is_instance_valid(enemy):
 			enemy.queue_free()
 	_active_enemies.clear()
+	_spawn_sequence = 0
 
 
 func get_alive_enemy_count() -> int:
@@ -81,15 +84,34 @@ func _spawn_next() -> void:
 	var markers: Array[Node2D] = arena_controller.get_markers(&"enemy_spawn")
 	if markers.is_empty():
 		return
-	var marker: Node2D = markers[randi() % markers.size()]
 	var enemy := scene.instantiate() as EnemyBase
 	if enemy == null:
 		return
 	arena_controller.current_arena.add_child(enemy)
-	enemy.global_position = marker.global_position
+	enemy.global_position = _get_spawn_position(markers)
 	enemy.set_targets(player, core)
 	_active_enemies.append(enemy)
 	enemy_spawned.emit(enemy)
+	_spawn_sequence += 1
+
+
+func _get_spawn_position(markers: Array[Node2D]) -> Vector2:
+	# Rotate deterministically through every arena marker first. When a wave wraps
+	# back to a marker, place the next enemy on a compact spiral around that marker
+	# instead of stacking multiple sprites/collision bodies at exactly one point.
+	var marker_count := markers.size()
+	var marker_index := _spawn_sequence % marker_count
+	var cycle := int(_spawn_sequence / marker_count)
+	var base_position := markers[marker_index].global_position
+	if cycle <= 0 or spawn_spread_radius <= 0.0:
+		return base_position
+
+	# Golden-angle spacing avoids visible rows while remaining deterministic for
+	# tests/replays. Radius grows slowly and is capped so spawn points stay close
+	# to their authored arena markers.
+	var angle := float(cycle - 1) * 2.39996323 + float(marker_index) * 0.41
+	var radius_multiplier := minf(1.0 + float(cycle - 1) * 0.18, 2.0)
+	return base_position + Vector2.RIGHT.rotated(angle) * spawn_spread_radius * radius_multiplier
 
 
 func _prune_dead_enemies() -> void:
