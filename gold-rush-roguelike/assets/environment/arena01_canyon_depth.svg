@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<defs>
+ <linearGradient id="skyhaze" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#7f3928" stop-opacity=".78"/><stop offset="1" stop-color="#f5bd71" stop-opacity="0"/></linearGradient>
+ <linearGradient id="mesaFar" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#8e4936"/><stop offset="1" stop-color="#5b3128"/></linearGradient>
+ <linearGradient id="mesaNear" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#a85a3c"/><stop offset="1" stop-color="#6b382a"/></linearGradient>
+ <linearGradient id="sun" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff3b3"/><stop offset=".5" stop-color="#ffbd56"/><stop offset="1" stop-color="#d86b2e"/></linearGradient>
+ <radialGradient id="glow"><stop stop-color="#fff0a8" stop-opacity=".55"/><stop offset="1" stop-color="#ffb14b" stop-opacity="0"/></radialGradient>
+ <filter id="blur"><feGaussianBlur stdDeviation="14"/></filter>
+</defs>
+<!-- warm high-atmosphere veil -->
+<rect width="1280" height="238" fill="url(#skyhaze)"/>
+<circle cx="1080" cy="94" r="102" fill="url(#glow)" filter="url(#blur)"/>
+<circle cx="1080" cy="94" r="30" fill="url(#sun)" opacity=".74"/>
+<!-- far mesas create horizon rhythm -->
+<path d="M0 143 L62 108 L127 119 L181 78 L250 96 L304 62 L362 91 L423 74 L474 112 L533 92 L598 121 L657 87 L723 103 L790 72 L850 100 L909 83 L968 118 L1028 91 L1097 108 L1163 76 L1220 103 L1280 87 L1280 187 L0 187Z" fill="url(#mesaFar)" opacity=".67"/>
+<path d="M0 166 L86 144 L142 153 L213 125 L278 149 L348 121 L421 151 L490 129 L562 159 L639 127 L707 153 L777 126 L842 158 L915 126 L985 153 L1056 124 L1126 150 L1196 128 L1280 150 L1280 204 L0 204Z" fill="url(#mesaNear)" opacity=".58"/>
+<!-- carved stratification -->
+<g fill="none" stroke="#d98d58" stroke-width="4" opacity=".28">
+ <path d="M25 151 Q118 128 209 142 T392 143 T574 149 T758 141 T946 148 T1250 139"/>
+ <path d="M48 170 Q135 151 223 161 T407 162 T594 169 T782 159 T977 169 T1235 158"/>
+</g>
+<!-- distant mine headframe left -->
+<g transform="translate(250 36)" fill="none" stroke="#342821" stroke-linejoin="round" opacity=".82">
+ <path d="M0 145 L48 18 L96 145 M16 106H80 M27 75H69 M37 47H59 M48 18V152" stroke-width="7"/>
+ <path d="M15 107L69 75M28 75L59 47M80 106L27 75" stroke-width="3.5"/>
+ <path d="M-12 147H108" stroke-width="8"/>
+ <circle cx="48" cy="17" r="12" stroke-width="5"/>
+</g>
+<!-- distant elevator / refinery center -->
+<g transform="translate(515 61)" opacity=".68" stroke="#3d2d24" stroke-width="5" fill="#614536">
+ <rect x="0" y="40" width="63" height="84" rx="3"/>
+ <path d="M-10 42 L31 6 L74 42Z"/>
+ <rect x="78" y="63" width="44" height="61"/>
+ <path d="M72 64 L100 40 L128 64Z"/>
+ <rect x="25" y="72" width="14" height="52" fill="#2c251f"/>
+ <path d="M64 79H82M121 84H150" fill="none"/>
+ <path d="M145 44V124M134 56H156" fill="none"/>
+</g>
+<!-- suspended ore conveyor right -->
+<g transform="translate(835 70)" opacity=".69" stroke="#3b2c24" fill="none">
+ <path d="M0 70 L230 30" stroke-width="10"/>
+ <path d="M10 81 L239 41" stroke-width="4"/>
+ <path d="M35 64V116M97 54V108M160 43V99M219 33V90" stroke-width="6"/>
+ <path d="M22 116H48M84 108h27M148 99h26M207 90h25" stroke-width="5"/>
+ <g fill="#6e4935" stroke-width="3"><circle cx="44" cy="63" r="8"/><circle cx="108" cy="52" r="8"/><circle cx="172" cy="41" r="8"/></g>
+</g>
+<!-- water tower / telegraph silhouettes -->
+<g opacity=".6" stroke="#453126" fill="#604637">
+ <ellipse cx="761" cy="98" rx="27" ry="12" stroke-width="5"/><rect x="736" y="98" width="50" height="34" stroke-width="5"/>
+ <path d="M744 132l-13 53M779 132l13 53M727 154h68" fill="none" stroke-width="5"/>
+ <path d="M1158 61v120M1134 82h49M1158 84l-36 35M1158 84l34 34" fill="none" stroke-width="6"/>
+</g>
+<!-- floating haze strips blend horizon into combat field -->
+<path d="M0 171 Q198 199 377 180 T713 190 T1014 177 T1280 191 L1280 240 Q1040 214 841 229 T470 221 T0 234Z" fill="#f2b968" opacity=".18"/>
+<path d="M0 203 Q224 226 432 208 T796 214 T1280 205" fill="none" stroke="#ffd58e" stroke-width="18" opacity=".09"/>
+<!-- small cyan tech lamps to echo weapons without dominating -->
+<g fill="#64eefa" opacity=".72">
+ <circle cx="312" cy="128" r="4"/><circle cx="563" cy="145" r="4"/><circle cx="1004" cy="128" r="4"/>
+</g>
+</svg>
