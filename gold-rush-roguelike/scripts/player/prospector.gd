@@ -14,6 +14,7 @@ signal dash_cooldown_changed(remaining: float, maximum: float)
 @export_range(0.0, 2.0, 0.01) var dash_invulnerability: float = 0.18
 @export_range(0.02, 1.0, 0.01) var attack_pose_hold: float = 0.12
 @export_range(0.02, 1.0, 0.01) var hit_pose_hold: float = 0.18
+@export_range(0.2, 2.0, 0.05) var death_visual_duration: float = 0.78
 
 var _input_enabled := true
 var _dash_remaining := 0.0
@@ -25,6 +26,8 @@ var _last_health := 0.0
 var _dash_direction := Vector2.RIGHT
 var _dash_cooldown_multiplier := 1.0
 var _visual_time := 0.0
+var _death_visual_elapsed := 0.0
+var _is_dead := false
 var _body_base_position := Vector2.ZERO
 var _body_base_scale := Vector2.ONE
 
@@ -52,6 +55,11 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	_update_timers(delta)
+	if _is_dead:
+		velocity = velocity.move_toward(Vector2.ZERO, deceleration * delta)
+		move_and_slide()
+		_update_body_visual(Vector2.ZERO, delta)
+		return
 	_update_aim()
 	if not _input_enabled:
 		velocity = velocity.move_toward(Vector2.ZERO, deceleration * delta)
@@ -84,7 +92,7 @@ func get_aim_direction() -> Vector2:
 
 
 func request_dash() -> void:
-	if not _input_enabled or _dash_cooldown_remaining > 0.0 or _dash_remaining > 0.0:
+	if not _input_enabled or _is_dead or _dash_cooldown_remaining > 0.0 or _dash_remaining > 0.0:
 		return
 	var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	_dash_direction = input_dir.normalized() if not input_dir.is_zero_approx() else get_aim_direction()
@@ -92,6 +100,7 @@ func request_dash() -> void:
 	_dash_cooldown_remaining = dash_cooldown * _dash_cooldown_multiplier
 	_invulnerability_remaining = dash_invulnerability
 	hurtbox_component.monitorable = false
+	body_visual.play(&"dash")
 	dash_started.emit()
 	dash_cooldown_changed.emit(_dash_cooldown_remaining, dash_cooldown * _dash_cooldown_multiplier)
 
@@ -139,7 +148,7 @@ func multiply_dash_recovery(multiplier: float) -> void:
 
 
 func _handle_fire() -> void:
-	if not Input.is_action_pressed("fire"):
+	if _is_dead or not Input.is_action_pressed("fire"):
 		return
 	weapon_component.try_fire(muzzle.global_position, get_aim_direction(), team_component.team)
 
@@ -153,9 +162,27 @@ func _update_aim() -> void:
 
 func _update_body_visual(input_dir: Vector2, delta: float) -> void:
 	_visual_time += delta
+	if _is_dead:
+		_death_visual_elapsed += delta
+		if body_visual.animation != &"death":
+			body_visual.play(&"death")
+		var death_t := clampf(_death_visual_elapsed / maxf(death_visual_duration, 0.01), 0.0, 1.0)
+		var eased := 1.0 - pow(1.0 - death_t, 2.0)
+		var fall_direction := -1.0 if body_visual.flip_h else 1.0
+		body_visual.position = _body_base_position + Vector2(5.0 * fall_direction * eased, 19.0 * eased)
+		body_visual.rotation = fall_direction * 1.02 * eased
+		body_visual.scale = Vector2(_body_base_scale.x * (1.0 + 0.05 * eased), _body_base_scale.y * (1.0 - 0.16 * eased))
+		var fade := clampf((death_t - 0.72) / 0.28, 0.0, 1.0)
+		body_visual.modulate = Color(1.0, 0.88, 0.76, 1.0 - fade * 0.62)
+		return
+
+	body_visual.rotation = 0.0
 	if _hit_pose_remaining > 0.0:
 		if body_visual.animation != &"hit":
 			body_visual.play(&"hit")
+	elif _dash_remaining > 0.0:
+		if body_visual.animation != &"dash":
+			body_visual.play(&"dash")
 	elif _attack_pose_remaining > 0.0:
 		if body_visual.animation != &"attack":
 			body_visual.play(&"attack")
@@ -173,9 +200,11 @@ func _update_body_visual(input_dir: Vector2, delta: float) -> void:
 	body_visual.modulate = Color.WHITE
 
 	if _dash_remaining > 0.0:
-		var dash_pulse := 0.5 + 0.5 * sin(_visual_time * 24.0)
-		body_visual.position = _body_base_position + Vector2(0.0, -2.0)
-		body_visual.scale = Vector2(_body_base_scale.x * (1.12 + dash_pulse * 0.05), _body_base_scale.y * 0.90)
+		var dash_progress := 1.0 - clampf(_dash_remaining / maxf(dash_duration, 0.01), 0.0, 1.0)
+		var dash_arch := sin(dash_progress * PI)
+		body_visual.position = _body_base_position + Vector2(0.0, -3.0 - dash_arch * 2.0)
+		body_visual.scale = Vector2(_body_base_scale.x * (1.15 + dash_arch * 0.09), _body_base_scale.y * (0.88 - dash_arch * 0.04))
+		body_visual.rotation = clampf(_dash_direction.y * 0.10, -0.10, 0.10)
 		return
 
 	if not input_dir.is_zero_approx():
@@ -205,23 +234,32 @@ func _update_timers(delta: float) -> void:
 
 
 func _on_weapon_fired(_projectile: Node2D) -> void:
+	if _is_dead:
+		return
 	_attack_pose_remaining = attack_pose_hold
-	body_visual.play(&"attack")
+	if _dash_remaining <= 0.0:
+		body_visual.play(&"attack")
 
 
 func _on_health_changed(current: float, _maximum: float) -> void:
-	if current < _last_health and current > 0.0:
+	if not _is_dead and current < _last_health and current > 0.0:
 		_hit_pose_remaining = hit_pose_hold
 		body_visual.play(&"hit")
 	_last_health = current
 
 
 func _on_health_died() -> void:
+	_is_dead = true
+	_death_visual_elapsed = 0.0
+	_attack_pose_remaining = 0.0
+	_hit_pose_remaining = 0.0
+	_dash_remaining = 0.0
 	set_input_enabled(false)
 	hurtbox_component.monitorable = false
+	body_visual.play(&"death")
 	player_died.emit()
 
 
 func _on_knockback_requested(force: Vector2) -> void:
-	if _dash_remaining <= 0.0:
+	if not _is_dead and _dash_remaining <= 0.0:
 		velocity += force
