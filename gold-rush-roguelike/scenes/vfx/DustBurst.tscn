@@ -3,10 +3,19 @@
 [ext_resource type="Script" path="res://scripts/vfx/simple_burst.gd" id="1"]
 
 [node name="DustBurst" type="Node2D"]
+z_index = 10
 script = ExtResource("1")
-duration = 0.32
-end_scale = 1.9
+duration = 0.34
+end_scale = 2.15
+
+[node name="DustWide" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-31,4,-22,-9,-8,-15,5,-11,18,-16,31,-4,29,8,15,13,0,10,-14,15,-28,10)
+color = Color(0.67,0.42,0.22,0.24)
 
 [node name="Dust" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(-18, 2, -11, -9, 0, -13, 12, -8, 19, 2, 12, 10, 0, 13, -13, 9)
-color = Color(0.72, 0.53, 0.32, 0.62)
+polygon = PackedVector2Array(-22,3,-14,-10,-2,-15,10,-9,21,2,14,11,1,14,-13,10)
+color = Color(0.84,0.63,0.38,0.58)
+
+[node name="DustLight" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-12,1,-7,-6,0,-9,8,-5,13,2,8,7,0,9,-8,6)
+color = Color(0.96,0.78,0.50,0.45)
