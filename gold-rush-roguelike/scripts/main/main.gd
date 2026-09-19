@@ -27,13 +27,14 @@ class_name GoldRushMain
 
 var _waiting_for_arena_advance := false
 var _active_boss: GoldBarTank
+var _arena_waves: Array = []
+var _arena_wave_index := 0
 
 
 func _ready() -> void:
 	run_controller.run_failed.connect(_on_run_failed)
 	run_controller.run_won.connect(_on_run_won)
 	arena_controller.arena_started.connect(_on_arena_started)
-	wave_director.wave_started.connect(hud.set_wave)
 	wave_director.wave_completed.connect(_on_wave_completed)
 	wave_director.enemy_spawned.connect(_bind_enemy_feedback)
 	build_controller.defense_built.connect(_bind_defense_feedback)
@@ -68,11 +69,17 @@ func _on_start_requested() -> void:
 	title_overlay.dismiss()
 	pause_overlay.set_pause_enabled(true)
 	player.set_input_enabled(true)
+	_waiting_for_arena_advance = false
+	_arena_waves.clear()
+	_arena_wave_index = 0
 	run_controller.start_new_run()
 	arena_controller.load_arena(1)
 
 
 func _on_arena_started(index: int) -> void:
+	_waiting_for_arena_advance = false
+	_arena_waves.clear()
+	_arena_wave_index = 0
 	if index >= 2:
 		build_controller.unlock_defense(1)
 	if index >= 3:
@@ -82,7 +89,7 @@ func _on_arena_started(index: int) -> void:
 	if index == 5:
 		_start_boss_encounter()
 	else:
-		_start_arena_wave(index)
+		_start_arena_waves(index)
 
 
 func _position_persistent_actors() -> void:
@@ -94,32 +101,105 @@ func _position_persistent_actors() -> void:
 		core.global_position = core_spawn.global_position
 
 
-func _start_arena_wave(index: int) -> void:
-	var wave: Array[Dictionary] = []
+func _start_arena_waves(index: int) -> void:
+	_arena_waves = _build_arena_waves(index)
+	_arena_wave_index = 0
+	if _arena_waves.is_empty():
+		_finish_arena_after_waves()
+		return
+	_start_next_arena_wave()
+
+
+func _build_arena_waves(index: int) -> Array:
+	var waves: Array = []
 	match index:
 		1:
-			wave = [{"scene": hopper_scene, "count": 8, "interval": 0.55}]
+			waves = [
+				[{"scene": hopper_scene, "count": 8, "interval": 0.65}],
+				[{"scene": hopper_scene, "count": 10, "interval": 0.58}],
+				[{"scene": hopper_scene, "count": 12, "interval": 0.50}],
+			]
 		2:
-			wave = [
-				{"scene": hopper_scene, "count": 8, "interval": 0.45},
-				{"scene": sentinel_scene, "count": 3, "interval": 0.75},
+			waves = [
+				[
+					{"scene": hopper_scene, "count": 8, "interval": 0.55},
+					{"scene": sentinel_scene, "count": 3, "interval": 0.85},
+				],
+				[
+					{"scene": hopper_scene, "count": 8, "interval": 0.50},
+					{"scene": sentinel_scene, "count": 4, "interval": 0.75},
+				],
+				[
+					{"scene": hopper_scene, "count": 10, "interval": 0.45},
+					{"scene": sentinel_scene, "count": 5, "interval": 0.68},
+				],
 			]
 		3:
-			wave = [
-				{"scene": hopper_scene, "count": 7, "interval": 0.38},
-				{"scene": sentinel_scene, "count": 4, "interval": 0.62},
-				{"scene": disc_scene, "count": 4, "interval": 0.55},
+			waves = [
+				[
+					{"scene": hopper_scene, "count": 6, "interval": 0.50},
+					{"scene": sentinel_scene, "count": 3, "interval": 0.74},
+					{"scene": disc_scene, "count": 3, "interval": 0.68},
+				],
+				[
+					{"scene": hopper_scene, "count": 7, "interval": 0.46},
+					{"scene": sentinel_scene, "count": 4, "interval": 0.68},
+					{"scene": disc_scene, "count": 4, "interval": 0.62},
+				],
+				[
+					{"scene": hopper_scene, "count": 8, "interval": 0.42},
+					{"scene": sentinel_scene, "count": 5, "interval": 0.62},
+					{"scene": disc_scene, "count": 5, "interval": 0.56},
+				],
 			]
 		4:
-			wave = [
-				{"scene": slime_scene, "count": 5, "interval": 0.85},
-				{"scene": sentinel_scene, "count": 4, "interval": 0.55},
-				{"scene": disc_scene, "count": 5, "interval": 0.5},
+			waves = [
+				[
+					{"scene": slime_scene, "count": 4, "interval": 0.90},
+					{"scene": sentinel_scene, "count": 3, "interval": 0.70},
+					{"scene": disc_scene, "count": 3, "interval": 0.64},
+				],
+				[
+					{"scene": slime_scene, "count": 5, "interval": 0.84},
+					{"scene": sentinel_scene, "count": 4, "interval": 0.64},
+					{"scene": disc_scene, "count": 4, "interval": 0.58},
+				],
+				[
+					{"scene": slime_scene, "count": 6, "interval": 0.78},
+					{"scene": sentinel_scene, "count": 5, "interval": 0.58},
+					{"scene": disc_scene, "count": 5, "interval": 0.52},
+				],
 			]
+	return waves
+
+
+func _start_next_arena_wave() -> void:
+	if _arena_wave_index >= _arena_waves.size():
+		_finish_arena_after_waves()
+		return
+	var wave: Array[Dictionary] = []
+	var raw_wave: Array = _arena_waves[_arena_wave_index]
+	for raw_entry in raw_wave:
+		if raw_entry is Dictionary:
+			wave.append(raw_entry as Dictionary)
+	_arena_wave_index += 1
+	hud.set_wave(_arena_wave_index)
 	if wave.is_empty():
-		arena_controller.complete_current_arena()
+		_start_next_arena_wave()
 		return
 	wave_director.start_wave(wave)
+
+
+func _finish_arena_after_waves() -> void:
+	arena_controller.complete_current_arena()
+	if arena_controller.current_arena_index >= arena_controller.arena_scenes.size():
+		return
+	_waiting_for_arena_advance = true
+	var choices := upgrade_controller.roll_choices(3)
+	if choices.is_empty():
+		advance_after_upgrade()
+		return
+	upgrade_overlay.present(choices)
 
 
 func _start_boss_encounter() -> void:
@@ -146,15 +226,10 @@ func _start_boss_encounter() -> void:
 func _on_wave_completed(_number: int) -> void:
 	if not run_controller.is_run_active:
 		return
-	arena_controller.complete_current_arena()
-	if arena_controller.current_arena_index >= arena_controller.arena_scenes.size():
+	if _arena_wave_index < _arena_waves.size():
+		_start_next_arena_wave()
 		return
-	_waiting_for_arena_advance = true
-	var choices := upgrade_controller.roll_choices(3)
-	if choices.is_empty():
-		advance_after_upgrade()
-		return
-	upgrade_overlay.present(choices)
+	_finish_arena_after_waves()
 
 
 func _on_upgrade_chosen(_id: StringName) -> void:
