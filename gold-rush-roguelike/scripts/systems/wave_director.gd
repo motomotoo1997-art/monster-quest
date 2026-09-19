@@ -40,6 +40,7 @@ func _process(delta: float) -> void:
 
 
 func start_wave(entries: Array[Dictionary]) -> void:
+	_resolve_runtime_dependencies()
 	clear_wave()
 	current_wave_number += 1
 	for entry in entries:
@@ -84,6 +85,7 @@ func get_alive_enemy_count() -> int:
 
 
 func _spawn_next() -> void:
+	_resolve_runtime_dependencies()
 	if _spawn_queue.is_empty():
 		_spawning_enabled = false
 		_check_wave_complete()
@@ -124,6 +126,22 @@ func _get_spawn_position(markers: Array[Node2D]) -> Vector2:
 	var angle := float(cycle - 1) * 2.39996323 + float(marker_index) * 0.41
 	var radius_multiplier := minf(1.0 + float(cycle - 1) * 0.18, 2.0)
 	return base_position + Vector2.RIGHT.rotated(angle) * spawn_spread_radius * radius_multiplier
+
+
+func _resolve_runtime_dependencies() -> void:
+	# Be resilient to scene-tree reparenting and SceneTree test launch order.
+	# Persistent actors move under the active arena, so their original NodePaths
+	# are not guaranteed to remain valid after ArenaController.load_arena().
+	if arena_controller == null or not is_instance_valid(arena_controller):
+		arena_controller = get_node_or_null(arena_controller_path) as ArenaController
+		if arena_controller == null and get_parent() != null:
+			arena_controller = get_parent().get_node_or_null("ArenaController") as ArenaController
+	if arena_controller == null or arena_controller.current_arena == null:
+		return
+	if player == null or not is_instance_valid(player):
+		player = arena_controller.current_arena.find_child("Prospector", true, false) as Node2D
+	if core == null or not is_instance_valid(core):
+		core = arena_controller.current_arena.find_child("GoldCore", true, false) as Node2D
 
 
 func _prune_dead_enemies() -> void:
