@@ -1,7 +1,12 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/components/projectile_component.gd" id="1_projectile"]
 [ext_resource type="Texture2D" path="res://assets/vfx/radial_energy_light.svg" id="2_light"]
+[ext_resource type="Texture2D" path="res://assets/vfx/combat_feedback_v6.svg" id="3_v6"]
+
+[sub_resource type="AtlasTexture" id="V6BossBoltTexture"]
+atlas = ExtResource("3_v6")
+region = Rect2(256,0,256,256)
 
 [sub_resource type="CircleShape2D" id="BossProjectileShape"]
 radius = 6.0
@@ -16,6 +21,10 @@ script = ExtResource("1_projectile")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("BossProjectileShape")
+
+[node name="V6Bolt" type="Sprite2D" parent="."]
+texture = SubResource("V6BossBoltTexture")
+scale = Vector2(0.24,0.24)
 
 [node name="OuterTrail" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(-44,-8,4,-7,18,0,4,7,-44,8,-28,0)
