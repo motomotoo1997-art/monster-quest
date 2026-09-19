@@ -3,7 +3,7 @@ extends SceneTree
 
 func _init() -> void:
 	var controller := UpgradeController.new()
-	controller.upgrade_definitions = []
+	controller.upgrade_definitions.clear()
 	for index in range(6):
 		var definition := UpgradeDefinition.new()
 		definition.id = StringName("upgrade_%d" % index)
