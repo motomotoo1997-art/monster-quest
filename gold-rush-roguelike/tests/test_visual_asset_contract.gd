@@ -78,6 +78,23 @@ func _run_test() -> void:
 	arena.queue_free()
 	await process_frame
 
+	var arena2_packed := load("res://scenes/arenas/Arena02.tscn") as PackedScene
+	if arena2_packed == null:
+		_fail("Arena02 visual scene must load")
+		return
+	var arena2 := arena2_packed.instantiate()
+	root.add_child(arena2)
+	await process_frame
+	var arena2_backdrop := arena2.get_node_or_null("IllustratedBackdrop") as Sprite2D
+	if arena2_backdrop == null or arena2_backdrop.texture == null:
+		_fail("Arena02 must contain an illustrated backdrop")
+		return
+	if not arena2_backdrop.texture.resource_path.ends_with("arena02_backdrop_v2.svg"):
+		_fail("Arena02 must use its unique canyon backdrop instead of reusing Arena01")
+		return
+	arena2.queue_free()
+	await process_frame
+
 	var hud_packed := load("res://scenes/ui/HUD.tscn") as PackedScene
 	if hud_packed == null:
 		_fail("HUD scene must load")
@@ -99,7 +116,7 @@ func _run_test() -> void:
 	hud.queue_free()
 	await process_frame
 
-	print("PASS: reference-matched actors, illustrated arena depth, atmosphere and compact HUD remain readable")
+	print("PASS: reference-matched actors, unique arena art, atmosphere and compact HUD remain readable")
 	quit(0)
 
 func _fail(message: String) -> void:
