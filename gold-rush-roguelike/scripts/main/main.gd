@@ -16,6 +16,7 @@ class_name GoldRushMain
 @onready var run_controller: RunController = $RunController
 @onready var arena_controller: ArenaController = $ArenaController
 @onready var wave_director: WaveDirector = $WaveDirector
+@onready var arena_event_controller: ArenaEventController = $ArenaEventController
 @onready var build_controller: BuildController = $BuildController
 @onready var upgrade_controller: UpgradeController = $UpgradeController
 @onready var camera_effects: CameraEffectsController = $CameraEffectsController
@@ -79,6 +80,7 @@ func _on_start_requested() -> void:
 
 
 func _on_arena_started(index: int) -> void:
+	arena_event_controller.stop_event()
 	_waiting_for_arena_advance = false
 	_arena_waves.clear()
 	_arena_wave_index = 0
@@ -205,9 +207,11 @@ func _start_next_arena_wave() -> void:
 		_start_next_arena_wave()
 		return
 	wave_director.start_wave(wave)
+	arena_event_controller.start_wave_event(arena_controller.current_arena_index,_arena_wave_index)
 
 
 func _finish_arena_after_waves() -> void:
+	arena_event_controller.stop_event()
 	arena_controller.complete_current_arena()
 	if arena_controller.current_arena_index >= arena_controller.arena_scenes.size():
 		return
@@ -220,6 +224,7 @@ func _finish_arena_after_waves() -> void:
 
 
 func _start_boss_encounter() -> void:
+	arena_event_controller.stop_event()
 	wave_director.clear_wave()
 	if boss_scene == null or arena_controller.current_arena == null:
 		run_controller.fail_run("Boss scene missing")
@@ -346,6 +351,7 @@ func _spawn_vfx(scene: PackedScene, world_position: Vector2) -> Node2D:
 
 
 func _on_run_failed(reason: String) -> void:
+	arena_event_controller.stop_event()
 	wave_director.stop_spawning()
 	pause_overlay.set_pause_enabled(false)
 	player.set_input_enabled(false)
@@ -353,6 +359,7 @@ func _on_run_failed(reason: String) -> void:
 
 
 func _on_run_won() -> void:
+	arena_event_controller.stop_event()
 	wave_director.stop_spawning()
 	pause_overlay.set_pause_enabled(false)
 	player.set_input_enabled(false)
