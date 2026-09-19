@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#c77a43"/><stop offset=".52" stop-color="#a65336"/><stop offset="1" stop-color="#713a31"/></linearGradient><linearGradient id="r" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#67372f"/><stop offset="1" stop-color="#241d1c"/></linearGradient><pattern id="p" width="90" height="70" patternUnits="userSpaceOnUse"><circle cx="18" cy="19" r="2" fill="#482d26" opacity=".22"/><path d="M50 54l22-8" stroke="#6b3c2d" stroke-width="2" opacity=".22"/></pattern></defs>
+<rect width="1280" height="720" fill="url(#g)"/><path d="M0 0H1280V128L1180 74 1095 130 1000 82 910 138 815 84 725 132 630 79 535 135 445 84 350 132 260 76 165 126 75 73 0 115Z" fill="url(#r)"/><rect width="1280" height="720" fill="url(#p)"/>
+<path d="M70 340Q330 295 560 340T1210 310" fill="none" stroke="#df9a5d" stroke-width="112" opacity=".16"/>
+<g transform="translate(1040 160)" stroke="#2d2420" stroke-width="8"><path d="M-105 120L-55-45 0 120 55-45 105 120" fill="none"/><path d="M-78 45H78M-65 4H65M-95 88H95" fill="none"/><rect x="-118" y="120" width="236" height="28" fill="#50352b"/></g>
+<g fill="#403331" stroke="#241d1b" stroke-width="7"><rect x="900" y="250" width="85" height="55"/><rect x="995" y="265" width="68" height="40"/><rect x="1070" y="240" width="95" height="65"/></g>
+<g stroke="#5d3528" stroke-width="6" opacity=".75"><path d="M760 120l20 34-15 38 22 31-17 40"/><path d="M1160 420l22 31-18 38 20 29-14 44"/></g>
+<g fill="#ff9a18" opacity=".45"><path d="M770 150l8 17-7 18 9 14-8 18-8-18 7-17-9-15z"/><path d="M1170 450l9 17-7 19 8 16-9 18-8-18 7-18-8-17z"/></g>
+<g fill="#5b392d" stroke="#33251f" stroke-width="5"><path d="M35 530q50-64 104 0l-23 48H62Z"/><path d="M1080 565q55-62 116 0l-27 49h-61Z"/><path d="M490 585q48-49 97 0l-22 41h-54Z"/></g>
+<g stroke="#3f3029" stroke-width="7"><path d="M180 160h240M180 188h240"/><path d="M200 150v50m60-50v50m60-50v50m60-50v50"/></g>
+</svg>
