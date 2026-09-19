@@ -44,7 +44,9 @@ var _death_announced := false
 @onready var weapon_component: WeaponComponent = $WeaponComponent
 @onready var muzzle: Marker2D = $Muzzle
 @onready var charge_telegraph: Node2D = $ChargeTelegraph
-@onready var charge_beam: Polygon2D = $ChargeTelegraph/Beam
+@onready var warning_line: Line2D = $ChargeTelegraph/WarningLine
+@onready var beam_glow: Line2D = $ChargeTelegraph/BeamGlow
+@onready var beam_core: Line2D = $ChargeTelegraph/BeamCore
 @onready var charge_light: PointLight2D = $ChargeTelegraph/ChargeLight
 @onready var slam_telegraph: Node2D = $SlamTelegraph
 @onready var slam_light: PointLight2D = $SlamTelegraph/SlamLight
@@ -145,12 +147,20 @@ func _update_visual(delta: float) -> void:
 		State.CHARGE_TELEGRAPH:
 			var pulse := 0.5 + 0.5 * sin(_visual_time * 15.0)
 			target_scale = _visual_base_scale * (1.0 + pulse * 0.035)
-			charge_beam.color = Color(1.0, 0.26, 0.04, 0.24 + pulse * 0.22)
+			warning_line.default_color = Color(1.0, 0.56, 0.08, 0.52 + pulse * 0.38)
+			warning_line.width = 3.0 + pulse * 2.0
+			beam_glow.default_color = Color(1.0, 0.28, 0.03, 0.04 + pulse * 0.05)
+			beam_core.default_color = Color(1.0, 0.96, 0.72, 0.03 + pulse * 0.05)
 			charge_light.energy = 1.25 + pulse * 1.15
 			charge_light.texture_scale = 0.90 + pulse * 0.18
 		State.CHARGE:
 			target_scale = Vector2(_visual_base_scale.x * 0.94, _visual_base_scale.y * 1.07)
-			charge_beam.color = Color(1.0, 0.58, 0.12, 0.82)
+			warning_line.default_color = Color(1.0, 0.42, 0.04, 0.32)
+			warning_line.width = 5.0
+			beam_glow.default_color = Color(1.0, 0.22, 0.02, 0.34)
+			beam_glow.width = 30.0
+			beam_core.default_color = Color(1.0, 0.98, 0.78, 0.98)
+			beam_core.width = 12.0
 			charge_light.energy = 2.55
 			charge_light.texture_scale = 1.12
 		State.SLAM:
@@ -159,7 +169,12 @@ func _update_visual(delta: float) -> void:
 			slam_light.energy = 1.05 + slam_pulse * 1.45
 			slam_light.texture_scale = 1.35 + slam_pulse * 0.22
 		_:
-			charge_beam.color = Color(1.0, 0.22, 0.04, 0.26)
+			warning_line.default_color = Color(1.0, 0.56, 0.08, 0.46)
+			warning_line.width = 4.0
+			beam_glow.default_color = Color(1.0, 0.25, 0.03, 0.08)
+			beam_glow.width = 28.0
+			beam_core.default_color = Color(1.0, 0.97, 0.76, 0.06)
+			beam_core.width = 10.0
 			charge_light.energy = 1.0
 			slam_light.energy = 0.9
 	visual_sprite.position = _visual_base_position + Vector2(0.0, bob)
