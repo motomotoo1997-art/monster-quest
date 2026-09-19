@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" path="res://scenes/combat/Projectile.tscn" id="6_projectile"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/GoldHopper.tscn" id="7_hopper"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/FlyingGoldDisc.tscn" id="8_disc"]
-[ext_resource type="Texture2D" path="res://assets/sprites/enemies/boss_views_v3.svg" id="9_texture"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/boss_reference_v4.svg" id="9_texture"]
 [ext_resource type="Texture2D" path="res://assets/vfx/radial_energy_light.svg" id="10_light"]
 
 [sub_resource type="RectangleShape2D" id="BodyShape"]
