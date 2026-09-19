@@ -52,7 +52,7 @@ add_scenes = Array[PackedScene]([ExtResource("7_hopper"),ExtResource("8_disc")])
 shape = SubResource("BodyShape")
 [node name="Shadow" type="Polygon2D" parent="."]
 position = Vector2(0,52)
-polygon = PackedVector2Array(-100,0,-73,-22,73,-22,100,0,73,22,-73,22)
+polygon = PackedVector2Array(-104,0,-90,-16,-62,-27,0,-32,62,-27,90,-16,104,0,90,16,62,27,0,32,-62,27,-90,16)
 color = Color(0.04,0.025,0.015,0.40)
 
 [node name="PhaseAura" type="Node2D" parent="."]
