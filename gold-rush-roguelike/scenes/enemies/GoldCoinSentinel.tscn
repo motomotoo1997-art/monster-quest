@@ -56,6 +56,16 @@ visible = false
 polygon = PackedVector2Array(-34,0,-24,-24,0,-35,24,-24,34,0,24,24,0,35,-24,24)
 color = Color(0.15,0.92,1,0.33)
 show_behind_parent = true
+[node name="TelegraphCore" type="Polygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-20,0,-14,-14,0,-21,14,-14,20,0,14,14,0,21,-14,14)
+color = Color(0.76,0.98,1,0.44)
+show_behind_parent = true
+[node name="EmitterGlow" type="Polygon2D" parent="."]
+visible = false
+position = Vector2(43,-20)
+polygon = PackedVector2Array(-12,0,-8,-8,0,-12,8,-8,12,0,8,8,0,12,-8,8)
+color = Color(0.72,0.98,1,0.76)
 [node name="Muzzle" type="Marker2D" parent="."]
 position = Vector2(43,-20)
 [node name="HealthComponent" type="Node" parent="."]
