@@ -1,0 +1,6 @@
+Verified frame map for Prospector runtime.
+idle: idle_0, idle_1, idle_2
+move: move_0, move_1, move_2, move_3
+attack: attack_0, attack_1, attack_2(recovery using verified attack_0 art), attack_3(recovery using verified attack_1 art)
+hit: hit_0, hit_1(recovery using verified idle_2 art)
+All files are 192x192 transparent PNGs. Recovery substitutions are temporary and keep the runtime on reference art while avoiding corrupt monolithic atlas uploads.
