@@ -64,6 +64,10 @@ func _run_test() -> void:
 	var arena := arena_packed.instantiate()
 	root.add_child(arena)
 	await process_frame
+	var depth := arena.get_node_or_null("CanyonDepth") as Sprite2D
+	if depth == null or depth.texture == null or depth.texture.get_width() < 1000:
+		_fail("Arena01 must contain a full-width illustrated CanyonDepth layer")
+		return
 	var dust := arena.get_node_or_null("AmbientDust") as CPUParticles2D
 	if dust == null:
 		_fail("Arena01 must contain AmbientDust CPUParticles2D atmosphere")
@@ -95,7 +99,7 @@ func _run_test() -> void:
 	hud.queue_free()
 	await process_frame
 
-	print("PASS: reference-matched actors, objective, Arena01 atmosphere and compact HUD remain readable")
+	print("PASS: reference-matched actors, illustrated arena depth, atmosphere and compact HUD remain readable")
 	quit(0)
 
 func _fail(message: String) -> void:
