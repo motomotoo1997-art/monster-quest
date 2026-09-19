@@ -7,6 +7,7 @@ signal core_destroyed
 @onready var team_component: TeamComponent = $TeamComponent
 @onready var energy_rings: Node2D = $EnergyRings
 @onready var aura: Polygon2D = $Aura
+@onready var core_light: PointLight2D = $CoreLight
 
 var _visual_pulse_phase := 0.0
 
@@ -25,6 +26,8 @@ func _process(delta: float) -> void:
 	energy_rings.rotation = sin(_visual_pulse_phase * 0.5) * 0.035
 	energy_rings.modulate.a = lerpf(0.68, 1.0, pulse)
 	aura.modulate.a = lerpf(0.62, 1.0, pulse)
+	core_light.energy = lerpf(0.82, 1.28, pulse)
+	core_light.texture_scale = lerpf(0.94, 1.10, pulse)
 
 
 func get_visual_pulse_phase() -> float:
