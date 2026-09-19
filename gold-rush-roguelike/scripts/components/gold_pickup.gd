@@ -9,18 +9,28 @@ signal collected(amount: int)
 
 var _time := 0.0
 var _visual_start_y := 0.0
+var _visual_start_scale := Vector2.ONE
 
 @onready var visual: Node2D = $Visual
+@onready var loot_light: PointLight2D = $LootLight
 
 
 func _ready() -> void:
 	_visual_start_y = visual.position.y
+	_visual_start_scale = visual.scale
 	body_entered.connect(_on_body_entered)
 
 
 func _process(delta: float) -> void:
 	_time += delta
-	visual.position.y = _visual_start_y + sin(_time * bob_speed) * bob_height
+	var bob := sin(_time * bob_speed)
+	var pulse := (sin(_time * (bob_speed + 1.8)) + 1.0) * 0.5
+	visual.position.y = _visual_start_y + bob * bob_height
+	visual.rotation = sin(_time * 1.35) * 0.07
+	visual.scale = _visual_start_scale * lerpf(0.94, 1.08, pulse)
+	loot_light.position.y = visual.position.y - 2.0
+	loot_light.energy = lerpf(0.38, 0.68, pulse)
+	loot_light.texture_scale = lerpf(0.52, 0.64, pulse)
 
 
 func configure(gold_amount: int) -> void:
