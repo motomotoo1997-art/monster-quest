@@ -7,6 +7,7 @@ class_name GoldCoinSentinel
 
 var _telegraph_remaining := 0.0
 var _shot_cooldown_remaining := 0.4
+var _attack_visual_remaining := 0.0
 
 @onready var weapon_component: WeaponComponent = $WeaponComponent
 @onready var muzzle: Marker2D = $Muzzle
@@ -19,6 +20,7 @@ func _ready() -> void:
 
 
 func _tick_behavior(delta: float) -> void:
+	_attack_visual_remaining = maxf(_attack_visual_remaining - delta, 0.0)
 	var target := choose_target()
 	if target == null:
 		velocity = Vector2.ZERO
@@ -46,8 +48,30 @@ func _tick_behavior(delta: float) -> void:
 		telegraph_visual.visible = true
 
 
+func _update_visual(delta: float) -> void:
+	if visual_sprite == null:
+		return
+	_visual_time += delta
+	if absf(velocity.x) > 2.0:
+		visual_sprite.flip_h = velocity.x < 0.0
+	var next_animation: StringName
+	if _telegraph_remaining > 0.0 or _attack_visual_remaining > 0.0:
+		next_animation = &"attack"
+	elif velocity.length() > 10.0:
+		next_animation = &"move"
+	else:
+		next_animation = &"idle"
+	if visual_sprite.animation != next_animation:
+		visual_sprite.play(next_animation)
+	var moving := velocity.length() > 8.0
+	var bob := sin(_visual_time * 7.0) * 1.3 if moving else sin(_visual_time * 3.2) * 0.45
+	visual_sprite.position = _visual_base_position + Vector2(0.0, bob)
+	visual_sprite.scale = _visual_base_scale
+
+
 func _fire_at(target: Node2D) -> void:
 	telegraph_visual.visible = false
+	_attack_visual_remaining = 0.24
 	if target == null or not is_instance_valid(target):
 		_shot_cooldown_remaining = shot_interval
 		return
