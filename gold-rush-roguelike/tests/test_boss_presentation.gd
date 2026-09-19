@@ -25,6 +25,9 @@ func _run_test() -> void:
 		return
 	if not _check(boss.visual_sprite.sprite_frames.has_animation(&"death"), "Gold Bar Tank must expose a disintegration death presentation"):
 		return
+	var core_glow := boss.get_node_or_null("CoreGlow") as Polygon2D
+	if not _check(core_glow != null and core_glow.color.a >= 0.28, "Frontier Juggernaut must expose a readable emissive core accent"):
+		return
 	var disintegration_vfx := boss.get_node_or_null("DisintegrationVFX") as Node2D
 	if not _check(disintegration_vfx != null, "Gold Bar Tank must include authored disintegration VFX"):
 		return
