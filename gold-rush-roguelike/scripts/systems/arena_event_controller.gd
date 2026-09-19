@@ -58,6 +58,14 @@ func get_event_config(arena_index: int, wave_number: int) -> Dictionary:
 		}
 	return {}
 
+func get_active_telegraph_count() -> int:
+	var count := 0
+	for strike in _pending_strikes:
+		var telegraph := strike.get("telegraph") as Node
+		if telegraph != null and is_instance_valid(telegraph) and telegraph.is_inside_tree():
+			count += 1
+	return count
+
 func start_wave_event(arena_index: int, wave_number: int) -> void:
 	stop_event()
 	_active_config = get_event_config(arena_index,wave_number)
