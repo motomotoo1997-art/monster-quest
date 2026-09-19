@@ -21,12 +21,22 @@ func _run_test() -> void:
 	if not _check(boss_texture is AtlasTexture, "Gold Bar Tank presentation must be atlas-backed"):
 		return
 	var boss_atlas := (boss_texture as AtlasTexture).atlas
-	if not _check(boss_atlas != null and boss_atlas.resource_path.ends_with("boss_reference_v5.svg"), "Gold Bar Tank must use the new high-detail reference atlas"):
+	if not _check(boss_atlas != null and boss_atlas.resource_path.ends_with("boss_frontier_juggernaut_v6.svg"), "Boss must use the replacement Frontier Juggernaut atlas"):
 		return
 	if not _check(boss.visual_sprite.sprite_frames.has_animation(&"death"), "Gold Bar Tank must expose a disintegration death presentation"):
 		return
 	var disintegration_vfx := boss.get_node_or_null("DisintegrationVFX") as Node2D
 	if not _check(disintegration_vfx != null, "Gold Bar Tank must include authored disintegration VFX"):
+		return
+
+	var warning_line := boss.get_node_or_null("ChargeTelegraph/WarningLine") as Line2D
+	if not _check(warning_line != null and warning_line.width <= 6.0, "Boss laser warning must be a thin readable line, not a giant wedge"):
+		return
+	var beam_core := boss.get_node_or_null("ChargeTelegraph/BeamCore") as Line2D
+	if not _check(beam_core != null and beam_core.width >= 8.0, "Boss firing beam needs a clean bright Line2D core"):
+		return
+	var boss_projectile_scene := boss.weapon_component.projectile_scene
+	if not _check(boss_projectile_scene != null and boss_projectile_scene.resource_path.ends_with("BossProjectile.tscn"), "Boss burst must use dedicated boss projectiles"):
 		return
 
 	var charge_light := boss.get_node_or_null("ChargeTelegraph/ChargeLight") as PointLight2D
