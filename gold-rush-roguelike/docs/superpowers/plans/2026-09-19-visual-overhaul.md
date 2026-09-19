@@ -76,13 +76,13 @@ tests/                           visual/runtime regression contracts
 - Consumes: existing EnemyBase gameplay, current enemy scripts and animation names.
 - Produces: four readable normal-enemy scenes using the replacement v6 atlas without changing collision or public gameplay methods.
 
-- [ ] **Step 1: Write failing visual contract.** Instantiate all four scenes and assert each visible AnimatedSprite2D/Sprite2D resolves to `enemies_frontier_v6.svg`, each has a non-empty ground shadow, and FlyingGoldDisc keeps a separated projected shadow.
-- [ ] **Step 2: Add the test to CI and run it.** Expected: FAIL because the v6 atlas does not exist / scenes still reference prior art.
-- [ ] **Step 3: Create the replacement atlas.** Hopper = compact faceted nugget creature; Sentinel = plated coin-machine with readable emitter; Disc = gold/steel saucer with cyan emitter; Slime = molten asymmetric body with bright inner core. Keep transparent canvas, consistent 3/4 projection and warm upper-left highlight.
-- [ ] **Step 4: Integrate the atlas into the four scenes.** Preserve collision shapes and gameplay node paths; update only SpriteFrames/visual child nodes, shadow scale/offset and presentation-only particles/lights.
-- [ ] **Step 5: Verify animation states.** Existing `idle/move/attack/hit/death` contracts must remain valid where supported; attack visuals must not shift the ground anchor.
-- [ ] **Step 6: Run targeted tests and full CI.** Expected: enemy visual contract GREEN, animation contract GREEN, production enemy visibility GREEN.
-- [ ] **Step 7: Commit.** `art: rebuild normal enemy roster`
+- [x] **Step 1: Write failing visual contract.** Instantiate all four scenes and assert each visible AnimatedSprite2D/Sprite2D resolves to `enemies_frontier_v6.svg`, each has a non-empty ground shadow, and FlyingGoldDisc keeps a separated projected shadow.
+- [x] **Step 2: Add the test to CI and run it.** Expected: FAIL because the v6 atlas does not exist / scenes still reference prior art.
+- [x] **Step 3: Create the replacement atlas.** Hopper = compact faceted nugget creature; Sentinel = plated coin-machine with readable emitter; Disc = gold/steel saucer with cyan emitter; Slime = molten asymmetric body with bright inner core. Keep transparent canvas, consistent 3/4 projection and warm upper-left highlight.
+- [x] **Step 4: Integrate the atlas into the four scenes.** Preserve collision shapes and gameplay node paths; update only SpriteFrames/visual child nodes, shadow scale/offset and presentation-only particles/lights.
+- [x] **Step 5: Verify animation states.** Existing `idle/move/attack/hit/death` contracts must remain valid where supported; attack visuals must not shift the ground anchor.
+- [x] **Step 6: Run targeted tests and full CI.** Expected: enemy visual contract GREEN, animation contract GREEN, production enemy visibility GREEN.
+- [x] **Step 7: Commit.** `art: rebuild normal enemy roster`
 
 ### Task 2: Defense Roster Visual Rebuild
 
@@ -98,12 +98,12 @@ tests/                           visual/runtime regression contracts
 - Consumes: current targeting, weapon and TNT behavior.
 - Produces: three distinct defenses with unchanged build footprint/cost/gameplay APIs.
 
-- [ ] **Step 1: Write failing defense visual contract.** Require replacement atlas, readable ground shadow, MagneticTurret cyan coil/head, CactusSentry weapon/recoil visual, TNT fuse/danger visual.
-- [ ] **Step 2: Run RED.** Expected: old assets fail replacement-path assertions.
-- [ ] **Step 3: Draw and integrate replacement defense atlas.** Keep all gameplay nodes and collision shapes unchanged.
-- [ ] **Step 4: Synchronize firing/arming presentation to existing gameplay events.** No cosmetic animation may fire a projectile or apply damage itself.
-- [ ] **Step 5: Run defense animation, economy/building and visual tests GREEN; run full CI.**
-- [ ] **Step 6: Commit.** `art: rebuild frontier defenses`
+- [x] **Step 1: Write failing defense visual contract.** Require replacement atlas, readable ground shadow, MagneticTurret cyan coil/head, CactusSentry weapon/recoil visual, TNT fuse/danger visual.
+- [x] **Step 2: Run RED.** Expected: old assets fail replacement-path assertions.
+- [x] **Step 3: Draw and integrate replacement defense atlas.** Keep all gameplay nodes and collision shapes unchanged.
+- [x] **Step 4: Synchronize firing/arming presentation to existing gameplay events.** No cosmetic animation may fire a projectile or apply damage itself.
+- [x] **Step 5: Run defense animation, economy/building and visual tests GREEN; run full CI.**
+- [x] **Step 6: Commit.** `art: rebuild frontier defenses`
 
 ### Task 3: Arena02-Arena04 Distinct Environment Identities
 
@@ -121,15 +121,15 @@ tests/                           visual/runtime regression contracts
 - Consumes: arena marker groups and Y-sort hierarchy.
 - Produces: three visually distinct arenas with unchanged spawn/player/core/build marker contracts.
 
-- [ ] **Step 1: Write failing arena identity contract.** Require unique v6 backdrop path and a unique landmark node in each arena; assert all required marker groups still exist.
-- [ ] **Step 2: Run RED.**
-- [ ] **Step 3: Build Arena02 mining yard.** Hoist, ore crusher, timber shed, mine supports, carts/rails near edges.
-- [ ] **Step 4: Build Arena03 rail/explosives yard.** Rail junction, TNT depot, loading platform and warning props with readable central combat lane.
-- [ ] **Step 5: Build Arena04 elite canyon/extraction site.** Derrick/extraction rig, harsher canyon walls, reinforced barricades and elite landmark.
-- [ ] **Step 6: Run arena identity, run-flow, depth-sort and build-zone tests GREEN; run full CI.**
-- [ ] **Step 7: Commit.** `art: give arenas 02-04 distinct frontier identities`
+- [x] **Step 1: Write failing arena identity contract.** Require unique v6 backdrop path and a unique landmark node in each arena; assert all required marker groups still exist.
+- [x] **Step 2: Run RED.**
+- [x] **Step 3: Build Arena02 mining yard.** Hoist, ore crusher, timber shed, mine supports, carts/rails near edges.
+- [x] **Step 4: Build Arena03 rail/explosives yard.** Rail junction, TNT depot, loading platform and warning props with readable central combat lane.
+- [x] **Step 5: Build Arena04 elite canyon/extraction site.** Derrick/extraction rig, harsher canyon walls, reinforced barricades and elite landmark.
+- [x] **Step 6: Run arena identity, run-flow, depth-sort and build-zone tests GREEN; run full CI.**
+- [x] **Step 7: Commit.** `art: give arenas 02-04 distinct frontier identities`
 
-### Task 4: Arena05 Foundry Boss Environment
+**Progress evidence:** Tasks 1-3 GREEN through CI run `35466282491`; Windows export succeeded.\n\n### Task 4: Arena05 Foundry Boss Environment
 
 **Files:**
 - Create: `assets/environment/arena05_molten_foundry_v6.svg`
