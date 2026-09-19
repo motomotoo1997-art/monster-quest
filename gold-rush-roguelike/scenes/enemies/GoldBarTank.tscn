@@ -50,9 +50,13 @@ position = Vector2(50,-5)
 [node name="ChargeTelegraph" type="Node2D" parent="."]
 visible = false
 [node name="Beam" type="Polygon2D" parent="ChargeTelegraph"]
-position = Vector2(190,0)
-polygon = PackedVector2Array(0,-18,380,-8,380,8,0,18)
+position = Vector2(0,0)
+polygon = PackedVector2Array(0,-16,520,-9,520,9,0,16)
 color = Color(1,0.22,0.04,0.26)
+[node name="BeamCore" type="Polygon2D" parent="ChargeTelegraph"]
+position = Vector2(0,0)
+polygon = PackedVector2Array(0,-4,520,-3,520,3,0,4)
+color = Color(1,0.85,0.3,0.72)
 [node name="SlamTelegraph" type="Node2D" parent="."]
 visible = false
 [node name="Ring" type="Polygon2D" parent="SlamTelegraph"]
