@@ -32,12 +32,16 @@ func _update_visual(delta: float) -> void:
 	_visual_time += delta
 	if absf(velocity.x) > 2.0:
 		visual_sprite.flip_h = velocity.x < 0.0
+	var moving := velocity.length() > 7.0
+	var next_animation: StringName = &"move" if moving else &"idle"
+	if visual_sprite.animation != next_animation:
+		visual_sprite.play(next_animation)
 	var wave := sin(_visual_time * 4.8)
 	var move_factor := clampf(velocity.length() / maxf(move_speed, 1.0), 0.0, 1.0)
-	visual_sprite.position = _visual_base_position + Vector2(0.0, wave * 2.0 - move_factor * 1.5)
+	visual_sprite.position = _visual_base_position + Vector2(0.0, wave * 1.5 - move_factor * 1.0)
 	visual_sprite.scale = Vector2(
-		_visual_base_scale.x * (1.0 + wave * 0.07 + move_factor * 0.04),
-		_visual_base_scale.y * (1.0 - wave * 0.07 - move_factor * 0.02)
+		_visual_base_scale.x * (1.0 + wave * 0.035 + move_factor * 0.025),
+		_visual_base_scale.y * (1.0 - wave * 0.035 - move_factor * 0.015)
 	)
 
 
