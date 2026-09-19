@@ -7,7 +7,8 @@
 [ext_resource type="Texture2D" path="res://assets/environment/arena03_rail_explosives_v6.svg" id="5_backdrop"]
 [ext_resource type="PackedScene" path="res://scenes/environment/RailSegmentProp.tscn" id="6_rail"]
 [ext_resource type="PackedScene" path="res://scenes/environment/CrateStackProp.tscn" id="7_crates"]
-[ext_resource type="Texture2D" path="res://assets/vfx/dust_mote.svg" id="8_dust"]\n[ext_resource type="Texture2D" path="res://assets/environment/frontier_props_v6.svg" id="9_props"]
+[ext_resource type="Texture2D" path="res://assets/vfx/dust_mote.svg" id="8_dust"]
+[ext_resource type="Texture2D" path="res://assets/environment/frontier_props_v6.svg" id="9_props"]
 
 [sub_resource type="AtlasTexture" id="TNTDepotTexture"]
 atlas = ExtResource("9_props")
@@ -24,7 +25,13 @@ y_sort_enabled = true
 [node name="IllustratedBackdrop" type="Sprite2D" parent="."]
 z_index = -50
 position = Vector2(640,360)
-texture = ExtResource("5_backdrop")\n\n[node name="TNTDepot" type="Sprite2D" parent="."]\nz_index = -18\nposition = Vector2(1010,185)\ntexture = SubResource("TNTDepotTexture")\nscale = Vector2(0.50,0.50)
+texture = ExtResource("5_backdrop")
+
+[node name="TNTDepot" type="Sprite2D" parent="."]
+z_index = -18
+position = Vector2(1010,185)
+texture = SubResource("TNTDepotTexture")
+scale = Vector2(0.50,0.50)
 
 [node name="CrossroadsGlow" type="Polygon2D" parent="."]
 z_index = -20
