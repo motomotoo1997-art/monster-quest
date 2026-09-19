@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://scripts/components/hurtbox_component.gd" id="4_hurtbox"]
 [ext_resource type="Script" path="res://scripts/components/weapon_component.gd" id="5_weapon"]
 [ext_resource type="PackedScene" path="res://scenes/combat/Projectile.tscn" id="6_projectile"]
-[ext_resource type="Texture2D" path="res://assets/sprites/enemies/enemies.webp" id="7_texture"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/enemies.svg" id="7_texture"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_enemy"]
 radius = 15.0
