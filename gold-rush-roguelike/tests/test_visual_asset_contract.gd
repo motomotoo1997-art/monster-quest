@@ -1,7 +1,7 @@
 extends SceneTree
 
 const EXPECTED := [
-	{"scene":"res://scenes/player/Prospector.tscn","visual":"BodyVisual","min_width":300.0,"min_scale":0.40},
+	{"scene":"res://scenes/player/Prospector.tscn","visual":"BodyVisual","min_width":192.0,"min_display_width":220.0,"min_scale":0.40},
 	{"scene":"res://scenes/enemies/GoldHopper.tscn","visual":"AnimatedSprite2D","min_width":300.0,"min_scale":0.30,"max_scale":0.36,"min_separation":36.0},
 	{"scene":"res://scenes/enemies/GoldCoinSentinel.tscn","visual":"AnimatedSprite2D","min_width":300.0,"min_scale":0.34,"max_scale":0.38,"min_separation":42.0},
 	{"scene":"res://scenes/enemies/FlyingGoldDisc.tscn","visual":"AnimatedSprite2D","min_width":300.0,"min_scale":0.28,"max_scale":0.32},
@@ -55,6 +55,11 @@ func _run_test() -> void:
 		if absf(visual.scale.x) < float(entry.min_scale):
 			_fail("Visual is too small/readability regression: %s" % entry.scene)
 			return
+		if entry.has("min_display_width"):
+			var display_width := float(texture.get_width()) * absf(visual.scale.x)
+			if display_width < float(entry.min_display_width):
+				_fail("Visual display footprint is too small for gameplay readability: %s" % entry.scene)
+				return
 		if entry.has("max_scale") and absf(visual.scale.x) > float(entry.max_scale):
 			_fail("Visual is too large/composition regression: %s" % entry.scene)
 			return
