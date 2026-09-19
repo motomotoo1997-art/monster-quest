@@ -56,11 +56,20 @@ func _update_visual(delta: float) -> void:
 	_visual_time += delta
 	if absf(velocity.x) > 2.0:
 		visual_sprite.flip_h = velocity.x < 0.0
+	var next_animation: StringName
+	if _burst_shots_remaining > 0:
+		next_animation = &"attack"
+	elif velocity.length() > 8.0:
+		next_animation = &"move"
+	else:
+		next_animation = &"idle"
+	if visual_sprite.animation != next_animation:
+		visual_sprite.play(next_animation)
 	var hover := sin(_visual_time * 5.3 + float(get_instance_id() % 7))
 	visual_sprite.position = _visual_base_position + Vector2(0.0, hover * 5.5)
 	var tilt := clampf(velocity.x / maxf(move_speed, 1.0), -1.0, 1.0)
 	visual_sprite.rotation = tilt * 0.08
-	var pulse := 1.0 + sin(_visual_time * 7.0) * 0.025
+	var pulse := 1.0 + sin(_visual_time * 7.0) * 0.018
 	visual_sprite.scale = _visual_base_scale * pulse
 
 
