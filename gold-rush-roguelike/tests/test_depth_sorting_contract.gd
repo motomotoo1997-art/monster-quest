@@ -13,7 +13,6 @@ const GROUND_SORT_SCENES := [
 	"res://scenes/environment/RockClusterProp.tscn",
 	"res://scenes/environment/MineCartProp.tscn",
 	"res://scenes/environment/GoldVeinProp.tscn",
-	"res://scenes/environment/RailSegmentProp.tscn",
 	"res://scenes/environment/CrateStackProp.tscn",
 ]
 
@@ -57,6 +56,21 @@ func _run_test() -> void:
 			return
 		ground_item.queue_free()
 		await process_frame
+
+	# Rails are floor decoration, not an occluding world prop. They stay below
+	# the shared actor/prop Y-sort layer by design.
+	var rail_packed := load("res://scenes/environment/RailSegmentProp.tscn") as PackedScene
+	var rail := rail_packed.instantiate() as Node2D if rail_packed != null else null
+	if rail == null:
+		_fail("Rail floor decoration must load")
+		return
+	root.add_child(rail)
+	await process_frame
+	if rail.z_index >= GROUND_SORT_Z:
+		_fail("Rail floor decoration must remain behind the grounded Y-sort layer")
+		return
+	rail.queue_free()
+	await process_frame
 
 	var flying_packed := load("res://scenes/enemies/FlyingGoldDisc.tscn") as PackedScene
 	var flying := flying_packed.instantiate() as Node2D if flying_packed != null else null
