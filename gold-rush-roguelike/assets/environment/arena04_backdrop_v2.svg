@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<defs>
+ <linearGradient id="ash" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#5b4037"/><stop offset=".5" stop-color="#3b2a29"/><stop offset="1" stop-color="#211c20"/></linearGradient>
+ <linearGradient id="rock" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#734536"/><stop offset=".45" stop-color="#432d2b"/><stop offset="1" stop-color="#211b20"/></linearGradient>
+ <linearGradient id="lava" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#7f1607"/><stop offset=".18" stop-color="#ff4c0b"/><stop offset=".5" stop-color="#ffd45a"/><stop offset=".72" stop-color="#ff6410"/><stop offset="1" stop-color="#7f1607"/></linearGradient>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff3a0"/><stop offset=".35" stop-color="#ffc62d"/><stop offset="1" stop-color="#9f5a05"/></linearGradient>
+ <radialGradient id="cyan"><stop stop-color="#ecffff"/><stop offset=".25" stop-color="#61f0ff"/><stop offset="1" stop-color="#087385"/></radialGradient>
+ <filter id="glow" x="-150%" y="-150%" width="400%" height="400%"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ <filter id="heat" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="4"/></filter>
+</defs>
+<rect width="1280" height="720" fill="url(#ash)"/>
+
+<!-- cavern mouth and layered ceiling -->
+<path d="M0 0H1280V121L1220 105 1160 130 1100 92 1020 122 946 83 870 118 790 76 712 110 633 70 551 112 469 76 391 118 306 86 226 125 144 91 70 130 0 109Z" fill="#17171b"/>
+<path d="M0 102L82 123 140 96 222 133 298 101 378 139 456 103 535 132 612 94 695 135 777 98 856 136 941 95 1025 136 1110 102 1191 132 1280 104V177H0Z" fill="#402b2a" stroke="#211a1d" stroke-width="8"/>
+
+<!-- industrial refinery silhouettes -->
+<g opacity=".78" stroke="#17191c" fill="#2a2c2d">
+ <rect x="78" y="90" width="95" height="118" rx="8" stroke-width="7"/><rect x="98" y="55" width="54" height="43" stroke-width="6"/>
+ <path d="M124 55V22M105 22h38" fill="none" stroke-width="7"/>
+ <rect x="1047" y="72" width="125" height="136" rx="7" stroke-width="8"/><path d="M1061 107h96M1080 72V33M1135 72V20" fill="none" stroke-width="6"/>
+ <circle cx="1080" cy="33" r="12"/><circle cx="1135" cy="20" r="11"/>
+</g>
+<g opacity=".6" fill="none" stroke="#8a4a29" stroke-width="8"><path d="M170 168H310V112H388"/><path d="M943 122H1038V163H1175"/></g>
+
+<!-- molten channels define combat lanes -->
+<path d="M0 267 Q196 234 363 279 T702 281 Q870 230 1280 263V326 Q1031 303 865 338 T520 336 Q278 304 0 349Z" fill="#1f2022"/>
+<path d="M0 293 Q210 257 365 304 T699 307 Q873 253 1280 287" fill="none" stroke="url(#lava)" stroke-width="22" opacity=".9" filter="url(#glow)"/>
+<path d="M0 487 Q207 448 392 486 Q576 527 733 486 Q935 431 1280 478V540 Q987 501 751 548 Q565 583 382 536 Q194 490 0 552Z" fill="#1d1d20"/>
+<path d="M0 515 Q207 476 389 511 Q579 553 741 513 Q950 459 1280 509" fill="none" stroke="url(#lava)" stroke-width="26" opacity=".94" filter="url(#glow)"/>
+
+<!-- safe ash combat strip -->
+<path d="M63 353 Q286 325 441 355 Q611 390 782 348 Q976 301 1210 342 L1192 459 Q984 423 802 463 Q622 501 442 459 Q272 420 74 447Z" fill="#6a4939" opacity=".65"/>
+<path d="M88 381 Q299 351 447 382 Q615 416 786 378 Q974 336 1184 368" fill="none" stroke="#a56a45" stroke-width="9" opacity=".35"/>
+
+<!-- central slag pillars aligned to collision geometry -->
+<g fill="url(#rock)" stroke="#1d181b" stroke-width="9">
+ <path d="M662 151l48-27 52 22 26 52-22 50-53 19-47-24-23-47z"/>
+ <path d="M658 437l51-25 50 23 25 51-23 52-52 19-48-25-22-47z"/>
+ <path d="M837 255l73-20 67 31 18 62-39 50-77 12-61-39-8-58z"/>
+ <path d="M936 426l42-30 52 13 31 46-13 59-48 30-53-16-26-49z"/>
+</g>
+<g fill="none" stroke="url(#lava)" stroke-linecap="round" filter="url(#glow)"><path d="M687 167l18 23-10 19 24 21" stroke-width="8"/><path d="M684 467l22 18-9 24 20 22" stroke-width="9"/><path d="M860 285l27 18-8 25 29 20" stroke-width="8"/><path d="M967 447l19 21-8 22 24 18" stroke-width="7"/></g>
+
+<!-- furnace gate / boss foreshadowing -->
+<g transform="translate(1081 183)">
+ <path d="M0 95Q58 9 116 95V181H0Z" fill="#17191c" stroke="#0c0d0e" stroke-width="10"/>
+ <path d="M20 96Q58 45 96 96V181H20Z" fill="#35180f" stroke="#5f2a12" stroke-width="8"/>
+ <path d="M32 112Q58 78 84 112V176H32Z" fill="url(#lava)" opacity=".75" filter="url(#glow)"/>
+ <path d="M-14 92H130M7 88V184M109 88V184" stroke="#6d4a37" stroke-width="14"/>
+ <path d="M0 93L58 25L116 93" fill="none" stroke="#6d4a37" stroke-width="14"/>
+</g>
+
+<!-- cyan cooling pylons create color contrast -->
+<g filter="url(#glow)"><circle cx="290" cy="403" r="10" fill="url(#cyan)"/><circle cx="541" cy="410" r="8" fill="url(#cyan)"/><circle cx="1022" cy="374" r="9" fill="url(#cyan)"/></g>
+<g fill="none" stroke="#47717a" stroke-width="6"><path d="M290 403v-43m-16 12h32"/><path d="M541 410v-37m-14 10h28"/><path d="M1022 374v-39m-15 11h30"/></g>
+
+<!-- ore veins and collapsed mine details -->
+<g fill="none" stroke="url(#gold)" stroke-width="8" stroke-linecap="round" filter="url(#glow)"><path d="M198 205l22-21 20 8 22-24"/><path d="M426 177l20 17 17-7 23 20"/><path d="M1064 573l22-22 20 8 18-22"/><path d="M1158 612l17-18 18 6 18-19"/></g>
+<g stroke="#5b3d2f" stroke-width="8" fill="none"><path d="M126 566l77-58 54 35"/><path d="M131 560h130M159 540v75M230 536v67"/><path d="M337 609l51-63 49 61"/><path d="M352 589h69"/></g>
+
+<!-- sparks/embers -->
+<g fill="#ffad32" opacity=".8"><circle cx="181" cy="348" r="3"/><circle cx="329" cy="573" r="4"/><circle cx="493" cy="287" r="3"/><circle cx="624" cy="598" r="3"/><circle cx="807" cy="203" r="4"/><circle cx="944" cy="589" r="3"/><circle cx="1149" cy="429" r="4"/></g>
+<g fill="#92543a" opacity=".8"><ellipse cx="220" cy="403" rx="11" ry="6"/><ellipse cx="414" cy="432" rx="9" ry="5"/><ellipse cx="579" cy="363" rx="12" ry="6"/><ellipse cx="935" cy="397" rx="10" ry="5"/><ellipse cx="1108" cy="552" rx="8" ry="4"/></g>
+<rect x="7" y="7" width="1266" height="706" rx="18" fill="none" stroke="#0b0b0d" stroke-width="30" opacity=".27"/>
+</svg>
