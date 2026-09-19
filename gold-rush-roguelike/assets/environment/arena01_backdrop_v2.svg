@@ -1,50 +1,60 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
 <defs>
- <linearGradient id="sand" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#e9bd72"/><stop offset=".55" stop-color="#d99d51"/><stop offset="1" stop-color="#c77e3f"/></linearGradient>
- <linearGradient id="rock" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#a75c35"/><stop offset=".5" stop-color="#774027"/><stop offset="1" stop-color="#4a2a20"/></linearGradient>
- <linearGradient id="mesa" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#b66b44"/><stop offset="1" stop-color="#7b4333"/></linearGradient>
- <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="2"/></filter>
+ <linearGradient id="sand" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#efc47c"/><stop offset=".48" stop-color="#dca154"/><stop offset="1" stop-color="#c77d3d"/></linearGradient>
+ <linearGradient id="mesa" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#be7449"/><stop offset="1" stop-color="#754033"/></linearGradient>
+ <linearGradient id="rock" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b96739"/><stop offset=".48" stop-color="#81462b"/><stop offset="1" stop-color="#4d2b21"/></linearGradient>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff3a0"/><stop offset=".45" stop-color="#f1ba2a"/><stop offset="1" stop-color="#a15c09"/></linearGradient>
 </defs>
 <rect width="1280" height="720" fill="url(#sand)"/>
-<!-- distant haze and mesas -->
-<path d="M0 0H1280V112 Q1120 87 995 102 Q840 70 720 109 Q545 71 405 108 Q220 75 0 116Z" fill="#f3d69a" opacity=".72"/>
-<path d="M30 112 L104 82 L168 98 L234 66 L292 92 L356 88 L398 111Z M886 106 L934 73 L1009 83 L1057 57 L1121 82 L1196 68 L1260 104Z" fill="url(#mesa)" opacity=".58"/>
-<!-- ghost mining town -->
-<g opacity=".33" fill="#5e4938" stroke="#4c3a2e" stroke-width="3">
- <rect x="387" y="72" width="64" height="46"/><path d="M377 72l42-27 42 27z"/><rect x="463" y="80" width="53" height="38"/><rect x="525" y="63" width="39" height="55"/><path d="M523 63l21-19 23 19z"/><rect x="576" y="85" width="70" height="33"/><path d="M585 85l26-25 27 25z"/>
- <path d="M482 80v-31h8v31M485 49l-12-13h32l-14 13" fill="none"/>
+<!-- distant haze -->
+<path d="M0 0H1280V132 Q1135 95 1010 111 Q860 77 730 119 Q563 78 430 114 Q250 82 0 125Z" fill="#f6dca5" opacity=".86"/>
+<!-- distant mesas -->
+<path d="M0 120 L76 88 L142 105 L205 73 L272 96 L345 86 L405 119Z M845 119 L920 78 L1002 92 L1064 58 L1141 88 L1214 72 L1280 107 L1280 145Z" fill="url(#mesa)" opacity=".72" stroke="#74402f" stroke-width="5"/>
+<!-- distant mining town -->
+<g opacity=".48" stroke="#4c392c" stroke-width="4" fill="#765643">
+ <rect x="365" y="74" width="72" height="48"/><path d="M354 74l47-31 49 31z"/>
+ <rect x="454" y="82" width="56" height="40"/><path d="M450 82l31-22 34 22z"/>
+ <rect x="524" y="64" width="43" height="58"/><path d="M519 64l27-25 28 25z"/>
+ <rect x="583" y="86" width="76" height="36"/><path d="M578 86l40-27 46 27z"/>
+ <rect x="676" y="75" width="52" height="47"/><path d="M670 75l32-24 32 24z"/>
+ <path d="M390 122v-23h18v23M474 122V98h16v24M600 122V101h19v21M691 122V98h17v24" fill="#463329"/>
 </g>
-<!-- mining derrick -->
-<g transform="translate(95 24)" stroke="#463429" stroke-width="7" fill="none" opacity=".8">
- <path d="M35 158 L91 15 L151 158 M50 121H137 M62 89H124 M74 57H112 M91 15V172"/><path d="M27 159H159"/>
- <path d="M52 122l72-33M62 89l51-32M75 58l29 30M137 121L62 89" stroke-width="4"/>
+<!-- derrick -->
+<g transform="translate(70 14)" stroke="#3e2e26" fill="none" stroke-linejoin="round">
+ <path d="M35 171 L94 14 L157 171 M50 132H142 M62 97H129 M76 61H115 M94 14V184" stroke-width="8"/>
+ <path d="M50 132l79-35M62 97l53-36M76 61l39 36M142 132L62 97" stroke-width="4"/>
+ <path d="M24 172H167" stroke-width="9"/>
 </g>
+<!-- telegraph poles -->
+<g stroke="#5c402b" stroke-width="7" fill="none" opacity=".72"><path d="M760 53v84M739 72h43M757 78l-35 30M763 78l34 28"/><path d="M815 69v73M797 86h38"/></g>
 <!-- north canyon shelf -->
-<path d="M0 128 L55 117 L98 136 L145 122 L186 143 L241 128 L292 151 L340 130 L380 148 L430 132 L476 151 L526 130 L574 148 L626 129 L678 147 L729 126 L782 146 L828 126 L884 148 L936 128 L990 149 L1045 127 L1098 144 L1148 123 L1200 139 L1280 119 L1280 0 L0 0Z" fill="#8f4f32" opacity=".83"/>
-<path d="M0 130 Q120 153 238 139 T482 141 T735 139 T992 141 T1280 128" fill="none" stroke="#c67e49" stroke-width="10" opacity=".5"/>
-<!-- edge rock clusters -->
-<g fill="url(#rock)" stroke="#5b3023" stroke-width="6">
- <path d="M0 249 L36 210 L77 226 L102 266 L76 301 L28 291 L0 309Z"/><path d="M0 558 L38 527 L82 540 L118 592 L86 630 L29 619 L0 648Z"/>
- <path d="M1280 235 L1240 208 L1199 229 L1174 271 L1207 302 L1253 291 L1280 315Z"/><path d="M1280 550 L1241 529 L1200 547 L1178 591 L1208 630 L1258 617 L1280 646Z"/>
- <path d="M205 678 l29-43 44-13 37 28 7 70H176z"/><path d="M930 720 l18-57 45-32 47 24 19 65z"/>
+<path d="M0 142 L55 126 L104 143 L150 126 L194 149 L245 131 L298 154 L345 132 L389 151 L438 133 L486 155 L533 132 L581 151 L630 131 L680 151 L731 129 L784 150 L833 129 L887 151 L940 130 L994 153 L1048 129 L1100 148 L1152 126 L1204 142 L1280 121 L1280 0 L0 0Z" fill="#8a4930" stroke="#643424" stroke-width="6"/>
+<path d="M0 145 Q119 166 241 148 T488 151 T741 149 T994 151 T1280 140" fill="none" stroke="#d58c50" stroke-width="11" opacity=".58"/>
+<!-- central worn combat lanes -->
+<path d="M72 345 Q280 279 477 326 Q668 379 844 296 Q1042 206 1230 307 L1230 470 Q1019 390 846 461 Q652 534 473 456 Q275 372 73 453Z" fill="#f2ca84" opacity=".50"/>
+<path d="M101 382 Q304 321 480 360 Q668 414 837 331 Q1022 242 1193 329" fill="none" stroke="#f9dea4" stroke-width="12" opacity=".42"/>
+<!-- broad rock framing -->
+<g fill="url(#rock)" stroke="#582f22" stroke-width="7">
+ <path d="M0 241 L38 203 L82 221 L108 268 L80 309 L31 298 L0 319Z"/><path d="M0 552 L41 519 L87 536 L124 590 L88 636 L32 623 L0 651Z"/>
+ <path d="M1280 229 L1239 202 L1198 222 L1169 270 L1204 307 L1251 293 L1280 319Z"/><path d="M1280 548 L1240 522 L1196 541 L1173 591 L1205 637 L1257 621 L1280 650Z"/>
+ <path d="M185 720 l21-61 49-35 52 24 24 72z"/><path d="M932 720 l19-60 47-31 49 26 22 65z"/>
 </g>
-<g fill="#d99050" opacity=".55"><path d="M20 260l37-28 22 27-42 19z"/><path d="M1203 250l37-23 20 24-43 22z"/><path d="M24 576l43-26 25 31-50 21z"/></g>
-<!-- central worn paths -->
-<path d="M88 356 Q298 288 484 334 Q673 383 842 306 Q1039 218 1225 319 L1225 463 Q1012 391 846 454 Q650 525 478 450 Q275 365 91 445Z" fill="#f1c77e" opacity=".42"/>
-<path d="M117 389 Q331 326 484 368 Q672 420 838 340 Q1024 251 1190 338" fill="none" stroke="#f7dc9b" stroke-width="9" opacity=".34"/>
-<!-- cracks -->
-<g fill="none" stroke="#9e6338" stroke-width="4" opacity=".65" stroke-linecap="round">
- <path d="M328 232 l19 18 23-6 17 23 26 4 M317 232l-13-18-18 2"/><path d="M873 521 l18-25 25 4 14-21 31 3 M891 496l-4-19"/>
- <path d="M1039 273 l23 11 14-18 29 9 M1048 282l-9 21"/><path d="M495 579 l16-25 26 8 19-18 23 9"/><path d="M690 213l19 12 14-14 21 11"/>
+<!-- gold seams in edge rocks -->
+<g fill="none" stroke="url(#gold)" stroke-width="8" stroke-linecap="round"><path d="M20 272l27-25 18 10 22-19"/><path d="M1213 573l22-18 16 7 17-14"/><path d="M973 690l18-23 19 4 13-18"/></g>
+<!-- cracks and ground scars -->
+<g fill="none" stroke="#9b6037" stroke-width="4" opacity=".78" stroke-linecap="round">
+ <path d="M311 231 l18 17 24-6 18 24 28 5 M311 231l-15-19-18 2"/><path d="M861 522 l19-26 26 4 16-22 31 3 M881 496l-4-20"/>
+ <path d="M1031 279 l24 10 16-18 30 9 M1041 288l-10 21"/><path d="M492 579 l17-25 28 8 19-18 24 9"/><path d="M684 216l20 12 15-15 23 12"/>
+ <path d="M217 432l18-15 18 8 17-16M728 590l16-19 20 7 18-14"/>
 </g>
 <!-- scattered stones -->
-<g fill="#9c6945" stroke="#70452f" stroke-width="2" opacity=".8">
- <ellipse cx="276" cy="286" rx="11" ry="6"/><ellipse cx="351" cy="494" rx="8" ry="5"/><ellipse cx="425" cy="259" rx="6" ry="4"/><ellipse cx="567" cy="530" rx="10" ry="5"/><ellipse cx="638" cy="260" rx="9" ry="5"/><ellipse cx="754" cy="486" rx="7" ry="4"/><ellipse cx="843" cy="254" rx="11" ry="6"/><ellipse cx="955" cy="438" rx="8" ry="4"/><ellipse cx="1083" cy="504" rx="12" ry="6"/><ellipse cx="1125" cy="294" rx="7" ry="4"/><ellipse cx="187" cy="475" rx="9" ry="5"/>
+<g fill="#9a6745" stroke="#6d432f" stroke-width="2" opacity=".9">
+ <ellipse cx="261" cy="286" rx="12" ry="6"/><ellipse cx="343" cy="495" rx="9" ry="5"/><ellipse cx="427" cy="257" rx="7" ry="4"/><ellipse cx="563" cy="531" rx="11" ry="5"/><ellipse cx="634" cy="261" rx="10" ry="5"/><ellipse cx="749" cy="488" rx="8" ry="4"/><ellipse cx="842" cy="252" rx="12" ry="6"/><ellipse cx="958" cy="442" rx="9" ry="4"/><ellipse cx="1085" cy="506" rx="13" ry="6"/><ellipse cx="1121" cy="297" rx="8" ry="4"/><ellipse cx="180" cy="477" rx="10" ry="5"/>
 </g>
-<!-- desert brush -->
-<g stroke="#647136" stroke-width="6" stroke-linecap="round" opacity=".72">
- <path d="M157 303l-8-22m8 22 10-20m-9 19-20-8m20 8 22-7M1100 570l-11-27m11 27 13-23m-14 22-22-8m23 8 23-12M720 598l-9-21m9 21 11-19m-10 18-19-6"/>
-</g>
+<!-- brush -->
+<g stroke="#66743a" stroke-width="7" stroke-linecap="round" opacity=".78"><path d="M154 304l-8-24m8 24 11-22m-10 21-21-8m21 8 23-8M1103 570l-12-29m12 29 14-24m-14 23-23-8m24 8 24-13M720 599l-10-22m10 22 12-20m-11 19-20-7"/></g>
+<!-- tiny gold fragments -->
+<g fill="#f5bd2f" stroke="#9b5e0a" stroke-width="2"><path d="M552 245l7-8 8 5-3 10z"/><path d="M905 401l6-7 8 3-2 9z"/><path d="M369 548l7-8 7 4-2 9z"/><path d="M1045 332l6-6 7 4-2 8z"/></g>
 <!-- warm vignette -->
-<rect x="8" y="8" width="1264" height="704" rx="20" fill="none" stroke="#6d3826" stroke-width="20" opacity=".12"/>
+<rect x="7" y="7" width="1266" height="706" rx="20" fill="none" stroke="#5f3224" stroke-width="22" opacity=".14"/>
 </svg>
