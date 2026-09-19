@@ -57,6 +57,9 @@ jobs:
       - name: Arena multiwave pacing
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_arena_multiwave_pacing.gd
 
+      - name: Full five-arena victory flow
+        run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_full_run_progression.gd
+
       - name: Wave lifecycle regression
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_wave_lifecycle.gd
 
