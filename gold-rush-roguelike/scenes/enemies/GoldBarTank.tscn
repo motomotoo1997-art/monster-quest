@@ -78,6 +78,16 @@ default_color = Color(1,0.70,0.12,0.66)
 closed = true
 antialiased = true
 
+[node name="CoreGlow" type="Polygon2D" parent="."]
+position = Vector2(4,-91)
+z_index = 1
+polygon = PackedVector2Array(0,-19,15,-9,18,7,6,19,-9,16,-18,4,-13,-11)
+color = Color(0.18,0.92,1,0.42)
+
+[node name="CoreHotspot" type="Polygon2D" parent="CoreGlow"]
+polygon = PackedVector2Array(0,-10,8,-4,9,5,2,11,-7,7,-9,-2)
+color = Color(0.82,1,1,0.58)
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0,-79)
 sprite_frames = SubResource("BossFrames")
