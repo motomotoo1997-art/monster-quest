@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<defs><linearGradient id="sand" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#edc179"/><stop offset="1" stop-color="#c98643"/></linearGradient><linearGradient id="mesa" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b96e44"/><stop offset="1" stop-color="#70402f"/></linearGradient><linearGradient id="wood" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#b86c39"/><stop offset="1" stop-color="#4e2a1c"/></linearGradient></defs>
+<rect width="1280" height="720" fill="url(#sand)"/>
+<path d="M0 0H1280V105Q1100 80 925 104Q760 72 592 106Q400 70 0 109Z" fill="#f4d9a3" opacity=".65"/>
+<path d="M0 118l91-44 74 29 68-54 75 48 92-31 65 51zM945 113l55-48 74 16 58-42 70 28 78-22v76z" fill="url(#mesa)" opacity=".55"/>
+<!-- mining settlement silhouettes -->
+<g transform="translate(350 40)" opacity=".45" fill="#66503d" stroke="#4e3b2f" stroke-width="4"><rect x="0" y="48" width="80" height="56"/><path d="M-8 48l47-30 50 30z"/><rect x="96" y="58" width="62" height="46"/><rect x="171" y="42" width="50" height="62"/><path d="M166 42l30-27 31 27z"/><rect x="238" y="64" width="94" height="40"/><path d="M245 64l42-29 38 29z"/><rect x="348" y="52" width="57" height="52"/><path d="M344 52l31-24 34 24z"/></g>
+<!-- central crossroads -->
+<path d="M0 302Q250 289 480 337Q640 370 800 337Q1030 288 1280 306V454Q1030 430 801 390Q640 365 479 397Q250 446 0 424Z" fill="#f5cf8c" opacity=".34"/>
+<path d="M565 0Q573 195 596 306Q625 451 577 720H714Q684 446 706 310Q727 170 721 0Z" fill="#f3cd87" opacity=".29"/>
+<!-- rail X -->
+<g stroke="#555047" opacity=".60"><path d="M92 583L1138 130" stroke-width="6"/><path d="M111 607L1156 154" stroke-width="6"/><path d="M142 133L1135 610" stroke-width="6"/><path d="M132 159L1124 635" stroke-width="6"/></g>
+<g stroke="#6b4a2e" stroke-width="5" opacity=".55"><path d="M217 522l-28-35M302 485l-28-35M388 448l-28-35M474 411l-28-35M560 374l-28-35M646 337l-28-35M732 300l-28-35M818 263l-28-35M904 226l-28-35M990 189l-28-35"/><path d="M260 190l-20 39M350 233l-20 39M440 276l-20 39M530 319l-20 39M620 362l-20 39M710 405l-20 39M800 448l-20 39M890 491l-20 39M980 534l-20 39"/></g>
+<!-- water tower/mining crane -->
+<g transform="translate(1035 40)" stroke="#4f3728" fill="none"><ellipse cx="62" cy="35" rx="44" ry="13" fill="#7d4b2e" stroke-width="7"/><rect x="18" y="34" width="88" height="48" rx="10" fill="#8e5835" stroke-width="7"/><path d="M31 82L12 156M94 82L113 156M24 118h77" stroke-width="8"/><path d="M12 156h103" stroke-width="7"/></g>
+<!-- signs -->
+<g transform="translate(193 190)" stroke="#4b2d1f" stroke-width="5"><path d="M20 0v88"/><rect x="-22" y="8" width="83" height="31" rx="4" fill="url(#wood)"/><path d="M-9 23h54" stroke="#e1b06a" stroke-width="4"/></g>
+<!-- cracks + pebbles -->
+<g fill="none" stroke="#9e6137" stroke-width="4" opacity=".66"><path d="M252 270l18 19 25-7 18 22 28 4M802 523l19-24 25 5 15-19 29 5M1030 300l18 13 17-15 24 12"/></g>
+<g fill="#94603f" opacity=".82"><ellipse cx="172" cy="490" rx="9" ry="5"/><ellipse cx="347" cy="595" rx="12" ry="6"/><ellipse cx="487" cy="227" rx="8" ry="4"/><ellipse cx="780" cy="214" rx="10" ry="5"/><ellipse cx="960" cy="480" rx="11" ry="6"/><ellipse cx="1133" cy="346" rx="8" ry="4"/></g>
+</svg>
