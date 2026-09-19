@@ -1,7 +1,7 @@
 [gd_scene format=3]
 
 [node name="CrateStackProp" type="Node2D"]
-z_index = 1
+z_index = 0
 
 [node name="Shadow" type="Polygon2D" parent="."]
 position = Vector2(0,31)
