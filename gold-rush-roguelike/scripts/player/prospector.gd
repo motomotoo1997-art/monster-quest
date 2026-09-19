@@ -21,6 +21,9 @@ var _invulnerability_remaining := 0.0
 var _attack_pose_remaining := 0.0
 var _dash_direction := Vector2.RIGHT
 var _dash_cooldown_multiplier := 1.0
+var _visual_time := 0.0
+var _body_base_position := Vector2.ZERO
+var _body_base_scale := Vector2.ONE
 
 @onready var body_visual: AnimatedSprite2D = $BodyVisual
 @onready var visual_pivot: Node2D = $VisualPivot
@@ -35,6 +38,8 @@ func _ready() -> void:
 	health_component.died.connect(_on_health_died)
 	hurtbox_component.knockback_requested.connect(_on_knockback_requested)
 	weapon_component.fired.connect(_on_weapon_fired)
+	_body_base_position = body_visual.position
+	_body_base_scale = body_visual.scale
 	body_visual.play(&"idle")
 
 
@@ -44,7 +49,7 @@ func _physics_process(delta: float) -> void:
 	if not _input_enabled:
 		velocity = velocity.move_toward(Vector2.ZERO, deceleration * delta)
 		move_and_slide()
-		_update_body_visual(Vector2.ZERO)
+		_update_body_visual(Vector2.ZERO, delta)
 		return
 	if Input.is_action_just_pressed("dash"):
 		request_dash()
@@ -52,7 +57,7 @@ func _physics_process(delta: float) -> void:
 		velocity = _dash_direction * dash_speed
 		move_and_slide()
 		_handle_fire()
-		_update_body_visual(_dash_direction)
+		_update_body_visual(_dash_direction, delta)
 		return
 	var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var target_velocity := input_dir * move_speed
@@ -61,7 +66,7 @@ func _physics_process(delta: float) -> void:
 		velocity = velocity.move_toward(Vector2.ZERO, deceleration * delta)
 	move_and_slide()
 	_handle_fire()
-	_update_body_visual(input_dir)
+	_update_body_visual(input_dir, delta)
 
 
 func get_aim_direction() -> Vector2:
@@ -136,16 +141,33 @@ func _update_aim() -> void:
 	var aim := get_aim_direction()
 	if not aim.is_zero_approx():
 		visual_pivot.rotation = aim.angle()
+		body_visual.flip_h = aim.x < 0.0
 
 
-func _update_body_visual(input_dir: Vector2) -> void:
+func _update_body_visual(input_dir: Vector2, delta: float) -> void:
+	_visual_time += delta
 	if _attack_pose_remaining > 0.0:
 		if body_visual.animation != &"attack":
 			body_visual.play(&"attack")
+	else:
+		var next_animation: StringName = &"move" if not input_dir.is_zero_approx() else &"idle"
+		if body_visual.animation != next_animation:
+			body_visual.play(next_animation)
+
+	if _dash_remaining > 0.0:
+		var dash_pulse := 0.5 + 0.5 * sin(_visual_time * 24.0)
+		body_visual.position = _body_base_position + Vector2(0.0, -2.0)
+		body_visual.scale = Vector2(_body_base_scale.x * (1.12 + dash_pulse * 0.05), _body_base_scale.y * 0.90)
 		return
-	var next_animation: StringName = &"move" if not input_dir.is_zero_approx() else &"idle"
-	if body_visual.animation != next_animation:
-		body_visual.play(next_animation)
+
+	if not input_dir.is_zero_approx():
+		var step := sin(_visual_time * 13.0)
+		body_visual.position = _body_base_position + Vector2(0.0, -absf(step) * 2.7)
+		body_visual.scale = Vector2(_body_base_scale.x * (1.0 + absf(step) * 0.025), _body_base_scale.y * (1.0 - absf(step) * 0.025))
+	else:
+		var breath := sin(_visual_time * 3.2)
+		body_visual.position = _body_base_position + Vector2(0.0, breath * 0.55)
+		body_visual.scale = Vector2(_body_base_scale.x * (1.0 - breath * 0.008), _body_base_scale.y * (1.0 + breath * 0.008))
 
 
 func _update_timers(delta: float) -> void:
