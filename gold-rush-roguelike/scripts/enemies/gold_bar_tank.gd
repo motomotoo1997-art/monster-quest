@@ -53,6 +53,9 @@ var _death_announced := false
 @onready var phase_light: PointLight2D = $PhaseAura/PhaseLight
 @onready var phase_ring: Line2D = $PhaseAura/PhaseRing
 @onready var phase_inner_ring: Line2D = $PhaseAura/PhaseInnerRing
+@onready var disintegration_vfx: Node2D = $DisintegrationVFX
+@onready var disintegration_light: PointLight2D = $DisintegrationVFX/BlastLight
+@onready var disintegration_ring: Line2D = $DisintegrationVFX/ShockRing
 
 
 func _ready() -> void:
@@ -61,6 +64,7 @@ func _ready() -> void:
 	charge_telegraph.visible = false
 	slam_telegraph.visible = false
 	phase_aura.visible = false
+	disintegration_vfx.visible = false
 	health_component.health_changed.connect(_on_health_changed)
 	health_component.died.connect(_on_boss_health_died)
 	boss_phase_changed.emit(phase)
@@ -96,7 +100,9 @@ func _update_visual(delta: float) -> void:
 		return
 	_visual_time += delta
 	var presentation: StringName = &"idle"
-	if state == State.CHARGE_TELEGRAPH:
+	if state == State.DEAD:
+		presentation = &"death"
+	elif state == State.CHARGE_TELEGRAPH:
 		presentation = &"charge"
 	elif state == State.CHARGE or state == State.BURST:
 		presentation = &"fire"
@@ -341,6 +347,32 @@ func _update_phase_from_health() -> void:
 	if next_phase != phase:
 		phase = next_phase
 		boss_phase_changed.emit(phase)
+
+
+func _on_health_died() -> void:
+	# Keep the boss on screen briefly so the reference disintegration pose is readable.
+	# Gameplay progression still sees is_alive() == false immediately because HealthComponent
+	# is already dead; only presentation lifetime is extended.
+	velocity = Vector2.ZERO
+	enemy_died.emit(self, gold_value)
+	state = State.DEAD
+	charge_telegraph.visible = false
+	slam_telegraph.visible = false
+	phase_aura.visible = false
+	if visual_sprite != null:
+		visual_sprite.play(&"death")
+		visual_sprite.modulate = Color.WHITE
+	disintegration_vfx.visible = true
+	disintegration_vfx.scale = Vector2(0.72, 0.72)
+	disintegration_light.energy = 3.4
+	disintegration_ring.modulate = Color.WHITE
+	var tween := create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(disintegration_vfx, "scale", Vector2(1.55, 1.55), 0.42).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.tween_property(disintegration_light, "energy", 0.0, 0.42).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.tween_property(disintegration_ring, "modulate:a", 0.0, 0.42)
+	tween.set_parallel(false)
+	tween.tween_callback(queue_free)
 
 
 func _on_boss_health_died() -> void:
