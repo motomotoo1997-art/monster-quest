@@ -1,5 +1,22 @@
 extends SceneTree
 
+const GROUND_SORT_Z := 5
+const GROUND_SORT_SCENES := [
+	"res://scenes/enemies/GoldHopper.tscn",
+	"res://scenes/enemies/GoldCoinSentinel.tscn",
+	"res://scenes/enemies/MoltenGoldSlime.tscn",
+	"res://scenes/enemies/GoldBarTank.tscn",
+	"res://scenes/defenses/MagneticTurret.tscn",
+	"res://scenes/defenses/CactusSentry.tscn",
+	"res://scenes/defenses/TNTBarrel.tscn",
+	"res://scenes/environment/CactusProp.tscn",
+	"res://scenes/environment/RockClusterProp.tscn",
+	"res://scenes/environment/MineCartProp.tscn",
+	"res://scenes/environment/GoldVeinProp.tscn",
+	"res://scenes/environment/RailSegmentProp.tscn",
+	"res://scenes/environment/CrateStackProp.tscn",
+]
+
 func _init() -> void:
 	call_deferred("_run_test")
 
@@ -20,6 +37,23 @@ func _run_test() -> void:
 	if arena_controller == null or player == null or core == null or build_controller == null:
 		_fail("Main depth-sort dependencies must exist")
 		return
+	if player.z_index != GROUND_SORT_Z or core.z_index != GROUND_SORT_Z:
+		_fail("Persistent ground actors must share the common ground z-index")
+		return
+
+	for scene_path in GROUND_SORT_SCENES:
+		var ground_packed := load(scene_path) as PackedScene
+		if ground_packed == null:
+			_fail("Ground-sort scene must load: %s" % scene_path)
+			return
+		var ground_item := ground_packed.instantiate() as Node2D
+		if ground_item == null:
+			_fail("Ground-sort scene root must be Node2D: %s" % scene_path)
+			return
+		if ground_item.z_index != GROUND_SORT_Z:
+			_fail("Ground-sort z-index mismatch (%d): %s" % [ground_item.z_index, scene_path])
+			return
+		ground_item.free()
 
 	if not arena_controller.load_arena(1):
 		_fail("Arena01 must load")
@@ -57,7 +91,7 @@ func _run_test() -> void:
 		_fail("Build parent must follow the active arena after transition")
 		return
 
-	print("PASS: arena props, persistent actors and defenses share one Y-sort hierarchy across transitions")
+	print("PASS: grounded world items share z-index and one Y-sort hierarchy across arena transitions")
 	quit(0)
 
 
