@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="Script" path="res://scripts/enemies/gold_coin_sentinel.gd" id="1_enemy"]
 [ext_resource type="Script" path="res://scripts/components/health_component.gd" id="2_health"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://scripts/components/weapon_component.gd" id="5_weapon"]
 [ext_resource type="PackedScene" path="res://scenes/combat/Projectile.tscn" id="6_projectile"]
 [ext_resource type="Texture2D" path="res://assets/sprites/enemies/enemies.svg" id="7_texture"]
+[ext_resource type="Script" path="res://scripts/components/gold_drop_component.gd" id="8_gold_drop"]
+[ext_resource type="PackedScene" path="res://scenes/combat/GoldPickup.tscn" id="9_gold_pickup"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_enemy"]
 radius = 17.0
@@ -30,20 +32,20 @@ prefer_core_weight = 0.58
 shape = SubResource("CircleShape2D_enemy")
 [node name="Shadow" type="Polygon2D" parent="."]
 position = Vector2(0, 14)
-polygon = PackedVector2Array(-22,0,-14,-6,14,-6,22,0,14,6,-14,6)
-color = Color(0.06,0.035,0.02,0.22)
+polygon = PackedVector2Array(-22, 0, -14, -6, 14, -6, 22, 0, 14, 6, -14, 6)
+color = Color(0.06, 0.035, 0.02, 0.22)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0,-27)
+position = Vector2(0, -27)
 sprite_frames = SubResource("SpriteFrames_enemy")
 animation = &"idle"
-scale = Vector2(0.32,0.32)
+scale = Vector2(0.32, 0.32)
 [node name="Telegraph" type="Polygon2D" parent="."]
 visible = false
-polygon = PackedVector2Array(-22,0,-15,-15,0,-22,15,-15,22,0,15,15,0,22,-15,15)
-color = Color(1,0.25,0.05,0.55)
+polygon = PackedVector2Array(-22, 0, -15, -15, 0, -22, 15, -15, 22, 0, 15, 15, 0, 22, -15, 15)
+color = Color(1, 0.25, 0.05, 0.55)
 show_behind_parent = true
 [node name="Muzzle" type="Marker2D" parent="."]
-position = Vector2(19,0)
+position = Vector2(19, 0)
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_health")
 max_health = 52.0
@@ -67,3 +69,7 @@ cooldown_sec = 0.12
 projectile_speed = 520.0
 projectile_damage = 7.0
 projectile_lifetime = 3.0
+[node name="GoldDropComponent" type="Node" parent="."]
+script = ExtResource("8_gold_drop")
+gold_amount = 10
+pickup_scene = ExtResource("9_gold_pickup")
