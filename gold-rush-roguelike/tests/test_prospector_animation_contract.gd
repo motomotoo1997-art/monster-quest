@@ -1,7 +1,7 @@
 extends SceneTree
 
 const REQUIRED_ANIMATIONS := {
-	&"idle": 3,
+	&"idle": 1,
 	&"move": 4,
 	&"attack": 4,
 	&"hit": 2,
