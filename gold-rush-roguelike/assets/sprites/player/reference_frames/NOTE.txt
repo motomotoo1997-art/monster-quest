@@ -1,0 +1,1 @@
+Binary frame blobs are attached via Git trees after per-frame SHA verification. This note keeps the migration atomic and documents that large monolithic PNG/WebP uploads were rejected after reproducible CI corruption.
