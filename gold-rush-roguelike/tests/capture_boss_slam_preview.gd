@@ -35,6 +35,8 @@ func _capture() -> void:
 	boss.phase = 2
 	boss._attack_index = 2
 	boss._choose_next_attack(main.player)
+	boss._update_visual(0.016)
+	boss.set_physics_process(false)
 	if boss.state != GoldBarTank.State.SLAM or not boss.slam_telegraph.visible:
 		_fail("Boss slam telegraph could not be entered through production attack pattern")
 		return
