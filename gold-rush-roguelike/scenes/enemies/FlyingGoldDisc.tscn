@@ -26,7 +26,7 @@ move_speed = 138.0
 contact_damage = 5.0
 attack_range = 470.0
 attack_cooldown = 1.0
-gold_value = 9
+gold_value = 4
 prefer_core_weight = 0.28
 separation_radius = 34.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -67,5 +67,5 @@ projectile_damage = 5.5
 projectile_lifetime = 2.5
 [node name="GoldDropComponent" type="Node" parent="."]
 script = ExtResource("8_gold_drop")
-gold_amount = 9
+gold_amount = 4
 pickup_scene = ExtResource("9_gold_pickup")
