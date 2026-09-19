@@ -157,6 +157,21 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
+      - name: Capture Arena04 elite preview
+        shell: bash
+        run: |
+          set -euo pipefail
+          timeout 35s xvfb-run -a godot --path gold-rush-roguelike --rendering-method gl_compatibility --script res://tests/capture_elite_preview.gd
+          test -s /tmp/gold-rush-elite-preview.png
+
+      - name: Upload Arena04 elite preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: GoldRushRoguelike-Elite-Preview
+          path: /tmp/gold-rush-elite-preview.png
+          if-no-files-found: error
+          retention-days: 14
+
       - name: Install Godot export templates
         shell: bash
         run: |
