@@ -2,8 +2,7 @@ extends SceneTree
 
 const OUTPUT_PATH := "/tmp/gold-rush-gameplay-preview.png"
 const MIN_ENEMIES_FOR_PREVIEW := 6
-const MAX_SIMULATION_STEPS := 40
-const SIMULATION_DELTA := 0.25
+const MAX_SPAWN_ATTEMPTS := 12
 
 func _init() -> void:
 	call_deferred("_capture")
@@ -24,23 +23,32 @@ func _capture() -> void:
 	main.player.set_input_enabled(false)
 	await process_frame
 
-	# A SceneTree launched with --script does not advance Node._process() reliably under xvfb.
-	# Drive the real production WaveDirector explicitly so the preview still uses the actual
-	# queue, spawn markers, enemy scenes, targeting and enemy_spawned signal path.
-	var simulated_steps: int = 0
-	while main.wave_director.get_alive_enemy_count() < MIN_ENEMIES_FOR_PREVIEW and simulated_steps < MAX_SIMULATION_STEPS:
-		main.wave_director._process(SIMULATION_DELTA)
-		await process_frame
-		simulated_steps += 1
+	# A --script SceneTree is not the normal project launcher, so explicitly mirror the
+	# WaveDirector dependencies that its _ready() owns during a standard game launch.
+	# Spawning still goes through the real production queue and _spawn_next() path.
+	main.wave_director.arena_controller = main.arena_controller
+	main.wave_director.player = main.player
+	main.wave_director.core = main.core
 
-	# Allow the real enemy scenes and y-sort visuals to settle for several rendered frames.
-	for _i in range(12):
+	var markers: Array[Node2D] = main.arena_controller.get_markers(&"enemy_spawn")
+	if markers.is_empty():
+		_fail("Arena01 must expose enemy_spawn markers to the production WaveDirector")
+		return
+
+	var spawn_attempts: int = 0
+	while main.wave_director.get_alive_enemy_count() < MIN_ENEMIES_FOR_PREVIEW and spawn_attempts < MAX_SPAWN_ATTEMPTS:
+		main.wave_director._spawn_next()
+		await process_frame
+		spawn_attempts += 1
+
+	# Let y-sort, enemy visual animation and the viewport render settle.
+	for _i in range(18):
 		await process_frame
 	await RenderingServer.frame_post_draw
 
 	var enemy_count: int = main.wave_director.get_alive_enemy_count()
 	if enemy_count < MIN_ENEMIES_FOR_PREVIEW:
-		_fail("Gameplay preview never reached battle density: %d enemies (wave %d, steps %d)" % [enemy_count,main.wave_director.current_wave_number,simulated_steps])
+		_fail("Gameplay preview never reached battle density: %d enemies (wave %d, attempts %d, markers %d)" % [enemy_count,main.wave_director.current_wave_number,spawn_attempts,markers.size()])
 		return
 
 	var image: Image = root.get_texture().get_image()
@@ -51,7 +59,7 @@ func _capture() -> void:
 	if err != OK:
 		_fail("Could not save gameplay preview: %s" % error_string(err))
 		return
-	print("PASS: gameplay preview saved with %d enemies after %d simulation steps to %s (%dx%d)" % [enemy_count,simulated_steps,OUTPUT_PATH,image.get_width(),image.get_height()])
+	print("PASS: gameplay preview saved with %d enemies after %d spawn attempts to %s (%dx%d)" % [enemy_count,spawn_attempts,OUTPUT_PATH,image.get_width(),image.get_height()])
 	main.queue_free()
 	quit(0)
 
