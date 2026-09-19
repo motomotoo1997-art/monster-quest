@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<defs>
+ <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#4a352f"/><stop offset=".55" stop-color="#2e2627"/><stop offset="1" stop-color="#17171b"/></linearGradient>
+ <linearGradient id="iron" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#74787a"/><stop offset=".35" stop-color="#3e4649"/><stop offset="1" stop-color="#171c1f"/></linearGradient>
+ <linearGradient id="rust" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#9c5733"/><stop offset="1" stop-color="#42281f"/></linearGradient>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff6ad"/><stop offset=".28" stop-color="#ffd343"/><stop offset=".68" stop-color="#c87c08"/><stop offset="1" stop-color="#704006"/></linearGradient>
+ <radialGradient id="core"><stop stop-color="#efffff"/><stop offset=".24" stop-color="#7cf5ff"/><stop offset=".56" stop-color="#15b7cf"/><stop offset="1" stop-color="#064f61"/></radialGradient>
+ <radialGradient id="heat"><stop stop-color="#fff0a6"/><stop offset=".3" stop-color="#ff8a1c"/><stop offset="1" stop-color="#7f180b"/></radialGradient>
+ <filter id="cyanGlow" x="-180%" y="-180%" width="460%" height="460%"><feGaussianBlur stdDeviation="9" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ <filter id="goldGlow" x="-140%" y="-140%" width="380%" height="380%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="1280" height="720" fill="url(#floor)"/>
+
+<!-- cavern/industrial roof -->
+<path d="M0 0H1280V115L1210 99 1150 126 1076 88 1005 120 925 75 847 113 769 77 687 108 607 71 529 111 448 76 372 114 294 82 218 120 143 87 69 125 0 101Z" fill="#101216"/>
+<path d="M0 105L82 124 150 100 226 136 309 101 387 139 465 105 543 136 623 99 704 137 787 102 866 138 949 98 1031 139 1111 102 1192 136 1280 109V164H0Z" fill="#30272a" stroke="#15171a" stroke-width="8"/>
+
+<!-- giant foundry machinery -->
+<g stroke="#121416" stroke-width="9" fill="url(#iron)">
+ <rect x="52" y="80" width="142" height="154" rx="12"/><rect x="1086" y="75" width="144" height="160" rx="12"/>
+ <circle cx="123" cy="130" r="38"/><circle cx="1158" cy="128" r="39"/>
+ <path d="M123 91v78M84 130h78M1158 89v78M1119 128h78" fill="none" stroke="#20272b" stroke-width="12"/>
+ <rect x="72" y="188" width="102" height="44" fill="url(#rust)"/><rect x="1107" y="190" width="101" height="43" fill="url(#rust)"/>
+</g>
+<g stroke="#687378" stroke-width="8" fill="none" opacity=".7"><path d="M195 121H330V72H445"/><path d="M835 78H958V124H1087"/><path d="M122 233V278H297"/><path d="M1160 233V277H992"/></g>
+
+<!-- boss arena metal ring -->
+<ellipse cx="900" cy="360" rx="287" ry="246" fill="#181b1d" stroke="#0c0e10" stroke-width="22"/>
+<ellipse cx="900" cy="360" rx="258" ry="217" fill="#292b2c" stroke="#55504a" stroke-width="11"/>
+<ellipse cx="900" cy="360" rx="224" ry="183" fill="#3a302c" stroke="#1a1b1c" stroke-width="8"/>
+<ellipse cx="900" cy="360" rx="184" ry="146" fill="#2a2524" stroke="#9a6424" stroke-width="7" opacity=".95"/>
+
+<!-- segmented hazard ring -->
+<g fill="none" stroke-linecap="butt">
+ <path d="M900 155 A205 205 0 0 1 1045 215" stroke="#d58a22" stroke-width="13"/>
+ <path d="M1064 233 A205 205 0 0 1 1102 337" stroke="#5a3b24" stroke-width="13"/>
+ <path d="M1104 382 A205 205 0 0 1 1038 513" stroke="#d58a22" stroke-width="13"/>
+ <path d="M1008 538 A205 205 0 0 1 870 563" stroke="#5a3b24" stroke-width="13"/>
+ <path d="M827 552 A205 205 0 0 1 716 455" stroke="#d58a22" stroke-width="13"/>
+ <path d="M701 414 A205 205 0 0 1 721 269" stroke="#5a3b24" stroke-width="13"/>
+ <path d="M744 235 A205 205 0 0 1 858 160" stroke="#d58a22" stroke-width="13"/>
+</g>
+
+<!-- cyan power conduits -->
+<g fill="none" stroke="#21bad0" stroke-width="8" opacity=".72" filter="url(#cyanGlow)">
+ <path d="M650 360H716"/><path d="M1084 360H1168"/><path d="M900 142V205"/><path d="M900 515V588"/>
+ <path d="M732 232l47 43M1022 235l-44 42M737 487l44-42M1023 488l-45-43"/>
+</g>
+<g fill="url(#core)" stroke="#0c5d70" stroke-width="5" filter="url(#cyanGlow)">
+ <circle cx="716" cy="360" r="13"/><circle cx="1084" cy="360" r="13"/><circle cx="900" cy="205" r="13"/><circle cx="900" cy="515" r="13"/>
+ <circle cx="779" cy="275" r="9"/><circle cx="978" cy="277" r="9"/><circle cx="781" cy="445" r="9"/><circle cx="978" cy="445" r="9"/>
+</g>
+
+<!-- central molten-gold seal -->
+<ellipse cx="900" cy="360" rx="98" ry="74" fill="#131517" stroke="#5f431f" stroke-width="9"/>
+<path d="M844 360 L870 320 L900 337 L929 312 L959 360 L934 403 L900 385 L870 405Z" fill="url(#gold)" stroke="#704006" stroke-width="7" filter="url(#goldGlow)" opacity=".85"/>
+<circle cx="900" cy="360" r="24" fill="url(#core)" stroke="#0b5d70" stroke-width="6" filter="url(#cyanGlow)"/>
+
+<!-- approach lane from player side -->
+<path d="M0 309 Q210 286 416 309 Q522 322 623 349 L629 439 Q506 421 396 424 Q199 430 0 455Z" fill="#765143" opacity=".52"/>
+<path d="M0 340 Q211 318 415 342 Q522 352 620 379" fill="none" stroke="#b7794c" stroke-width="11" opacity=".32"/>
+
+<!-- mine fortress gate behind boss -->
+<g transform="translate(1090 252)">
+ <path d="M0 107Q59 17 118 107V232H0Z" fill="#0e1114" stroke="#07090a" stroke-width="11"/>
+ <path d="M21 109Q59 55 97 109V232H21Z" fill="#202428" stroke="#494d4f" stroke-width="7"/>
+ <path d="M-14 103H132M8 98V235M110 98V235" stroke="url(#iron)" stroke-width="15"/>
+ <path d="M1 103L59 28L117 103" fill="none" stroke="url(#iron)" stroke-width="15"/>
+ <path d="M48 114v99M70 114v99" stroke="#a96d23" stroke-width="8"/>
+</g>
+
+<!-- defensive buttresses / collision pillars -->
+<g fill="url(#iron)" stroke="#121518" stroke-width="9">
+ <path d="M594 125l57-27 52 24 25 55-27 48-55 17-51-29-17-47z"/>
+ <path d="M590 498l57-27 54 24 26 54-29 51-55 17-51-29-18-48z"/>
+</g>
+<g fill="none" stroke="url(#gold)" stroke-width="8" filter="url(#goldGlow)"><path d="M619 145l18 20-10 20 21 18"/><path d="M616 521l20 19-8 21 22 18"/></g>
+
+<!-- rails, chains, crates, slag -->
+<g stroke="#4c4d4a" stroke-width="5" opacity=".7"><path d="M136 568L467 615M139 590L470 637"/><g stroke-width="4"><path d="M184 575l-4 25M232 582l-4 25M281 589l-4 25M330 596l-4 25M379 603l-4 25M428 610l-4 25"/></g></g>
+<g stroke="#17191c" stroke-width="5" fill="none" opacity=".8"><path d="M320 0v120M344 0v120M320 66h24"/><path d="M978 0v120M1002 0v120M978 58h24"/></g>
+<g fill="#7b4b32" stroke="#39271f" stroke-width="4"><rect x="405" y="119" width="60" height="45" rx="4"/><rect x="450" y="136" width="53" height="39" rx="4"/><rect x="329" y="528" width="58" height="44" rx="4"/></g>
+<g fill="#6b4b3b" opacity=".9"><ellipse cx="243" cy="265" rx="13" ry="7"/><ellipse cx="487" cy="498" rx="12" ry="6"/><ellipse cx="570" cy="319" rx="8" ry="5"/><ellipse cx="1026" cy="573" rx="12" ry="6"/><ellipse cx="1177" cy="523" rx="10" ry="5"/></g>
+
+<!-- warning lamps -->
+<g fill="url(#heat)" filter="url(#goldGlow)"><circle cx="532" cy="164" r="8"/><circle cx="531" cy="544" r="8"/><circle cx="1197" cy="255" r="8"/></g>
+<rect x="7" y="7" width="1266" height="706" rx="18" fill="none" stroke="#090a0c" stroke-width="34" opacity=".31"/>
+</svg>
