@@ -49,9 +49,12 @@ func _run_test() -> void:
 	if StringName(events.get("active_event_id")) != &"dynamite_rain":
 		_fail("Starting Arena03 wave 2 must activate dynamite rain")
 		return
-	var telegraphs := main.arena_controller.current_arena.get_tree().get_nodes_in_group("arena_hazard_telegraph")
-	if telegraphs.is_empty():
+	if not events.has_method("get_active_telegraph_count") or int(events.call("get_active_telegraph_count")) < 1:
 		_fail("Arena event must immediately expose a readable hazard telegraph")
+		return
+	var telegraph := main.arena_controller.current_arena.find_child("ArenaHazardTelegraph",true,false) as Node2D
+	if telegraph == null or telegraph.get_node_or_null("DangerRing") == null:
+		_fail("Arena hazard telegraph needs an authored warning ring in the active arena")
 		return
 	events.call("stop_event")
 	if StringName(events.get("active_event_id")) != &"":
