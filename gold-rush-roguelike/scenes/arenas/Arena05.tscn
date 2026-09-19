@@ -1,48 +1,41 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/environment/CactusProp.tscn" id="1_cactus"]
 [ext_resource type="PackedScene" path="res://scenes/environment/RockClusterProp.tscn" id="2_rocks"]
 [ext_resource type="PackedScene" path="res://scenes/environment/MineCartProp.tscn" id="3_cart"]
 [ext_resource type="PackedScene" path="res://scenes/environment/GoldVeinProp.tscn" id="4_gold"]
+[ext_resource type="Texture2D" path="res://assets/environment/arena01_backdrop_v2.svg" id="5_backdrop"]
 
 [sub_resource type="RectangleShape2D" id="BuildShape"]
-size = Vector2(1120, 560)
+size = Vector2(1120,560)
 [sub_resource type="CircleShape2D" id="PillarShape"]
 radius = 42.0
 [sub_resource type="RectangleShape2D" id="GateShape"]
-size = Vector2(95, 155)
+size = Vector2(95,155)
 
 [node name="Arena05" type="Node2D"]
 y_sort_enabled = true
-
-[node name="Ground" type="Polygon2D" parent="."]
-z_index = -30
-polygon = PackedVector2Array(0,0,1280,0,1280,720,0,720)
-color = Color(0.28,0.14,0.10,1)
-[node name="CanyonFloor" type="Polygon2D" parent="."]
-z_index = -29
-polygon = PackedVector2Array(42,48,1238,48,1240,674,42,674)
-color = Color(0.61,0.36,0.19,1)
+[node name="IllustratedBackdrop" type="Sprite2D" parent="."]
+z_index = -50
+position = Vector2(640,360)
+texture = ExtResource("5_backdrop")
+modulate = Color(0.78,0.66,0.58,1)
 [node name="BossApproach" type="Polygon2D" parent="."]
-z_index = -28
+z_index = -20
 polygon = PackedVector2Array(72,310,480,286,612,304,760,235,1185,220,1210,500,770,482,610,418,480,440,75,414)
-color = Color(0.77,0.52,0.26,0.48)
+color = Color(1,0.80,0.38,0.13)
 [node name="BossRing" type="Polygon2D" parent="."]
-z_index = -27
+z_index = -19
 polygon = PackedVector2Array(725,120,1000,135,1160,360,1000,585,725,600,575,360)
-color = Color(0.46,0.26,0.14,0.92)
+color = Color(0.28,0.16,0.10,0.60)
 [node name="BossRingInner" type="Polygon2D" parent="."]
-z_index = -26
+z_index = -18
 polygon = PackedVector2Array(760,170,965,180,1105,360,965,540,760,550,625,360)
-color = Color(0.67,0.43,0.20,0.52)
-[node name="CanyonNorth" type="Polygon2D" parent="."]
-z_index = -25
-polygon = PackedVector2Array(0,0,1280,0,1280,51,1185,82,1060,50,930,80,810,48,685,78,555,51,430,83,300,50,170,84,55,58,0,90)
-color = Color(0.21,0.11,0.09,1)
-[node name="CanyonSouth" type="Polygon2D" parent="."]
-z_index = -25
-polygon = PackedVector2Array(0,626,72,670,200,641,330,682,460,648,590,690,720,651,850,688,985,650,1115,686,1210,650,1280,672,1280,720,0,720)
-color = Color(0.22,0.12,0.09,1)
+color = Color(0.89,0.59,0.22,0.18)
+[node name="BossRingGlow" type="Polygon2D" parent="."]
+z_index = -17
+polygon = PackedVector2Array(792,209,940,214,1064,360,940,506,792,511,674,360)
+color = Color(1,0.76,0.18,0.08)
 
 [node name="BuildZone" type="Area2D" parent="." groups=["build_zone"]]
 position = Vector2(640,360)
@@ -69,51 +62,62 @@ position = Vector2(900,360)
 position = Vector2(650,175)
 collision_layer = 1
 collision_mask = 1
-[node name="Visual" type="Polygon2D" parent="PillarNorth"]
-polygon = PackedVector2Array(-40,-8,-27,-39,18,-43,43,-15,36,34,-20,42,-44,10)
-color = Color(0.27,0.18,0.14,1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PillarNorth"]
 shape = SubResource("PillarShape")
+[node name="PillarNorthVisual" parent="." instance=ExtResource("2_rocks")]
+position = Vector2(650,175)
+scale = Vector2(0.82,0.82)
 [node name="PillarSouth" type="StaticBody2D" parent="."]
 position = Vector2(650,545)
 collision_layer = 1
 collision_mask = 1
-[node name="Visual" type="Polygon2D" parent="PillarSouth"]
-polygon = PackedVector2Array(-40,-8,-27,-39,18,-43,43,-15,36,34,-20,42,-44,10)
-color = Color(0.27,0.18,0.14,1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PillarSouth"]
 shape = SubResource("PillarShape")
+[node name="PillarSouthVisual" parent="." instance=ExtResource("2_rocks")]
+position = Vector2(650,545)
+scale = Vector2(0.82,0.82)
+
 [node name="MineGate" type="StaticBody2D" parent="."]
 position = Vector2(1100,360)
 collision_layer = 1
 collision_mask = 1
-[node name="Visual" type="Polygon2D" parent="MineGate"]
-polygon = PackedVector2Array(-48,-79,48,-79,48,79,25,79,25,-42,-25,-42,-25,79,-48,79)
-color = Color(0.24,0.17,0.13,1)
+[node name="GateBack" type="Polygon2D" parent="MineGate"]
+polygon = PackedVector2Array(-52,-82,52,-82,52,82,27,82,27,-45,-27,-45,-27,82,-52,82)
+color = Color(0.16,0.12,0.10,1)
+[node name="GateTimberLeft" type="Polygon2D" parent="MineGate"]
+polygon = PackedVector2Array(-58,-88,-38,-88,-38,86,-58,86)
+color = Color(0.46,0.25,0.14,1)
+[node name="GateTimberRight" type="Polygon2D" parent="MineGate"]
+polygon = PackedVector2Array(38,-88,58,-88,58,86,38,86)
+color = Color(0.46,0.25,0.14,1)
 [node name="GateTrim" type="Polygon2D" parent="MineGate"]
-polygon = PackedVector2Array(-55,-88,55,-88,55,-68,-55,-68)
-color = Color(0.54,0.32,0.16,1)
+polygon = PackedVector2Array(-64,-96,64,-96,64,-72,-64,-72)
+color = Color(0.64,0.36,0.17,1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MineGate"]
 shape = SubResource("GateShape")
 
 [node name="CactusWest" parent="." instance=ExtResource("1_cactus")]
 position = Vector2(150,165)
-scale = Vector2(0.58,0.58)
+scale = Vector2(0.68,0.68)
 [node name="RockDecorSW" parent="." instance=ExtResource("2_rocks")]
 position = Vector2(280,565)
-scale = Vector2(0.80,0.80)
+scale = Vector2(0.90,0.90)
 [node name="RockDecorNE" parent="." instance=ExtResource("2_rocks")]
 position = Vector2(980,125)
-scale = Vector2(0.66,0.66)
+scale = Vector2(0.76,0.76)
 [node name="MineCart" parent="." instance=ExtResource("3_cart")]
 position = Vector2(520,555)
 rotation = -0.12
+scale = Vector2(1.12,1.12)
 [node name="GoldVeinNorth" parent="." instance=ExtResource("4_gold")]
 position = Vector2(800,120)
-scale = Vector2(0.82,0.82)
+scale = Vector2(0.92,0.92)
 [node name="GoldVeinSouth" parent="." instance=ExtResource("4_gold")]
 position = Vector2(890,590)
-scale = Vector2(0.75,0.75)
+scale = Vector2(0.85,0.85)
 [node name="GoldVeinGate" parent="." instance=ExtResource("4_gold")]
 position = Vector2(1135,470)
-scale = Vector2(0.55,0.55)
+scale = Vector2(0.65,0.65)
+[node name="GoldVeinGateTop" parent="." instance=ExtResource("4_gold")]
+position = Vector2(1110,220)
+scale = Vector2(0.52,0.52)
