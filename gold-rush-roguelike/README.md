@@ -84,17 +84,18 @@ There is no permanent metaprogression in this vertical slice.
 
 ## Visual pipeline
 
-The supplied JPEG concept sheets are the visual direction for the game. The currently integrated runtime atlases are clean, transparent **SVG game assets redrawn from those references** so Godot can import them reliably and the repository does not depend on white-background concept-sheet crops.
+The visual-overhaul runtime now uses a crisp 2.5D western/mining presentation with dark silhouettes, warm sandstone/ochre environments, cyan energy accents, orange danger telegraphs, layered contact shadows and scene-editable props.
 
-Current runtime art:
+Current production art includes:
 
-- `assets/sprites/player/prospector.svg`
-- `assets/sprites/enemies/enemies.svg`
-- `assets/sprites/enemies/boss_views.svg`
-- `assets/sprites/defenses/defenses.svg`
-- `assets/environment/desert_props.svg`
+- detailed Prospector reference-frame animation set under `assets/sprites/player/reference_frames/`
+- `assets/sprites/enemies/enemies_frontier_v6.svg` plus the refined Frontier Juggernaut boss presentation
+- `assets/sprites/defenses/defenses_frontier_v6.svg`
+- `assets/vfx/combat_feedback_v6.svg` for player/boss bolts, hit impacts, explosions and gold pickups
+- distinct Arena01-Arena05 environment backdrops, including `arena05_molten_foundry_v6.svg`
+- scene-editable foundry, mining, cactus, rock, rail, cart and gold-vein landmarks rather than a single baked gameplay screenshot
 
-Environment dressing remains scene-editable: cactus, rock cluster, mine cart, and gold-vein props are individual `.tscn` scenes placed in each arena rather than baked into a screenshot background.
+CI performs visual regression checks in addition to gameplay tests. Successful runs capture dense Arena01 combat, Arena05 laser telegraph, Arena05 slam telegraph and the upgrade-selection UI before exporting Windows x86_64. The slam benchmark specifically guards against warning VFX washing out the boss silhouette.
 
 The optional concept-sheet preprocessing utility remains available for future high-resolution replacement art:
 
@@ -105,7 +106,7 @@ python tools/slice_reference_sheets.py \
   --prefix example
 ```
 
-It removes only border-connected near-background pixels and normalizes extracted sprites to a shared bottom-center anchor. Any regenerated strip still needs visual QA before replacing the current runtime atlas.
+It removes only border-connected near-background pixels and normalizes extracted sprites to a shared bottom-center anchor. Any regenerated strip still needs visual QA before replacing production art.
 
 ## Automated tests and export
 
