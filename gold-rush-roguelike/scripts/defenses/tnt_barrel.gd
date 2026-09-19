@@ -15,13 +15,14 @@ var _visual_base_scale := Vector2.ONE
 
 @onready var trigger_area: Area2D = $TriggerArea
 @onready var blast_area: Area2D = $BlastArea
-@onready var visual: Sprite2D = $Visual
+@onready var visual: AnimatedSprite2D = $Visual
 
 
 func _ready() -> void:
 	super()
 	_arm_remaining = arm_delay
 	_visual_base_scale = visual.scale
+	visual.play(&"prearm")
 	trigger_area.area_entered.connect(_on_trigger_area_entered)
 
 
@@ -33,6 +34,7 @@ func _physics_process(delta: float) -> void:
 		_arm_remaining = maxf(_arm_remaining - delta, 0.0)
 		if _arm_remaining <= 0.0:
 			_armed = true
+			visual.play(&"armed")
 	_update_visual()
 
 
@@ -43,13 +45,17 @@ func trigger() -> void:
 
 func _update_visual() -> void:
 	if not _armed:
-		var prearm := 1.0 + sin(_visual_time * 5.0) * 0.015
+		if visual.animation != &"prearm":
+			visual.play(&"prearm")
+		var prearm := 1.0 + sin(_visual_time * 5.0) * 0.01
 		visual.scale = _visual_base_scale * prearm
 		visual.modulate = Color.WHITE
 		return
+	if visual.animation != &"armed":
+		visual.play(&"armed")
 	var pulse := 0.5 + 0.5 * sin(_visual_time * 12.0)
-	visual.scale = _visual_base_scale * (1.0 + pulse * 0.08)
-	visual.modulate = Color(1.0, 0.72 + pulse * 0.28, 0.52 + pulse * 0.38, 1.0)
+	visual.scale = _visual_base_scale * (1.0 + pulse * 0.045)
+	visual.modulate = Color(1.0, 0.78 + pulse * 0.22, 0.60 + pulse * 0.30, 1.0)
 
 
 func _on_trigger_area_entered(area: Area2D) -> void:
