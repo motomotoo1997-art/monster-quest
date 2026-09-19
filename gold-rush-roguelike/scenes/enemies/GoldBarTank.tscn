@@ -48,6 +48,7 @@ scale = Vector2(0.60,0.60)
 [node name="Muzzle" type="Marker2D" parent="."]
 position = Vector2(50,-5)
 [node name="ChargeTelegraph" type="Node2D" parent="."]
+position = Vector2(50,-5)
 visible = false
 [node name="Beam" type="Polygon2D" parent="ChargeTelegraph"]
 position = Vector2(0,0)
