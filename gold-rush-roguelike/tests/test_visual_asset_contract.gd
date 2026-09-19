@@ -4,12 +4,13 @@ const EXPECTED := [
 	{"scene":"res://scenes/player/Prospector.tscn","visual":"BodyVisual","min_width":300.0,"min_scale":0.40},
 	{"scene":"res://scenes/enemies/GoldHopper.tscn","visual":"AnimatedSprite2D","min_width":300.0,"min_scale":0.30},
 	{"scene":"res://scenes/enemies/GoldCoinSentinel.tscn","visual":"AnimatedSprite2D","min_width":300.0,"min_scale":0.34},
-	{"scene":"res://scenes/enemies/FlyingGoldDisc.tscn","visual":"AnimatedSprite2D","min_width":300.0,"min_scale":0.38},
+	{"scene":"res://scenes/enemies/FlyingGoldDisc.tscn","visual":"AnimatedSprite2D","min_width":300.0,"min_scale":0.34,"max_scale":0.40},
 	{"scene":"res://scenes/enemies/MoltenGoldSlime.tscn","visual":"AnimatedSprite2D","min_width":300.0,"min_scale":0.34},
 	{"scene":"res://scenes/enemies/GoldBarTank.tscn","visual":"AnimatedSprite2D","min_width":450.0,"min_scale":0.58},
 	{"scene":"res://scenes/defenses/MagneticTurret.tscn","visual":"Visual","min_width":400.0,"min_scale":0.34},
 	{"scene":"res://scenes/defenses/CactusSentry.tscn","visual":"Visual","min_width":400.0,"min_scale":0.32},
 	{"scene":"res://scenes/defenses/TNTBarrel.tscn","visual":"Visual","min_width":400.0,"min_scale":0.32},
+	{"scene":"res://scenes/objectives/GoldCore.tscn","visual":"Visual","min_width":256.0,"min_scale":0.25,"max_scale":0.55},
 ]
 
 func _init() -> void:
@@ -47,6 +48,9 @@ func _run_test() -> void:
 		if absf(visual.scale.x) < float(entry.min_scale):
 			_fail("Visual is too small/readability regression: %s" % entry.scene)
 			return
+		if entry.has("max_scale") and absf(visual.scale.x) > float(entry.max_scale):
+			_fail("Visual is too large/composition regression: %s" % entry.scene)
+			return
 		if instance is EnemyBase and instance.z_index < 3:
 			_fail("Enemy readability z-index regressed: %s" % entry.scene)
 			return
@@ -70,7 +74,7 @@ func _run_test() -> void:
 	arena.queue_free()
 	await process_frame
 
-	print("PASS: reference-matched actor, defense and Arena01 atmosphere visuals remain readable")
+	print("PASS: reference-matched actor, defense, objective and Arena01 atmosphere visuals remain readable")
 	quit(0)
 
 func _fail(message: String) -> void:
