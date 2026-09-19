@@ -34,11 +34,12 @@ func _run_test() -> void:
 		if drop.gold_amount != enemy.gold_value:
 			_fail("Gold drop must match enemy gold_value: %s" % scene_path)
 			return
+		var expected_gold := drop.gold_amount
 		enemy.health_component.damage(enemy.health_component.max_health)
 		await process_frame
 		var found_pickup := false
 		for child in root.get_children():
-			if child is GoldPickup and (child as GoldPickup).amount == drop.gold_amount:
+			if child is GoldPickup and (child as GoldPickup).amount == expected_gold:
 				found_pickup = true
 				child.queue_free()
 				break
