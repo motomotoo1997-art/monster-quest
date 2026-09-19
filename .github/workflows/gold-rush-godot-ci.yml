@@ -48,6 +48,9 @@ jobs:
       - name: Run flow and boss state
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_run_flow.gd
 
+      - name: Gold Bar Tank laser regression
+        run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_boss_laser.gd
+
       - name: Main scene smoke test
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/smoke_main_scene.gd
 
