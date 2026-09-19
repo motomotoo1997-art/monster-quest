@@ -17,6 +17,18 @@ func _run_test() -> void:
 	root.add_child(boss)
 	await process_frame
 
+	var boss_texture := boss.visual_sprite.sprite_frames.get_frame_texture(&"idle", 0)
+	if not _check(boss_texture is AtlasTexture, "Gold Bar Tank presentation must be atlas-backed"):
+		return
+	var boss_atlas := (boss_texture as AtlasTexture).atlas
+	if not _check(boss_atlas != null and boss_atlas.resource_path.ends_with("boss_reference_v5.svg"), "Gold Bar Tank must use the new high-detail reference atlas"):
+		return
+	if not _check(boss.visual_sprite.sprite_frames.has_animation(&"death"), "Gold Bar Tank must expose a disintegration death presentation"):
+		return
+	var disintegration_vfx := boss.get_node_or_null("DisintegrationVFX") as Node2D
+	if not _check(disintegration_vfx != null, "Gold Bar Tank must include authored disintegration VFX"):
+		return
+
 	var charge_light := boss.get_node_or_null("ChargeTelegraph/ChargeLight") as PointLight2D
 	if not _check(charge_light != null, "Laser telegraph must include a local PointLight2D"):
 		return
