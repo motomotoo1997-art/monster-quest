@@ -1,6 +1,6 @@
 extends SceneTree
 
-const GROUND_SORT_Z := 5
+const GROUND_SORT_Z := 0
 const GROUND_SORT_SCENES := [
 	"res://scenes/enemies/GoldHopper.tscn",
 	"res://scenes/enemies/GoldCoinSentinel.tscn",
@@ -50,10 +50,26 @@ func _run_test() -> void:
 		if ground_item == null:
 			_fail("Ground-sort scene root must be Node2D: %s" % scene_path)
 			return
+		root.add_child(ground_item)
+		await process_frame
 		if ground_item.z_index != GROUND_SORT_Z:
 			_fail("Ground-sort z-index mismatch (%d): %s" % [ground_item.z_index, scene_path])
 			return
-		ground_item.free()
+		ground_item.queue_free()
+		await process_frame
+
+	var flying_packed := load("res://scenes/enemies/FlyingGoldDisc.tscn") as PackedScene
+	var flying := flying_packed.instantiate() as Node2D if flying_packed != null else null
+	if flying == null:
+		_fail("Flying Gold Disc scene must load")
+		return
+	root.add_child(flying)
+	await process_frame
+	if flying.z_index <= GROUND_SORT_Z:
+		_fail("Flying Gold Disc must remain on a dedicated airborne render layer")
+		return
+	flying.queue_free()
+	await process_frame
 
 	if not arena_controller.load_arena(1):
 		_fail("Arena01 must load")
