@@ -50,6 +50,20 @@ func _tick_behavior(delta: float) -> void:
 		_burst_timer = 0.0
 
 
+func _update_visual(delta: float) -> void:
+	if visual_sprite == null:
+		return
+	_visual_time += delta
+	if absf(velocity.x) > 2.0:
+		visual_sprite.flip_h = velocity.x < 0.0
+	var hover := sin(_visual_time * 5.3 + float(get_instance_id() % 7))
+	visual_sprite.position = _visual_base_position + Vector2(0.0, hover * 5.5)
+	var tilt := clampf(velocity.x / maxf(move_speed, 1.0), -1.0, 1.0)
+	visual_sprite.rotation = tilt * 0.08
+	var pulse := 1.0 + sin(_visual_time * 7.0) * 0.025
+	visual_sprite.scale = _visual_base_scale * pulse
+
+
 func _fire_at(target: Node2D) -> void:
 	if target == null or not is_instance_valid(target):
 		return
