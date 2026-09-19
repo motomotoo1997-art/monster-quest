@@ -137,6 +137,7 @@ func _start_boss_encounter() -> void:
 	boss.set_targets(player, core)
 	boss.boss_died.connect(_on_boss_died)
 	boss.slam_impact.connect(_on_boss_slam)
+	boss.laser_fired.connect(_on_boss_laser)
 	_bind_enemy_feedback(boss)
 	_active_boss = boss
 	hud.show_boss(boss.health_component)
@@ -216,6 +217,13 @@ func _on_tnt_exploded(world_position: Vector2) -> void:
 func _on_boss_slam(world_position: Vector2) -> void:
 	_spawn_vfx(explosion_scene, world_position)
 	camera_effects.shake(10.0, 0.38)
+
+
+func _on_boss_laser(origin: Vector2, direction: Vector2) -> void:
+	var vfx := _spawn_vfx(muzzle_flash_scene, origin)
+	if vfx != null:
+		vfx.rotation = direction.angle()
+	camera_effects.shake(5.5, 0.18)
 
 
 func _spawn_vfx(scene: PackedScene, world_position: Vector2) -> Node2D:
