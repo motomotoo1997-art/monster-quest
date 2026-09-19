@@ -73,6 +73,6 @@ func _on_run_won() -> void:
 
 
 func _fail(message: String) -> void:
-	get_tree().paused = false
+	paused = false
 	push_error("FAIL: " + message)
 	quit(1)
