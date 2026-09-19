@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1152" height="384" viewBox="0 0 1152 384">
+<defs>
+ <linearGradient id="coat" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#815033"/><stop offset=".5" stop-color="#5c3425"/><stop offset="1" stop-color="#2b1916"/></linearGradient>
+ <linearGradient id="leather" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b86f37"/><stop offset="1" stop-color="#5a2c1b"/></linearGradient>
+ <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#9eb1b8"/><stop offset=".45" stop-color="#40515a"/><stop offset="1" stop-color="#1b272e"/></linearGradient>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff5a8"/><stop offset=".4" stop-color="#e8b338"/><stop offset="1" stop-color="#805012"/></linearGradient>
+ <radialGradient id="cyan"><stop stop-color="#eaffff"/><stop offset=".3" stop-color="#63ecff"/><stop offset="1" stop-color="#14728b"/></radialGradient>
+ <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ <g id="base">
+  <ellipse cx="192" cy="334" rx="62" ry="14" fill="#1f120c" opacity=".28"/>
+  <path d="M147 303 L154 221 Q156 190 176 177 L210 177 Q232 189 234 221 L241 303 Q216 321 194 317 Q169 322 147 303Z" fill="url(#coat)" stroke="#241713" stroke-width="7"/>
+  <path d="M163 224 L145 294 L165 300 L181 235Z" fill="#3a211b" opacity=".85"/><path d="M225 225 L244 294 L224 300 L208 236Z" fill="#3a211b" opacity=".85"/>
+  <path d="M160 307 L151 337 L177 340 L187 309Z" fill="#402b23" stroke="#201713" stroke-width="5"/><path d="M221 307 L229 337 L203 340 L193 309Z" fill="#402b23" stroke="#201713" stroke-width="5"/>
+  <path d="M149 338 q17 9 34 0 l-2 12 h-42zM205 338 q17 9 34 0 l10 12 h-42z" fill="#30231f" stroke="#18120f" stroke-width="4"/>
+  <rect x="151" y="199" width="83" height="24" rx="8" fill="url(#leather)" stroke="#352016" stroke-width="5"/>
+  <circle cx="193" cy="211" r="9" fill="url(#gold)" stroke="#5b3a13" stroke-width="3"/><path d="M193 201l3 7h8l-6 5 2 8-7-4-7 4 2-8-6-5h8z" fill="#fff1a3"/>
+  <path d="M147 206 Q132 191 139 163 L153 151 Q173 170 169 204Z" fill="#4d3024" stroke="#261913" stroke-width="6"/>
+  <path d="M238 207 Q253 190 247 163 L233 151 Q213 170 216 204Z" fill="#4d3024" stroke="#261913" stroke-width="6"/>
+  <path d="M161 161 Q159 126 193 115 Q227 126 225 161 L219 185 Q194 211 166 184Z" fill="#c78b60" stroke="#2b1b15" stroke-width="7"/>
+  <path d="M157 155 Q166 205 193 216 Q224 203 230 155 Q222 176 214 184 L208 203 L194 214 L179 203 L173 184 Q164 176 157 155Z" fill="#e8e0cc" stroke="#4b4037" stroke-width="6"/>
+  <path d="M169 160 Q193 178 218 159 L214 183 Q192 195 173 181Z" fill="#d3c9b7"/>
+  <path d="M139 128 Q192 84 250 127 L241 148 L145 148Z" fill="url(#leather)" stroke="#2f1e16" stroke-width="7"/><path d="M158 111 Q194 89 229 113 L225 132 L154 132Z" fill="#6a3b24" stroke="#2b1c15" stroke-width="5"/>
+  <path d="M158 143 Q193 132 226 143" fill="none" stroke="#2d211b" stroke-width="7"/>
+  <circle cx="176" cy="151" r="14" fill="#26323a" stroke="#171d21" stroke-width="5"/><circle cx="211" cy="151" r="14" fill="#26323a" stroke="#171d21" stroke-width="5"/><circle cx="176" cy="151" r="8" fill="url(#cyan)" filter="url(#glow)"/><circle cx="211" cy="151" r="8" fill="url(#cyan)" filter="url(#glow)"/><path d="M190 151h7" stroke="#1a2024" stroke-width="5"/>
+  <path d="M137 183 L116 153 L124 145 L151 172" fill="none" stroke="#3c2b24" stroke-width="7"/><path d="M119 150 L104 121" stroke="#6d5034" stroke-width="9"/><path d="M98 112 l13 4 8 13-11 8-14-8z" fill="#8a6948" stroke="#33261d" stroke-width="4"/>
+  <path d="M232 188 L261 174 L266 224 L237 232Z" fill="#49362a" stroke="#241b16" stroke-width="5"/><path d="M244 185 l20 15" stroke="#a66d3d" stroke-width="4"/>
+  <g fill="url(#gold)"><circle cx="171" cy="190" r="4"/><circle cx="184" cy="201" r="3"/><circle cx="207" cy="190" r="4"/></g>
+ </g>
+ <g id="rifle">
+  <path d="M212 219 L286 195 L310 202 L286 218 L224 238Z" fill="url(#metal)" stroke="#172128" stroke-width="6"/>
+  <path d="M278 195 L318 184 L327 193 L303 207Z" fill="#243740" stroke="#111a1f" stroke-width="5"/>
+  <rect x="241" y="204" width="39" height="14" rx="5" fill="#1c2d36"/><rect x="249" y="207" width="25" height="7" rx="3" fill="#54e6ff" filter="url(#glow)"/>
+  <path d="M237 230 L251 257 L269 253 L260 222Z" fill="#5e3825" stroke="#2b1b15" stroke-width="5"/>
+  <circle cx="318" cy="191" r="7" fill="url(#cyan)" filter="url(#glow)"/>
+ </g>
+</defs>
+<!-- idle with pickaxe -->
+<g transform="translate(0 0)"><use href="#base"/><path d="M140 213 Q117 225 111 256" fill="none" stroke="#c78b60" stroke-width="15" stroke-linecap="round"/><path d="M111 252 L82 177" stroke="#6e4c32" stroke-width="9"/><path d="M56 171 Q82 156 108 171" fill="none" stroke="#78858b" stroke-width="12" stroke-linecap="round"/><path d="M221 215 Q251 229 259 258" fill="none" stroke="#c78b60" stroke-width="15" stroke-linecap="round"/><circle cx="260" cy="260" r="8" fill="#70442d"/></g>
+<!-- aim -->
+<g transform="translate(384 0)"><use href="#base"/><path d="M153 216 Q177 230 218 222" fill="none" stroke="#c78b60" stroke-width="15" stroke-linecap="round"/><path d="M226 211 Q246 194 267 204" fill="none" stroke="#c78b60" stroke-width="15" stroke-linecap="round"/><use href="#rifle"/><path d="M318 190 l31 -11" stroke="#6deeff" stroke-width="5" opacity=".7" filter="url(#glow)"/></g>
+<!-- dynamite -->
+<g transform="translate(768 0)"><use href="#base"/><path d="M152 216 Q126 196 115 172" fill="none" stroke="#c78b60" stroke-width="15" stroke-linecap="round"/><path d="M115 172 Q105 148 126 134" fill="none" stroke="#c78b60" stroke-width="15" stroke-linecap="round"/><rect x="117" y="99" width="22" height="53" rx="6" fill="#b72f24" stroke="#551914" stroke-width="5"/><path d="M128 99 Q132 82 146 84" fill="none" stroke="#514232" stroke-width="4"/><circle cx="149" cy="83" r="8" fill="#ffd558" filter="url(#glow)"/><path d="M224 219 Q252 231 260 261" fill="none" stroke="#c78b60" stroke-width="15" stroke-linecap="round"/></g>
+</svg>
