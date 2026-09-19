@@ -4,6 +4,11 @@ var _all_arenas_completed := false
 
 
 func _init() -> void:
+	# Run after SceneTree initialization so @onready members on instantiated scenes are valid.
+	call_deferred("_run_tests")
+
+
+func _run_tests() -> void:
 	if not _test_enemy_target_fallback():
 		return
 	if not _test_arena_progression():
@@ -76,6 +81,8 @@ func _test_boss_phase_transition() -> bool:
 	if not _check(boss != null, "GoldBarTank scene must instantiate as GoldBarTank"):
 		return false
 	root.add_child(boss)
+	if not _check(boss.health_component != null, "Boss HealthComponent must be ready after entering the tree"):
+		return false
 	if not _check(boss.phase == 1, "Boss must start in phase one"):
 		return false
 	if not _check(boss.state >= GoldBarTank.State.INTRO and boss.state <= GoldBarTank.State.DEAD,
