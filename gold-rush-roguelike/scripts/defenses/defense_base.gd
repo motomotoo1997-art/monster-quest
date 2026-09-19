@@ -10,6 +10,9 @@ signal defense_destroyed(defense: DefenseBase)
 
 
 func _ready() -> void:
+	# Defenses are ground objects and must share Z=0 with props/actors so the
+	# arena Y-sort can place them correctly by their feet position.
+	z_index = 0
 	add_to_group("defenses")
 	health_component.died.connect(_on_health_died)
 
