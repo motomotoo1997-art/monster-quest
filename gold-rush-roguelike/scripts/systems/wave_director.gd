@@ -42,12 +42,12 @@ func start_wave(definition: Array[Dictionary]) -> void:
 	stop_spawning()
 	_spawn_queue.clear()
 	for entry in definition:
-		var scene := entry.get("scene") as PackedScene
-		var count := maxi(int(entry.get("count", 0)), 0)
-		var interval := maxf(float(entry.get("interval", 0.4)), 0.02)
+		var scene: PackedScene = entry.get("scene") as PackedScene
+		var count: int = maxi(int(entry.get("count", 0)), 0)
+		var interval: float = maxf(float(entry.get("interval", 0.4)), 0.02)
 		if scene == null or count <= 0:
 			continue
-		for _i in range(count):
+		for _i in count:
 			_spawn_queue.append({"scene": scene, "interval": interval})
 	wave_number += 1
 	_wave_active = true
@@ -76,19 +76,22 @@ func _spawn_next() -> void:
 		_spawning_enabled = false
 		_check_wave_complete()
 		return
-	var entry := _spawn_queue.pop_front()
-	var scene := entry.get("scene") as PackedScene
+	var entry: Dictionary = _spawn_queue.pop_front()
+	var scene: PackedScene = entry.get("scene") as PackedScene
 	_spawn_timer = float(entry.get("interval", 0.4))
 	if scene == null or arena_controller == null or arena_controller.current_arena == null:
 		return
-	var markers := arena_controller.get_markers(&"enemy_spawn")
+	var markers: Array[Node] = arena_controller.get_markers(&"enemy_spawn")
 	if markers.is_empty():
 		return
 	var enemy := scene.instantiate() as EnemyBase
 	if enemy == null:
 		return
 	arena_controller.current_arena.add_child(enemy)
-	var marker := markers[randi() % markers.size()]
+	var marker := markers[randi() % markers.size()] as Node2D
+	if marker == null:
+		enemy.queue_free()
+		return
 	enemy.global_position = marker.global_position
 	enemy.set_targets(player_target, core_target)
 	enemy.enemy_died.connect(_on_enemy_died)
@@ -111,7 +114,7 @@ func _spawn_gold(world_position: Vector2, amount: int) -> void:
 	var pickup := gold_pickup_scene.instantiate() as GoldPickup
 	if pickup == null:
 		return
-	var target_parent := arena_controller.current_arena if arena_controller != null else get_tree().current_scene
+	var target_parent: Node = arena_controller.current_arena if arena_controller != null else get_tree().current_scene
 	if target_parent == null:
 		pickup.free()
 		return
