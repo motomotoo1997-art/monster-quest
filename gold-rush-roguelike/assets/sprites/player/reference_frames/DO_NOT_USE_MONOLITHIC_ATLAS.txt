@@ -1,0 +1,1 @@
+Do not reference prospector_reference_v4.png/webp in scenes until monolithic binary transport is replaced. Use verified split PNG frames instead.
