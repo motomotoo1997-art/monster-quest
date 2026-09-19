@@ -2,9 +2,9 @@ extends SceneTree
 
 const EXPECTED := [
 	{"scene":"res://scenes/player/Prospector.tscn","visual":"BodyVisual","min_width":300.0,"min_scale":0.40},
-	{"scene":"res://scenes/enemies/GoldHopper.tscn","visual":"AnimatedSprite2D","min_width":300.0,"min_scale":0.30,"max_scale":0.36},
-	{"scene":"res://scenes/enemies/GoldCoinSentinel.tscn","visual":"AnimatedSprite2D","min_width":300.0,"min_scale":0.34,"max_scale":0.38},
-	{"scene":"res://scenes/enemies/FlyingGoldDisc.tscn","visual":"AnimatedSprite2D","min_width":300.0,"min_scale":0.34,"max_scale":0.40},
+	{"scene":"res://scenes/enemies/GoldHopper.tscn","visual":"AnimatedSprite2D","min_width":300.0,"min_scale":0.30,"max_scale":0.36,"min_separation":36.0},
+	{"scene":"res://scenes/enemies/GoldCoinSentinel.tscn","visual":"AnimatedSprite2D","min_width":300.0,"min_scale":0.34,"max_scale":0.38,"min_separation":42.0},
+	{"scene":"res://scenes/enemies/FlyingGoldDisc.tscn","visual":"AnimatedSprite2D","min_width":300.0,"min_scale":0.28,"max_scale":0.32},
 	{"scene":"res://scenes/enemies/MoltenGoldSlime.tscn","visual":"AnimatedSprite2D","min_width":300.0,"min_scale":0.34,"max_scale":0.40},
 	{"scene":"res://scenes/enemies/GoldBarTank.tscn","visual":"AnimatedSprite2D","min_width":450.0,"min_scale":0.58},
 	{"scene":"res://scenes/defenses/MagneticTurret.tscn","visual":"Visual","min_width":400.0,"min_scale":0.34},
@@ -58,11 +58,38 @@ func _run_test() -> void:
 		if entry.has("max_scale") and absf(visual.scale.x) > float(entry.max_scale):
 			_fail("Visual is too large/composition regression: %s" % entry.scene)
 			return
-		if instance is EnemyBase and instance.z_index < 3:
-			_fail("Enemy readability z-index regressed: %s" % entry.scene)
-			return
+		if instance is EnemyBase:
+			if instance.z_index < 3:
+				_fail("Enemy readability z-index regressed: %s" % entry.scene)
+				return
+			if entry.has("min_separation") and instance.separation_radius < float(entry.min_separation):
+				_fail("Enemy crowd separation regressed: %s" % entry.scene)
+				return
 		instance.queue_free()
 		await process_frame
+
+	var core_packed := load("res://scenes/objectives/GoldCore.tscn") as PackedScene
+	if core_packed == null:
+		_fail("GoldCore scene must load")
+		return
+	var core := core_packed.instantiate()
+	root.add_child(core)
+	await process_frame
+	var energy_rings := core.get_node_or_null("EnergyRings") as Node2D
+	if energy_rings == null or energy_rings.get_child_count() < 2:
+		_fail("GoldCore must have layered animated containment rings")
+		return
+	if not core.has_method("get_visual_pulse_phase"):
+		_fail("GoldCore must expose deterministic pulse state for animation regression")
+		return
+	var pulse_a: float = core.get_visual_pulse_phase()
+	await create_timer(0.12).timeout
+	var pulse_b: float = core.get_visual_pulse_phase()
+	if is_equal_approx(pulse_a, pulse_b):
+		_fail("GoldCore containment energy must animate over time")
+		return
+	core.queue_free()
+	await process_frame
 
 	var arena_packed := load("res://scenes/arenas/Arena01.tscn") as PackedScene
 	if arena_packed == null:
@@ -127,7 +154,7 @@ func _run_test() -> void:
 	hud.queue_free()
 	await process_frame
 
-	print("PASS: actors, all unique arena art, atmosphere and compact HUD remain readable")
+	print("PASS: actors, containment animation, crowd spacing, arena art, atmosphere and compact HUD remain readable")
 	quit(0)
 
 func _fail(message: String) -> void:
