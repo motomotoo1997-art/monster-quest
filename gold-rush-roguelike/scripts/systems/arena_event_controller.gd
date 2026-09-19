@@ -19,6 +19,7 @@ var _pending_strikes: Array[Dictionary] = []
 func _process(delta: float) -> void:
 	if active_event_id == &"":
 		return
+	_resolve_arena_controller()
 	if arena_controller == null or arena_controller.current_arena == null:
 		stop_event()
 		return
@@ -71,6 +72,7 @@ func get_active_telegraph_count() -> int:
 
 func start_wave_event(arena_index: int, wave_number: int) -> void:
 	stop_event()
+	_resolve_arena_controller()
 	_active_config = get_event_config(arena_index,wave_number)
 	if _active_config.is_empty():
 		return
@@ -202,6 +204,13 @@ func _impact_strike(strike: Dictionary) -> void:
 			if active_event_id == &"molten_burst":
 				explosion.modulate = Color(1.0,0.72,0.38,1.0)
 	hazard_impacted.emit(world_position,active_event_id)
+
+func _resolve_arena_controller() -> void:
+	if arena_controller != null and is_instance_valid(arena_controller):
+		return
+	arena_controller = get_node_or_null(arena_controller_path) as ArenaController
+	if arena_controller == null and get_parent() != null:
+		arena_controller = get_parent().get_node_or_null("ArenaController") as ArenaController
 
 func _resolve_player() -> Prospector:
 	if arena_controller == null or arena_controller.current_arena == null:
