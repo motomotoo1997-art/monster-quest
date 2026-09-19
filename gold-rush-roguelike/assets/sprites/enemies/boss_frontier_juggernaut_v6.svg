@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2048" height="384" viewBox="0 0 2048 384">
+<defs>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff09a"/><stop offset=".22" stop-color="#ffc928"/><stop offset=".58" stop-color="#c97a0b"/><stop offset="1" stop-color="#6f370a"/></linearGradient>
+ <linearGradient id="darkGold" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#d7961d"/><stop offset="1" stop-color="#74400d"/></linearGradient>
+ <linearGradient id="steel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#859398"/><stop offset=".5" stop-color="#3d4a4d"/><stop offset="1" stop-color="#182124"/></linearGradient>
+ <radialGradient id="cyan"><stop stop-color="#fff"/><stop offset=".22" stop-color="#a6ffff"/><stop offset=".55" stop-color="#28dff4"/><stop offset="1" stop-color="#04728b"/></radialGradient>
+ <radialGradient id="flash"><stop stop-color="#fff"/><stop offset=".16" stop-color="#fff4b0"/><stop offset=".45" stop-color="#ffb51e" stop-opacity=".92"/><stop offset="1" stop-color="#ff6a00" stop-opacity="0"/></radialGradient>
+ <filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="8"/></filter>
+ <g id="leg">
+  <circle cx="0" cy="0" r="16" fill="url(#steel)" stroke="#231912" stroke-width="6"/><circle r="7" fill="#d38b16" stroke="#38230f" stroke-width="3"/>
+  <path d="M-12 9L-24 46-15 72 13 72 25 48 14 11Z" fill="url(#darkGold)" stroke="#2b1c10" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M-17 30L15 22 20 45-20 52Z" fill="url(#gold)" stroke="#6e3a0b" stroke-width="4"/>
+  <path d="M-17 70H19L31 84 24 93H-26L-34 85Z" fill="#303737" stroke="#1f1712" stroke-width="6"/><path d="M-11 78H18" stroke="#9da7a4" stroke-width="4"/>
+ </g>
+ <g id="cannon">
+  <circle cx="0" cy="0" r="22" fill="#344548" stroke="#211812" stroke-width="7"/>
+  <path d="M8-20H104Q119-20 119-5V5Q119 20 104 20H8Z" fill="url(#steel)" stroke="#241a13" stroke-width="7"/>
+  <path d="M42-15H95M42-5H101M42 5H101M42 15H95" stroke="#c88a22" stroke-width="4"/>
+  <rect x="104" y="-28" width="62" height="56" rx="8" fill="url(#darkGold)" stroke="#261a11" stroke-width="7"/>
+  <rect x="119" y="-18" width="32" height="36" rx="5" fill="#294448" stroke="#241a13" stroke-width="5"/><rect x="135" y="-13" width="11" height="26" rx="4" fill="url(#cyan)"/>
+ </g>
+ <g id="body">
+  <ellipse cx="0" cy="92" rx="142" ry="21" fill="#251812" opacity=".32"/>
+  <path d="M-132-36L-92-72-30-86 40-82 98-61 132-24 128 48 91 73-90 73-129 48Z" fill="#74400d" stroke="#281a10" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M-113-26L-80-55-24-67 34-64 82-48 111-18 108 39 78 56-77 56-109 38Z" fill="url(#darkGold)" stroke="#5d330b" stroke-width="4"/>
+  <path d="M-95-52L-63-82-18-96 34-92 70-75 89-51Z" fill="url(#gold)" stroke="#3b230d" stroke-width="7"/>
+  <path d="M-76-70L-45-86M-29-87L0-94M20-90L51-78" stroke="#fff0a0" stroke-width="4" opacity=".75"/>
+  <rect x="-101" y="-26" width="61" height="54" rx="7" fill="url(#gold)" stroke="#3d230b" stroke-width="6"/>
+  <rect x="-31" y="-31" width="62" height="60" rx="7" fill="url(#gold)" stroke="#3d230b" stroke-width="6"/>
+  <rect x="40" y="-26" width="61" height="54" rx="7" fill="url(#gold)" stroke="#3d230b" stroke-width="6"/>
+  <path d="M-90-11h38M-20-15h40M51-11h38" stroke="#9b5a0a" stroke-width="3"/>
+  <circle cx="0" cy="39" r="24" fill="#263b3e" stroke="#261a11" stroke-width="7"/><circle cx="0" cy="39" r="14" fill="url(#cyan)" stroke="#07596c" stroke-width="4"/>
+  <circle cx="-79" cy="48" r="8" fill="url(#cyan)" stroke="#243235" stroke-width="4"/><circle cx="79" cy="48" r="8" fill="url(#cyan)" stroke="#243235" stroke-width="4"/>
+  <path d="M-116 12H116" stroke="#34271c" stroke-width="8" opacity=".9"/>
+ </g>
+ <g id="walker">
+  <use href="#body"/>
+  <g transform="translate(-102,54) rotate(12)"><use href="#leg"/></g><g transform="translate(-42,62) rotate(4)"><use href="#leg"/></g>
+  <g transform="translate(45,61) rotate(-4)"><use href="#leg"/></g><g transform="translate(105,52) rotate(-12)"><use href="#leg"/></g>
+  <g transform="translate(63,-49)"><use href="#cannon"/></g>
+ </g>
+</defs>
+<!-- idle / charge -->
+<g transform="translate(250 196)"><use href="#walker"/><circle cx="230" cy="-49" r="38" fill="url(#cyan)" opacity=".28" filter="url(#glow)"/><circle cx="230" cy="-49" r="12" fill="#d9ffff"/></g>
+<!-- firing recoil -->
+<g transform="translate(760 198)"><use href="#body"/><g transform="translate(-108,57) rotate(16)"><use href="#leg"/></g><g transform="translate(-45,64) rotate(6)"><use href="#leg"/></g><g transform="translate(48,63) rotate(-6)"><use href="#leg"/></g><g transform="translate(111,54) rotate(-15)"><use href="#leg"/></g><g transform="translate(45,-49)"><use href="#cannon"/></g><circle cx="211" cy="-49" r="54" fill="url(#flash)" filter="url(#glow)"/><path d="M212-49H302" stroke="#fff7c4" stroke-width="11" stroke-linecap="round"/><g fill="#9b6840" opacity=".5"><circle cx="-128" cy="113" r="13"/><circle cx="-153" cy="118" r="9"/><circle cx="126" cy="116" r="12"/></g></g>
+<!-- damaged -->
+<g transform="translate(1275 199) rotate(-1)"><use href="#walker"/><g fill="none" stroke="#4b260d" stroke-width="6" stroke-linecap="round"><path d="M-35-58l-14 18 18 14-20 22"/><path d="M72-18l-16 16 13 13-18 17"/></g><g stroke="#9ffbff" stroke-width="5" stroke-linecap="round"><path d="M-110 77l-22-14"/><path d="M-108 84l-28 4"/><path d="M72 64l24-17"/></g><path d="M-88-18l18-12 13 16-19 11z" fill="#ffcc31" stroke="#4a280c" stroke-width="4"/></g>
+<!-- death -->
+<g transform="translate(1790 198)"><circle cx="0" cy="-15" r="130" fill="url(#flash)" opacity=".48"/><g opacity=".90"><use href="#body"/></g><g transform="translate(-116,61) rotate(25)"><use href="#leg"/></g><g transform="translate(-50,68) rotate(14)"><use href="#leg"/></g><g transform="translate(54,67) rotate(-15)"><use href="#leg"/></g><g transform="translate(120,58) rotate(-24)"><use href="#leg"/></g><g transform="translate(78,-58) rotate(10)"><use href="#cannon"/></g><g fill="url(#gold)" stroke="#40240c" stroke-width="5"><path d="M-112-91l34-17 22 18-27 28z"/><path d="M-34-116l38-14 21 25-35 24z"/><path d="M56-104l36-9 20 29-35 20z"/><path d="M118-72l30 4 8 31-33 6z"/></g><g stroke="#d8ffff" stroke-width="7" stroke-linecap="round"><path d="M0-52v-96"/><path d="M-29-45l-73-70"/><path d="M31-45l76-66"/><path d="M-43-16l-98-20"/><path d="M44-14l101-14"/></g></g>
+</svg>
