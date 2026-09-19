@@ -1,0 +1,104 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/vfx/boss_climax_burst.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/vfx/dust_mote.svg" id="2_dust"]
+[ext_resource type="Texture2D" path="res://assets/vfx/radial_energy_light.svg" id="3_light"]
+
+[node name="BossClimaxBurst" type="Node2D" groups=["boss_climax_vfx"]]
+z_index = 40
+script = ExtResource("1_script")
+duration = 0.92
+shard_distance = 132.0
+
+[node name="CoreFlash" type="PointLight2D" parent="."]
+texture = ExtResource("3_light")
+texture_scale = 1.25
+energy = 3.65
+color = Color(0.72,0.96,1,1)
+
+[node name="ShockRing" type="Line2D" parent="."]
+points = PackedVector2Array(0,-42,30,-30,42,0,30,30,0,42,-30,30,-42,0,-30,-30)
+width = 8.0
+default_color = Color(1,0.67,0.10,0.98)
+closed = true
+antialiased = true
+
+[node name="CyanRing" type="Line2D" parent="."]
+points = PackedVector2Array(0,-34,24,-24,34,0,24,24,0,34,-24,24,-34,0,-24,-24)
+width = 5.0
+default_color = Color(0.20,0.94,1,0.96)
+closed = true
+antialiased = true
+
+[node name="CoreBurst" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0,-31,8,-13,24,-21,19,-4,36,1,19,9,27,27,8,20,0,39,-9,20,-28,28,-20,8,-38,1,-21,-7,-27,-25,-8,-19)
+color = Color(0.93,0.99,1,0.96)
+
+[node name="GoldShards" type="Node2D" parent="."]
+
+[node name="Shard0" type="Polygon2D" parent="GoldShards"]
+position = Vector2(0,-12)
+polygon = PackedVector2Array(-8,-5,8,-8,13,3,3,12,-10,6)
+color = Color(1,0.87,0.28,1)
+[node name="Shard1" type="Polygon2D" parent="GoldShards"]
+position = Vector2(7,-9)
+polygon = PackedVector2Array(-7,-7,9,-4,8,8,-4,12,-12,2)
+color = Color(1,0.67,0.08,1)
+[node name="Shard2" type="Polygon2D" parent="GoldShards"]
+position = Vector2(12,-4)
+polygon = PackedVector2Array(-5,-9,10,-5,12,6,1,13,-10,4)
+color = Color(1,0.92,0.37,1)
+[node name="Shard3" type="Polygon2D" parent="GoldShards"]
+position = Vector2(13,4)
+polygon = PackedVector2Array(-10,-4,6,-9,13,2,5,12,-9,9)
+color = Color(0.89,0.50,0.05,1)
+[node name="Shard4" type="Polygon2D" parent="GoldShards"]
+position = Vector2(8,10)
+polygon = PackedVector2Array(-7,-8,9,-4,11,7,0,13,-12,3)
+color = Color(1,0.78,0.14,1)
+[node name="Shard5" type="Polygon2D" parent="GoldShards"]
+position = Vector2(1,13)
+polygon = PackedVector2Array(-9,-5,7,-9,12,3,4,13,-10,8)
+color = Color(1,0.94,0.45,1)
+[node name="Shard6" type="Polygon2D" parent="GoldShards"]
+position = Vector2(-7,10)
+polygon = PackedVector2Array(-7,-8,10,-5,11,7,-1,13,-12,3)
+color = Color(0.86,0.44,0.04,1)
+[node name="Shard7" type="Polygon2D" parent="GoldShards"]
+position = Vector2(-12,5)
+polygon = PackedVector2Array(-10,-5,7,-9,13,2,4,12,-9,9)
+color = Color(1,0.73,0.11,1)
+[node name="Shard8" type="Polygon2D" parent="GoldShards"]
+position = Vector2(-13,-3)
+polygon = PackedVector2Array(-6,-9,10,-4,11,7,0,13,-12,3)
+color = Color(1,0.88,0.26,1)
+[node name="Shard9" type="Polygon2D" parent="GoldShards"]
+position = Vector2(-9,-9)
+polygon = PackedVector2Array(-9,-5,8,-8,12,4,3,13,-10,7)
+color = Color(0.91,0.53,0.05,1)
+[node name="Shard10" type="Polygon2D" parent="GoldShards"]
+position = Vector2(-3,-13)
+polygon = PackedVector2Array(-7,-8,9,-5,12,6,1,13,-11,4)
+color = Color(1,0.80,0.16,1)
+[node name="Shard11" type="Polygon2D" parent="GoldShards"]
+position = Vector2(5,-12)
+polygon = PackedVector2Array(-9,-6,8,-9,13,3,3,12,-10,7)
+color = Color(1,0.95,0.48,1)
+
+[node name="Dust" type="CPUParticles2D" parent="."]
+emitting = true
+amount = 28
+lifetime = 0.78
+one_shot = true
+explosiveness = 0.96
+texture = ExtResource("2_dust")
+emission_shape = 1
+emission_sphere_radius = 18.0
+direction = Vector2(0,-1)
+spread = 180.0
+gravity = Vector2(0,118)
+initial_velocity_min = 76.0
+initial_velocity_max = 186.0
+scale_amount_min = 0.60
+scale_amount_max = 1.75
+color = Color(0.94,0.65,0.28,0.82)
