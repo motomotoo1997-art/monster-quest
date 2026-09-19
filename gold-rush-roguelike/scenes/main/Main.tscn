@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3]
+[gd_scene load_steps=36 format=3]
 
 [ext_resource type="Script" path="res://scripts/main/main.gd" id="1_main"]
 [ext_resource type="Script" path="res://scripts/systems/run_controller.gd" id="2_run"]
@@ -34,6 +34,7 @@
 [ext_resource type="PackedScene" path="res://scenes/vfx/DustBurst.tscn" id="32_dust"]
 [ext_resource type="PackedScene" path="res://scenes/ui/TitleOverlay.tscn" id="33_title"]
 [ext_resource type="PackedScene" path="res://scenes/ui/PauseOverlay.tscn" id="34_pause"]
+[ext_resource type="PackedScene" path="res://scenes/vfx/EnemyDeathBurst.tscn" id="35_death"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_main")
@@ -46,6 +47,7 @@ hit_flash_scene = ExtResource("29_hit")
 explosion_scene = ExtResource("30_explosion")
 muzzle_flash_scene = ExtResource("31_muzzle")
 dust_burst_scene = ExtResource("32_dust")
+enemy_death_burst_scene = ExtResource("35_death")
 
 [node name="ArenaLayer" type="Node2D" parent="."]
 
