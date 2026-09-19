@@ -10,12 +10,25 @@ func _init() -> void:
 		definition.display_name = "Upgrade %d" % index
 		definition.stat_key = &"test"
 		controller.upgrade_definitions.append(definition)
+
 	controller.set_rng_seed(1337)
 	var choices := controller.roll_choices(3)
-	assert(choices.size() == 3)
+	if choices.size() != 3:
+		_fail("Expected 3 upgrade choices, got %d" % choices.size())
+		return
+
 	var ids: Dictionary = {}
 	for choice in choices:
 		ids[choice.id] = true
-	assert(ids.size() == 3, "Upgrade roll must contain unique IDs")
+	if ids.size() != 3:
+		_fail("Upgrade roll must contain 3 unique IDs, got %d" % ids.size())
+		return
+
 	controller.free()
+	print("PASS: upgrade choices are deterministic and unique")
 	quit(0)
+
+
+func _fail(message: String) -> void:
+	push_error("FAIL: " + message)
+	quit(1)
