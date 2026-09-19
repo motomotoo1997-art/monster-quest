@@ -61,6 +61,8 @@ jobs:
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_boss_presentation.gd
       - name: Visual asset readability regression
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_visual_asset_contract.gd
+      - name: Western reference art regression
+        run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_reference_art_contract.gd
       - name: Energy lighting regression
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_energy_lighting_contract.gd
       - name: Shared isometric depth-sort regression
