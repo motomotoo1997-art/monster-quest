@@ -23,7 +23,7 @@ region = Rect2(768,0,384,384)
 atlas = ExtResource("5_texture")
 region = Rect2(1152,0,384,384)
 [sub_resource type="SpriteFrames" id="SpriteFrames_enemy"]
-animations = [{"frames":[{"duration":1.0,"texture":SubResource("Hopper0")},{"duration":1.0,"texture":SubResource("Hopper3")}],"loop":true,"name":&"idle","speed":6.0},{"frames":[{"duration":1.0,"texture":SubResource("Hopper0")},{"duration":1.0,"texture":SubResource("Hopper1")},{"duration":1.0,"texture":SubResource("Hopper2")},{"duration":1.0,"texture":SubResource("Hopper3")}],"loop":true,"name":&"move","speed":12.0}]
+animations = [{"frames":[{"duration":1.0,"texture":SubResource("Hopper0")},{"duration":1.0,"texture":SubResource("Hopper3")}],"loop":true,"name":&"idle","speed":6.0},{"frames":[{"duration":1.0,"texture":SubResource("Hopper0")},{"duration":1.0,"texture":SubResource("Hopper1")},{"duration":1.0,"texture":SubResource("Hopper2")},{"duration":1.0,"texture":SubResource("Hopper3")}],"loop":true,"name":&"move","speed":12.0},{"frames":[{"duration":1.0,"texture":SubResource("Hopper0")},{"duration":1.0,"texture":SubResource("Hopper1")},{"duration":1.0,"texture":SubResource("Hopper2")},{"duration":1.0,"texture":SubResource("Hopper3")}],"loop":false,"name":&"hop","speed":14.0}]
 
 [node name="GoldHopper" type="CharacterBody2D" groups=["enemies"]]
 z_index = 5
