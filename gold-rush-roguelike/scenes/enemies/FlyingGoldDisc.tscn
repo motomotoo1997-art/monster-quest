@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://scripts/components/hurtbox_component.gd" id="4_hurtbox"]
 [ext_resource type="Script" path="res://scripts/components/weapon_component.gd" id="5_weapon"]
 [ext_resource type="PackedScene" path="res://scenes/combat/Projectile.tscn" id="6_projectile"]
-[ext_resource type="Texture2D" path="res://assets/sprites/enemies/enemies_reference_v5.svg" id="7_texture"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/enemies_frontier_v6.svg" id="7_texture"]
 [ext_resource type="Script" path="res://scripts/components/gold_drop_component.gd" id="8_gold_drop"]
 [ext_resource type="PackedScene" path="res://scenes/combat/GoldPickup.tscn" id="9_gold_pickup"]
 
@@ -61,7 +61,7 @@ show_behind_parent = true
 position = Vector2(0,-45)
 sprite_frames = SubResource("SpriteFrames_enemy")
 animation = &"idle"
-scale = Vector2(0.30,0.30)
+scale = Vector2(0.44,0.44)
 [node name="Muzzle" type="Marker2D" parent="."]
 position = Vector2(0,-43)
 [node name="HealthComponent" type="Node" parent="."]
