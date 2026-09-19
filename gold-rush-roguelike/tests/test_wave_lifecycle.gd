@@ -17,6 +17,13 @@ func _run_test() -> void:
 	root.add_child(enemy)
 	await process_frame
 
+	if not enemy.has_method("is_alive"):
+		_fail("EnemyBase must expose is_alive() for WaveDirector pruning")
+		return
+	if not enemy.is_alive():
+		_fail("Fresh enemy must report alive")
+		return
+
 	var director := WaveDirector.new()
 	root.add_child(director)
 	director._active_enemies.append(enemy)
@@ -31,7 +38,7 @@ func _run_test() -> void:
 		return
 
 	director.queue_free()
-	print("PASS: WaveDirector prunes enemies without invalid method calls")
+	print("PASS: WaveDirector prunes enemies through explicit alive contract")
 	quit(0)
 
 
