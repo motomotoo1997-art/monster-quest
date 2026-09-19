@@ -59,8 +59,13 @@ func _run_test() -> void:
 				if enemy == null:
 					_fail("Wave enemy must instantiate as EnemyBase")
 					return
+				root.add_child(enemy)
+				await process_frame
+				if bool(entry.get("elite", false)):
+					enemy.apply_elite_modifier()
 				total_gold += enemy.gold_value * count
-				enemy.free()
+				enemy.queue_free()
+				await process_frame
 
 	if total_gold < MIN_RUN_GOLD or total_gold > MAX_RUN_GOLD:
 		_fail("Full-run gold budget %d must stay within %d..%d" % [total_gold, MIN_RUN_GOLD, MAX_RUN_GOLD])
