@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<defs>
+  <linearGradient id="packed" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b8733f" stop-opacity=".22"/><stop offset=".55" stop-color="#7a432a" stop-opacity=".10"/><stop offset="1" stop-color="#f0c77d" stop-opacity=".06"/></linearGradient>
+  <linearGradient id="rut" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#6d3d28" stop-opacity=".34"/><stop offset="1" stop-color="#9d5f35" stop-opacity=".05"/></linearGradient>
+  <radialGradient id="dustshadow"><stop stop-color="#75442f" stop-opacity=".24"/><stop offset="1" stop-color="#75442f" stop-opacity="0"/></radialGradient>
+  <linearGradient id="goldfleck" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff1a0"/><stop offset=".5" stop-color="#f5bd2f"/><stop offset="1" stop-color="#a6600a"/></linearGradient>
+</defs>
+<!-- broad compacted-earth islands -->
+<path d="M82 322 C235 286 351 300 479 337 C618 378 741 360 878 309 C1000 263 1119 270 1224 315 C1191 350 1139 371 1074 385 C946 413 858 456 741 466 C598 479 513 431 393 406 C271 381 169 391 88 418Z" fill="url(#packed)"/>
+<path d="M184 493 C293 448 398 452 491 482 C589 514 681 542 796 515 C892 492 997 451 1104 467 C1034 511 973 539 902 557 C796 585 657 590 543 561 C428 532 300 520 184 548Z" fill="#875033" opacity=".075"/>
+<!-- dry wash and lighter sand shelf -->
+<path d="M120 352 C277 313 399 337 511 378 C624 420 731 414 844 365 C973 309 1087 287 1189 325" fill="none" stroke="#f6d795" stroke-width="24" opacity=".16" stroke-linecap="round"/>
+<path d="M124 364 C279 328 393 352 505 392 C625 434 731 431 850 380 C967 330 1088 307 1186 340" fill="none" stroke="#7d4a2f" stroke-width="4" opacity=".18" stroke-linecap="round"/>
+<!-- wagon ruts, paired and broken -->
+<g fill="none" stroke-linecap="round">
+ <path d="M139 517 C264 491 371 486 485 503 C585 518 646 543 745 540" stroke="#6d402c" stroke-width="7" opacity=".22"/>
+ <path d="M143 535 C269 507 373 503 486 519 C580 532 651 557 748 555" stroke="#f1c27a" stroke-width="4" opacity=".18"/>
+ <path d="M762 544 C860 526 936 490 1018 458 C1083 433 1134 424 1189 430" stroke="#74432d" stroke-width="6" opacity=".16" stroke-dasharray="36 15 54 19"/>
+ <path d="M771 559 C866 541 944 506 1025 473 C1087 447 1139 441 1190 447" stroke="#f0c27b" stroke-width="3" opacity=".15" stroke-dasharray="30 19 46 17"/>
+</g>
+<!-- buried rail / mine-cart wear near lower left -->
+<g transform="translate(150 0) rotate(-4 250 548)" opacity=".22">
+ <path d="M0 545H350" stroke="#573c2c" stroke-width="6"/>
+ <path d="M0 568H350" stroke="#573c2c" stroke-width="6"/>
+ <g stroke="#734b31" stroke-width="5"><path d="M25 538v38"/><path d="M67 538v38"/><path d="M109 538v38"/><path d="M151 538v38"/><path d="M193 538v38"/><path d="M235 538v38"/><path d="M277 538v38"/><path d="M319 538v38"/></g>
+</g>
+<!-- prop contact-shadow pools -->
+<g fill="url(#dustshadow)">
+ <ellipse cx="176" cy="221" rx="71" ry="27"/><ellipse cx="337" cy="526" rx="126" ry="34"/><ellipse cx="763" cy="269" rx="92" ry="32"/><ellipse cx="766" cy="497" rx="89" ry="31"/><ellipse cx="1040" cy="574" rx="78" ry="27"/><ellipse cx="980" cy="186" rx="70" ry="30"/>
+</g>
+<!-- fractured sandstone veins -->
+<g fill="none" stroke="#825035" stroke-width="3" opacity=".38" stroke-linecap="round" stroke-linejoin="round">
+ <path d="M212 275l24-18 22 8 18-21 35 9 18-17M236 257l-9-21M275 244l8-22"/>
+ <path d="M417 454l20-17 26 7 15-20 31 9 23-21M463 441l3 20M506 427l12-19"/>
+ <path d="M649 300l28-18 27 10 19-24 29 8 23-18M702 292l6-21"/>
+ <path d="M903 438l24-25 28 8 18-18 34 7 17-19M953 421l4 19M1008 411l11 17"/>
+ <path d="M1090 263l20-17 25 6 18-20 31 7M1127 247l-2-18"/>
+ <path d="M552 590l19-18 30 8 16-18 25 8M602 579l7 19"/>
+</g>
+<!-- wind-carved contour strokes -->
+<g fill="none" stroke="#f1c27c" stroke-width="5" opacity=".15" stroke-linecap="round">
+ <path d="M74 444c95-22 165-15 244 9"/><path d="M91 461c78-18 142-11 207 8"/>
+ <path d="M807 236c105-39 202-43 315-18"/><path d="M837 254c89-31 175-33 261-16"/>
+ <path d="M776 610c89-10 181 1 259 28"/><path d="M812 627c73-4 139 6 202 27"/>
+</g>
+<!-- small gravel clusters -->
+<g fill="#8d593b" stroke="#70422f" stroke-width="1.5" opacity=".65">
+ <ellipse cx="289" cy="344" rx="5" ry="3"/><ellipse cx="303" cy="350" rx="3" ry="2"/><ellipse cx="315" cy="341" rx="4" ry="2.5"/><ellipse cx="327" cy="349" rx="6" ry="3"/>
+ <ellipse cx="574" cy="456" rx="5" ry="3"/><ellipse cx="587" cy="449" rx="3" ry="2"/><ellipse cx="598" cy="458" rx="6" ry="3"/><ellipse cx="610" cy="452" rx="4" ry="2"/>
+ <ellipse cx="845" cy="520" rx="5" ry="3"/><ellipse cx="859" cy="513" rx="4" ry="2"/><ellipse cx="871" cy="521" rx="6" ry="3"/><ellipse cx="882" cy="516" rx="3" ry="2"/>
+ <ellipse cx="1032" cy="347" rx="5" ry="3"/><ellipse cx="1045" cy="355" rx="3" ry="2"/><ellipse cx="1057" cy="345" rx="6" ry="3"/><ellipse cx="1068" cy="352" rx="4" ry="2"/>
+</g>
+<!-- boot / creature track hints -->
+<g fill="#7a4932" opacity=".20">
+ <ellipse cx="455" cy="273" rx="5" ry="9" transform="rotate(-18 455 273)"/><ellipse cx="477" cy="286" rx="5" ry="9" transform="rotate(12 477 286)"/><ellipse cx="501" cy="299" rx="5" ry="9" transform="rotate(-15 501 299)"/>
+ <ellipse cx="930" cy="591" rx="6" ry="10" transform="rotate(22 930 591)"/><ellipse cx="952" cy="575" rx="6" ry="10" transform="rotate(-8 952 575)"/><ellipse cx="973" cy="562" rx="6" ry="10" transform="rotate(17 973 562)"/>
+</g>
+<!-- sparse ore flecks -->
+<g fill="url(#goldfleck)" opacity=".72">
+ <path d="M359 403l5-8 7 4-2 8z"/><path d="M695 478l4-7 7 2-1 8z"/><path d="M887 321l5-7 7 4-3 8z"/><path d="M1135 493l4-6 6 3-2 7z"/><path d="M248 593l5-8 6 4-2 7z"/>
+</g>
+</svg>

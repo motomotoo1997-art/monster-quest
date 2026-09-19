@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<defs>
+ <linearGradient id="edgeL" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#3c251f" stop-opacity=".34"/><stop offset="1" stop-color="#6f402e" stop-opacity="0"/></linearGradient>
+ <linearGradient id="edgeR" x1="1" y1="0" x2="0" y2="0"><stop stop-color="#3c251f" stop-opacity=".30"/><stop offset="1" stop-color="#6f402e" stop-opacity="0"/></linearGradient>
+ <linearGradient id="bottom" x1="0" y1="1" x2="0" y2="0"><stop stop-color="#4b2a22" stop-opacity=".32"/><stop offset="1" stop-color="#4b2a22" stop-opacity="0"/></linearGradient>
+ <linearGradient id="rockHi" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d4894f" stop-opacity=".42"/><stop offset="1" stop-color="#7c422d" stop-opacity=".06"/></linearGradient>
+</defs>
+<!-- soft canyon depth framing -->
+<path d="M0 176 C65 196 108 239 119 309 C130 385 109 465 151 548 C113 572 72 608 0 650Z" fill="url(#edgeL)"/>
+<path d="M1280 162 C1213 194 1174 244 1161 316 C1149 394 1171 470 1128 548 C1178 579 1224 613 1280 652Z" fill="url(#edgeR)"/>
+<path d="M0 621 C162 589 270 604 388 642 C502 678 638 680 761 650 C910 614 1047 586 1280 626 L1280 720 L0 720Z" fill="url(#bottom)"/>
+<!-- layered sandstone shelves at edge only -->
+<g fill="none" stroke-linecap="round">
+ <path d="M6 211C54 222 80 244 99 274M2 235C40 244 67 264 86 295M9 490C59 503 94 529 117 565" stroke="#e2a064" stroke-width="7" opacity=".20"/>
+ <path d="M1274 205C1231 221 1201 246 1185 280M1278 233C1241 247 1216 269 1197 300M1272 484C1233 503 1201 529 1176 564" stroke="#e2a064" stroke-width="7" opacity=".18"/>
+ <path d="M179 678C284 647 357 652 448 675M836 677C939 642 1036 642 1124 675" stroke="#d28a52" stroke-width="9" opacity=".18"/>
+</g>
+<!-- fractured rock faces -->
+<g fill="url(#rockHi)" stroke="#5d3428" stroke-width="3" opacity=".36">
+ <path d="M0 352l34-21 25 11 21-25 20 8 17 33-22 31-35-6-25 18L0 390z"/>
+ <path d="M1280 342l-32-20-27 13-20-23-24 9-14 31 25 30 31-8 25 17 36-10z"/>
+ <path d="M92 667l42-28 37 15 28-20 39 16 18 70H58z"/>
+ <path d="M1050 720l18-67 38-21 31 17 38-24 48 28 23 67z"/>
+</g>
+<!-- mining timber silhouettes at far edge -->
+<g stroke="#3f2c25" stroke-linecap="round" opacity=".34">
+ <path d="M83 203v-88M145 210v-97M76 145h76M87 166l52-36M137 166l-45-37" stroke-width="9"/>
+ <path d="M1128 203v-82M1188 210v-96M1121 151h75M1134 171l47-36M1180 171l-40-34" stroke-width="8"/>
+</g>
+<!-- long directional cast shadows from western structures -->
+<g fill="#4b3027" opacity=".11">
+ <path d="M230 164l252 96-18 23-259-85z"/><path d="M935 170l-204 107 18 22 214-92z"/><path d="M1013 505l171 55-10 25-176-43z"/>
+</g>
+<!-- fine warm atmospheric veil along horizon and floor -->
+<path d="M0 148 C226 178 403 158 635 167 C850 174 1048 160 1280 143 L1280 205 C1041 187 842 204 633 196 C412 188 224 207 0 183Z" fill="#f5c77d" opacity=".07"/>
+<path d="M0 585 C211 566 397 580 603 606 C829 634 1021 589 1280 574 L1280 645 C1050 625 861 656 627 635 C392 614 210 602 0 626Z" fill="#f3b765" opacity=".055"/>
+</svg>

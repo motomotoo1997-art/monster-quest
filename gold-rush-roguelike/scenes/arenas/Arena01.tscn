@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=15 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/environment/CactusProp.tscn" id="1_cactus"]
 [ext_resource type="PackedScene" path="res://scenes/environment/RockClusterProp.tscn" id="2_rocks"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" path="res://scenes/environment/CrateStackProp.tscn" id="7_crates"]
 [ext_resource type="Texture2D" path="res://assets/vfx/dust_mote.svg" id="8_dust"]
 [ext_resource type="Texture2D" path="res://assets/environment/arena01_canyon_depth.svg" id="9_depth"]
+[ext_resource type="Texture2D" path="res://assets/environment/arena01_ground_detail_v3.svg" id="10_ground_detail"]
+[ext_resource type="Texture2D" path="res://assets/environment/arena01_foreground_depth_v3.svg" id="11_foreground"]
 
 [sub_resource type="RectangleShape2D" id="BuildShape"]
 size = Vector2(1120,560)
@@ -40,6 +42,11 @@ z_index = -20
 polygon = PackedVector2Array(134,326,504,299,785,319,1169,263,1182,425,800,392,516,421,135,403)
 color = Color(1,0.86,0.58,0.10)
 
+[node name="GroundDetail" type="Sprite2D" parent="."]
+z_index = -19
+position = Vector2(640,360)
+texture = ExtResource("10_ground_detail")
+
 [node name="AmbientDust" type="CPUParticles2D" parent="."]
 z_index = -4
 position = Vector2(640,360)
@@ -57,6 +64,11 @@ initial_velocity_max = 14.0
 scale_amount_min = 0.45
 scale_amount_max = 1.25
 color = Color(1,0.90,0.70,0.34)
+
+[node name="ForegroundDepth" type="Sprite2D" parent="."]
+z_index = -3
+position = Vector2(640,360)
+texture = ExtResource("11_foreground")
 
 [node name="BuildPadA" type="Polygon2D" parent="."]
 z_index = -6
