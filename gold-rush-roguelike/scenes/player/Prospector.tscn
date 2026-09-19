@@ -28,7 +28,7 @@ region = Rect2(768, 0, 384, 384)
 animations = [{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_idle")}],"loop":true,"name":&"idle","speed":5.0},{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_idle")}],"loop":true,"name":&"move","speed":8.0},{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_aim")}],"loop":false,"name":&"attack","speed":8.0},{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_dynamite")}],"loop":false,"name":&"ability","speed":6.0}]
 
 [node name="Prospector" type="CharacterBody2D" groups=["player"]]
-z_index = 4
+z_index = 6
 collision_layer = 1
 collision_mask = 1
 script = ExtResource("1_player")
@@ -38,20 +38,20 @@ position = Vector2(0, 5)
 shape = SubResource("CapsuleShape2D_player")
 
 [node name="Shadow" type="Polygon2D" parent="."]
-position = Vector2(0, 20)
-polygon = PackedVector2Array(-27,0,-18,-8,18,-8,27,0,18,8,-18,8)
-color = Color(0.04,0.025,0.015,0.30)
+position = Vector2(0, 22)
+polygon = PackedVector2Array(-34,0,-23,-9,23,-9,34,0,23,9,-23,9)
+color = Color(0.04,0.025,0.015,0.34)
 
 [node name="BodyVisual" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -58)
+position = Vector2(0, -72)
 sprite_frames = SubResource("SpriteFrames_player")
 animation = &"idle"
-scale = Vector2(0.48, 0.48)
+scale = Vector2(0.62, 0.62)
 
 [node name="VisualPivot" type="Node2D" parent="."]
 
 [node name="Muzzle" type="Marker2D" parent="VisualPivot"]
-position = Vector2(47, -8)
+position = Vector2(58, -16)
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_health")
