@@ -5,6 +5,8 @@ const REQUIRED_ANIMATIONS := {
 	&"move": 4,
 	&"attack": 4,
 	&"hit": 2,
+	&"dash": 3,
+	&"death": 4,
 }
 
 func _init() -> void:
@@ -34,7 +36,7 @@ func _run_test() -> void:
 		if frames.get_animation_speed(animation_name) < 5.0:
 			_fail("Prospector animation FPS too low: %s" % animation_name)
 			return
-	print("PASS: Prospector has production multi-frame idle/move/attack/hit animations")
+	print("PASS: Prospector has production multi-frame idle/move/attack/hit/dash/death animations")
 	quit(0)
 
 func _fail(message: String) -> void:
