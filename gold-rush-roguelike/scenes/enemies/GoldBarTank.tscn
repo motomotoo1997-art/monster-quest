@@ -8,30 +8,31 @@
 [ext_resource type="PackedScene" path="res://scenes/combat/Projectile.tscn" id="6_projectile"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/GoldHopper.tscn" id="7_hopper"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/FlyingGoldDisc.tscn" id="8_disc"]
-[ext_resource type="Texture2D" path="res://assets/sprites/enemies/boss_views.svg" id="9_texture"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/boss_views_v2.svg" id="9_texture"]
 
 [sub_resource type="RectangleShape2D" id="BodyShape"]
-size = Vector2(92,62)
+size = Vector2(104,68)
 [sub_resource type="RectangleShape2D" id="HurtShape"]
-size = Vector2(88,58)
+size = Vector2(100,64)
 [sub_resource type="CircleShape2D" id="SlamShape"]
 radius = 155.0
 [sub_resource type="AtlasTexture" id="AtlasTexture_idle"]
 atlas = ExtResource("9_texture")
-region = Rect2(0,0,256,213)
+region = Rect2(0,0,512,384)
 [sub_resource type="AtlasTexture" id="AtlasTexture_charge"]
 atlas = ExtResource("9_texture")
-region = Rect2(256,0,256,213)
+region = Rect2(512,0,512,384)
 [sub_resource type="AtlasTexture" id="AtlasTexture_damaged"]
 atlas = ExtResource("9_texture")
-region = Rect2(512,0,256,213)
+region = Rect2(1024,0,512,384)
 [sub_resource type="AtlasTexture" id="AtlasTexture_fire"]
 atlas = ExtResource("9_texture")
-region = Rect2(768,0,256,213)
+region = Rect2(1536,0,512,384)
 [sub_resource type="SpriteFrames" id="BossFrames"]
 animations = [{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_fire")}],"loop":false,"name":&"attack","speed":10.0},{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_charge")}],"loop":true,"name":&"charge","speed":6.0},{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_damaged")}],"loop":true,"name":&"damaged","speed":5.0},{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_fire")}],"loop":false,"name":&"fire","speed":10.0},{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_idle")}],"loop":true,"name":&"idle","speed":5.0},{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_idle")}],"loop":true,"name":&"move","speed":8.0}]
 
 [node name="GoldBarTank" type="CharacterBody2D" groups=["enemies","boss"]]
+z_index = 6
 collision_layer = 1
 collision_mask = 1
 script = ExtResource("1_boss")
@@ -46,32 +47,30 @@ add_scenes = Array[PackedScene]([ExtResource("7_hopper"),ExtResource("8_disc")])
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("BodyShape")
 [node name="Shadow" type="Polygon2D" parent="."]
-position = Vector2(0,38)
-polygon = PackedVector2Array(-58,0,-43,-14,43,-14,58,0,43,14,-43,14)
-color = Color(0.06,0.035,0.02,0.28)
+position = Vector2(0,43)
+polygon = PackedVector2Array(-78,0,-58,-18,58,-18,78,0,58,18,-58,18)
+color = Color(0.04,0.025,0.015,0.34)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0,-42)
+position = Vector2(0,-64)
 sprite_frames = SubResource("BossFrames")
 animation = &"idle"
-scale = Vector2(0.60,0.60)
+scale = Vector2(0.64,0.64)
 [node name="Muzzle" type="Marker2D" parent="."]
-position = Vector2(50,-5)
+position = Vector2(116,-76)
 [node name="ChargeTelegraph" type="Node2D" parent="."]
-position = Vector2(50,-5)
+position = Vector2(116,-76)
 visible = false
 [node name="Beam" type="Polygon2D" parent="ChargeTelegraph"]
-position = Vector2(0,0)
-polygon = PackedVector2Array(0,-16,520,-9,520,9,0,16)
-color = Color(1,0.22,0.04,0.26)
+polygon = PackedVector2Array(0,-19,520,-10,520,10,0,19)
+color = Color(1,0.18,0.025,0.34)
 [node name="BeamCore" type="Polygon2D" parent="ChargeTelegraph"]
-position = Vector2(0,0)
-polygon = PackedVector2Array(0,-4,520,-3,520,3,0,4)
-color = Color(1,0.85,0.3,0.72)
+polygon = PackedVector2Array(0,-5,520,-4,520,4,0,5)
+color = Color(1,0.91,0.35,0.88)
 [node name="SlamTelegraph" type="Node2D" parent="."]
 visible = false
 [node name="Ring" type="Polygon2D" parent="SlamTelegraph"]
 polygon = PackedVector2Array(0,-155,109,-109,155,0,109,109,0,155,-109,109,-155,0,-109,-109)
-color = Color(1,0.32,0.04,0.22)
+color = Color(1,0.28,0.025,0.26)
 show_behind_parent = true
 [node name="SlamArea" type="Area2D" parent="."]
 collision_layer = 0
