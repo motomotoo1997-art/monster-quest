@@ -23,8 +23,8 @@ func _run_test() -> void:
 	if backdrop == null or backdrop.texture == null:
 		_fail("Arena01 reference backdrop missing")
 		return
-	if not backdrop.texture.resource_path.ends_with("arena01_western_town_v4.svg"):
-		_fail("Arena01 must use the western-town reference rebuild")
+	if not backdrop.texture.resource_path.ends_with("arena01_reference_fidelity_v5.svg"):
+		_fail("Arena01 must use the high-fidelity western gold-mine reference rebuild")
 		return
 	if backdrop.texture.get_width() < 1200:
 		_fail("Arena01 reference backdrop must remain full-width")
