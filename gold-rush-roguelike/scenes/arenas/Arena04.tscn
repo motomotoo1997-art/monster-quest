@@ -1,14 +1,17 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=15 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/environment/CactusProp.tscn" id="1_cactus"]
 [ext_resource type="PackedScene" path="res://scenes/environment/RockClusterProp.tscn" id="2_rocks"]
 [ext_resource type="PackedScene" path="res://scenes/environment/MineCartProp.tscn" id="3_cart"]
 [ext_resource type="PackedScene" path="res://scenes/environment/GoldVeinProp.tscn" id="4_gold"]
-[ext_resource type="Texture2D" path="res://assets/environment/arena04_backdrop_v2.svg" id="5_backdrop"]
+[ext_resource type="Texture2D" path="res://assets/environment/arena04_elite_canyon_v6.svg" id="5_backdrop"]
 [ext_resource type="PackedScene" path="res://scenes/environment/RailSegmentProp.tscn" id="6_rail"]
 [ext_resource type="PackedScene" path="res://scenes/environment/CrateStackProp.tscn" id="7_crates"]
-[ext_resource type="Texture2D" path="res://assets/vfx/dust_mote.svg" id="8_dust"]
+[ext_resource type="Texture2D" path="res://assets/vfx/dust_mote.svg" id="8_dust"]\n[ext_resource type="Texture2D" path="res://assets/environment/frontier_props_v6.svg" id="9_props"]
 
+[sub_resource type="AtlasTexture" id="ExtractionRigTexture"]
+atlas = ExtResource("9_props")
+region = Rect2(1024,0,512,512)
 [sub_resource type="RectangleShape2D" id="BuildShape"]
 size = Vector2(1120,560)
 [sub_resource type="CircleShape2D" id="PillarShape"]
@@ -23,7 +26,7 @@ y_sort_enabled = true
 [node name="IllustratedBackdrop" type="Sprite2D" parent="."]
 z_index = -50
 position = Vector2(640,360)
-texture = ExtResource("5_backdrop")
+texture = ExtResource("5_backdrop")\n\n[node name="ExtractionRig" type="Sprite2D" parent="."]\nz_index = -18\nposition = Vector2(1000,185)\ntexture = SubResource("ExtractionRigTexture")\nscale = Vector2(0.54,0.54)
 
 [node name="HeatWash" type="Polygon2D" parent="."]
 z_index = -22
