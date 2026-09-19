@@ -64,10 +64,12 @@ position_smoothing_enabled = false
 [node name="RunController" type="Node" parent="."]
 script = ExtResource("2_run")
 
-[node name="ArenaController" type="Node" parent="." node_paths=PackedStringArray("arena_container_path")]
+[node name="ArenaController" type="Node" parent="." node_paths=PackedStringArray("arena_container_path", "persistent_staging_path", "persistent_actor_paths")]
 script = ExtResource("3_arena_controller")
 arena_scenes = Array[PackedScene]([ExtResource("9_arena1"), ExtResource("10_arena2"), ExtResource("11_arena3"), ExtResource("12_arena4"), ExtResource("13_arena5")])
 arena_container_path = NodePath("../ArenaLayer")
+persistent_staging_path = NodePath("../Actors")
+persistent_actor_paths = Array[NodePath]([NodePath("../Actors/Prospector"), NodePath("../Actors/GoldCore")])
 
 [node name="WaveDirector" type="Node" parent="." node_paths=PackedStringArray("arena_controller_path", "player_path", "core_path")]
 script = ExtResource("4_wave")
@@ -80,9 +82,10 @@ gold_pickup_scene = ExtResource("21_gold")
 script = ExtResource("5_economy")
 starting_gold = 65
 
-[node name="BuildController" type="Node" parent="." node_paths=PackedStringArray("economy_path")]
+[node name="BuildController" type="Node" parent="." node_paths=PackedStringArray("economy_path", "arena_controller_path")]
 script = ExtResource("6_build")
 economy_path = NodePath("../EconomyController")
+arena_controller_path = NodePath("../ArenaController")
 defense_scenes = Array[PackedScene]([ExtResource("18_magnetic"), ExtResource("19_cactus"), ExtResource("20_tnt")])
 
 [node name="UpgradeController" type="Node" parent="." node_paths=PackedStringArray("player_path", "economy_path", "build_controller_path")]
