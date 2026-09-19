@@ -1,6 +1,6 @@
 extends SceneTree
 
-const ATLAS_PATH := "res://assets/sprites/defenses/defenses_animation_v3.svg"
+const ATLAS_PATH := "res://assets/sprites/defenses/defenses_frontier_v6.svg"
 const EXPECTED := [
 	{"scene":"res://scenes/defenses/MagneticTurret.tscn","animations":{&"idle":3,&"fire":3}},
 	{"scene":"res://scenes/defenses/CactusSentry.tscn","animations":{&"idle":2,&"fire":3}},
