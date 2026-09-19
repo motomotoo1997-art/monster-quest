@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/components/health_component.gd" id="2_health"]
 [ext_resource type="Script" path="res://scripts/components/team_component.gd" id="3_team"]
 [ext_resource type="Script" path="res://scripts/components/hurtbox_component.gd" id="4_hurtbox"]
-[ext_resource type="Texture2D" path="res://assets/sprites/defenses/defenses_animation_v3.svg" id="5_texture"]
+[ext_resource type="Texture2D" path="res://assets/sprites/defenses/defenses_frontier_v6.svg" id="5_texture"]
 [sub_resource type="CircleShape2D" id="CircleShape2D_body"]
 radius = 16.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_trigger"]
@@ -46,7 +46,7 @@ position = Vector2(0,-47)
 sprite_frames = SubResource("Frames")
 animation = &"prearm"
 scale = Vector2(0.36,0.36)
-[node name="HealthComponent" type="Node" parent="."]
+[node name="FuseGlow" type="Polygon2D" parent="."]\nposition = Vector2(14,-82)\npolygon = PackedVector2Array(-9,0,-6,-6,0,-10,6,-6,9,0,6,6,0,10,-6,6)\ncolor = Color(1,0.58,0.08,0.58)\n\n[node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_health")
 max_health = 45.0
 [node name="TeamComponent" type="Node" parent="."]
