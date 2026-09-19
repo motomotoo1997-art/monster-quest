@@ -3,9 +3,9 @@ extends SceneTree
 const ATLAS_PATH := "res://assets/sprites/enemies/enemies_animation_v4.svg"
 const EXPECTED := [
 	{"scene":"res://scenes/enemies/GoldHopper.tscn","animations":{&"idle":2,&"move":4,&"hop":4}},
-	{"scene":"res://scenes/enemies/GoldCoinSentinel.tscn","animations":{&"idle":3,&"move":3,&"attack":3}},
-	{"scene":"res://scenes/enemies/FlyingGoldDisc.tscn","animations":{&"idle":4,&"move":4,&"attack":3}},
-	{"scene":"res://scenes/enemies/MoltenGoldSlime.tscn","animations":{&"idle":3,&"move":4}},
+	{"scene":"res://scenes/enemies/GoldCoinSentinel.tscn","animations":{&"idle":3,&"move":3,&"attack":3},"presentation_nodes":["TelegraphCore","EmitterGlow"]},
+	{"scene":"res://scenes/enemies/FlyingGoldDisc.tscn","animations":{&"idle":4,&"move":4,&"attack":3},"presentation_nodes":["EngineGlow","AttackHalo"]},
+	{"scene":"res://scenes/enemies/MoltenGoldSlime.tscn","animations":{&"idle":3,&"move":4},"presentation_nodes":["MoltenAura","CoreGlow"]},
 ]
 
 func _init() -> void:
@@ -50,9 +50,15 @@ func _run_test() -> void:
 			if unique_regions.size() < required_count:
 				_fail("Enemy animation reuses duplicate frames: %s/%s" % [entry.scene, animation_name])
 				return
+		if entry.has("presentation_nodes"):
+			for node_path in entry.presentation_nodes:
+				var accent := enemy.get_node_or_null(node_path) as CanvasItem
+				if accent == null:
+					_fail("Enemy presentation accent missing: %s/%s" % [entry.scene, node_path])
+					return
 		enemy.queue_free()
 		await process_frame
-	print("PASS: normal enemies use distinct production multi-frame animations")
+	print("PASS: normal enemies use distinct production animations and layered presentation accents")
 	quit(0)
 
 func _fail(message: String) -> void:
