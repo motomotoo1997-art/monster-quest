@@ -78,6 +78,21 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
+      - name: Capture Arena05 boss preview
+        shell: bash
+        run: |
+          set -euo pipefail
+          timeout 35s xvfb-run -a godot --path gold-rush-roguelike --rendering-method gl_compatibility --script res://tests/capture_boss_preview.gd
+          test -s /tmp/gold-rush-boss-preview.png
+
+      - name: Upload Arena05 boss preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: GoldRushRoguelike-Boss-Preview
+          path: /tmp/gold-rush-boss-preview.png
+          if-no-files-found: error
+          retention-days: 14
+
       - name: Install Godot export templates
         shell: bash
         run: |
