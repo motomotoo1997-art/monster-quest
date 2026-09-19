@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<defs>
+ <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#8a4b36"/><stop offset=".55" stop-color="#663a31"/><stop offset="1" stop-color="#402b29"/></linearGradient>
+ <linearGradient id="cliff" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#4b302c"/><stop offset="1" stop-color="#201c1c"/></linearGradient>
+ <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#626c6b"/><stop offset=".45" stop-color="#343c3d"/><stop offset="1" stop-color="#1d2223"/></linearGradient>
+ <linearGradient id="molten" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#8f260b"/><stop offset=".22" stop-color="#ff7d0a"/><stop offset=".5" stop-color="#ffd64a"/><stop offset=".78" stop-color="#ff7b09"/><stop offset="1" stop-color="#8e250b"/></linearGradient>
+ <pattern id="grit" width="92" height="72" patternUnits="userSpaceOnUse"><circle cx="16" cy="22" r="2" fill="#211a19" opacity=".18"/><path d="M47 55l24-7" stroke="#2f211e" stroke-width="2" opacity=".17"/></pattern>
+</defs>
+<rect width="1280" height="720" fill="url(#floor)"/>
+<path d="M0 0H1280V118L1190 72 1100 124 1010 78 920 132 830 76 740 126 645 70 550 128 460 75 365 130 270 72 180 120 88 70 0 112Z" fill="url(#cliff)"/>
+<path d="M0 625Q175 570 330 612T655 598T960 610T1280 570V720H0Z" fill="#241d1c" opacity=".58"/>
+<rect width="1280" height="720" fill="url(#grit)"/>
+<!-- dark central combat plate -->
+<path d="M160 250L520 205 815 220 1125 280 1130 515 805 560 500 548 145 485Z" fill="#4a3330" stroke="#302523" stroke-width="10"/>
+<path d="M225 292L520 258 800 270 1055 315 1057 465 795 510 505 500 218 454Z" fill="#6b4133" opacity=".42"/>
+<!-- molten channels stay at edges -->
+<path d="M0 180Q120 150 245 182L225 226Q112 203 0 234Z" fill="url(#molten)" stroke="#3a211b" stroke-width="8"/>
+<path d="M1030 150Q1155 122 1280 160V216Q1165 180 1052 208Z" fill="url(#molten)" stroke="#3a211b" stroke-width="8"/>
+<path d="M0 560Q118 532 248 568L228 616Q110 585 0 620Z" fill="url(#molten)" stroke="#3a211b" stroke-width="8"/>
+<path d="M1050 558Q1162 525 1280 552V620Q1168 580 1064 606Z" fill="url(#molten)" stroke="#3a211b" stroke-width="8"/>
+<!-- steel grates and pipes -->
+<g stroke="#242020" stroke-width="7" fill="url(#metal)">
+ <path d="M80 280H190V322H80Z"/><path d="M1090 255H1200V298H1090Z"/><path d="M88 442H198V485H88Z"/><path d="M1095 455H1205V498H1095Z"/>
+</g>
+<g stroke="#7d8580" stroke-width="3" opacity=".42"><path d="M96 286v30m18-30v30m18-30v30m18-30v30m18-30v30"/><path d="M1106 261v30m18-30v30m18-30v30m18-30v30"/></g>
+<!-- perimeter support silhouettes -->
+<g fill="#332824" stroke="#201b1a" stroke-width="6"><rect x="320" y="120" width="42" height="112"/><rect x="930" y="115" width="42" height="116"/><rect x="300" y="520" width="44" height="94"/><rect x="948" y="518" width="44" height="96"/></g>
+<g fill="#d79620" opacity=".6"><path d="M333 143l8-15 8 15-8 15z"/><path d="M943 140l8-15 8 15-8 15z"/></g>
+<!-- readable boss lane -->
+<path d="M610 335Q800 295 1025 338" fill="none" stroke="#d9a35b" stroke-width="3" opacity=".22" stroke-dasharray="16 18"/>
+</svg>
