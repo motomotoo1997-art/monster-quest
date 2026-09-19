@@ -17,6 +17,9 @@ var _strafe_sign := 1.0
 
 func _ready() -> void:
 	super()
+	# Flying discs intentionally render over ground props instead of taking part
+	# in ground Y-sort occlusion.
+	z_index = 7
 	_strafe_sign = -1.0 if get_instance_id() % 2 == 0 else 1.0
 
 
