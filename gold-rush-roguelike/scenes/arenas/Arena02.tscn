@@ -1,10 +1,13 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/environment/CactusProp.tscn" id="1_cactus"]
 [ext_resource type="PackedScene" path="res://scenes/environment/RockClusterProp.tscn" id="2_rocks"]
 [ext_resource type="PackedScene" path="res://scenes/environment/MineCartProp.tscn" id="3_cart"]
 [ext_resource type="PackedScene" path="res://scenes/environment/GoldVeinProp.tscn" id="4_gold"]
-[ext_resource type="Texture2D" path="res://assets/environment/arena01_backdrop_v2.svg" id="5_backdrop"]
+[ext_resource type="Texture2D" path="res://assets/environment/arena02_backdrop_v2.svg" id="5_backdrop"]
+[ext_resource type="PackedScene" path="res://scenes/environment/RailSegmentProp.tscn" id="6_rail"]
+[ext_resource type="PackedScene" path="res://scenes/environment/CrateStackProp.tscn" id="7_crates"]
+[ext_resource type="Texture2D" path="res://assets/vfx/dust_mote.svg" id="8_dust"]
 
 [sub_resource type="RectangleShape2D" id="BuildShape"]
 size = Vector2(1120,560)
@@ -15,15 +18,39 @@ radius = 34.0
 
 [node name="Arena02" type="Node2D"]
 y_sort_enabled = true
+
 [node name="IllustratedBackdrop" type="Sprite2D" parent="."]
 z_index = -50
 position = Vector2(640,360)
 texture = ExtResource("5_backdrop")
-modulate = Color(0.94,0.91,0.86,1)
+
+[node name="CanyonWarmWash" type="Polygon2D" parent="."]
+z_index = -44
+polygon = PackedVector2Array(0,0,470,0,405,720,0,720)
+color = Color(1,0.57,0.28,0.045)
+
 [node name="SplitTrail" type="Polygon2D" parent="."]
 z_index = -20
 polygon = PackedVector2Array(92,315,455,288,682,333,1182,174,1210,296,757,380,1195,498,1174,608,680,427,450,448,90,412)
-color = Color(1,0.87,0.58,0.11)
+color = Color(1,0.87,0.58,0.075)
+
+[node name="AmbientDust" type="CPUParticles2D" parent="."]
+z_index = -4
+position = Vector2(640,360)
+amount = 32
+lifetime = 4.6
+preprocess = 4.6
+texture = ExtResource("8_dust")
+emission_shape = 3
+emission_rect_extents = Vector2(610,260)
+direction = Vector2(-1,-0.05)
+spread = 180.0
+gravity = Vector2(0,-1)
+initial_velocity_min = 5.0
+initial_velocity_max = 16.0
+scale_amount_min = 0.40
+scale_amount_max = 1.15
+color = Color(1,0.82,0.61,0.30)
 
 [node name="BuildZone" type="Area2D" parent="." groups=["build_zone"]]
 position = Vector2(640,360)
@@ -33,6 +60,7 @@ monitoring = false
 monitorable = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BuildZone"]
 shape = SubResource("BuildShape")
+
 [node name="PlayerSpawn" type="Marker2D" parent="." groups=["player_spawn"]]
 position = Vector2(315,360)
 [node name="CoreSpawn" type="Marker2D" parent="." groups=["core_spawn"]]
@@ -99,3 +127,20 @@ scale = Vector2(0.84,0.84)
 [node name="GoldVeinSW" parent="." instance=ExtResource("4_gold")]
 position = Vector2(250,560)
 scale = Vector2(0.65,0.65)
+
+[node name="BrokenRailA" parent="." instance=ExtResource("6_rail")]
+position = Vector2(940,590)
+rotation = 0.31
+scale = Vector2(0.92,0.92)
+[node name="BrokenRailB" parent="." instance=ExtResource("6_rail")]
+position = Vector2(1080,635)
+rotation = 0.31
+scale = Vector2(0.82,0.82)
+[node name="CratesWest" parent="." instance=ExtResource("7_crates")]
+position = Vector2(390,530)
+rotation = -0.10
+scale = Vector2(0.72,0.72)
+[node name="CratesEast" parent="." instance=ExtResource("7_crates")]
+position = Vector2(1035,350)
+rotation = 0.08
+scale = Vector2(0.62,0.62)
