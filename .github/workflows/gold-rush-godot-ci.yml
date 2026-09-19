@@ -30,5 +30,20 @@ jobs:
       - name: Import project headlessly
         run: godot --headless --path gold-rush-roguelike --editor --quit
 
+      - name: Health and teams
+        run: godot --headless --path gold-rush-roguelike --script res://tests/test_health_and_teams.gd
+
+      - name: Weapon and projectile
+        run: godot --headless --path gold-rush-roguelike --script res://tests/test_weapon_and_projectile.gd
+
+      - name: Economy and building
+        run: godot --headless --path gold-rush-roguelike --script res://tests/test_economy_and_building.gd
+
+      - name: Roguelike upgrades
+        run: godot --headless --path gold-rush-roguelike --script res://tests/test_upgrades.gd
+
+      - name: Run flow and boss state
+        run: godot --headless --path gold-rush-roguelike --script res://tests/test_run_flow.gd
+
       - name: Main scene smoke test
         run: godot --headless --path gold-rush-roguelike --script res://tests/smoke_main_scene.gd
