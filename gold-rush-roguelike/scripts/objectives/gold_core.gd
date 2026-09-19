@@ -12,6 +12,8 @@ var _visual_pulse_phase := 0.0
 
 
 func _ready() -> void:
+	# The core is a grounded world object and participates in arena Y-sort.
+	z_index = 0
 	health_component.died.connect(_on_health_died)
 
 
