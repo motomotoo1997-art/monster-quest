@@ -6,19 +6,20 @@
 [ext_resource type="Script" path="res://scripts/components/hurtbox_component.gd" id="4_hurtbox"]
 [ext_resource type="Script" path="res://scripts/components/weapon_component.gd" id="5_weapon"]
 [ext_resource type="PackedScene" path="res://scenes/combat/Projectile.tscn" id="6_projectile"]
-[ext_resource type="Texture2D" path="res://assets/sprites/enemies/enemies.svg" id="7_texture"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/enemies_v2.svg" id="7_texture"]
 [ext_resource type="Script" path="res://scripts/components/gold_drop_component.gd" id="8_gold_drop"]
 [ext_resource type="PackedScene" path="res://scenes/combat/GoldPickup.tscn" id="9_gold_pickup"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_enemy"]
-radius = 17.0
+radius = 19.0
 [sub_resource type="AtlasTexture" id="AtlasTexture_enemy"]
 atlas = ExtResource("7_texture")
-region = Rect2(320, 0, 320, 320)
+region = Rect2(384, 0, 384, 384)
 [sub_resource type="SpriteFrames" id="SpriteFrames_enemy"]
-animations = [{"frames": [{"duration": 1.0, "texture": SubResource("AtlasTexture_enemy")}], "loop": true, "name": &"idle", "speed": 5.0}, {"frames": [{"duration": 1.0, "texture": SubResource("AtlasTexture_enemy")}], "loop": true, "name": &"attack", "speed": 8.0}]
+animations = [{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_enemy")}],"loop":true,"name":&"idle","speed":5.0},{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_enemy")}],"loop":true,"name":&"attack","speed":8.0}]
 
 [node name="GoldCoinSentinel" type="CharacterBody2D" groups=["enemies"]]
+z_index = 3
 collision_layer = 1
 collision_mask = 1
 script = ExtResource("1_enemy")
@@ -31,28 +32,28 @@ prefer_core_weight = 0.58
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_enemy")
 [node name="Shadow" type="Polygon2D" parent="."]
-position = Vector2(0, 14)
-polygon = PackedVector2Array(-22, 0, -14, -6, 14, -6, 22, 0, 14, 6, -14, 6)
-color = Color(0.06, 0.035, 0.02, 0.22)
+position = Vector2(0,18)
+polygon = PackedVector2Array(-31,0,-20,-9,20,-9,31,0,20,9,-20,9)
+color = Color(0.04,0.025,0.015,0.29)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -27)
+position = Vector2(0,-48)
 sprite_frames = SubResource("SpriteFrames_enemy")
 animation = &"idle"
-scale = Vector2(0.32, 0.32)
+scale = Vector2(0.39,0.39)
 [node name="Telegraph" type="Polygon2D" parent="."]
 visible = false
-polygon = PackedVector2Array(-22, 0, -15, -15, 0, -22, 15, -15, 22, 0, 15, 15, 0, 22, -15, 15)
-color = Color(1, 0.25, 0.05, 0.55)
+polygon = PackedVector2Array(-32,0,-23,-23,0,-33,23,-23,32,0,23,23,0,33,-23,23)
+color = Color(1,0.20,0.04,0.42)
 show_behind_parent = true
 [node name="Muzzle" type="Marker2D" parent="."]
-position = Vector2(19, 0)
+position = Vector2(47,-14)
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_health")
 max_health = 52.0
 [node name="TeamComponent" type="Node" parent="."]
 script = ExtResource("3_team")
 team = 1
-[node name="HurtboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component_path", "team_component_path")]
+[node name="HurtboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component_path","team_component_path")]
 collision_layer = 2
 collision_mask = 0
 monitoring = false
