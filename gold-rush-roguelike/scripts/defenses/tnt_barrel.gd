@@ -10,28 +10,46 @@ signal exploded(world_position: Vector2)
 var _arm_remaining := 0.0
 var _armed := false
 var _exploded := false
+var _visual_time := 0.0
+var _visual_base_scale := Vector2.ONE
 
 @onready var trigger_area: Area2D = $TriggerArea
 @onready var blast_area: Area2D = $BlastArea
+@onready var visual: Sprite2D = $Visual
 
 
 func _ready() -> void:
 	super()
 	_arm_remaining = arm_delay
+	_visual_base_scale = visual.scale
 	trigger_area.area_entered.connect(_on_trigger_area_entered)
 
 
 func _physics_process(delta: float) -> void:
-	if _armed or _exploded:
+	if _exploded:
 		return
-	_arm_remaining = maxf(_arm_remaining - delta, 0.0)
-	if _arm_remaining <= 0.0:
-		_armed = true
+	_visual_time += delta
+	if not _armed:
+		_arm_remaining = maxf(_arm_remaining - delta, 0.0)
+		if _arm_remaining <= 0.0:
+			_armed = true
+	_update_visual()
 
 
 func trigger() -> void:
 	if _armed and not _exploded:
 		_explode()
+
+
+func _update_visual() -> void:
+	if not _armed:
+		var prearm := 1.0 + sin(_visual_time * 5.0) * 0.015
+		visual.scale = _visual_base_scale * prearm
+		visual.modulate = Color.WHITE
+		return
+	var pulse := 0.5 + 0.5 * sin(_visual_time * 12.0)
+	visual.scale = _visual_base_scale * (1.0 + pulse * 0.08)
+	visual.modulate = Color(1.0, 0.72 + pulse * 0.28, 0.52 + pulse * 0.38, 1.0)
 
 
 func _on_trigger_area_entered(area: Area2D) -> void:
