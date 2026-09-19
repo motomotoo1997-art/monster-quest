@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1536" viewBox="0 0 1536 1536">
+<defs>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff2a2"/><stop offset=".2" stop-color="#ffc52b"/><stop offset=".55" stop-color="#d8890d"/><stop offset="1" stop-color="#7b3d09"/></linearGradient>
+ <linearGradient id="goldDark" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#d99720"/><stop offset="1" stop-color="#71380b"/></linearGradient>
+ <linearGradient id="steel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#91a3a4"/><stop offset=".42" stop-color="#455457"/><stop offset="1" stop-color="#172326"/></linearGradient>
+ <linearGradient id="molten" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff4a4"/><stop offset=".2" stop-color="#ffc42d"/><stop offset=".58" stop-color="#f07b0d"/><stop offset="1" stop-color="#8f2808"/></linearGradient>
+ <radialGradient id="cyan"><stop stop-color="#fff"/><stop offset=".18" stop-color="#b8ffff"/><stop offset=".55" stop-color="#20dff0"/><stop offset="1" stop-color="#05687e"/></radialGradient>
+ <radialGradient id="hot"><stop stop-color="#fffbe0"/><stop offset=".2" stop-color="#ffe864"/><stop offset=".55" stop-color="#ff9b18"/><stop offset="1" stop-color="#d13c08"/></radialGradient>
+ <filter id="soft" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="8"/></filter>
+ <g id="hopper">
+  <path d="M-68 22L-82-19-56-63-14-83 38-72 74-35 70 17 42 54-9 67-52 52Z" fill="url(#gold)" stroke="#38230d" stroke-width="9" stroke-linejoin="round"/>
+  <path d="M-56-46L-18-68 28-61 56-33 28-26-8-34Z" fill="#ffd85a" opacity=".82"/>
+  <path d="M-53 7L-23-25 18-20 52 6 30 42-13 50Z" fill="#c6760a" opacity=".54"/>
+  <path d="M-64-8L-38-4-27 17-49 29-67 16Z" fill="#8f4d09" opacity=".55"/>
+  <circle cx="-23" cy="-10" r="12" fill="#2a251c" stroke="#6b3d0d" stroke-width="5"/><circle cx="-19" cy="-14" r="4" fill="#fff6b8"/>
+  <circle cx="29" cy="-7" r="12" fill="#2a251c" stroke="#6b3d0d" stroke-width="5"/><circle cx="33" cy="-11" r="4" fill="#fff6b8"/>
+  <path d="M-12 21Q4 32 20 18" fill="none" stroke="#56310d" stroke-width="6" stroke-linecap="round"/>
+  <path d="M-48 50L-69 72-45 83-22 61M35 51L59 72 38 84 13 62" fill="url(#goldDark)" stroke="#38230d" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M-48-53L-29-68M6-69L32-59M45-40L57-21" stroke="#fff3ad" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+ </g>
+ <g id="sentinel">
+  <path d="M-63 51L-78 6-67-46-37-74 10-82 49-63 72-24 69 28 43 65-6 78Z" fill="url(#steel)" stroke="#291d12" stroke-width="9"/>
+  <circle cy="-24" r="58" fill="url(#goldDark)" stroke="#3d250e" stroke-width="8"/>
+  <circle cy="-24" r="43" fill="url(#gold)" stroke="#8b510c" stroke-width="5"/>
+  <path d="M-34-49Q0-70 34-49M-40-5Q0 17 40-5" fill="none" stroke="#fff0a2" stroke-width="5" opacity=".72"/>
+  <rect x="-40" y="35" width="80" height="36" rx="12" fill="#354548" stroke="#211915" stroke-width="7"/>
+  <circle cx="-21" cy="53" r="7" fill="url(#cyan)"/><circle cx="21" cy="53" r="7" fill="url(#cyan)"/>
+  <path d="M49-38L99-31 117-13 109 14 55 13Z" fill="url(#steel)" stroke="#261c14" stroke-width="8"/>
+  <rect x="92" y="-25" width="37" height="32" rx="6" fill="url(#gold)" stroke="#3c250d" stroke-width="6"/>
+  <circle cx="118" cy="-9" r="8" fill="url(#cyan)" stroke="#14353a" stroke-width="4"/>
+  <path d="M-74-9L-100 11-88 28-63 18M-63 57L-80 87-54 94-33 68M43 58L58 90 84 80 66 48" fill="url(#goldDark)" stroke="#35220f" stroke-width="7"/>
+  <path d="M-22-46L5-56M13-52L35-39" stroke="#fff6bd" stroke-width="5" stroke-linecap="round"/>
+ </g>
+ <g id="disc">
+  <ellipse cy="23" rx="95" ry="34" fill="#28373a" stroke="#1c1713" stroke-width="9"/>
+  <path d="M-90 14Q-65-31 0-40Q66-31 91 14Q55 44 0 49Q-56 44-90 14Z" fill="url(#gold)" stroke="#3b250e" stroke-width="8"/>
+  <path d="M-57-7Q-35-54 0-61Q38-53 59-7Z" fill="url(#steel)" stroke="#251c15" stroke-width="8"/>
+  <ellipse cy="-12" rx="29" ry="18" fill="url(#cyan)" stroke="#16383d" stroke-width="6"/>
+  <path d="M-68 17Q0 37 68 17" fill="none" stroke="#fff1a1" stroke-width="5" opacity=".7"/>
+  <circle cx="-59" cy="27" r="8" fill="url(#cyan)"/><circle cx="0" cy="37" r="8" fill="url(#cyan)"/><circle cx="59" cy="27" r="8" fill="url(#cyan)"/>
+  <path d="M-40-34L-20-49M22-48L41-33" stroke="#dce7e3" stroke-width="5" stroke-linecap="round" opacity=".7"/>
+  <path d="M-80 46L-45 62M80 46L45 62" stroke="#20dff0" stroke-width="8" stroke-linecap="round" opacity=".45"/>
+ </g>
+ <g id="slime">
+  <path d="M-85 53Q-95 20-72-3Q-79-45-43-62Q-22-92 9-71Q46-84 61-50Q90-33 76 1Q98 28 78 57Q49 73 20 63Q-4 82-28 64Q-61 77-85 53Z" fill="url(#molten)" stroke="#4b240b" stroke-width="9"/>
+  <path d="M-63 20Q-42-9-20 5Q0-28 24-6Q49-20 63 12Q50 48 18 46Q-10 63-34 43Z" fill="#ffb21c" opacity=".72"/>
+  <path d="M-49-37Q-30-63-7-52M18-52Q39-56 51-32" fill="none" stroke="#fff5a7" stroke-width="6" stroke-linecap="round"/>
+  <ellipse cx="-25" cy="7" rx="11" ry="15" fill="#3b2617"/><ellipse cx="27" cy="7" rx="11" ry="15" fill="#3b2617"/>
+  <circle cx="-22" cy="3" r="4" fill="#fff6bc"/><circle cx="30" cy="3" r="4" fill="#fff6bc"/>
+  <path d="M-13 32Q4 42 19 29" fill="none" stroke="#6b2e0b" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="0" cy="-20" r="18" fill="url(#hot)" opacity=".88"/>
+  <path d="M-67 56Q-58 88-39 62M39 61Q54 89 65 55M2 64Q7 91 20 66" fill="url(#molten)" stroke="#4b240b" stroke-width="7"/>
+ </g>
+</defs>
+
+<!-- row 1: GoldHopper -->
+<g transform="translate(192 204)"><use href="#hopper"/></g>
+<g transform="translate(576 192) scale(1.05 .88)"><use href="#hopper"/></g>
+<g transform="translate(960 174) rotate(-5) scale(.94 1.08)"><use href="#hopper"/></g>
+<g transform="translate(1344 201) rotate(4) scale(1.02 .96)"><use href="#hopper"/></g>
+
+<!-- row 2: Sentinel -->
+<g transform="translate(192 584)"><use href="#sentinel"/></g>
+<g transform="translate(576 578) rotate(-3)"><use href="#sentinel"/></g>
+<g transform="translate(960 584) rotate(3)"><use href="#sentinel"/></g>
+<g transform="translate(1344 582)"><use href="#sentinel"/><circle cx="122" cy="-9" r="28" fill="url(#cyan)" opacity=".22" filter="url(#soft)"/></g>
+
+<!-- row 3: Flying Disc -->
+<g transform="translate(192 970)"><use href="#disc"/></g>
+<g transform="translate(576 966) rotate(-5) scale(1 .94)"><use href="#disc"/></g>
+<g transform="translate(960 962) rotate(5) scale(1 .92)"><use href="#disc"/></g>
+<g transform="translate(1344 968)"><use href="#disc"/><circle cy="-12" r="40" fill="url(#cyan)" opacity=".18" filter="url(#soft)"/></g>
+
+<!-- row 4: Molten Slime -->
+<g transform="translate(192 1356)"><use href="#slime"/></g>
+<g transform="translate(576 1364) scale(1.08 .88)"><use href="#slime"/></g>
+<g transform="translate(960 1348) scale(.92 1.1)"><use href="#slime"/></g>
+<g transform="translate(1344 1362) rotate(3) scale(1.06 .91)"><use href="#slime"/></g>
+</svg>
