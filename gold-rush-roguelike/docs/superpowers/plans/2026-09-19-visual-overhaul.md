@@ -129,7 +129,9 @@ tests/                           visual/runtime regression contracts
 - [x] **Step 6: Run arena identity, run-flow, depth-sort and build-zone tests GREEN; run full CI.**
 - [x] **Step 7: Commit.** `art: give arenas 02-04 distinct frontier identities`
 
-**Progress evidence:** Tasks 1-3 GREEN through CI run `35466282491`; Windows export succeeded.\n\n### Task 4: Arena05 Foundry Boss Environment
+**Progress evidence:** Tasks 1-3 GREEN through CI run `35466282491`; Windows export succeeded.
+
+### Task 4: Arena05 Foundry Boss Environment
 
 **Files:**
 - Create: `assets/environment/arena05_molten_foundry_v6.svg`
