@@ -59,8 +59,12 @@ func _run_test() -> void:
 			_fail("Visual is too large/composition regression: %s" % entry.scene)
 			return
 		if instance is EnemyBase:
-			if instance.z_index < 3:
-				_fail("Enemy readability z-index regressed: %s" % entry.scene)
+			if instance is FlyingGoldDisc:
+				if instance.z_index <= 0:
+					_fail("Flying enemy must stay above the grounded Y-sort layer: %s" % entry.scene)
+					return
+			elif instance.z_index != 0:
+				_fail("Ground enemy must remain on the shared arena Y-sort z-index: %s" % entry.scene)
 				return
 			if entry.has("min_separation") and instance.separation_radius < float(entry.min_separation):
 				_fail("Enemy crowd separation regressed: %s" % entry.scene)
