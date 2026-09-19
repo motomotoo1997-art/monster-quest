@@ -35,45 +35,48 @@ jobs:
 
       - name: Health and teams
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_health_and_teams.gd
-
       - name: Weapon and projectile
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_weapon_and_projectile.gd
-
       - name: Economy and building
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_economy_and_building.gd
-
       - name: Enemy gold drops
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_enemy_gold_drops.gd
-
       - name: Run economy budget
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_run_economy_budget.gd
-
       - name: Roguelike upgrades
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_upgrades.gd
-
       - name: Run flow and boss state
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_run_flow.gd
-
       - name: Arena multiwave pacing
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_arena_multiwave_pacing.gd
-
       - name: Full five-arena victory flow
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_full_run_progression.gd
-
       - name: Wave lifecycle regression
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_wave_lifecycle.gd
-
       - name: Gold Bar Tank laser regression
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_boss_laser.gd
-
       - name: Gold Bar Tank presentation regression
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_boss_presentation.gd
-
       - name: Visual asset readability regression
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_visual_asset_contract.gd
-
       - name: Main scene smoke test
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/smoke_main_scene.gd
+
+      - name: Capture gameplay preview
+        shell: bash
+        run: |
+          set -euo pipefail
+          command -v xvfb-run >/dev/null || { sudo apt-get update -qq && sudo apt-get install -y -qq xvfb; }
+          timeout 35s xvfb-run -a godot --path gold-rush-roguelike --rendering-method gl_compatibility --script res://tests/capture_gameplay_preview.gd
+          test -s /tmp/gold-rush-gameplay-preview.png
+
+      - name: Upload gameplay preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: GoldRushRoguelike-Gameplay-Preview
+          path: /tmp/gold-rush-gameplay-preview.png
+          if-no-files-found: error
+          retention-days: 14
 
       - name: Install Godot export templates
         shell: bash
