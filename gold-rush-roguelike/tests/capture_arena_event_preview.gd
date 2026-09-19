@@ -18,6 +18,9 @@ func _capture() -> void:
 	main.arena_controller.load_arena(4)
 	await process_frame
 	main.wave_director.clear_wave()
+	# This is a staged visual QA shot, not a live wave. Prevent WaveDirector from
+	# auto-completing the cleared wave and replacing the authored event.
+	main.wave_director.current_wave_number = 0
 	main.arena_event_controller.start_wave_event(4,3)
 
 	var enemy_scenes: Array[PackedScene] = [main.slime_scene,main.sentinel_scene,main.disc_scene]
