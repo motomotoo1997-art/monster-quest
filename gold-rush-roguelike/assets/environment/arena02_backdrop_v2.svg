@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<defs><linearGradient id="sand" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#e2b56a"/><stop offset="1" stop-color="#bd7139"/></linearGradient><linearGradient id="cliff" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#aa613d"/><stop offset=".5" stop-color="#73402d"/><stop offset="1" stop-color="#41251e"/></linearGradient><linearGradient id="wood" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#a76135"/><stop offset="1" stop-color="#4d2a1c"/></linearGradient></defs>
+<rect width="1280" height="720" fill="url(#sand)"/>
+<path d="M0 0H1280V116Q1138 82 1010 107Q878 76 751 108Q611 72 488 105Q315 71 0 116Z" fill="#f1d59a" opacity=".62"/>
+<!-- tall side canyon -->
+<path d="M0 118L74 102L116 141L96 199L145 242L112 313L151 361L109 421L143 486L106 546L137 617L84 677L0 720Z" fill="url(#cliff)" stroke="#603626" stroke-width="9"/>
+<path d="M1280 112L1204 105L1166 148L1189 205L1142 251L1171 314L1136 371L1175 432L1144 497L1178 555L1140 621L1199 680L1280 720Z" fill="url(#cliff)" stroke="#603626" stroke-width="9"/>
+<path d="M20 153l48-20 22 24-34 39 28 38-30 52M1255 148l-43-17-25 30 31 38-25 41 26 49" fill="none" stroke="#d58b55" stroke-width="9" opacity=".45"/>
+<!-- forked paths -->
+<path d="M142 348Q355 315 515 357Q684 402 816 298Q988 166 1140 210L1160 318Q1000 296 861 382Q694 490 523 426Q350 363 143 431Z" fill="#efc67f" opacity=".38"/>
+<path d="M524 357Q684 302 734 164Q764 89 843 89L920 115Q807 177 796 278" fill="#f3cd87" opacity=".24"/>
+<!-- old timber bridge over dry cut -->
+<path d="M577 117Q662 163 746 116L744 150Q662 194 579 151Z" fill="#5a3323" opacity=".45"/>
+<g stroke="url(#wood)" stroke-width="12" stroke-linecap="round"><path d="M584 125L590 164M616 137L620 174M649 145L650 181M681 143L680 179M713 133L710 171M740 122L734 160"/></g>
+<path d="M570 116Q661 157 755 111M574 154Q661 194 748 151" fill="none" stroke="#3d271d" stroke-width="5"/>
+<!-- distant mine entrance -->
+<g transform="translate(900 58)"><path d="M0 94Q50 24 102 94V150H0Z" fill="#473129" stroke="#39251e" stroke-width="8"/><path d="M18 94Q50 54 83 94V150H18Z" fill="#161513"/><path d="M-12 90H113M2 87V151M99 87V151" stroke="#8a5130" stroke-width="12"/><path d="M-8 87L51 31L109 87" fill="none" stroke="#8a5130" stroke-width="12"/></g>
+<!-- rail remnants -->
+<g stroke="#4d4a43" stroke-width="5" opacity=".55"><path d="M873 580L1115 664M887 560L1128 644"/><g stroke-width="4"><path d="M892 566l-12 27M929 580l-13 27M967 593l-13 28M1006 607l-13 28M1046 621l-13 28M1086 635l-13 28"/></g></g>
+<!-- cracks/stones -->
+<g fill="none" stroke="#945a32" stroke-width="4" opacity=".65"><path d="M275 230l19 18 22-6 17 22 25 3M296 247l-8 18"/><path d="M879 455l20-24 24 5 16-19 27 6M905 434l1-19"/><path d="M419 568l20-20 20 7 20-15"/></g>
+<g fill="#8c5b3d" opacity=".8"><ellipse cx="226" cy="471" rx="10" ry="6"/><ellipse cx="354" cy="276" rx="7" ry="4"/><ellipse cx="482" cy="499" rx="11" ry="6"/><ellipse cx="786" cy="523" rx="8" ry="5"/><ellipse cx="1005" cy="395" rx="10" ry="6"/></g>
+</svg>
