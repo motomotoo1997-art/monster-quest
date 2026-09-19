@@ -13,6 +13,8 @@ corner_radius_top_left = 14
 corner_radius_top_right = 14
 corner_radius_bottom_right = 14
 corner_radius_bottom_left = 14
+shadow_color = Color(0,0,0,0.48)
+shadow_size = 10
 
 [sub_resource type="StyleBoxFlat" id="ButtonNormal"]
 bg_color = Color(0.16, 0.12, 0.08, 1)
@@ -29,6 +31,8 @@ content_margin_left = 16.0
 content_margin_top = 18.0
 content_margin_right = 16.0
 content_margin_bottom = 18.0
+shadow_color = Color(0,0,0,0.28)
+shadow_size = 5
 
 [sub_resource type="StyleBoxFlat" id="ButtonHover"]
 bg_color = Color(0.24, 0.17, 0.09, 1)
