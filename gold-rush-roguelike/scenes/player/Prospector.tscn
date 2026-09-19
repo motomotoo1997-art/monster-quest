@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://scripts/components/hurtbox_component.gd" id="4_hurtbox"]
 [ext_resource type="Script" path="res://scripts/components/weapon_component.gd" id="5_weapon"]
 [ext_resource type="PackedScene" path="res://scenes/combat/Projectile.tscn" id="6_projectile"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/prospector_animation_v3.svg" id="7_texture"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/prospector_reference_v4.webp" id="7_texture"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_player"]
 radius = 13.0
@@ -14,46 +14,46 @@ height = 34.0
 
 [sub_resource type="AtlasTexture" id="Atlas_idle_0"]
 atlas = ExtResource("7_texture")
-region = Rect2(0, 0, 384, 384)
+region = Rect2(0, 0, 192, 192)
 [sub_resource type="AtlasTexture" id="Atlas_idle_1"]
 atlas = ExtResource("7_texture")
-region = Rect2(384, 0, 384, 384)
+region = Rect2(192, 0, 192, 192)
 [sub_resource type="AtlasTexture" id="Atlas_idle_2"]
 atlas = ExtResource("7_texture")
-region = Rect2(768, 0, 384, 384)
+region = Rect2(384, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="Atlas_move_0"]
 atlas = ExtResource("7_texture")
-region = Rect2(0, 384, 384, 384)
+region = Rect2(0, 192, 192, 192)
 [sub_resource type="AtlasTexture" id="Atlas_move_1"]
 atlas = ExtResource("7_texture")
-region = Rect2(384, 384, 384, 384)
+region = Rect2(192, 192, 192, 192)
 [sub_resource type="AtlasTexture" id="Atlas_move_2"]
 atlas = ExtResource("7_texture")
-region = Rect2(768, 384, 384, 384)
+region = Rect2(384, 192, 192, 192)
 [sub_resource type="AtlasTexture" id="Atlas_move_3"]
 atlas = ExtResource("7_texture")
-region = Rect2(1152, 384, 384, 384)
+region = Rect2(576, 192, 192, 192)
 
 [sub_resource type="AtlasTexture" id="Atlas_attack_0"]
 atlas = ExtResource("7_texture")
-region = Rect2(0, 768, 384, 384)
+region = Rect2(0, 384, 192, 192)
 [sub_resource type="AtlasTexture" id="Atlas_attack_1"]
 atlas = ExtResource("7_texture")
-region = Rect2(384, 768, 384, 384)
+region = Rect2(192, 384, 192, 192)
 [sub_resource type="AtlasTexture" id="Atlas_attack_2"]
 atlas = ExtResource("7_texture")
-region = Rect2(768, 768, 384, 384)
+region = Rect2(384, 384, 192, 192)
 [sub_resource type="AtlasTexture" id="Atlas_attack_3"]
 atlas = ExtResource("7_texture")
-region = Rect2(1152, 768, 384, 384)
+region = Rect2(576, 384, 192, 192)
 
 [sub_resource type="AtlasTexture" id="Atlas_hit_0"]
 atlas = ExtResource("7_texture")
-region = Rect2(0, 1152, 384, 384)
+region = Rect2(0, 576, 192, 192)
 [sub_resource type="AtlasTexture" id="Atlas_hit_1"]
 atlas = ExtResource("7_texture")
-region = Rect2(384, 1152, 384, 384)
+region = Rect2(192, 576, 192, 192)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_player"]
 animations = [{"frames":[{"duration":1.0,"texture":SubResource("Atlas_idle_0")},{"duration":1.0,"texture":SubResource("Atlas_idle_1")},{"duration":1.0,"texture":SubResource("Atlas_idle_2")}],"loop":true,"name":&"idle","speed":5.5},{"frames":[{"duration":1.0,"texture":SubResource("Atlas_move_0")},{"duration":1.0,"texture":SubResource("Atlas_move_1")},{"duration":1.0,"texture":SubResource("Atlas_move_2")},{"duration":1.0,"texture":SubResource("Atlas_move_3")}],"loop":true,"name":&"move","speed":9.0},{"frames":[{"duration":1.0,"texture":SubResource("Atlas_attack_0")},{"duration":1.0,"texture":SubResource("Atlas_attack_1")},{"duration":1.0,"texture":SubResource("Atlas_attack_2")},{"duration":1.0,"texture":SubResource("Atlas_attack_3")}],"loop":false,"name":&"attack","speed":12.0},{"frames":[{"duration":1.0,"texture":SubResource("Atlas_hit_0")},{"duration":1.0,"texture":SubResource("Atlas_hit_1")}],"loop":false,"name":&"hit","speed":8.0},{"frames":[{"duration":1.0,"texture":SubResource("Atlas_attack_0")},{"duration":1.0,"texture":SubResource("Atlas_attack_3")}],"loop":false,"name":&"ability","speed":7.0}]
