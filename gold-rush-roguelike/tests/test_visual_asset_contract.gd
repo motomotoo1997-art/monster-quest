@@ -132,15 +132,12 @@ func _run_test() -> void:
 	if dust.amount < 20 or dust.lifetime < 2.0:
 		_fail("Arena01 ambient dust is too sparse to create depth")
 		return
-	var fidelity_props := ["CactusNW","CactusWest","CactusSouth","CactusEast","RocksNorth","RocksEast","RailA","MineCart","CratesNW","GoldVein","GoldVeinSouth"]
-	var visible_fidelity_props := 0
-	for prop_name in fidelity_props:
-		var prop := arena.get_node_or_null(prop_name) as Node2D
-		if prop != null and prop.visible:
-			visible_fidelity_props += 1
-	if visible_fidelity_props < 9:
-		_fail("Arena01 needs at least nine visible layered western/gold props for reference-level scene density")
-		return
+	var frontier_buildings := ["Saloon","SheriffOffice","FrontierBank","GeneralStore"]
+	for building_name in frontier_buildings:
+		var building := arena.get_node_or_null(building_name) as Sprite2D
+		if building == null or not building.visible or building.texture == null:
+			_fail("Arena01 replacement town building must be visible and textured: %s" % building_name)
+			return
 	arena.queue_free()
 	await process_frame
 
