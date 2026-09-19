@@ -19,11 +19,13 @@ var _attack_cooldown_remaining := 0.0
 var _visual_time := 0.0
 var _visual_base_position := Vector2.ZERO
 var _visual_base_scale := Vector2.ONE
+var _elite_applied := false
 
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var team_component: TeamComponent = $TeamComponent
 @onready var hurtbox_component: HurtboxComponent = $HurtboxComponent
 @onready var visual_sprite: AnimatedSprite2D = get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
+@onready var elite_aura: CanvasItem = get_node_or_null("EliteAura") as CanvasItem
 
 
 func _ready() -> void:
@@ -82,6 +84,33 @@ func set_movement_enabled(enabled: bool) -> void:
 		velocity = Vector2.ZERO
 
 
+func apply_elite_modifier() -> void:
+	if _elite_applied:
+		return
+	_elite_applied = true
+	add_to_group("elite_enemies")
+	move_speed *= 1.08
+	contact_damage *= 1.25
+	attack_cooldown *= 0.84
+	gold_value = maxi(int(round(float(gold_value) * 2.4)), gold_value + 1)
+	if health_component != null:
+		health_component.max_health *= 1.65
+		health_component.reset_health()
+	var drop := get_node_or_null("GoldDropComponent") as GoldDropComponent
+	if drop != null:
+		drop.gold_amount = gold_value
+	var weapon := get_node_or_null("WeaponComponent") as WeaponComponent
+	if weapon != null:
+		weapon.projectile_damage *= 1.25
+		weapon.cooldown_sec *= 0.84
+	if visual_sprite != null:
+		_visual_base_scale *= 1.08
+		visual_sprite.scale = _visual_base_scale
+		visual_sprite.self_modulate = Color(0.92, 1.0, 1.0, 1.0)
+	if elite_aura != null:
+		elite_aura.visible = true
+
+
 func _tick_behavior(_delta: float) -> void:
 	var target := choose_target()
 	if target == null:
@@ -107,6 +136,9 @@ func _update_visual(delta: float) -> void:
 	var bob := sin(_visual_time * 8.5) * 1.6 if moving else sin(_visual_time * 3.5) * 0.45
 	visual_sprite.position = _visual_base_position + Vector2(0.0, bob)
 	visual_sprite.scale = _visual_base_scale
+	if _elite_applied and elite_aura != null:
+		elite_aura.scale = Vector2.ONE * (1.0 + sin(_visual_time * 5.2) * 0.07)
+		elite_aura.modulate.a = 0.72 + sin(_visual_time * 4.4) * 0.18
 
 
 func _move_toward(world_position: Vector2, speed_multiplier: float = 1.0) -> void:
