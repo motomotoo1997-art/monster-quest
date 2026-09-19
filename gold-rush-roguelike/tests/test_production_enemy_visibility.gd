@@ -17,7 +17,10 @@ func _run_test() -> void:
 	await physics_frame
 	var enemies := get_nodes_in_group("enemies")
 	if enemies.size() < 3:
-		_fail("Production Arena01 must show an opening enemy group immediately; found %d" % enemies.size())
+		var arena_ready := main.arena_controller.current_arena != null
+		var director_ready := main.wave_director.arena_controller != null
+		var marker_count := main.arena_controller.get_markers(&"enemy_spawn").size()
+		_fail("Production Arena01 must show an opening enemy group immediately; found=%d arena=%s director=%s markers=%d queue=%d spawning=%s wave=%d" % [enemies.size(),arena_ready,director_ready,marker_count,main.wave_director._spawn_queue.size(),main.wave_director._spawning_enabled,main.wave_director.current_wave_number])
 		return
 	var visible_count := 0
 	for node in enemies:
