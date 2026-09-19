@@ -10,6 +10,7 @@ class_name GoldRushMain
 @export var explosion_scene: PackedScene
 @export var muzzle_flash_scene: PackedScene
 @export var dust_burst_scene: PackedScene
+@export var enemy_death_burst_scene: PackedScene
 
 @onready var run_controller: RunController = $RunController
 @onready var arena_controller: ArenaController = $ArenaController
@@ -264,9 +265,20 @@ func _bind_enemy_feedback(enemy: EnemyBase) -> void:
 	if enemy == null:
 		return
 	enemy.hurtbox_component.hit_received.connect(_on_actor_hit.bind(enemy))
+	if not enemy.enemy_died.is_connected(_on_enemy_died):
+		enemy.enemy_died.connect(_on_enemy_died)
 	var weapon := enemy.get_node_or_null("WeaponComponent") as WeaponComponent
 	if weapon != null:
 		weapon.fired.connect(_on_projectile_fired)
+
+
+func _on_enemy_died(enemy: Node, _gold_value: int) -> void:
+	if enemy == null or not is_instance_valid(enemy):
+		return
+	var enemy_node := enemy as Node2D
+	if enemy_node == null:
+		return
+	_spawn_vfx(enemy_death_burst_scene, enemy_node.global_position)
 
 
 func _bind_defense_feedback(defense: DefenseBase) -> void:
