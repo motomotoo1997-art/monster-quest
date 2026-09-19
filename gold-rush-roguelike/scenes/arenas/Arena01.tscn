@@ -1,4 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/environment/CactusProp.tscn" id="1_cactus"]
+[ext_resource type="PackedScene" path="res://scenes/environment/RockClusterProp.tscn" id="2_rocks"]
+[ext_resource type="PackedScene" path="res://scenes/environment/MineCartProp.tscn" id="3_cart"]
+[ext_resource type="PackedScene" path="res://scenes/environment/GoldVeinProp.tscn" id="4_gold"]
 
 [sub_resource type="RectangleShape2D" id="BuildShape"]
 size = Vector2(1120, 560)
@@ -13,14 +18,29 @@ size = Vector2(80, 90)
 y_sort_enabled = true
 
 [node name="Ground" type="Polygon2D" parent="."]
-z_index = -20
+z_index = -30
 polygon = PackedVector2Array(0, 0, 1280, 0, 1280, 720, 0, 720)
-color = Color(0.61, 0.38, 0.2, 1)
+color = Color(0.43, 0.23, 0.13, 1)
 
-[node name="InnerSand" type="Polygon2D" parent="."]
-z_index = -19
-polygon = PackedVector2Array(70, 70, 1210, 70, 1210, 650, 70, 650)
-color = Color(0.79, 0.57, 0.31, 1)
+[node name="CanyonFloor" type="Polygon2D" parent="."]
+z_index = -29
+polygon = PackedVector2Array(54, 62, 1225, 52, 1238, 664, 61, 670)
+color = Color(0.76, 0.50, 0.25, 1)
+
+[node name="DustPath" type="Polygon2D" parent="."]
+z_index = -28
+polygon = PackedVector2Array(118, 309, 530, 280, 795, 300, 1189, 236, 1207, 456, 804, 416, 520, 444, 118, 419)
+color = Color(0.87, 0.67, 0.36, 0.56)
+
+[node name="CanyonNorth" type="Polygon2D" parent="."]
+z_index = -27
+polygon = PackedVector2Array(0,0,1280,0,1280,54,1150,73,1030,51,910,78,780,54,660,83,530,55,420,76,290,52,170,79,55,61,0,82)
+color = Color(0.34, 0.18, 0.12, 1)
+
+[node name="CanyonSouth" type="Polygon2D" parent="."]
+z_index = -27
+polygon = PackedVector2Array(0,635,70,658,180,640,300,674,430,647,560,683,690,653,820,681,950,649,1080,678,1195,649,1280,664,1280,720,0,720)
+color = Color(0.36, 0.19, 0.12, 1)
 
 [node name="BuildZone" type="Area2D" parent="." groups=["build_zone"]]
 position = Vector2(640, 360)
@@ -70,3 +90,27 @@ color = Color(0.41, 0.28, 0.19, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RockB"]
 shape = SubResource("RockShape2")
+
+[node name="CactusNW" parent="." instance=ExtResource("1_cactus")]
+position = Vector2(175, 178)
+scale = Vector2(0.82, 0.82)
+
+[node name="CactusSouth" parent="." instance=ExtResource("1_cactus")]
+position = Vector2(1045, 560)
+scale = Vector2(0.72, 0.72)
+
+[node name="RocksNorth" parent="." instance=ExtResource("2_rocks")]
+position = Vector2(600, 130)
+scale = Vector2(0.88, 0.88)
+
+[node name="RocksEast" parent="." instance=ExtResource("2_rocks")]
+position = Vector2(1100, 485)
+scale = Vector2(0.72, 0.72)
+
+[node name="MineCart" parent="." instance=ExtResource("3_cart")]
+position = Vector2(235, 535)
+rotation = -0.10
+
+[node name="GoldVein" parent="." instance=ExtResource("4_gold")]
+position = Vector2(966, 165)
+scale = Vector2(0.78, 0.78)
