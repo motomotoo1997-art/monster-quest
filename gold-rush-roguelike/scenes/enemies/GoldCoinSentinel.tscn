@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=15 format=3]
 
 [ext_resource type="Script" path="res://scripts/enemies/gold_coin_sentinel.gd" id="1_enemy"]
 [ext_resource type="Script" path="res://scripts/components/health_component.gd" id="2_health"]
@@ -6,17 +6,26 @@
 [ext_resource type="Script" path="res://scripts/components/hurtbox_component.gd" id="4_hurtbox"]
 [ext_resource type="Script" path="res://scripts/components/weapon_component.gd" id="5_weapon"]
 [ext_resource type="PackedScene" path="res://scenes/combat/Projectile.tscn" id="6_projectile"]
-[ext_resource type="Texture2D" path="res://assets/sprites/enemies/enemies_v2.svg" id="7_texture"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/enemies_animation_v3.svg" id="7_texture"]
 [ext_resource type="Script" path="res://scripts/components/gold_drop_component.gd" id="8_gold_drop"]
 [ext_resource type="PackedScene" path="res://scenes/combat/GoldPickup.tscn" id="9_gold_pickup"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_enemy"]
 radius = 19.0
-[sub_resource type="AtlasTexture" id="AtlasTexture_enemy"]
+[sub_resource type="AtlasTexture" id="Sentinel0"]
 atlas = ExtResource("7_texture")
-region = Rect2(384, 0, 384, 384)
+region = Rect2(0,384,384,384)
+[sub_resource type="AtlasTexture" id="Sentinel1"]
+atlas = ExtResource("7_texture")
+region = Rect2(384,384,384,384)
+[sub_resource type="AtlasTexture" id="Sentinel2"]
+atlas = ExtResource("7_texture")
+region = Rect2(768,384,384,384)
+[sub_resource type="AtlasTexture" id="Sentinel3"]
+atlas = ExtResource("7_texture")
+region = Rect2(1152,384,384,384)
 [sub_resource type="SpriteFrames" id="SpriteFrames_enemy"]
-animations = [{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_enemy")}],"loop":true,"name":&"idle","speed":5.0},{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_enemy")}],"loop":true,"name":&"attack","speed":8.0}]
+animations = [{"frames":[{"duration":1.0,"texture":SubResource("Sentinel0")},{"duration":1.0,"texture":SubResource("Sentinel1")},{"duration":1.0,"texture":SubResource("Sentinel2")}],"loop":true,"name":&"idle","speed":6.0},{"frames":[{"duration":1.0,"texture":SubResource("Sentinel0")},{"duration":1.0,"texture":SubResource("Sentinel2")},{"duration":1.0,"texture":SubResource("Sentinel1")}],"loop":true,"name":&"move","speed":8.0},{"frames":[{"duration":1.0,"texture":SubResource("Sentinel1")},{"duration":1.0,"texture":SubResource("Sentinel3")},{"duration":1.0,"texture":SubResource("Sentinel2")}],"loop":false,"name":&"attack","speed":10.0}]
 
 [node name="GoldCoinSentinel" type="CharacterBody2D" groups=["enemies"]]
 z_index = 5
