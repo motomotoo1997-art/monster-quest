@@ -5,10 +5,10 @@
 [ext_resource type="Script" path="res://scripts/components/team_component.gd" id="3_team"]
 [ext_resource type="Script" path="res://scripts/components/hurtbox_component.gd" id="4_hurtbox"]
 [ext_resource type="Script" path="res://scripts/components/weapon_component.gd" id="5_weapon"]
-[ext_resource type="PackedScene" path="res://scenes/combat/Projectile.tscn" id="6_projectile"]
+[ext_resource type="PackedScene" path="res://scenes/combat/BossProjectile.tscn" id="6_projectile"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/GoldHopper.tscn" id="7_hopper"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/FlyingGoldDisc.tscn" id="8_disc"]
-[ext_resource type="Texture2D" path="res://assets/sprites/enemies/boss_reference_v5.svg" id="9_texture"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/boss_frontier_juggernaut_v6.svg" id="9_texture"]
 [ext_resource type="Texture2D" path="res://assets/vfx/radial_energy_light.svg" id="10_light"]
 
 [sub_resource type="RectangleShape2D" id="BodyShape"]
@@ -111,7 +111,7 @@ width = 5.0
 default_color = Color(0.68,0.97,1,0.92)
 
 [node name="Muzzle" type="Marker2D" parent="."]
-position = Vector2(142,-95)
+position = Vector2(155,-100)
 [node name="ChargeTelegraph" type="Node2D" parent="."]
 position = Vector2(142,-95)
 visible = false
@@ -120,15 +120,21 @@ texture = ExtResource("10_light")
 texture_scale = 0.95
 energy = 1.45
 color = Color(1,0.28,0.06,1)
-[node name="BeamAura" type="Polygon2D" parent="ChargeTelegraph"]
-polygon = PackedVector2Array(0,-27,520,-15,520,15,0,27)
-color = Color(0.08,0.88,1,0.18)
-[node name="Beam" type="Polygon2D" parent="ChargeTelegraph"]
-polygon = PackedVector2Array(0,-17,520,-9,520,9,0,17)
-color = Color(0.08,0.82,1,0.48)
-[node name="BeamCore" type="Polygon2D" parent="ChargeTelegraph"]
-polygon = PackedVector2Array(0,-5,520,-4,520,4,0,5)
-color = Color(0.88,1,1,0.96)
+[node name="WarningLine" type="Line2D" parent="ChargeTelegraph"]
+points = PackedVector2Array(0,0,520,0)
+width = 4.0
+default_color = Color(1,0.56,0.08,0.72)
+antialiased = true
+[node name="BeamGlow" type="Line2D" parent="ChargeTelegraph"]
+points = PackedVector2Array(0,0,520,0)
+width = 28.0
+default_color = Color(1,0.25,0.03,0.08)
+antialiased = true
+[node name="BeamCore" type="Line2D" parent="ChargeTelegraph"]
+points = PackedVector2Array(0,0,520,0)
+width = 10.0
+default_color = Color(1,0.97,0.76,0.06)
+antialiased = true
 [node name="SlamTelegraph" type="Node2D" parent="."]
 visible = false
 [node name="SlamLight" type="PointLight2D" parent="SlamTelegraph"]
