@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1792" height="1344" viewBox="0 0 1792 1344">
+<defs>
+ <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#80dcff"/><stop offset=".32" stop-color="#338fc7"/><stop offset=".68" stop-color="#245b8d"/><stop offset="1" stop-color="#153149"/></linearGradient>
+ <linearGradient id="steel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#dce8ec"/><stop offset=".38" stop-color="#81939c"/><stop offset="1" stop-color="#2b373e"/></linearGradient>
+ <linearGradient id="rust" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#cf8138"/><stop offset=".52" stop-color="#82431f"/><stop offset="1" stop-color="#3e2117"/></linearGradient>
+ <linearGradient id="green" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b3e665"/><stop offset=".45" stop-color="#559d35"/><stop offset="1" stop-color="#24591f"/></linearGradient>
+ <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#c47b3c"/><stop offset="1" stop-color="#61321f"/></linearGradient>
+ <radialGradient id="cyan"><stop stop-color="#fff"/><stop offset=".24" stop-color="#96f9ff"/><stop offset=".58" stop-color="#2bd9f2"/><stop offset="1" stop-color="#08748a"/></radialGradient>
+ <filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ <g id="magnetic">
+  <ellipse cx="224" cy="397" rx="122" ry="20" fill="#1c1410" opacity=".28"/>
+  <g fill="url(#blue)" stroke="#17314a" stroke-width="9"><path d="M126 333L92 380L140 391L169 351Z"/><path d="M322 333L356 380L308 391L279 351Z"/><path d="M175 348L162 402L203 405L217 357Z"/><path d="M273 348L286 402L245 405L231 357Z"/></g>
+  <ellipse cx="224" cy="334" rx="104" ry="54" fill="url(#blue)" stroke="#17314a" stroke-width="10"/><ellipse cx="224" cy="326" rx="72" ry="34" fill="#1e4264" stroke="#142c43" stroke-width="7"/><circle cx="224" cy="327" r="28" fill="url(#cyan)" stroke="#0f4d60" stroke-width="7" filter="url(#glow)"/>
+  <path d="M164 283Q174 230 224 220Q274 230 284 283L273 315H175Z" fill="url(#steel)" stroke="#27343b" stroke-width="10"/><path d="M176 278Q190 245 224 240Q258 245 272 278" fill="none" stroke="#72cfff" stroke-width="8" opacity=".75"/>
+  <path d="M205 242L219 153L264 145L283 238Z" fill="#40515b" stroke="#26343b" stroke-width="10"/><path d="M252 157L315 119L337 139L282 189Z" fill="url(#steel)" stroke="#25333a" stroke-width="10"/><path d="M315 119L365 102L391 131L340 155Z" fill="url(#blue)" stroke="#17314a" stroke-width="10"/><rect x="360" y="105" width="46" height="39" rx="12" fill="#203f59" stroke="#122838" stroke-width="8"/><ellipse cx="404" cy="124" rx="17" ry="20" fill="url(#cyan)" stroke="#0d5365" stroke-width="6" filter="url(#glow)"/>
+ </g>
+ <g id="cactus">
+  <ellipse cx="224" cy="397" rx="103" ry="18" fill="#1e160d" opacity=".25"/>
+  <path d="M190 355Q181 300 187 235L151 255Q130 267 114 247L96 214Q88 197 105 188Q121 180 132 199L145 220L187 193L188 142Q188 101 224 101Q260 101 260 142L260 202L300 179L311 147Q317 129 334 135Q351 141 345 160L333 200Q329 215 316 223L261 254Q263 306 254 355Z" fill="url(#green)" stroke="#21491e" stroke-width="10"/>
+  <path d="M170 275Q224 295 278 275L273 318Q224 337 175 318Z" fill="#3e4a46" stroke="#222e2c" stroke-width="8"/><circle cx="224" cy="294" r="23" fill="url(#cyan)" stroke="#155264" stroke-width="6" filter="url(#glow)"/>
+  <path d="M224 224L291 193" stroke="#505f65" stroke-width="21" stroke-linecap="round"/><path d="M280 181L342 166L348 192L293 207Z" fill="url(#steel)" stroke="#202c32" stroke-width="8"/><ellipse cx="349" cy="179" rx="10" ry="13" fill="url(#cyan)" filter="url(#glow)"/>
+  <path d="M146 346Q224 381 302 346L291 391H158Z" fill="url(#rust)" stroke="#3a2519" stroke-width="9"/>
+ </g>
+ <g id="tnt">
+  <ellipse cx="224" cy="399" rx="89" ry="17" fill="#24140d" opacity=".26"/><rect x="146" y="175" width="156" height="202" rx="29" fill="#a93226" stroke="#4a1816" stroke-width="11"/><path d="M151 215h146M149 327h150" stroke="#462b27" stroke-width="17"/><rect x="169" y="230" width="110" height="79" rx="9" fill="#ead9a7" stroke="#513d28" stroke-width="6"/><text x="224" y="280" text-anchor="middle" font-family="sans-serif" font-weight="900" font-size="43" fill="#782118">TNT</text>
+  <rect x="116" y="126" width="86" height="59" rx="10" fill="#34536a" stroke="#1d303e" stroke-width="8"/><circle cx="141" cy="154" r="12" fill="#17262e"/><circle cx="177" cy="154" r="12" fill="#17262e"/><circle cx="141" cy="154" r="6" fill="#34def2" filter="url(#glow)"/><circle cx="177" cy="154" r="6" fill="#f4b830"/>
+  <path d="M214 173Q202 134 229 111Q258 87 284 118" fill="none" stroke="#3d3328" stroke-width="8"/><path d="M277 116Q294 86 319 102Q342 118 330 143" fill="none" stroke="#ad6b2c" stroke-width="7"/><circle cx="330" cy="145" r="16" fill="#ffb52d" filter="url(#glow)"/><circle cx="330" cy="145" r="7" fill="#fff7b5"/>
+ </g>
+</defs>
+<!-- magnetic row -->
+<g transform="translate(0 0)"><use href="#magnetic"/></g>
+<g transform="translate(448 0)"><g transform="translate(0 -3) scale(1.01 .99)"><use href="#magnetic"/></g><circle cx="224" cy="327" r="40" fill="none" stroke="#6bf1ff" stroke-width="6" opacity=".42"/></g>
+<g transform="translate(896 0)"><g transform="rotate(-2 224 330)"><use href="#magnetic"/></g><path d="M406 124h31" stroke="#baffff" stroke-width="8" filter="url(#glow)"/></g>
+<g transform="translate(1344 0)"><g transform="translate(-6 3) rotate(-4 224 330)"><use href="#magnetic"/></g><polygon points="403,124 443,105 431,127 449,141 410,139" fill="#7af4ff" filter="url(#glow)"/></g>
+<!-- cactus row -->
+<g transform="translate(0 448)"><use href="#cactus"/></g>
+<g transform="translate(448 448)"><g transform="translate(0 -3) scale(1.015 .99)"><use href="#cactus"/></g><path d="M203 121q21-14 42 0" fill="none" stroke="#dff0a0" stroke-width="5" opacity=".55"/></g>
+<g transform="translate(896 448)"><g transform="translate(-4 2) rotate(-2 224 330)"><use href="#cactus"/></g><circle cx="365" cy="178" r="19" fill="#6df1ff" opacity=".65" filter="url(#glow)"/></g>
+<g transform="translate(1344 448)"><g transform="translate(-8 4) rotate(-4 224 330)"><use href="#cactus"/></g><polygon points="352,178 400,158 383,183 404,196 361,196" fill="#b9ffff" filter="url(#glow)"/></g>
+<!-- TNT row -->
+<g transform="translate(0 896)"><use href="#tnt"/></g>
+<g transform="translate(448 896)"><g transform="scale(1.01 .99) translate(-2 3)"><use href="#tnt"/></g><circle cx="330" cy="145" r="25" fill="none" stroke="#ffc657" stroke-width="6" opacity=".45"/></g>
+<g transform="translate(896 896)"><use href="#tnt"/><circle cx="330" cy="145" r="34" fill="#ff9f24" opacity=".28" filter="url(#glow)"/><path d="M315 128l-18-22M342 126l19-23" stroke="#ffe57d" stroke-width="7"/></g>
+<g transform="translate(1344 896)"><g transform="scale(1.04 .96) translate(-9 8)"><use href="#tnt"/></g><circle cx="330" cy="145" r="43" fill="#ffbe34" opacity=".43" filter="url(#glow)"/><g fill="#fff4a6"><circle cx="288" cy="112" r="6"/><circle cx="365" cy="120" r="7"/><circle cx="373" cy="161" r="5"/></g></g>
+</svg>
