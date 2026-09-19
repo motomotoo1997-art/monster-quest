@@ -52,7 +52,25 @@ func _run_test() -> void:
 			return
 		instance.queue_free()
 		await process_frame
-	print("PASS: reference-matched actor and defense visuals remain readable")
+
+	var arena_packed := load("res://scenes/arenas/Arena01.tscn") as PackedScene
+	if arena_packed == null:
+		_fail("Arena01 visual scene must load")
+		return
+	var arena := arena_packed.instantiate()
+	root.add_child(arena)
+	await process_frame
+	var dust := arena.get_node_or_null("AmbientDust") as CPUParticles2D
+	if dust == null:
+		_fail("Arena01 must contain AmbientDust CPUParticles2D atmosphere")
+		return
+	if dust.amount < 20 or dust.lifetime < 2.0:
+		_fail("Arena01 ambient dust is too sparse to create depth")
+		return
+	arena.queue_free()
+	await process_frame
+
+	print("PASS: reference-matched actor, defense and Arena01 atmosphere visuals remain readable")
 	quit(0)
 
 func _fail(message: String) -> void:
