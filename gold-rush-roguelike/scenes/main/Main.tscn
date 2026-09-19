@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3]
+[gd_scene load_steps=38 format=3]
 
 [ext_resource type="Script" path="res://scripts/main/main.gd" id="1_main"]
 [ext_resource type="Script" path="res://scripts/systems/run_controller.gd" id="2_run"]
@@ -36,6 +36,7 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/PauseOverlay.tscn" id="34_pause"]
 [ext_resource type="PackedScene" path="res://scenes/vfx/EnemyDeathBurst.tscn" id="35_death"]
 [ext_resource type="PackedScene" path="res://scenes/vfx/BossClimaxBurst.tscn" id="36_boss_death"]
+[ext_resource type="Script" path="res://scripts/systems/arena_event_controller.gd" id="37_events"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_main")
@@ -80,6 +81,11 @@ arena_controller_path = NodePath("../ArenaController")
 player_path = NodePath("../Actors/Prospector")
 core_path = NodePath("../Actors/GoldCore")
 gold_pickup_scene = ExtResource("21_gold")
+
+[node name="ArenaEventController" type="Node" parent="." node_paths=PackedStringArray("arena_controller_path")]
+script = ExtResource("37_events")
+arena_controller_path = NodePath("../ArenaController")
+explosion_scene = ExtResource("30_explosion")
 
 [node name="EconomyController" type="Node" parent="."]
 script = ExtResource("5_economy")
