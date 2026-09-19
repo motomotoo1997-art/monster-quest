@@ -2,7 +2,8 @@ extends SceneTree
 
 const OUTPUT_PATH := "/tmp/gold-rush-gameplay-preview.png"
 const MIN_ENEMIES_FOR_PREVIEW := 9
-const MAX_SPAWN_ATTEMPTS := 14
+const TARGET_ENEMIES_FOR_PREVIEW := 11
+const MAX_SPAWN_ATTEMPTS := 16
 
 func _init() -> void:
 	call_deferred("_capture")
@@ -26,14 +27,14 @@ func _capture() -> void:
 	await physics_frame
 	await physics_frame
 
-	# Build the starting Cactus through the real production build/economy path so the
-	# screenshot represents the shooter + tower-defense loop instead of staging a fake prop.
+	# Build the starting Cactus through the real production build/economy path. Prefer a
+	# forward position so it genuinely engages the incoming wave and emits production VFX.
 	main.build_controller.select_defense(2)
 	var built_defense := false
 	var build_candidates: Array[Vector2] = [
+		Vector2(900, 430),
+		Vector2(870, 400),
 		Vector2(645, 505),
-		Vector2(625, 535),
-		Vector2(930, 430),
 	]
 	for candidate in build_candidates:
 		if main.build_controller.confirm_build(candidate):
@@ -57,19 +58,19 @@ func _capture() -> void:
 		return
 
 	var spawn_attempts: int = 0
-	while main.wave_director.get_alive_enemy_count() < MIN_ENEMIES_FOR_PREVIEW and spawn_attempts < MAX_SPAWN_ATTEMPTS:
+	while main.wave_director.get_alive_enemy_count() < TARGET_ENEMIES_FOR_PREVIEW and spawn_attempts < MAX_SPAWN_ATTEMPTS:
 		main.wave_director._spawn_next()
 		await process_frame
 		spawn_attempts += 1
 
-	# Let targeting, sentry fire, y-sort and VFX settle into a genuine battle frame.
-	for _i in range(28):
+	# Let targeting, sentry fire, projectile trails, y-sort and ambient VFX settle.
+	for _i in range(48):
 		await process_frame
 	await RenderingServer.frame_post_draw
 
 	var enemy_count: int = main.wave_director.get_alive_enemy_count()
 	if enemy_count < MIN_ENEMIES_FOR_PREVIEW:
-		_fail("Gameplay preview never reached battle density: %d enemies (wave %d, attempts %d, markers %d)" % [enemy_count,main.wave_director.current_wave_number,spawn_attempts,markers.size()])
+		_fail("Gameplay preview never reached sustained battle density: %d enemies (wave %d, attempts %d, markers %d)" % [enemy_count,main.wave_director.current_wave_number,spawn_attempts,markers.size()])
 		return
 	var defenses := get_nodes_in_group("defenses")
 	if defenses.is_empty():
