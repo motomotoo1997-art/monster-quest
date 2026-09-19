@@ -59,8 +59,12 @@ func _run_test() -> void:
 		_fail("Boss warning line must remain thinner than the firing beam")
 		return
 	var slam_ring := boss.get_node_or_null("SlamTelegraph/Ring") as Polygon2D
-	if slam_ring == null or slam_ring.color.a < 0.20:
-		_fail("Boss slam warning must remain readable on the foundry floor")
+	var slam_outline := boss.get_node_or_null("SlamTelegraph/Outline") as Line2D
+	if slam_ring == null or slam_ring.color.a > 0.14:
+		_fail("Boss slam fill must stay translucent enough to preserve the silhouette")
+		return
+	if slam_outline == null or slam_outline.width < 4.0 or slam_outline.default_color.a < 0.60:
+		_fail("Boss slam warning needs a strong perimeter instead of an opaque floor wash")
 		return
 	boss.state = GoldBarTank.State.SLAM
 	boss.slam_telegraph.visible = true
