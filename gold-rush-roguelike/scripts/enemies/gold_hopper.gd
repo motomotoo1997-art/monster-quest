@@ -30,3 +30,21 @@ func _tick_behavior(delta: float) -> void:
 		_hop_cooldown_remaining = hop_interval
 	velocity = _get_separation_force() * 0.35
 	move_and_slide()
+
+
+func _update_visual(delta: float) -> void:
+	if visual_sprite == null:
+		return
+	_visual_time += delta
+	if absf(velocity.x) > 2.0:
+		visual_sprite.flip_h = velocity.x < 0.0
+	if _hop_remaining > 0.0:
+		var progress := clampf(1.0 - _hop_remaining / maxf(hop_duration, 0.001), 0.0, 1.0)
+		var arc := sin(progress * PI)
+		visual_sprite.position = _visual_base_position + Vector2(0.0, -24.0 * arc)
+		var stretch := 1.0 + 0.18 * arc
+		visual_sprite.scale = Vector2(_visual_base_scale.x / stretch, _visual_base_scale.y * stretch)
+	else:
+		var crouch := (sin(_visual_time * 5.5) + 1.0) * 0.5
+		visual_sprite.position = _visual_base_position + Vector2(0.0, 1.5 * crouch)
+		visual_sprite.scale = Vector2(_visual_base_scale.x * (1.0 + 0.05 * crouch), _visual_base_scale.y * (1.0 - 0.05 * crouch))
