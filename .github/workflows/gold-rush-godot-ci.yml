@@ -43,6 +43,8 @@ jobs:
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_enemy_gold_drops.gd
       - name: Elite enemy escalation
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_enemy_elite_modifier.gd
+      - name: Arena combat events
+        run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_arena_events.gd
       - name: Run economy budget
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_run_economy_budget.gd
       - name: Roguelike upgrades
