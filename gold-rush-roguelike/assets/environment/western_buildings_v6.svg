@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2048" height="512" viewBox="0 0 2048 512">
+<defs>
+ <linearGradient id="woodA" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#b76f3a"/><stop offset="1" stop-color="#754025"/></linearGradient>
+ <linearGradient id="woodB" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#d18b45"/><stop offset="1" stop-color="#8b4c29"/></linearGradient>
+ <linearGradient id="woodC" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#9c6a42"/><stop offset="1" stop-color="#5c3928"/></linearGradient>
+ <linearGradient id="brick" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#a85b3f"/><stop offset="1" stop-color="#6e382d"/></linearGradient>
+ <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#9ed5cf"/><stop offset=".5" stop-color="#426f70"/><stop offset="1" stop-color="#233f44"/></linearGradient>
+ <filter id="shadow"><feGaussianBlur stdDeviation="7"/></filter>
+ <g id="planks" stroke="#5a3423" stroke-width="3" opacity=".55"><path d="M0 0H330M0 28H330M0 56H330M0 84H330M0 112H330M0 140H330M0 168H330M0 196H330"/></g>
+ <g id="window"><rect x="-36" y="-46" width="72" height="92" rx="4" fill="url(#glass)" stroke="#33231b" stroke-width="8"/><path d="M0-42V42M-32 0H32" stroke="#d2b37a" stroke-width="5"/></g>
+ <g id="barrel"><path d="M-18-26Q0-34 18-26L15 26Q0 34-15 26Z" fill="#8b552d" stroke="#38251b" stroke-width="5"/><path d="M-17-13H17M-16 13H16" stroke="#30251f" stroke-width="5"/></g>
+</defs>
+<!-- SALOON -->
+<g transform="translate(0 0)">
+ <ellipse cx="256" cy="446" rx="205" ry="25" fill="#2a1b14" opacity=".30" filter="url(#shadow)"/>
+ <path d="M72 402V162H440V402Z" fill="url(#woodA)" stroke="#2f211a" stroke-width="10"/><g transform="translate(91 184)"><use href="#planks"/></g>
+ <path d="M92 162V88H420V162L388 137H124Z" fill="#9a552f" stroke="#2f211a" stroke-width="10"/>
+ <path d="M135 111H377" stroke="#d69a59" stroke-width="7"/><rect x="146" y="103" width="220" height="58" rx="8" fill="#3b271d" stroke="#241914" stroke-width="7"/>
+ <text x="256" y="143" text-anchor="middle" font-family="serif" font-size="37" font-weight="900" fill="#f0c676">SALOON</text>
+ <path d="M90 252H422" stroke="#3c291e" stroke-width="14"/><path d="M112 254V397M400 254V397" stroke="#4b3022" stroke-width="12"/>
+ <use href="#window" x="151" y="313"/><use href="#window" x="361" y="313"/>
+ <rect x="219" y="286" width="74" height="116" fill="#4b2d20" stroke="#2c1f19" stroke-width="8"/><path d="M223 320q33 22 66 0v52q-33-20-66 0Z" fill="#a55c35" stroke="#4b2b20" stroke-width="5"/>
+ <path d="M58 402H454L430 430H82Z" fill="#8a5a35" stroke="#36251d" stroke-width="8"/><path d="M82 414H430" stroke="#d29a5e" stroke-width="4"/>
+ <use href="#barrel" x="92" y="390"/><use href="#barrel" x="420" y="391"/>
+</g>
+<!-- SHERIFF -->
+<g transform="translate(512 0)">
+ <ellipse cx="256" cy="446" rx="198" ry="25" fill="#2a1b14" opacity=".30" filter="url(#shadow)"/>
+ <path d="M76 405V166H436V405Z" fill="url(#woodC)" stroke="#2f211a" stroke-width="10"/><g transform="translate(91 185)"><use href="#planks"/></g>
+ <path d="M92 166V82H420V166H392V121H120V166Z" fill="#73503a" stroke="#2f211a" stroke-width="10"/>
+ <rect x="142" y="101" width="228" height="61" rx="6" fill="#d2b06f" stroke="#33251c" stroke-width="7"/><text x="256" y="140" text-anchor="middle" font-family="serif" font-size="31" font-weight="900" fill="#3b2a20">SHERIFF</text>
+ <path d="M256 171l12 25 27 4-20 19 5 27-24-13-24 13 5-27-20-19 27-4Z" fill="#e4b94f" stroke="#4c341f" stroke-width="5"/>
+ <use href="#window" x="155" y="313"/><g transform="translate(155 313)" stroke="#2a2722" stroke-width="6"><path d="M-24-42V42M0-42V42M24-42V42"/></g>
+ <rect x="292" y="279" width="76" height="126" fill="#4a3025" stroke="#2a201a" stroke-width="8"/><rect x="309" y="300" width="42" height="45" fill="url(#glass)" stroke="#2a201a" stroke-width="5"/><circle cx="350" cy="365" r="5" fill="#d9b55b"/>
+ <path d="M60 405H452L430 432H82Z" fill="#76523a" stroke="#33251e" stroke-width="8"/>
+ <rect x="102" y="354" width="62" height="44" fill="#d8c18a" stroke="#3a2a21" stroke-width="5"/><text x="133" y="382" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="800" fill="#5a2f25">WANTED</text>
+</g>
+<!-- BANK -->
+<g transform="translate(1024 0)">
+ <ellipse cx="256" cy="446" rx="202" ry="25" fill="#2a1b14" opacity=".30" filter="url(#shadow)"/>
+ <path d="M70 405V170H442V405Z" fill="url(#brick)" stroke="#2f211a" stroke-width="10"/>
+ <g stroke="#69362c" stroke-width="3" opacity=".7"><path d="M82 205H430M82 240H430M82 275H430M82 310H430M82 345H430M82 380H430"/><path d="M120 170V205M190 205V240M265 170V205M340 205V240M405 170V205"/></g>
+ <path d="M91 170V92H421V170H392L375 128H137L120 170Z" fill="#8b4b36" stroke="#2f211a" stroke-width="10"/>
+ <rect x="154" y="103" width="204" height="54" rx="5" fill="#d6b66d" stroke="#3b2b20" stroke-width="7"/><text x="256" y="141" text-anchor="middle" font-family="serif" font-size="34" font-weight="900" fill="#3c2a20">BANK</text>
+ <use href="#window" x="151" y="313"/><g transform="translate(151 313)" stroke="#2c2924" stroke-width="6"><path d="M-24-42V42M0-42V42M24-42V42"/></g>
+ <use href="#window" x="361" y="313"/><g transform="translate(361 313)" stroke="#2c2924" stroke-width="6"><path d="M-24-42V42M0-42V42M24-42V42"/></g>
+ <rect x="219" y="274" width="74" height="131" fill="#3f3128" stroke="#211b17" stroke-width="8"/><circle cx="278" cy="344" r="6" fill="#e4b94f"/>
+ <path d="M56 405H456L432 432H80Z" fill="#806046" stroke="#33251e" stroke-width="8"/>
+</g>
+<!-- GENERAL STORE -->
+<g transform="translate(1536 0)">
+ <ellipse cx="256" cy="446" rx="205" ry="25" fill="#2a1b14" opacity=".30" filter="url(#shadow)"/>
+ <path d="M72 405V164H440V405Z" fill="url(#woodB)" stroke="#2f211a" stroke-width="10"/><g transform="translate(91 184)"><use href="#planks"/></g>
+ <path d="M88 164V91H424V164L392 140H120Z" fill="#b9763d" stroke="#2f211a" stroke-width="10"/>
+ <rect x="123" y="104" width="266" height="54" rx="6" fill="#efe0aa" stroke="#3c2a20" stroke-width="7"/><text x="256" y="139" text-anchor="middle" font-family="serif" font-size="28" font-weight="900" fill="#4b3223">GENERAL STORE</text>
+ <path d="M88 244H424" stroke="#3b291f" stroke-width="14"/><path d="M112 245V403M400 245V403" stroke="#4b3022" stroke-width="12"/>
+ <rect x="112" y="275" width="108" height="100" fill="url(#glass)" stroke="#34261e" stroke-width="8"/><path d="M166 279V371M116 326H216" stroke="#e1c98c" stroke-width="5"/>
+ <rect x="292" y="275" width="108" height="100" fill="url(#glass)" stroke="#34261e" stroke-width="8"/><path d="M346 279V371M296 326H396" stroke="#e1c98c" stroke-width="5"/>
+ <rect x="226" y="283" width="61" height="122" fill="#5b3826" stroke="#2a201a" stroke-width="8"/><circle cx="273" cy="346" r="5" fill="#e5bd58"/>
+ <path d="M56 405H456L432 432H80Z" fill="#8c5c37" stroke="#33251e" stroke-width="8"/>
+ <rect x="90" y="365" width="44" height="35" fill="#74502f" stroke="#33251e" stroke-width="5"/><use href="#barrel" x="425" y="390"/>
+</g>
+</svg>
