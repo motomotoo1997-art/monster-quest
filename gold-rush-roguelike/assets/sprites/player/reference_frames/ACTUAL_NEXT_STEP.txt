@@ -1,0 +1,1 @@
+Atomic tree commit follows: attach split frame blobs, delete corrupt monolithic atlas, rewrite Prospector scene.
