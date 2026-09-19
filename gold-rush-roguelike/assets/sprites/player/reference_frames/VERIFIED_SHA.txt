@@ -1,0 +1,12 @@
+Verified q16 frame blobs used for safe Prospector runtime migration:
+idle_0 3702a4aea36b4a08232192b6f45771cd06af6d39
+idle_1 7e39a91d4378e01518ad18b653ae7aa1ee1f76af
+idle_2 489b62288b0cc7f8c8ad64ab179d96966ff82194
+move_0 15bb838adfc9ebcaecf79afb5e5b67f17c133fd0
+move_1 1a968354cdd1c6a061c075c6e78a42e0786b7396
+move_2 f300970f17d71301e225ea0a89137aea4ec03298
+move_3 c3cd081434528da9901cb413213703ebbe2fac02
+attack_0 a8ed042314f0857aa0cd4a02e3f7e4d3e3e17e73
+attack_1 8b9a0aec340b505e361821431da6d03e4283a1ac
+hit_0 ce6698382ddac29c1ab6997273e6bc57dd1d5133
+Recovery frames temporarily reuse verified blobs until unique binary uploads are separately verified.
