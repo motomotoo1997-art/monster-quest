@@ -145,12 +145,14 @@ tests/                           visual/runtime regression contracts
 - Consumes: Frontier Juggernaut state machine and existing boss telegraph nodes.
 - Produces: foundry arena with clear safe playfield and boss contrast.
 
-- [ ] **Step 1: Write failing foundry contract.** Require foundry backdrop, furnace/gantry landmark, readable boss spawn clearance and preserved boss warning/beam nodes.
-- [ ] **Step 2: Run RED.**
-- [ ] **Step 3: Build molten-gold foundry backdrop and edge props.** Keep bright molten values away from the center so gold enemies/boss remain readable.
-- [ ] **Step 4: Refine Juggernaut contact shadow, emissive core and attack anticipation without changing attack damage/state logic.
-- [ ] **Step 5: Run boss laser, presentation, climax VFX and run-flow tests GREEN; capture boss preview.**
-- [ ] **Step 6: Commit.** `art: rebuild Arena05 molten foundry`
+- [x] **Step 1: Write failing foundry contract.** Require foundry backdrop, furnace/gantry landmark, readable boss spawn clearance and preserved boss warning/beam nodes.
+- [x] **Step 2: Run RED.**
+- [x] **Step 3: Build molten-gold foundry backdrop and edge props.** Keep bright molten values away from the center so gold enemies/boss remain readable.
+- [x] **Step 4: Refine Juggernaut contact shadow, emissive core and attack anticipation without changing attack damage/state logic.
+- [x] **Step 5: Run boss laser, presentation, climax VFX and run-flow tests GREEN; capture boss preview.**
+- [x] **Step 6: Commit.** `art: rebuild Arena05 molten foundry`
+
+**Progress evidence:** Task 4 GREEN through CI run `35466741037`; Arena05 boss preview and Windows x86_64 export succeeded.
 
 ### Task 5: Combat VFX, Pickups and HUD Alignment
 
