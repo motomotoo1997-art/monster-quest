@@ -171,12 +171,14 @@ tests/                           visual/runtime regression contracts
 - Consumes: current combat signals, pickup collection, HUD bindings.
 - Produces: compact synchronized VFX and coherent western HUD without gameplay polling changes.
 
-- [ ] **Step 1: Write failing feedback contract.** Assert player projectile, boss projectile, hit, explosion and pickup use distinct readable presentation; assert HUD player/core/boss panels remain separate and boss name is Frontier Juggernaut.
-- [ ] **Step 2: Run RED.**
-- [ ] **Step 3: Rebuild muzzle/projectile/impact/death/pickup effects.** Use compact sprite/polygon glow; avoid PointLight2D on every normal projectile.
-- [ ] **Step 4: Restyle HUD and upgrade cards with dark timber/metal/leather panel language, restrained gold trim, cyan friendly energy and orange-red boss danger.
-- [ ] **Step 5: Verify self-cleaning effect lifetime and HUD signal updates; run full CI.**
-- [ ] **Step 6: Commit.** `art: unify combat feedback and frontier HUD`
+- [x] **Step 1: Write failing feedback contract.** Assert player projectile, boss projectile, hit, explosion and pickup use distinct readable presentation; assert HUD player/core/boss panels remain separate and boss name is Frontier Juggernaut.
+- [x] **Step 2: Run RED.**
+- [x] **Step 3: Rebuild muzzle/projectile/impact/death/pickup effects.** Use compact sprite/polygon glow; avoid PointLight2D on every normal projectile.
+- [x] **Step 4: Restyle HUD and upgrade cards with dark timber/metal/leather panel language, restrained gold trim, cyan friendly energy and orange-red boss danger.
+- [x] **Step 5: Verify self-cleaning effect lifetime and HUD signal updates; run full CI.**
+- [x] **Step 6: Commit.** `art: unify combat feedback and frontier HUD`
+
+**Progress evidence:** Task 5 GREEN through CI run `35466995292`; v6 feedback regression, gameplay capture, boss capture and Windows export all succeeded.
 
 ### Task 6: Final Visual QA and Release Candidate
 
