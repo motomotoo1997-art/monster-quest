@@ -88,6 +88,15 @@ func _update_visual(delta: float) -> void:
 	if visual_sprite == null:
 		return
 	_visual_time += delta
+	var presentation: StringName = &"idle"
+	if state == State.CHARGE_TELEGRAPH:
+		presentation = &"charge"
+	elif state == State.CHARGE or state == State.BURST:
+		presentation = &"fire"
+	elif phase >= 3:
+		presentation = &"damaged"
+	if visual_sprite.animation != presentation:
+		visual_sprite.play(presentation)
 	if absf(velocity.x) > 2.0:
 		visual_sprite.flip_h = velocity.x < 0.0
 	var phase_tint := Color.WHITE
