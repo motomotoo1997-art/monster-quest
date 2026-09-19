@@ -4,6 +4,7 @@ class_name GoldBarTank
 signal boss_phase_changed(phase: int)
 signal boss_died
 signal slam_impact(world_position: Vector2)
+signal laser_fired(origin: Vector2, direction: Vector2)
 
 
 enum State {
@@ -17,9 +18,10 @@ enum State {
 	DEAD,
 }
 
-@export_range(100.0, 3000.0, 10.0) var charge_speed: float = 720.0
+@export_range(100.0, 1200.0, 10.0) var laser_range: float = 520.0
+@export_range(0.0, 1000.0, 1.0) var laser_damage: float = 42.0
 @export_range(0.1, 3.0, 0.05) var charge_telegraph_time: float = 0.75
-@export_range(0.1, 3.0, 0.05) var charge_duration: float = 0.65
+@export_range(0.05, 1.0, 0.01) var charge_duration: float = 0.20
 @export_range(1, 16, 1) var burst_shots: int = 5
 @export_range(0.03, 1.0, 0.01) var burst_gap: float = 0.16
 @export_range(0.1, 3.0, 0.05) var slam_telegraph_time: float = 0.65
@@ -34,6 +36,7 @@ var _state_timer := 0.9
 var _attack_delay_remaining := 0.0
 var _attack_index := 0
 var _charge_direction := Vector2.RIGHT
+var _laser_has_fired := false
 var _burst_remaining := 0
 var _burst_timer := 0.0
 var _death_announced := false
@@ -41,6 +44,7 @@ var _death_announced := false
 @onready var weapon_component: WeaponComponent = $WeaponComponent
 @onready var muzzle: Marker2D = $Muzzle
 @onready var charge_telegraph: Node2D = $ChargeTelegraph
+@onready var charge_beam: Polygon2D = $ChargeTelegraph/Beam
 @onready var slam_telegraph: Node2D = $SlamTelegraph
 @onready var slam_area: Area2D = $SlamArea
 
@@ -80,6 +84,37 @@ func _tick_behavior(delta: float) -> void:
 			_tick_spawn_adds(delta)
 
 
+func _update_visual(delta: float) -> void:
+	if visual_sprite == null:
+		return
+	_visual_time += delta
+	if absf(velocity.x) > 2.0:
+		visual_sprite.flip_h = velocity.x < 0.0
+	var phase_tint := Color.WHITE
+	if phase == 2:
+		phase_tint = Color(1.0, 0.90, 0.70, 1.0)
+	elif phase >= 3:
+		phase_tint = Color(1.0, 0.72, 0.55, 1.0)
+	var bob := sin(_visual_time * 3.6) * 1.2
+	var target_scale := _visual_base_scale
+	match state:
+		State.CHARGE_TELEGRAPH:
+			var pulse := 0.5 + 0.5 * sin(_visual_time * 15.0)
+			target_scale = _visual_base_scale * (1.0 + pulse * 0.035)
+			charge_beam.color = Color(1.0, 0.26, 0.04, 0.24 + pulse * 0.22)
+		State.CHARGE:
+			target_scale = Vector2(_visual_base_scale.x * 0.94, _visual_base_scale.y * 1.07)
+			charge_beam.color = Color(1.0, 0.58, 0.12, 0.82)
+		State.SLAM:
+			var slam_pulse := 0.5 + 0.5 * sin(_visual_time * 12.0)
+			target_scale = Vector2(_visual_base_scale.x * (1.0 + slam_pulse * 0.07), _visual_base_scale.y * (1.0 - slam_pulse * 0.05))
+		_:
+			charge_beam.color = Color(1.0, 0.22, 0.04, 0.26)
+	visual_sprite.position = _visual_base_position + Vector2(0.0, bob)
+	visual_sprite.scale = target_scale
+	visual_sprite.modulate = phase_tint
+
+
 func _tick_chase(delta: float) -> void:
 	var target := choose_target()
 	if target == null:
@@ -111,6 +146,7 @@ func _choose_next_attack(target: Node2D) -> void:
 	match next_state:
 		State.CHARGE_TELEGRAPH:
 			_charge_direction = global_position.direction_to(target.global_position)
+			_laser_has_fired = false
 			_set_state(State.CHARGE_TELEGRAPH, charge_telegraph_time * _phase_time_scale())
 			charge_telegraph.rotation = _charge_direction.angle()
 			charge_telegraph.visible = true
@@ -129,17 +165,33 @@ func _tick_charge_telegraph(delta: float) -> void:
 	velocity = Vector2.ZERO
 	_state_timer -= delta
 	if _state_timer <= 0.0:
-		charge_telegraph.visible = false
-		_set_state(State.CHARGE, charge_duration + 0.08 * float(phase - 1))
+		_set_state(State.CHARGE, charge_duration)
 
 
 func _tick_charge(delta: float) -> void:
+	velocity = Vector2.ZERO
+	if not _laser_has_fired:
+		_laser_has_fired = true
+		_fire_laser()
 	_state_timer -= delta
-	velocity = _charge_direction * charge_speed * (1.0 + 0.08 * float(phase - 1))
-	move_and_slide()
-	if get_slide_collision_count() > 0 or _state_timer <= 0.0:
-		velocity = Vector2.ZERO
+	if _state_timer <= 0.0:
+		charge_telegraph.visible = false
 		_enter_chase()
+
+
+func _fire_laser() -> void:
+	var origin := global_position
+	var end := origin + _charge_direction * laser_range
+	var query := PhysicsRayQueryParameters2D.create(origin, end, 2)
+	query.collide_with_areas = true
+	query.collide_with_bodies = false
+	query.exclude = [hurtbox_component.get_rid()]
+	var hit: Dictionary = get_world_2d().direct_space_state.intersect_ray(query)
+	if not hit.is_empty():
+		var hurtbox: HurtboxComponent = hit.get("collider") as HurtboxComponent
+		if hurtbox != null and hurtbox.team_component != null and team_component.is_hostile_to(hurtbox.team_component):
+			hurtbox.receive_hit(laser_damage, team_component.team, _charge_direction * 180.0)
+	laser_fired.emit(origin, _charge_direction)
 
 
 func _tick_burst(delta: float) -> void:
