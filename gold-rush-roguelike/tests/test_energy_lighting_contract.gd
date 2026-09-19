@@ -6,6 +6,7 @@ const LIGHT_SCENES := [
 	{"scene":"res://scenes/objectives/GoldCore.tscn","light":"CoreLight","min_energy":0.75},
 	{"scene":"res://scenes/defenses/MagneticTurret.tscn","light":"EnergyLight","min_energy":0.45},
 	{"scene":"res://scenes/defenses/CactusSentry.tscn","light":"EnergyLight","min_energy":0.35},
+	{"scene":"res://scenes/combat/GoldPickup.tscn","light":"LootLight","min_energy":0.35},
 ]
 
 func _init() -> void:
@@ -37,7 +38,7 @@ func _run_test() -> void:
 		instance.queue_free()
 		await process_frame
 
-	print("PASS: cyan/gold combat energy has local dynamic lighting on core, defenses and impact VFX")
+	print("PASS: cyan/gold combat energy and loot have local dynamic lighting")
 	quit(0)
 
 
