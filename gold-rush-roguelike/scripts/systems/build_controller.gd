@@ -7,6 +7,7 @@ signal defense_built(defense: DefenseBase)
 signal defense_unlocked(slot: int)
 
 @export var economy_path: NodePath
+@export var arena_controller_path: NodePath
 @export var defense_scenes: Array[PackedScene] = []
 @export_flags_2d_physics var build_zone_mask: int = 16
 @export_flags_2d_physics var blocking_mask: int = 1
@@ -16,11 +17,15 @@ var preview_instance: DefenseBase
 var unlocked_slots: Array[int] = [2]
 var _last_preview_valid := false
 var economy: EconomyController
+var arena_controller: ArenaController
 
 
 func _ready() -> void:
 	add_to_group("build_controller")
 	economy = _resolve_economy()
+	arena_controller = _resolve_arena_controller()
+	if arena_controller != null:
+		arena_controller.arena_will_unload.connect(_on_arena_will_unload)
 
 
 func _process(_delta: float) -> void:
@@ -37,6 +42,10 @@ func _process(_delta: float) -> void:
 		trigger_tnt()
 
 	if preview_instance == null:
+		return
+	if not is_instance_valid(preview_instance):
+		preview_instance = null
+		_last_preview_valid = false
 		return
 	var world_position := _get_mouse_world_position()
 	preview_instance.global_position = world_position
@@ -70,6 +79,14 @@ func is_unlocked(slot: int) -> bool:
 	return unlocked_slots.has(slot)
 
 
+func get_build_parent() -> Node2D:
+	if arena_controller == null or not is_instance_valid(arena_controller):
+		arena_controller = _resolve_arena_controller()
+	if arena_controller != null and arena_controller.current_arena != null and is_instance_valid(arena_controller.current_arena):
+		return arena_controller.current_arena
+	return get_tree().current_scene as Node2D
+
+
 func begin_preview() -> void:
 	cancel_build()
 	var scene := _get_selected_scene()
@@ -78,7 +95,7 @@ func begin_preview() -> void:
 	var preview := scene.instantiate() as DefenseBase
 	if preview == null:
 		return
-	var parent := get_tree().current_scene
+	var parent := get_build_parent()
 	if parent == null:
 		preview.free()
 		return
@@ -101,7 +118,7 @@ func confirm_build(world_position: Vector2) -> bool:
 	if not economy.can_afford(cost):
 		defense.free()
 		return false
-	var parent := get_tree().current_scene
+	var parent := get_build_parent()
 	if parent == null:
 		defense.free()
 		return false
@@ -173,7 +190,17 @@ func _disable_collision_recursive(node: Node) -> void:
 		_disable_collision_recursive(child)
 
 
+func _on_arena_will_unload(_arena: Node2D) -> void:
+	cancel_build()
+
+
 func _resolve_economy() -> EconomyController:
 	if not economy_path.is_empty():
 		return get_node_or_null(economy_path) as EconomyController
 	return get_tree().get_first_node_in_group("economy_controller") as EconomyController
+
+
+func _resolve_arena_controller() -> ArenaController:
+	if not arena_controller_path.is_empty():
+		return get_node_or_null(arena_controller_path) as ArenaController
+	return get_tree().get_first_node_in_group("arena_controller") as ArenaController
