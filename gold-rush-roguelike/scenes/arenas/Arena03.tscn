@@ -1,10 +1,13 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/environment/CactusProp.tscn" id="1_cactus"]
 [ext_resource type="PackedScene" path="res://scenes/environment/RockClusterProp.tscn" id="2_rocks"]
 [ext_resource type="PackedScene" path="res://scenes/environment/MineCartProp.tscn" id="3_cart"]
 [ext_resource type="PackedScene" path="res://scenes/environment/GoldVeinProp.tscn" id="4_gold"]
-[ext_resource type="Texture2D" path="res://assets/environment/arena01_backdrop_v2.svg" id="5_backdrop"]
+[ext_resource type="Texture2D" path="res://assets/environment/arena03_backdrop_v2.svg" id="5_backdrop"]
+[ext_resource type="PackedScene" path="res://scenes/environment/RailSegmentProp.tscn" id="6_rail"]
+[ext_resource type="PackedScene" path="res://scenes/environment/CrateStackProp.tscn" id="7_crates"]
+[ext_resource type="Texture2D" path="res://assets/vfx/dust_mote.svg" id="8_dust"]
 
 [sub_resource type="RectangleShape2D" id="BuildShape"]
 size = Vector2(1120,560)
@@ -19,11 +22,29 @@ y_sort_enabled = true
 z_index = -50
 position = Vector2(640,360)
 texture = ExtResource("5_backdrop")
-modulate = Color(1,0.94,0.82,1)
-[node name="Crossroads" type="Polygon2D" parent="."]
+
+[node name="CrossroadsGlow" type="Polygon2D" parent="."]
 z_index = -20
 polygon = PackedVector2Array(83,359,495,322,595,256,612,79,748,76,745,252,822,302,1198,290,1206,432,832,424,742,469,740,631,602,633,603,474,495,430,84,445)
-color = Color(1,0.90,0.61,0.12)
+color = Color(1,0.90,0.61,0.055)
+
+[node name="AmbientDust" type="CPUParticles2D" parent="."]
+z_index = -4
+position = Vector2(640,360)
+amount = 30
+lifetime = 4.0
+preprocess = 4.0
+texture = ExtResource("8_dust")
+emission_shape = 3
+emission_rect_extents = Vector2(610,260)
+direction = Vector2(0.7,-0.12)
+spread = 180.0
+gravity = Vector2(0,-1.5)
+initial_velocity_min = 4.0
+initial_velocity_max = 13.0
+scale_amount_min = 0.38
+scale_amount_max = 1.1
+color = Color(1,0.88,0.64,0.28)
 
 [node name="BuildZone" type="Area2D" parent="." groups=["build_zone"]]
 position = Vector2(640,360)
@@ -98,3 +119,20 @@ scale = Vector2(0.82,0.82)
 [node name="GoldVeinB" parent="." instance=ExtResource("4_gold")]
 position = Vector2(560,575)
 scale = Vector2(0.64,0.64)
+
+[node name="RailNorth" parent="." instance=ExtResource("6_rail")]
+position = Vector2(640,165)
+rotation = 1.56
+scale = Vector2(0.78,0.78)
+[node name="RailWest" parent="." instance=ExtResource("6_rail")]
+position = Vector2(250,500)
+rotation = -0.42
+scale = Vector2(0.82,0.82)
+[node name="CratesNorth" parent="." instance=ExtResource("7_crates")]
+position = Vector2(525,160)
+rotation = 0.07
+scale = Vector2(0.68,0.68)
+[node name="CratesEast" parent="." instance=ExtResource("7_crates")]
+position = Vector2(1028,485)
+rotation = -0.08
+scale = Vector2(0.62,0.62)
