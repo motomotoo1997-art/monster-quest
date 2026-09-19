@@ -1,0 +1,1 @@
+Stop creating marker files. Next operation must be GitHub.create_tree.
