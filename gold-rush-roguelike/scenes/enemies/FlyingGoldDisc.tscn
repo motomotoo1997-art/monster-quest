@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="Script" path="res://scripts/enemies/flying_gold_disc.gd" id="1_enemy"]
 [ext_resource type="Script" path="res://scripts/components/health_component.gd" id="2_health"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://scripts/components/weapon_component.gd" id="5_weapon"]
 [ext_resource type="PackedScene" path="res://scenes/combat/Projectile.tscn" id="6_projectile"]
 [ext_resource type="Texture2D" path="res://assets/sprites/enemies/enemies.svg" id="7_texture"]
+[ext_resource type="Script" path="res://scripts/components/gold_drop_component.gd" id="8_gold_drop"]
+[ext_resource type="PackedScene" path="res://scenes/combat/GoldPickup.tscn" id="9_gold_pickup"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_enemy"]
 radius = 15.0
@@ -14,7 +16,7 @@ radius = 15.0
 atlas = ExtResource("7_texture")
 region = Rect2(640, 0, 320, 320)
 [sub_resource type="SpriteFrames" id="SpriteFrames_enemy"]
-animations = [{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_enemy")}],"loop":true,"name":&"idle","speed":8.0},{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_enemy")}],"loop":true,"name":&"attack","speed":10.0}]
+animations = [{"frames": [{"duration": 1.0, "texture": SubResource("AtlasTexture_enemy")}], "loop": true, "name": &"idle", "speed": 8.0}, {"frames": [{"duration": 1.0, "texture": SubResource("AtlasTexture_enemy")}], "loop": true, "name": &"attack", "speed": 10.0}]
 
 [node name="FlyingGoldDisc" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 0
@@ -30,16 +32,16 @@ separation_radius = 34.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_enemy")
 [node name="Shadow" type="Polygon2D" parent="."]
-position = Vector2(0,25)
-polygon = PackedVector2Array(-17,0,-11,-5,11,-5,17,0,11,5,-11,5)
-color = Color(0.06,0.035,0.02,0.16)
+position = Vector2(0, 25)
+polygon = PackedVector2Array(-17, 0, -11, -5, 11, -5, 17, 0, 11, 5, -11, 5)
+color = Color(0.06, 0.035, 0.02, 0.16)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0,-34)
+position = Vector2(0, -34)
 sprite_frames = SubResource("SpriteFrames_enemy")
 animation = &"idle"
-scale = Vector2(0.34,0.34)
+scale = Vector2(0.34, 0.34)
 [node name="Muzzle" type="Marker2D" parent="."]
-position = Vector2(21,0)
+position = Vector2(21, 0)
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_health")
 max_health = 42.0
@@ -63,3 +65,7 @@ cooldown_sec = 0.1
 projectile_speed = 610.0
 projectile_damage = 5.5
 projectile_lifetime = 2.5
+[node name="GoldDropComponent" type="Node" parent="."]
+script = ExtResource("8_gold_drop")
+gold_amount = 9
+pickup_scene = ExtResource("9_gold_pickup")
