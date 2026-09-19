@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3]
+[gd_scene load_steps=18 format=3]
 
 [ext_resource type="Script" path="res://scripts/enemies/gold_bar_tank.gd" id="1_boss"]
 [ext_resource type="Script" path="res://scripts/components/health_component.gd" id="2_health"]
@@ -16,11 +16,20 @@ size = Vector2(92,62)
 size = Vector2(88,58)
 [sub_resource type="CircleShape2D" id="SlamShape"]
 radius = 155.0
-[sub_resource type="AtlasTexture" id="AtlasTexture_boss"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle"]
+atlas = ExtResource("9_texture")
+region = Rect2(0,0,256,213)
+[sub_resource type="AtlasTexture" id="AtlasTexture_charge"]
+atlas = ExtResource("9_texture")
+region = Rect2(256,0,256,213)
+[sub_resource type="AtlasTexture" id="AtlasTexture_damaged"]
+atlas = ExtResource("9_texture")
+region = Rect2(512,0,256,213)
+[sub_resource type="AtlasTexture" id="AtlasTexture_fire"]
 atlas = ExtResource("9_texture")
 region = Rect2(768,0,256,213)
 [sub_resource type="SpriteFrames" id="BossFrames"]
-animations = [{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_boss")}],"loop":true,"name":&"idle","speed":5.0},{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_boss")}],"loop":true,"name":&"move","speed":8.0},{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_boss")}],"loop":false,"name":&"attack","speed":10.0}]
+animations = [{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_fire")}],"loop":false,"name":&"attack","speed":10.0},{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_charge")}],"loop":true,"name":&"charge","speed":6.0},{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_damaged")}],"loop":true,"name":&"damaged","speed":5.0},{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_fire")}],"loop":false,"name":&"fire","speed":10.0},{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_idle")}],"loop":true,"name":&"idle","speed":5.0},{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_idle")}],"loop":true,"name":&"move","speed":8.0}]
 
 [node name="GoldBarTank" type="CharacterBody2D" groups=["enemies","boss"]]
 collision_layer = 1
