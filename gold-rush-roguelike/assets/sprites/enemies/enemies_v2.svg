@@ -1,57 +1,65 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1536" height="384" viewBox="0 0 1536 384">
 <defs>
- <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff7ae"/><stop offset=".25" stop-color="#f4ca45"/><stop offset=".58" stop-color="#c98612"/><stop offset="1" stop-color="#6f3e08"/></linearGradient>
- <linearGradient id="darkgold" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#d79a22"/><stop offset="1" stop-color="#69400e"/></linearGradient>
- <linearGradient id="hot" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff6a4"/><stop offset=".34" stop-color="#ffc229"/><stop offset=".7" stop-color="#e55c0b"/><stop offset="1" stop-color="#8e2907"/></linearGradient>
- <radialGradient id="cyan"><stop stop-color="#ecffff"/><stop offset=".32" stop-color="#5ceeff"/><stop offset="1" stop-color="#08677e"/></radialGradient>
- <filter id="glow" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff5a8"/><stop offset=".22" stop-color="#ffd84f"/><stop offset=".56" stop-color="#d99a18"/><stop offset="1" stop-color="#7a430b"/></linearGradient>
+ <linearGradient id="coin" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#ffe77a"/><stop offset=".48" stop-color="#c98212"/><stop offset="1" stop-color="#70400b"/></linearGradient>
+ <linearGradient id="hot" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff6a0"/><stop offset=".26" stop-color="#ffd42c"/><stop offset=".62" stop-color="#ff8a12"/><stop offset="1" stop-color="#b93b08"/></linearGradient>
+ <radialGradient id="cyan"><stop stop-color="#ffffff"/><stop offset=".22" stop-color="#8ff7ff"/><stop offset=".55" stop-color="#27d8ef"/><stop offset="1" stop-color="#08758d"/></radialGradient>
+ <filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
 </defs>
-<!-- Gold Hopper -->
-<g transform="translate(0 0)">
- <ellipse cx="192" cy="330" rx="72" ry="15" fill="#26170c" opacity=".25"/>
- <path d="M144 295 Q153 268 168 249 M237 294 Q229 266 215 249" fill="none" stroke="#593b18" stroke-width="16" stroke-linecap="round"/>
- <path d="M130 309 l-29 13 M251 309 l30 13" stroke="#6d4c22" stroke-width="15" stroke-linecap="round"/>
- <path d="M108 237 Q110 150 162 118 Q210 84 269 134 Q298 159 279 223 Q263 277 205 283 Q141 287 108 237Z" fill="url(#gold)" stroke="#603707" stroke-width="9"/>
- <path d="M132 157 L168 124 L196 145 L225 119 L267 153 L245 170 L263 205 L233 223 L218 262 L181 244 L145 265 L137 224 L109 206Z" fill="#ffd85b" opacity=".34"/>
- <path d="M129 177 L163 148 M221 134 L257 165 M127 224 L159 244 M238 222 L263 203" stroke="#fff6b0" stroke-width="7" opacity=".6"/>
- <ellipse cx="163" cy="192" rx="20" ry="25" fill="#f6f0d4" stroke="#473016" stroke-width="6"/><ellipse cx="223" cy="188" rx="20" ry="25" fill="#f6f0d4" stroke="#473016" stroke-width="6"/>
- <circle cx="169" cy="200" r="8" fill="#241a13"/><circle cx="217" cy="197" r="8" fill="#241a13"/>
- <path d="M171 233 Q191 219 212 235" fill="none" stroke="#5b350c" stroke-width="8" stroke-linecap="round"/>
- <path d="M97 232 Q68 245 73 269" fill="none" stroke="#ca8c1e" stroke-width="13" stroke-linecap="round"/><path d="M286 224 Q316 238 310 263" fill="none" stroke="#ca8c1e" stroke-width="13" stroke-linecap="round"/>
+<!-- GOLD HOPPER: faceted nugget on six insect legs -->
+<g>
+ <ellipse cx="192" cy="324" rx="74" ry="14" fill="#301b10" opacity=".28"/>
+ <g fill="none" stroke="#4f351d" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M145 245 L112 267 L91 300 L66 309"/><path d="M149 257 L117 287 L110 320 L88 332"/><path d="M162 262 L147 301 L151 330"/>
+  <path d="M239 245 L272 267 L293 300 L318 309"/><path d="M235 257 L267 287 L274 320 L296 332"/><path d="M222 262 L237 301 L233 330"/>
+ </g>
+ <g fill="#c68a22" stroke="#563817" stroke-width="5"><ellipse cx="66" cy="309" rx="17" ry="8"/><ellipse cx="88" cy="332" rx="18" ry="8"/><ellipse cx="151" cy="331" rx="15" ry="7"/><ellipse cx="318" cy="309" rx="17" ry="8"/><ellipse cx="296" cy="332" rx="18" ry="8"/><ellipse cx="233" cy="331" rx="15" ry="7"/></g>
+ <path d="M105 223 L122 159 L160 118 L215 111 L271 145 L286 200 L257 253 L205 279 L145 265Z" fill="url(#gold)" stroke="#5b350d" stroke-width="9"/>
+ <path d="M122 160 L161 118 L177 166 L214 111 L231 167 L271 145 L251 195 L286 200 L239 223 L257 253 L205 237 L205 279 L173 238 L145 265 L151 218 L105 223 L139 190Z" fill="#ffdc5b" opacity=".28"/>
+ <path d="M128 153 L159 126 M213 120 L257 148 M119 215 L150 227 M242 211 L274 198" fill="none" stroke="#fff2a6" stroke-width="7" opacity=".75"/>
+ <ellipse cx="164" cy="193" rx="18" ry="15" fill="url(#cyan)" stroke="#184f5a" stroke-width="5" filter="url(#glow)"/><ellipse cx="224" cy="193" rx="18" ry="15" fill="url(#cyan)" stroke="#184f5a" stroke-width="5" filter="url(#glow)"/>
+ <path d="M171 230 Q192 243 215 229" fill="none" stroke="#65390e" stroke-width="7" stroke-linecap="round"/>
 </g>
-<!-- Coin Sentinel -->
+<!-- COIN SENTINEL: stacked coin robot -->
 <g transform="translate(384 0)">
- <ellipse cx="192" cy="332" rx="95" ry="17" fill="#26170c" opacity=".26"/>
- <path d="M151 289 L137 324 M229 289 L245 324" stroke="#6b551e" stroke-width="19" stroke-linecap="round"/><path d="M134 324 l-28 9 M248 324 l28 9" stroke="#a06e19" stroke-width="15" stroke-linecap="round"/>
- <circle cx="192" cy="179" r="91" fill="url(#gold)" stroke="#62400b" stroke-width="11"/><circle cx="192" cy="179" r="69" fill="none" stroke="#ffe98b" stroke-width="8" opacity=".62"/><circle cx="192" cy="179" r="48" fill="#313b3f" stroke="#755414" stroke-width="8"/>
- <circle cx="192" cy="179" r="23" fill="url(#cyan)" stroke="#143d49" stroke-width="6" filter="url(#glow)"/><circle cx="184" cy="170" r="6" fill="#fff" opacity=".8"/>
- <path d="M117 139 L78 109 L49 119 M112 171 L60 167 L35 150 M271 139 L307 109 L338 119 M274 174 L325 164 L351 146" fill="none" stroke="#8e6b1f" stroke-width="17" stroke-linecap="round"/>
- <path d="M55 107 l-20-17 -18 16 18 14 -15 16 23 8 16-20z" fill="url(#darkgold)" stroke="#4c350e" stroke-width="6"/><path d="M329 104 l23-14 18 18-19 13 11 20-25 3-13-21z" fill="url(#darkgold)" stroke="#4c350e" stroke-width="6"/>
- <path d="M48 145 l-29 10 23 13-20 18 35-5 12-18z" fill="url(#gold)" stroke="#51380d" stroke-width="6"/><path d="M340 143 l31 5-20 17 23 15-35 2-17-16z" fill="url(#gold)" stroke="#51380d" stroke-width="6"/>
- <path d="M104 220 L66 246 L42 239 M279 220 L318 246 L344 238" fill="none" stroke="#80601a" stroke-width="16" stroke-linecap="round"/>
- <path d="M36 226 l-24 13 20 14-13 21 30-10 8-21zM350 225 l25 14-20 14 14 20-31-8-9-22z" fill="#81651f" stroke="#49350d" stroke-width="6"/>
- <g fill="#fff2a0"><circle cx="137" cy="127" r="5"/><circle cx="250" cy="132" r="5"/><circle cx="130" cy="226" r="4"/></g>
+ <ellipse cx="192" cy="329" rx="78" ry="14" fill="#29180e" opacity=".28"/>
+ <g fill="none" stroke="#4e3b22" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M146 180 L102 205 L78 243 L46 252"/><path d="M145 211 L108 239 L91 277 L57 285"/>
+  <path d="M238 180 L282 205 L306 243 L338 252"/><path d="M239 211 L276 239 L293 277 L327 285"/>
+  <path d="M165 283 L151 318 L132 332 M219 283 L233 318 L252 332"/>
+ </g>
+ <g fill="#d89b20" stroke="#553b15" stroke-width="5"><circle cx="46" cy="252" r="11"/><circle cx="57" cy="285" r="11"/><circle cx="338" cy="252" r="11"/><circle cx="327" cy="285" r="11"/><ellipse cx="126" cy="334" rx="20" ry="8"/><ellipse cx="258" cy="334" rx="20" ry="8"/></g>
+ <g stroke="#60400e" stroke-width="6">
+  <ellipse cx="192" cy="270" rx="57" ry="18" fill="url(#coin)"/><ellipse cx="192" cy="249" rx="57" ry="18" fill="url(#coin)"/><ellipse cx="192" cy="228" rx="57" ry="18" fill="url(#coin)"/><ellipse cx="192" cy="207" rx="57" ry="18" fill="url(#coin)"/>
+  <ellipse cx="192" cy="186" rx="57" ry="18" fill="url(#coin)"/><ellipse cx="192" cy="165" rx="57" ry="18" fill="url(#coin)"/><ellipse cx="192" cy="144" rx="57" ry="18" fill="url(#coin)"/><ellipse cx="192" cy="123" rx="57" ry="18" fill="url(#coin)"/>
+ </g>
+ <path d="M139 123 Q192 88 245 123" fill="url(#gold)" stroke="#60400e" stroke-width="7"/>
+ <ellipse cx="170" cy="151" rx="13" ry="11" fill="url(#cyan)" filter="url(#glow)"/><ellipse cx="214" cy="151" rx="13" ry="11" fill="url(#cyan)" filter="url(#glow)"/>
+ <path d="M158 189 Q192 202 226 189" fill="none" stroke="#fff19b" stroke-width="5" opacity=".55"/>
+ <path d="M155 133 Q192 121 230 133 M153 176 Q192 164 232 176 M151 219 Q192 207 234 219 M150 261 Q192 249 235 261" fill="none" stroke="#fff1a0" stroke-width="5" opacity=".55"/>
 </g>
-<!-- Flying Gold Disc -->
+<!-- FLYING DISC: layered saw-disc with cyan core -->
 <g transform="translate(768 0)">
- <ellipse cx="192" cy="316" rx="92" ry="14" fill="#20140b" opacity=".17"/>
+ <ellipse cx="192" cy="317" rx="102" ry="13" fill="#23160d" opacity=".18"/>
  <g transform="translate(192 190)">
-  <path d="M-133 0 L-171 -22 L-143 -38 L-178 -67 L-117 -68 L-125 -111 L-75 -85 L-57 -132 L-24 -94 L0 -145 L25 -94 L59 -132 L77 -84 L127 -110 L118 -68 L179 -66 L144 -37 L172 -20 L133 0 L172 22 L143 39 L178 68 L117 68 L126 112 L76 86 L57 132 L24 95 L0 145 L-26 94 L-59 132 L-77 84 L-126 111 L-118 68 L-179 66 L-144 37 L-171 21Z" fill="url(#darkgold)" stroke="#5f3c0b" stroke-width="7"/>
-  <ellipse cx="0" cy="0" rx="132" ry="63" fill="url(#gold)" stroke="#65410d" stroke-width="9"/><ellipse cx="0" cy="-9" rx="93" ry="39" fill="#ffe273" opacity=".48"/>
-  <ellipse cx="0" cy="-8" rx="60" ry="48" fill="#34434a" stroke="#6a4c13" stroke-width="8"/><ellipse cx="0" cy="-8" rx="30" ry="24" fill="url(#cyan)" stroke="#164554" stroke-width="6" filter="url(#glow)"/>
-  <circle cx="-81" cy="19" r="11" fill="url(#cyan)" filter="url(#glow)"/><circle cx="81" cy="19" r="11" fill="url(#cyan)" filter="url(#glow)"/>
-  <path d="M-116 30 Q0 76 116 30" fill="none" stroke="#b97912" stroke-width="9"/><path d="M-97 -31 Q0 -68 97 -31" fill="none" stroke="#fff4a2" stroke-width="7" opacity=".5"/>
+  <path d="M-150 0 L-181 -21 L-151 -39 L-175 -75 L-128 -73 L-136 -112 L-91 -93 L-66 -132 L-38 -102 L0 -145 L38 -102 L67 -132 L92 -93 L136 -112 L128 -73 L176 -75 L151 -39 L181 -21 L150 0 L181 22 L151 39 L176 76 L128 73 L136 113 L92 94 L67 133 L38 102 L0 145 L-38 102 L-67 133 L-92 94 L-136 113 L-128 73 L-176 76 L-151 39 L-181 22Z" fill="url(#coin)" stroke="#5d3a0b" stroke-width="7"/>
+  <ellipse cx="0" cy="0" rx="142" ry="68" fill="url(#gold)" stroke="#6a430d" stroke-width="9"/>
+  <ellipse cx="0" cy="-5" rx="108" ry="47" fill="#ffe672" opacity=".42"/>
+  <ellipse cx="0" cy="0" rx="66" ry="52" fill="#303d42" stroke="#6a4b16" stroke-width="8"/>
+  <ellipse cx="0" cy="0" rx="34" ry="28" fill="url(#cyan)" stroke="#154f5d" stroke-width="6" filter="url(#glow)"/>
+  <circle cx="-91" cy="19" r="10" fill="#45e8ff" filter="url(#glow)"/><circle cx="91" cy="19" r="10" fill="#45e8ff" filter="url(#glow)"/>
+  <path d="M-116 -26 Q0 -70 116 -26 M-119 31 Q0 75 119 31" fill="none" stroke="#fff2a4" stroke-width="7" opacity=".52"/>
  </g>
 </g>
-<!-- Molten Slime -->
+<!-- MOLTEN GOLD SLIME -->
 <g transform="translate(1152 0)">
- <ellipse cx="192" cy="331" rx="89" ry="17" fill="#8e2d08" opacity=".22"/>
- <path d="M96 309 Q111 274 106 233 Q100 180 129 143 Q153 112 169 122 Q182 87 204 116 Q225 92 239 132 Q274 151 280 213 Q286 270 311 310 Q281 335 246 318 Q218 350 190 322 Q160 348 139 318 Q115 331 96 309Z" fill="url(#hot)" stroke="#8b2e08" stroke-width="10"/>
- <path d="M126 288 Q145 269 153 301 Q175 279 187 315 Q207 278 224 311 Q242 277 263 299" fill="none" stroke="#fff07d" stroke-width="8" opacity=".45"/>
- <path d="M128 189 Q148 143 165 156 Q178 126 191 157 Q204 127 220 158 Q240 144 259 190" fill="#fff179" opacity=".23"/>
- <ellipse cx="159" cy="210" rx="20" ry="14" fill="url(#cyan)" filter="url(#glow)"/><ellipse cx="226" cy="210" rx="20" ry="14" fill="url(#cyan)" filter="url(#glow)"/>
- <path d="M164 256 Q194 276 226 255" fill="none" stroke="#7c2909" stroke-width="9" stroke-linecap="round"/>
- <circle cx="115" cy="275" r="12" fill="#ffd449"/><circle cx="277" cy="266" r="9" fill="#fff17b"/><circle cx="149" cy="319" r="8" fill="#ff7a12"/>
- <path d="M105 252 Q78 263 82 293 M282 244 Q314 258 307 291" fill="none" stroke="#e9750c" stroke-width="17" stroke-linecap="round"/>
+ <ellipse cx="190" cy="330" rx="100" ry="17" fill="#8c3009" opacity=".24"/>
+ <path d="M82 312 Q110 283 104 244 Q96 194 124 158 Q143 133 164 145 Q175 105 196 137 Q213 95 232 143 Q265 144 282 185 Q297 220 280 259 Q319 265 338 291 Q303 281 278 296 Q247 344 213 315 Q186 354 160 317 Q126 342 103 315Z" fill="url(#hot)" stroke="#8d3309" stroke-width="10"/>
+ <path d="M112 268 Q137 249 152 286 Q171 260 188 305 Q207 266 224 302 Q245 267 272 287" fill="none" stroke="#fff18a" stroke-width="8" opacity=".48"/>
+ <path d="M119 187 Q151 145 170 162 Q181 132 195 163 Q211 127 227 165 Q247 148 273 189" fill="#fff3a0" opacity=".27"/>
+ <ellipse cx="158" cy="216" rx="18" ry="14" fill="url(#cyan)" stroke="#155364" stroke-width="4" filter="url(#glow)"/><ellipse cx="226" cy="216" rx="18" ry="14" fill="url(#cyan)" stroke="#155364" stroke-width="4" filter="url(#glow)"/>
+ <path d="M165 258 Q192 276 221 257" fill="none" stroke="#813009" stroke-width="9" stroke-linecap="round"/>
+ <path d="M286 259 Q328 236 357 248 Q331 265 313 290 Q293 305 271 301" fill="url(#hot)" stroke="#8d3309" stroke-width="8"/>
+ <circle cx="104" cy="286" r="12" fill="#ffd94d"/><circle cx="292" cy="300" r="10" fill="#ffeb6f"/><circle cx="144" cy="323" r="8" fill="#ff7914"/>
 </g>
 </svg>
