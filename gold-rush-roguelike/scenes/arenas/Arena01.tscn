@@ -139,11 +139,11 @@ position = Vector2(760,485)
 rotation = 0.24
 scale = Vector2(0.92,0.92)
 [node name="RocksNorth" parent="." instance=ExtResource("2_rocks")]
-visible = false
+visible = true
 position = Vector2(600,145)
 scale = Vector2(0.95,0.95)
 [node name="RocksEast" parent="." instance=ExtResource("2_rocks")]
-visible = false
+visible = true
 position = Vector2(1100,485)
 scale = Vector2(0.82,0.82)
 [node name="RocksWest" parent="." instance=ExtResource("2_rocks")]
@@ -158,19 +158,19 @@ rotation = 0.16
 scale = Vector2(0.54,0.54)
 
 [node name="CactusNW" parent="." instance=ExtResource("1_cactus")]
-visible = false
+visible = true
 position = Vector2(175,202)
 scale = Vector2(0.96,0.96)
 [node name="CactusWest" parent="." instance=ExtResource("1_cactus")]
-visible = false
+visible = true
 position = Vector2(95,468)
 scale = Vector2(0.72,0.72)
 [node name="CactusSouth" parent="." instance=ExtResource("1_cactus")]
-visible = false
+visible = true
 position = Vector2(1085,558)
 scale = Vector2(0.86,0.86)
 [node name="CactusEast" parent="." instance=ExtResource("1_cactus")]
-visible = false
+visible = true
 position = Vector2(1180,230)
 scale = Vector2(0.68,0.68)
 [node name="CactusMid" parent="." instance=ExtResource("1_cactus")]
@@ -179,7 +179,7 @@ position = Vector2(900,530)
 scale = Vector2(0.55,0.55)
 
 [node name="RailA" parent="." instance=ExtResource("6_rail")]
-visible = false
+visible = true
 position = Vector2(250,540)
 rotation = -0.08
 scale = Vector2(1.08,1.08)
@@ -189,13 +189,13 @@ position = Vector2(420,526)
 rotation = -0.08
 scale = Vector2(0.95,0.95)
 [node name="MineCart" parent="." instance=ExtResource("3_cart")]
-visible = false
+visible = true
 position = Vector2(330,520)
 rotation = -0.10
 scale = Vector2(1.08,1.08)
 
 [node name="CratesNW" parent="." instance=ExtResource("7_crates")]
-visible = false
+visible = true
 position = Vector2(405,170)
 rotation = 0.04
 scale = Vector2(0.88,0.88)
@@ -206,11 +206,11 @@ rotation = -0.08
 scale = Vector2(0.72,0.72)
 
 [node name="GoldVein" parent="." instance=ExtResource("4_gold")]
-visible = false
+visible = true
 position = Vector2(975,170)
 scale = Vector2(0.92,0.92)
 [node name="GoldVeinSouth" parent="." instance=ExtResource("4_gold")]
-visible = false
+visible = true
 position = Vector2(915,590)
 scale = Vector2(0.62,0.62)
 [node name="GoldVeinWest" parent="." instance=ExtResource("4_gold")]
