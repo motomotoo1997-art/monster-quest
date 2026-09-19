@@ -19,21 +19,23 @@ func _capture() -> void:
 	root.add_child(main)
 	await process_frame
 	main._on_start_requested()
+	# --script preview runs outside the normal launcher, so explicitly keep the tree live
+	# after dismissing the title overlay. The WaveDirector itself remains production code.
+	paused = false
 	main.player.set_input_enabled(false)
+	await process_frame
 
-	# Capture an actual combat composition instead of an empty opening frame.
 	var waited: float = 0.0
-	while get_nodes_in_group("enemies").size() < MIN_ENEMIES_FOR_PREVIEW and waited < MAX_WAIT_SECONDS:
-		await create_timer(0.25).timeout
+	while main.wave_director.get_alive_enemy_count() < MIN_ENEMIES_FOR_PREVIEW and waited < MAX_WAIT_SECONDS:
+		await create_timer(0.25, true).timeout
 		waited += 0.25
-	# Let the spawned enemies advance far enough into the central combat lane.
-	await create_timer(1.0).timeout
+	await create_timer(1.0, true).timeout
 	await process_frame
 	await RenderingServer.frame_post_draw
 
-	var enemy_count: int = get_nodes_in_group("enemies").size()
+	var enemy_count: int = main.wave_director.get_alive_enemy_count()
 	if enemy_count < MIN_ENEMIES_FOR_PREVIEW:
-		_fail("Gameplay preview never reached battle density: %d enemies" % enemy_count)
+		_fail("Gameplay preview never reached battle density: %d enemies (wave %d)" % [enemy_count,main.wave_director.current_wave_number])
 		return
 
 	var image: Image = root.get_texture().get_image()
