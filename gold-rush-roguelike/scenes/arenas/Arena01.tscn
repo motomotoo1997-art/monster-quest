@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/environment/CactusProp.tscn" id="1_cactus"]
 [ext_resource type="PackedScene" path="res://scenes/environment/RockClusterProp.tscn" id="2_rocks"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" path="res://scenes/environment/RailSegmentProp.tscn" id="6_rail"]
 [ext_resource type="PackedScene" path="res://scenes/environment/CrateStackProp.tscn" id="7_crates"]
 [ext_resource type="Texture2D" path="res://assets/vfx/dust_mote.svg" id="8_dust"]
+[ext_resource type="Texture2D" path="res://assets/environment/arena01_canyon_depth.svg" id="9_depth"]
 
 [sub_resource type="RectangleShape2D" id="BuildShape"]
 size = Vector2(1120,560)
@@ -23,6 +24,16 @@ y_sort_enabled = true
 z_index = -50
 position = Vector2(640,360)
 texture = ExtResource("5_backdrop")
+
+[node name="CanyonDepth" type="Sprite2D" parent="."]
+z_index = -45
+position = Vector2(640,360)
+texture = ExtResource("9_depth")
+
+[node name="SunWash" type="Polygon2D" parent="."]
+z_index = -43
+polygon = PackedVector2Array(860,0,1280,0,1280,282,1115,248,986,192)
+color = Color(1,0.69,0.30,0.055)
 
 [node name="DustPathHighlight" type="Polygon2D" parent="."]
 z_index = -20
