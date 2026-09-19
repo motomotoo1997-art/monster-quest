@@ -7,7 +7,8 @@
 [ext_resource type="Texture2D" path="res://assets/environment/arena02_mining_yard_v6.svg" id="5_backdrop"]
 [ext_resource type="PackedScene" path="res://scenes/environment/RailSegmentProp.tscn" id="6_rail"]
 [ext_resource type="PackedScene" path="res://scenes/environment/CrateStackProp.tscn" id="7_crates"]
-[ext_resource type="Texture2D" path="res://assets/vfx/dust_mote.svg" id="8_dust"]\n[ext_resource type="Texture2D" path="res://assets/environment/frontier_props_v6.svg" id="9_props"]
+[ext_resource type="Texture2D" path="res://assets/vfx/dust_mote.svg" id="8_dust"]
+[ext_resource type="Texture2D" path="res://assets/environment/frontier_props_v6.svg" id="9_props"]
 
 [sub_resource type="AtlasTexture" id="MiningHoistTexture"]
 atlas = ExtResource("9_props")
@@ -25,7 +26,13 @@ y_sort_enabled = true
 [node name="IllustratedBackdrop" type="Sprite2D" parent="."]
 z_index = -50
 position = Vector2(640,360)
-texture = ExtResource("5_backdrop")\n\n[node name="MiningHoist" type="Sprite2D" parent="."]\nz_index = -18\nposition = Vector2(980,185)\ntexture = SubResource("MiningHoistTexture")\nscale = Vector2(0.54,0.54)
+texture = ExtResource("5_backdrop")
+
+[node name="MiningHoist" type="Sprite2D" parent="."]
+z_index = -18
+position = Vector2(980,185)
+texture = SubResource("MiningHoistTexture")
+scale = Vector2(0.54,0.54)
 
 [node name="CanyonWarmWash" type="Polygon2D" parent="."]
 z_index = -44
