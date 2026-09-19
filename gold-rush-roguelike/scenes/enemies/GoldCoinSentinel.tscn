@@ -50,7 +50,7 @@ color = Color(0.04,0.025,0.015,0.29)
 position = Vector2(0,-46)
 sprite_frames = SubResource("SpriteFrames_enemy")
 animation = &"idle"
-scale = Vector2(0.46,0.46)
+scale = Vector2(0.36,0.36)
 [node name="Telegraph" type="Polygon2D" parent="."]
 visible = false
 polygon = PackedVector2Array(-34,0,-24,-24,0,-35,24,-24,34,0,24,24,0,35,-24,24)
