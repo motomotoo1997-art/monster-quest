@@ -67,7 +67,9 @@ jobs:
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_production_enemy_visibility.gd
       - name: Energy lighting regression
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_energy_lighting_contract.gd
-      - name: Arena identity overhaul regression\n        run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_arena_identity_overhaul.gd\n      - name: Shared isometric depth-sort regression
+      - name: Arena identity overhaul regression
+        run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_arena_identity_overhaul.gd
+      - name: Shared isometric depth-sort regression
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_depth_sorting_contract.gd
       - name: Prospector animation regression
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_prospector_animation_contract.gd
