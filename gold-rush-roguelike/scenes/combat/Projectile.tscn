@@ -6,6 +6,7 @@
 radius = 4.0
 
 [node name="Projectile" type="Area2D"]
+z_index = 12
 collision_layer = 0
 collision_mask = 6
 monitoring = true
@@ -15,6 +16,18 @@ script = ExtResource("1_projectile")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_projectile")
 
+[node name="TrailSoft" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-36,-7,5,-5,13,0,5,5,-36,7,-23,0)
+color = Color(0.05,0.76,1,0.20)
+
+[node name="Trail" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-25,-3,4,-3,12,0,4,3,-25,3,-15,0)
+color = Color(0.08,0.88,1,0.62)
+
 [node name="Visual" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(-7, 0, -2, -3, 7, 0, -2, 3)
-color = Color(1, 0.72, 0.18, 1)
+polygon = PackedVector2Array(-6,0,-1,-5,10,0,-1,5)
+color = Color(0.80,0.98,1,1)
+
+[node name="Core" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-2,0,2,-2,8,0,2,2)
+color = Color(1,1,1,1)
