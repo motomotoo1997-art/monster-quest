@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://scripts/enemies/molten_gold_slime.gd" id="1_enemy"]
 [ext_resource type="Script" path="res://scripts/components/health_component.gd" id="2_health"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://scripts/components/hurtbox_component.gd" id="4_hurtbox"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/MoltenPuddle.tscn" id="5_puddle"]
 [ext_resource type="Texture2D" path="res://assets/sprites/enemies/enemies.svg" id="6_texture"]
+[ext_resource type="Script" path="res://scripts/components/gold_drop_component.gd" id="7_gold_drop"]
+[ext_resource type="PackedScene" path="res://scenes/combat/GoldPickup.tscn" id="8_gold_pickup"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_enemy"]
 radius = 19.0
@@ -13,7 +15,7 @@ radius = 19.0
 atlas = ExtResource("6_texture")
 region = Rect2(960, 0, 320, 320)
 [sub_resource type="SpriteFrames" id="SpriteFrames_enemy"]
-animations = [{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_enemy")}],"loop":true,"name":&"idle","speed":4.0},{"frames":[{"duration":1.0,"texture":SubResource("AtlasTexture_enemy")}],"loop":true,"name":&"move","speed":6.0}]
+animations = [{"frames": [{"duration": 1.0, "texture": SubResource("AtlasTexture_enemy")}], "loop": true, "name": &"idle", "speed": 4.0}, {"frames": [{"duration": 1.0, "texture": SubResource("AtlasTexture_enemy")}], "loop": true, "name": &"move", "speed": 6.0}]
 
 [node name="MoltenGoldSlime" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 1
@@ -31,14 +33,14 @@ puddle_damage = 5.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_enemy")
 [node name="Shadow" type="Polygon2D" parent="."]
-position = Vector2(0,16)
-polygon = PackedVector2Array(-26,0,-17,-7,17,-7,26,0,17,7,-17,7)
-color = Color(0.06,0.035,0.02,0.23)
+position = Vector2(0, 16)
+polygon = PackedVector2Array(-26, 0, -17, -7, 17, -7, 26, 0, 17, 7, -17, 7)
+color = Color(0.06, 0.035, 0.02, 0.23)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0,-22)
+position = Vector2(0, -22)
 sprite_frames = SubResource("SpriteFrames_enemy")
 animation = &"idle"
-scale = Vector2(0.36,0.36)
+scale = Vector2(0.36, 0.36)
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_health")
 max_health = 88.0
@@ -55,3 +57,7 @@ health_component_path = NodePath("../HealthComponent")
 team_component_path = NodePath("../TeamComponent")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 shape = SubResource("CircleShape2D_enemy")
+[node name="GoldDropComponent" type="Node" parent="."]
+script = ExtResource("7_gold_drop")
+gold_amount = 12
+pickup_scene = ExtResource("8_gold_pickup")
