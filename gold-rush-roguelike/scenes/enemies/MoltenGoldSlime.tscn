@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://scripts/components/team_component.gd" id="3_team"]
 [ext_resource type="Script" path="res://scripts/components/hurtbox_component.gd" id="4_hurtbox"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/MoltenPuddle.tscn" id="5_puddle"]
-[ext_resource type="Texture2D" path="res://assets/sprites/enemies/enemies_animation_v3.svg" id="6_texture"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/enemies_animation_v4.svg" id="6_texture"]
 [ext_resource type="Script" path="res://scripts/components/gold_drop_component.gd" id="7_gold_drop"]
 [ext_resource type="PackedScene" path="res://scenes/combat/GoldPickup.tscn" id="8_gold_pickup"]
 
