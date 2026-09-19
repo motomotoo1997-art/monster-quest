@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="256" viewBox="0 0 1280 256">
+<defs>
+ <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#0a6175" stop-opacity="0"/><stop offset=".35" stop-color="#22dff2" stop-opacity=".55"/><stop offset=".72" stop-color="#c7ffff"/><stop offset="1" stop-color="#fff"/></linearGradient>
+ <linearGradient id="boss" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#7e1d08" stop-opacity="0"/><stop offset=".32" stop-color="#f05b08" stop-opacity=".6"/><stop offset=".7" stop-color="#ffd34b"/><stop offset="1" stop-color="#fff4b1"/></linearGradient>
+ <radialGradient id="impact"><stop stop-color="#fff"/><stop offset=".18" stop-color="#bffcff"/><stop offset=".46" stop-color="#27d9ed"/><stop offset=".75" stop-color="#f0a51c" stop-opacity=".72"/><stop offset="1" stop-color="#1b7180" stop-opacity="0"/></radialGradient>
+ <radialGradient id="boom"><stop stop-color="#fff8c0"/><stop offset=".2" stop-color="#ffd84c"/><stop offset=".48" stop-color="#f57b0a"/><stop offset=".72" stop-color="#b8320b" stop-opacity=".85"/><stop offset="1" stop-color="#5e1c0b" stop-opacity="0"/></radialGradient>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff5a6"/><stop offset=".28" stop-color="#ffd23f"/><stop offset=".65" stop-color="#d8870e"/><stop offset="1" stop-color="#713807"/></linearGradient>
+ <filter id="blur" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="8"/></filter>
+</defs>
+<!-- player bolt -->
+<g transform="translate(128 128)">
+ <path d="M-92 0L-18-14 48-9 91 0 48 9-18 14Z" fill="#18dff1" opacity=".2" filter="url(#blur)"/>
+ <path d="M-92 0L-15-8 54-6 94 0 54 6-15 8Z" fill="url(#cyan)"/>
+ <path d="M30-5L90 0 30 5 48 0Z" fill="#fff"/>
+ <path d="M-58 0L-12 0" stroke="#70f7ff" stroke-width="4" stroke-linecap="round" opacity=".7"/>
+</g>
+<!-- boss bolt -->
+<g transform="translate(384 128)">
+ <path d="M-100 0L-20-18 58-12 102 0 58 12-20 18Z" fill="#ff5a0b" opacity=".22" filter="url(#blur)"/>
+ <path d="M-98 0L-12-10 62-7 104 0 62 7-12 10Z" fill="url(#boss)"/>
+ <path d="M25-8L88-4 108 0 88 4 25 8 44 0Z" fill="#fff2a0"/>
+ <path d="M-70 0L-12 0" stroke="#ffbd34" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+</g>
+<!-- impact -->
+<g transform="translate(640 128)">
+ <circle r="58" fill="url(#impact)" opacity=".45" filter="url(#blur)"/>
+ <path d="M0-74L12-25 49-57 30-15 79-17 34 5 69 36 24 20 30 70 6 29-18 72-12 26-58 51-29 13-78 3-30-8-57-48-15-25Z" fill="url(#impact)"/>
+ <circle r="15" fill="#fff"/>
+ <g stroke="#ffd14a" stroke-width="5" stroke-linecap="round"><path d="M42-35l30-24"/><path d="M45 29l33 19"/><path d="M-42 31l-31 23"/></g>
+</g>
+<!-- explosion -->
+<g transform="translate(896 128)">
+ <circle r="76" fill="url(#boom)" opacity=".45" filter="url(#blur)"/>
+ <path d="M0-84L18-38 48-69 43-28 84-38 56-8 94 12 50 18 71 59 30 37 20 86 0 43-28 81-30 38-72 62-51 20-94 7-54-11-82-45-39-34-42-78-13-44Z" fill="url(#boom)"/>
+ <circle r="24" fill="#fff1a2"/>
+ <path d="M-70 62Q0 92 70 62" fill="none" stroke="#cf7d2c" stroke-width="8" opacity=".45"/>
+</g>
+<!-- pickup -->
+<g transform="translate(1152 128)">
+ <circle r="60" fill="#ffc52b" opacity=".18" filter="url(#blur)"/>
+ <path d="M0-66L45-32 39 30 0 66-43 31-48-31Z" fill="#5c3109" opacity=".8"/>
+ <path d="M0-56L36-27 31 24 0 55-35 25-39-27Z" fill="url(#gold)" stroke="#8a4b08" stroke-width="5"/>
+ <path d="M0-49L0 47M-34-24L31 24M35-24L-31 25" stroke="#ffe887" stroke-width="4" opacity=".5"/>
+ <path d="M-13-38L9-30-1-9-21-16Z" fill="#fff8bd" opacity=".85"/>
+ <path d="M51-55v25M39-43h25" stroke="#fff8c9" stroke-width="6" stroke-linecap="round"/>
+</g>
+</svg>
