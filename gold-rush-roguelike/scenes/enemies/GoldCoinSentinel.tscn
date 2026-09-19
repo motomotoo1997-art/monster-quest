@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://scripts/components/hurtbox_component.gd" id="4_hurtbox"]
 [ext_resource type="Script" path="res://scripts/components/weapon_component.gd" id="5_weapon"]
 [ext_resource type="PackedScene" path="res://scenes/combat/Projectile.tscn" id="6_projectile"]
-[ext_resource type="Texture2D" path="res://assets/sprites/enemies/enemies_animation_v3.svg" id="7_texture"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/enemies_animation_v4.svg" id="7_texture"]
 [ext_resource type="Script" path="res://scripts/components/gold_drop_component.gd" id="8_gold_drop"]
 [ext_resource type="PackedScene" path="res://scenes/combat/GoldPickup.tscn" id="9_gold_pickup"]
 
