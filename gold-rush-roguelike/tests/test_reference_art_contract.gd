@@ -5,7 +5,7 @@ const ENEMIES := [
 	{"scene":"res://scenes/enemies/GoldCoinSentinel.tscn","atlas":"enemies_reference_v5.svg"},
 	{"scene":"res://scenes/enemies/FlyingGoldDisc.tscn","atlas":"enemies_reference_v5.svg"},
 	{"scene":"res://scenes/enemies/MoltenGoldSlime.tscn","atlas":"enemies_reference_v5.svg"},
-	{"scene":"res://scenes/enemies/GoldBarTank.tscn","atlas":"boss_reference_v4.svg"},
+	{"scene":"res://scenes/enemies/GoldBarTank.tscn","atlas":"boss_reference_v5.svg"},
 ]
 
 func _init() -> void:
