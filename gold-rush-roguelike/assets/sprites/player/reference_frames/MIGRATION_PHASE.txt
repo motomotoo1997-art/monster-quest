@@ -1,0 +1,1 @@
+Phase: per-frame binary verification. Pending atomic tree commit with 13 PNG frame blobs and Prospector.tscn rewrite.
