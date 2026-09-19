@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1792" height="1344" viewBox="0 0 1792 1344">
+<defs>
+ <linearGradient id="steel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#a1afb0"/><stop offset=".38" stop-color="#526064"/><stop offset="1" stop-color="#1e292c"/></linearGradient>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff0a0"/><stop offset=".2" stop-color="#ffc631"/><stop offset=".58" stop-color="#c97a0c"/><stop offset="1" stop-color="#6d390b"/></linearGradient>
+ <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#a86438"/><stop offset=".5" stop-color="#754126"/><stop offset="1" stop-color="#45291e"/></linearGradient>
+ <linearGradient id="cactus" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#9bb54d"/><stop offset=".45" stop-color="#58762d"/><stop offset="1" stop-color="#29451f"/></linearGradient>
+ <radialGradient id="cyan"><stop stop-color="#fff"/><stop offset=".18" stop-color="#b9ffff"/><stop offset=".55" stop-color="#20dff0"/><stop offset="1" stop-color="#05687e"/></radialGradient>
+ <radialGradient id="spark"><stop stop-color="#fff"/><stop offset=".2" stop-color="#fff0a2"/><stop offset=".55" stop-color="#ffb21a"/><stop offset="1" stop-color="#f04a08" stop-opacity="0"/></radialGradient>
+ <filter id="soft" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="9"/></filter>
+ <g id="turret">
+  <ellipse cy="79" rx="82" ry="20" fill="#201813" opacity=".35"/>
+  <path d="M-72 63L-57 9-35-14H37L59 9 73 63 44 84H-43Z" fill="url(#steel)" stroke="#241b15" stroke-width="9"/>
+  <path d="M-50 52L-39 17-23 4H25L41 18 51 52Z" fill="#334247" stroke="#1d1713" stroke-width="5"/>
+  <circle cy="25" r="31" fill="#1e3135" stroke="#181411" stroke-width="7"/><circle cy="25" r="21" fill="url(#cyan)" stroke="#07596a" stroke-width="5"/>
+  <path d="M-26 24H26M0-2V52" stroke="#d4ffff" stroke-width="4" opacity=".62"/>
+  <path d="M-45-10L-24-47 5-61 37-48 50-20 35 3-33 4Z" fill="url(#gold)" stroke="#35230e" stroke-width="8"/>
+  <rect x="21" y="-45" width="95" height="31" rx="10" fill="url(#steel)" stroke="#201914" stroke-width="8"/>
+  <path d="M48-39H99M48-30H103M48-21H96" stroke="#d29525" stroke-width="4"/>
+  <rect x="100" y="-51" width="39" height="43" rx="7" fill="#2a3d41" stroke="#201914" stroke-width="7"/><circle cx="124" cy="-29" r="9" fill="url(#cyan)"/>
+  <path d="M-31-44L-12-55M10-55L29-44" stroke="#fff0a0" stroke-width="5" stroke-linecap="round"/>
+ </g>
+ <g id="cactusGun">
+  <ellipse cy="82" rx="70" ry="18" fill="#201813" opacity=".34"/>
+  <path d="M-42 68Q-55 38-43 8L-37-62Q-35-84-14-86Q8-84 8-61V-24Q20-40 29-55Q40-72 54-61Q65-50 54-34L30-4Q22 6 9 8V70Z" fill="url(#cactus)" stroke="#26341b" stroke-width="9" stroke-linejoin="round"/>
+  <path d="M-28-55V53M-7-63V58M18-10V55" stroke="#b7c970" stroke-width="4" opacity=".52"/>
+  <g fill="#eadb9b"><path d="M-45-34l-13-4 12-5z"/><path d="M-42 9l-13-4 12-5z"/><path d="M7-39l13-4-12-5z"/><path d="M7 25l13-4-12-5z"/></g>
+  <path d="M-30-70L-14-90 4-72" fill="#a25b31" stroke="#3c2a1d" stroke-width="6"/>
+  <path d="M-18-78L-3-68" stroke="#e6b05e" stroke-width="5"/>
+  <path d="M8-30L79-24 94-8 85 11 10 9Z" fill="url(#wood)" stroke="#2c2119" stroke-width="8"/>
+  <rect x="69" y="-32" width="42" height="49" rx="6" fill="url(#steel)" stroke="#261d17" stroke-width="7"/><circle cx="97" cy="-8" r="7" fill="url(#cyan)"/>
+  <path d="M-25 70L-49 87H38L10 69Z" fill="#6f4b2a" stroke="#34251b" stroke-width="7"/>
+ </g>
+ <g id="tnt">
+  <ellipse cy="86" rx="64" ry="17" fill="#201813" opacity=".34"/>
+  <path d="M-55-50Q0-68 55-50L48 67Q0 84-48 67Z" fill="#b23f2b" stroke="#342018" stroke-width="9"/>
+  <path d="M-51-31Q0-45 51-31M-49 43Q0 58 49 43" fill="none" stroke="#4a2b21" stroke-width="10"/>
+  <path d="M-42-20Q0-31 42-20L38 31Q0 43-38 31Z" fill="#d45a39" opacity=".8"/>
+  <rect x="-34" y="-5" width="68" height="28" rx="4" fill="#efe1b0" stroke="#3b291e" stroke-width="5"/><text x="0" y="16" text-anchor="middle" font-family="sans-serif" font-size="25" font-weight="900" fill="#7a2118">TNT</text>
+  <path d="M0-58Q8-88 33-95" fill="none" stroke="#33261f" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="36" cy="-98" r="10" fill="url(#spark)"/>
+  <path d="M-37-47Q0-57 37-47M-34 61Q0 72 34 61" fill="none" stroke="#f08b55" stroke-width="4" opacity=".65"/>
+ </g>
+</defs>
+
+<!-- Magnetic turret row -->
+<g transform="translate(224 224)"><use href="#turret"/></g>
+<g transform="translate(672 221) rotate(-2)"><use href="#turret"/><circle cx="124" cy="-29" r="28" fill="url(#cyan)" opacity=".15" filter="url(#soft)"/></g>
+<g transform="translate(1120 224) rotate(2)"><use href="#turret"/><circle cy="25" r="42" fill="url(#cyan)" opacity=".14" filter="url(#soft)"/></g>
+<g transform="translate(1568 224)"><use href="#turret"/><circle cx="146" cy="-29" r="46" fill="url(#cyan)" opacity=".18" filter="url(#soft)"/><path d="M141-29H187" stroke="#dfffff" stroke-width="10" stroke-linecap="round"/></g>
+
+<!-- Cactus sentry row -->
+<g transform="translate(224 672)"><use href="#cactusGun"/></g>
+<g transform="translate(672 672) rotate(-1)"><use href="#cactusGun"/></g>
+<g transform="translate(1120 672) rotate(2)"><use href="#cactusGun"/><circle cx="112" cy="-8" r="34" fill="url(#spark)" opacity=".45" filter="url(#soft)"/></g>
+<g transform="translate(1568 672) rotate(-3)"><use href="#cactusGun"/><path d="M106-8H151" stroke="#fff3b0" stroke-width="8" stroke-linecap="round"/><circle cx="151" cy="-8" r="30" fill="url(#spark)" opacity=".6"/></g>
+
+<!-- TNT row -->
+<g transform="translate(224 1120)"><use href="#tnt"/></g>
+<g transform="translate(672 1120)"><use href="#tnt"/><circle cx="36" cy="-98" r="22" fill="url(#spark)" opacity=".42"/></g>
+<g transform="translate(1120 1120) scale(1.02 .98)"><use href="#tnt"/><circle cx="36" cy="-98" r="32" fill="url(#spark)" opacity=".65" filter="url(#soft)"/></g>
+<g transform="translate(1568 1120) scale(.99 1.01)"><use href="#tnt"/><circle cx="36" cy="-98" r="45" fill="url(#spark)" opacity=".78" filter="url(#soft)"/><path d="M35-110l0-30M47-105l25-22M24-105L0-128" stroke="#fff4b2" stroke-width="6" stroke-linecap="round"/></g>
+</svg>
