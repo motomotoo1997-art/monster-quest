@@ -114,10 +114,14 @@ func _build_arena_waves(index: int) -> Array:
 	var waves: Array = []
 	match index:
 		1:
-			# Arena 1 is now a visual showcase as well as onboarding: dense nugget pressure
-			# first, then readable Sentinel and Disc silhouettes so the battlefield feels alive.
+			# Arena 1 now introduces the complete visual language immediately: nugget swarm,
+			# tall coin sentinel and flying disc silhouettes all appear in the opening fight.
 			waves = [
-				[{"scene": hopper_scene, "count": 10, "interval": 0.40}],
+				[
+					{"scene": hopper_scene, "count": 6, "interval": 0.34},
+					{"scene": sentinel_scene, "count": 2, "interval": 0.52},
+					{"scene": disc_scene, "count": 2, "interval": 0.44},
+				],
 				[
 					{"scene": hopper_scene, "count": 8, "interval": 0.34},
 					{"scene": sentinel_scene, "count": 2, "interval": 0.58},
