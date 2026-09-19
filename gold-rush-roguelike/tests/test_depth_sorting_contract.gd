@@ -57,8 +57,6 @@ func _run_test() -> void:
 		ground_item.queue_free()
 		await process_frame
 
-	# Rails are floor decoration, not an occluding world prop. They stay below
-	# the shared actor/prop Y-sort layer by design.
 	var rail_packed := load("res://scenes/environment/RailSegmentProp.tscn") as PackedScene
 	var rail := rail_packed.instantiate() as Node2D if rail_packed != null else null
 	if rail == null:
@@ -94,7 +92,9 @@ func _run_test() -> void:
 		_fail("Active arena must be the shared Y-sort canvas")
 		return
 	if player.get_parent() != arena_one or core.get_parent() != arena_one:
-		_fail("Prospector and Gold Core must join the active arena Y-sort hierarchy")
+		var tracked: Array = arena_controller.get("_persistent_actors") as Array
+		var staging := arena_controller.get("_persistent_staging") as Node2D
+		_fail("Persistent actors did not attach: player_parent=%s core_parent=%s arena=%s tracked=%d staging=%s staging_children=%d" % [player.get_parent().get_path(), core.get_parent().get_path(), arena_one.get_path(), tracked.size(), staging.get_path() if staging != null else NodePath("<null>"), staging.get_child_count() if staging != null else -1])
 		return
 	if not build_controller.has_method("get_build_parent"):
 		_fail("BuildController must expose the active arena build parent")
