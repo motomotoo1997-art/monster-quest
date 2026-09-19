@@ -1,30 +1,40 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="640" height="160" viewBox="0 0 640 160">
 <defs>
- <linearGradient id="rock" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#9b5e35"/><stop offset="1" stop-color="#56301f"/></linearGradient>
- <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#a65c2e"/><stop offset="1" stop-color="#5c2e1b"/></linearGradient>
- <linearGradient id="ore" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff39c"/><stop offset=".45" stop-color="#f0bd35"/><stop offset="1" stop-color="#9a5b0a"/></linearGradient>
+ <linearGradient id="rock" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c17849"/><stop offset=".45" stop-color="#8e5234"/><stop offset="1" stop-color="#4d2c22"/></linearGradient>
+ <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#bd7139"/><stop offset=".55" stop-color="#82462a"/><stop offset="1" stop-color="#43251a"/></linearGradient>
+ <linearGradient id="ore" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff7ae"/><stop offset=".35" stop-color="#f0c63f"/><stop offset=".7" stop-color="#bd7812"/><stop offset="1" stop-color="#684008"/></linearGradient>
+ <linearGradient id="cactus" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8ece58"/><stop offset=".5" stop-color="#4b963b"/><stop offset="1" stop-color="#24562b"/></linearGradient>
 </defs>
+<!-- cactus -->
 <g transform="translate(0,0)">
- <ellipse cx="80" cy="139" rx="35" ry="7" fill="#27170e" opacity=".22"/>
- <path d="M70 135V65Q70 49 81 49Q92 49 92 65V84L106 73V59Q106 48 116 48Q126 48 126 60V82Q126 91 119 97L92 112V135Z" fill="#4a9e55" stroke="#255a31" stroke-width="6"/>
- <path d="M70 103L55 94V79Q55 69 45 69Q35 69 35 80V101Q35 109 42 114L70 127" fill="#4a9e55" stroke="#255a31" stroke-width="6"/>
- <g fill="#e9d58c"><circle cx="78" cy="71" r="2"/><circle cx="83" cy="94" r="2"/><circle cx="111" cy="67" r="2"/><circle cx="53" cy="90" r="2"/></g>
+ <ellipse cx="80" cy="142" rx="38" ry="8" fill="#2c190e" opacity=".25"/>
+ <path d="M67 138V66Q67 47 81 47Q95 47 95 66V88L109 79V61Q109 47 121 47Q133 47 133 61V84Q133 95 124 101L95 120V138Z" fill="url(#cactus)" stroke="#254f29" stroke-width="6"/>
+ <path d="M68 108L52 98V80Q52 67 41 67Q30 67 30 81V103Q30 113 39 119L68 133" fill="url(#cactus)" stroke="#254f29" stroke-width="6"/>
+ <path d="M76 57v72M87 57v72M116 55v38M42 76v31" stroke="#b7de76" stroke-width="2" opacity=".48"/>
+ <g fill="#f0df9a"><circle cx="74" cy="72" r="2"/><circle cx="88" cy="91" r="2"/><circle cx="116" cy="67" r="2"/><circle cx="45" cy="91" r="2"/><circle cx="83" cy="118" r="2"/></g>
 </g>
+<!-- rock cluster -->
 <g transform="translate(160,0)">
- <ellipse cx="80" cy="137" rx="48" ry="8" fill="#27170e" opacity=".22"/>
- <path d="M31 126L45 94L72 84L89 101L110 88L133 106L128 132L47 137Z" fill="url(#rock)" stroke="#4a291b" stroke-width="6"/>
- <path d="M49 99L70 92L81 105L59 116Z" fill="#b97442" opacity=".7"/><path d="M105 96L121 108L111 122L93 113Z" fill="#794329"/>
+ <ellipse cx="80" cy="140" rx="51" ry="9" fill="#2b180f" opacity=".24"/>
+ <path d="M25 132L39 99L67 85L87 101L109 87L137 111L131 138L42 142Z" fill="url(#rock)" stroke="#4b2a20" stroke-width="6"/>
+ <path d="M39 101L66 91L78 105L58 121L35 118ZM91 101L110 94L128 112L114 129L88 120Z" fill="#d18a53" opacity=".55"/>
+ <path d="M68 86l13 18-8 18M109 89l-8 16 13 17" fill="none" stroke="#613725" stroke-width="3"/>
+ <path d="M45 105l18-7M98 107l17-8" stroke="#f0ad69" stroke-width="3" opacity=".42"/>
 </g>
+<!-- mine cart -->
 <g transform="translate(320,0)">
- <ellipse cx="80" cy="139" rx="49" ry="8" fill="#27170e" opacity=".22"/>
- <rect x="35" y="82" width="88" height="51" rx="5" fill="url(#wood)" stroke="#3b2118" stroke-width="6"/>
- <path d="M35 94H123M35 119H123M49 82V133M109 82V133" stroke="#d18b43" stroke-width="5"/>
- <circle cx="46" cy="135" r="13" fill="#343338" stroke="#17181a" stroke-width="5"/><circle cx="113" cy="135" r="13" fill="#343338" stroke="#17181a" stroke-width="5"/>
- <path d="M60 82L72 60L87 82Z" fill="url(#ore)" stroke="#7c4a08" stroke-width="4"/><path d="M82 82L96 53L110 82Z" fill="url(#ore)" stroke="#7c4a08" stroke-width="4"/>
+ <ellipse cx="80" cy="143" rx="54" ry="9" fill="#24170f" opacity=".28"/>
+ <path d="M31 80H129L120 128H43Z" fill="url(#wood)" stroke="#3a2419" stroke-width="6"/>
+ <path d="M34 94h92M40 114h83M52 81v48M108 81v48" stroke="#da9850" stroke-width="4" opacity=".62"/>
+ <path d="M44 79l13-16 15 16M70 79l16-25 18 25M97 79l12-18 14 18" fill="url(#ore)" stroke="#714407" stroke-width="4"/>
+ <path d="M27 132h108" stroke="#54514b" stroke-width="6"/><circle cx="49" cy="136" r="14" fill="#35383a" stroke="#17191a" stroke-width="5"/><circle cx="113" cy="136" r="14" fill="#35383a" stroke="#17191a" stroke-width="5"/><circle cx="49" cy="136" r="5" fill="#82898d"/><circle cx="113" cy="136" r="5" fill="#82898d"/>
 </g>
+<!-- gold vein -->
 <g transform="translate(480,0)">
- <ellipse cx="80" cy="138" rx="43" ry="8" fill="#27170e" opacity=".2"/>
- <path d="M52 130L44 99L63 72L76 98L88 56L99 98L114 78L124 106L113 132Z" fill="url(#ore)" stroke="#7f4c08" stroke-width="6"/>
- <path d="M84 68L89 58L94 70L89 78Z" fill="#fff7bb"/><path d="M62 84L67 76L72 88L67 94Z" fill="#fff7bb"/>
+ <ellipse cx="80" cy="141" rx="47" ry="9" fill="#2b170c" opacity=".22"/>
+ <path d="M34 137L43 105L61 78L72 98L86 51L99 96L113 72L132 109L125 138Z" fill="#704330" stroke="#46291f" stroke-width="6"/>
+ <path d="M49 126L56 101L68 86L76 111L87 61L97 108L111 86L121 115L116 134Z" fill="url(#ore)" stroke="#7b4a09" stroke-width="5"/>
+ <path d="M85 70l5-12 7 13-6 9ZM61 98l4-10 7 11-6 7ZM106 101l5-9 6 10-5 7" fill="#fff9bd"/>
+ <path d="M45 119l21-17M98 119l19-17" stroke="#f6cf55" stroke-width="3" opacity=".7"/>
 </g>
 </svg>
