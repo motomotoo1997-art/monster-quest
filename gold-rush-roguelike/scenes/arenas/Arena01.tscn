@@ -63,11 +63,11 @@ position = Vector2(360,360)
 [node name="CoreSpawn" type="Marker2D" parent="." groups=["core_spawn"]]
 position = Vector2(520,360)
 [node name="EnemySpawnNorth" type="Marker2D" parent="." groups=["enemy_spawn"]]
-position = Vector2(870,105)
+position = Vector2(850,155)
 [node name="EnemySpawnEast" type="Marker2D" parent="." groups=["enemy_spawn"]]
-position = Vector2(1160,360)
+position = Vector2(1085,360)
 [node name="EnemySpawnSouth" type="Marker2D" parent="." groups=["enemy_spawn"]]
-position = Vector2(870,615)
+position = Vector2(850,565)
 
 [node name="RockA" type="StaticBody2D" parent="."]
 position = Vector2(760,250)
