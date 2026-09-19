@@ -155,8 +155,14 @@ energy = 0.95
 color = Color(1,0.58,0.08,1)
 [node name="Ring" type="Polygon2D" parent="SlamTelegraph"]
 polygon = PackedVector2Array(0,-155,109,-109,155,0,109,109,0,155,-109,109,-155,0,-109,-109)
-color = Color(1,0.58,0.06,0.24)
+color = Color(1,0.58,0.06,0.10)
 show_behind_parent = true
+
+[node name="Outline" type="Line2D" parent="SlamTelegraph"]
+points = PackedVector2Array(0,-155,109,-109,155,0,109,109,0,155,-109,109,-155,0,-109,-109,0,-155)
+width = 5.0
+default_color = Color(1,0.62,0.08,0.82)
+antialiased = true
 [node name="SlamArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
