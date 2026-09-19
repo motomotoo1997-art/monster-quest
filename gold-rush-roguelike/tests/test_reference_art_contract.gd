@@ -1,10 +1,10 @@
 extends SceneTree
 
 const ENEMIES := [
-	{"scene":"res://scenes/enemies/GoldHopper.tscn","atlas":"enemies_reference_v5.svg"},
-	{"scene":"res://scenes/enemies/GoldCoinSentinel.tscn","atlas":"enemies_reference_v5.svg"},
-	{"scene":"res://scenes/enemies/FlyingGoldDisc.tscn","atlas":"enemies_reference_v5.svg"},
-	{"scene":"res://scenes/enemies/MoltenGoldSlime.tscn","atlas":"enemies_reference_v5.svg"},
+	{"scene":"res://scenes/enemies/GoldHopper.tscn","atlas":"enemies_frontier_v6.svg"},
+	{"scene":"res://scenes/enemies/GoldCoinSentinel.tscn","atlas":"enemies_frontier_v6.svg"},
+	{"scene":"res://scenes/enemies/FlyingGoldDisc.tscn","atlas":"enemies_frontier_v6.svg"},
+	{"scene":"res://scenes/enemies/MoltenGoldSlime.tscn","atlas":"enemies_frontier_v6.svg"},
 	{"scene":"res://scenes/enemies/GoldBarTank.tscn","atlas":"boss_frontier_juggernaut_v6.svg"},
 ]
 
