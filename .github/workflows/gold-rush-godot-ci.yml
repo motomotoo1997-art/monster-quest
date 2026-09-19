@@ -45,6 +45,9 @@ jobs:
       - name: Enemy gold drops
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_enemy_gold_drops.gd
 
+      - name: Run economy budget
+        run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_run_economy_budget.gd
+
       - name: Roguelike upgrades
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_upgrades.gd
 
