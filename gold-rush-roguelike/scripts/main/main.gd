@@ -114,10 +114,19 @@ func _build_arena_waves(index: int) -> Array:
 	var waves: Array = []
 	match index:
 		1:
+			# Arena 1 is now a visual showcase as well as onboarding: dense nugget pressure
+			# first, then readable Sentinel and Disc silhouettes so the battlefield feels alive.
 			waves = [
-				[{"scene": hopper_scene, "count": 8, "interval": 0.65}],
-				[{"scene": hopper_scene, "count": 10, "interval": 0.58}],
-				[{"scene": hopper_scene, "count": 12, "interval": 0.50}],
+				[{"scene": hopper_scene, "count": 10, "interval": 0.40}],
+				[
+					{"scene": hopper_scene, "count": 8, "interval": 0.34},
+					{"scene": sentinel_scene, "count": 2, "interval": 0.58},
+				],
+				[
+					{"scene": hopper_scene, "count": 10, "interval": 0.30},
+					{"scene": sentinel_scene, "count": 3, "interval": 0.52},
+					{"scene": disc_scene, "count": 2, "interval": 0.46},
+				],
 			]
 		2:
 			waves = [
