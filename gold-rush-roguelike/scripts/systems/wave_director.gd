@@ -9,6 +9,7 @@ signal enemy_spawned(enemy: EnemyBase)
 @export var player_path: NodePath
 @export var core_path: NodePath
 @export_range(0.0, 80.0, 1.0) var spawn_spread_radius: float = 24.0
+@export_range(1, 6, 1) var initial_spawn_burst: int = 3
 
 var current_wave_number: int = 0
 var _spawn_queue: Array[Dictionary] = []
@@ -48,6 +49,11 @@ func start_wave(entries: Array[Dictionary]) -> void:
 	_spawning_enabled = not _spawn_queue.is_empty()
 	_spawn_timer = 0.05
 	wave_started.emit(current_wave_number)
+	# Put a readable threat group on screen immediately. This avoids an empty-looking
+	# arena at wave start while the remaining queue still uses authored spawn intervals.
+	var opening_count := mini(initial_spawn_burst, _spawn_queue.size())
+	for _i in range(opening_count):
+		_spawn_next()
 	if not _spawning_enabled:
 		_check_wave_complete()
 
