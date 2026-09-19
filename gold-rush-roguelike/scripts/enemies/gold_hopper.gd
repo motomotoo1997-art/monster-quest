@@ -71,7 +71,9 @@ func _update_visual(delta: float) -> void:
 	if visual_sprite.animation != &"idle":
 		visual_sprite.play(&"idle")
 	ground_shadow.modulate = Color.WHITE
-	var windup := 1.0 - clampf(_hop_cooldown_remaining / maxf(anticipation_window, 0.01), 0.0, 1.0)
+	var windup := 0.0
+	if movement_enabled and choose_target() != null:
+		windup = 1.0 - clampf(_hop_cooldown_remaining / maxf(anticipation_window, 0.01), 0.0, 1.0)
 	var landing := clampf(_landing_pulse_remaining / 0.13, 0.0, 1.0)
 	var crouch := (sin(_visual_time * 5.5) + 1.0) * 0.5
 	var squash := maxf(windup * 0.11, landing * 0.14)
