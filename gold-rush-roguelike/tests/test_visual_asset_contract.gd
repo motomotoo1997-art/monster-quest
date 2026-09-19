@@ -14,9 +14,9 @@ const EXPECTED := [
 ]
 
 const ARENA_BACKDROPS := [
-	{"scene":"res://scenes/arenas/Arena02.tscn","texture":"arena02_backdrop_v2.svg"},
-	{"scene":"res://scenes/arenas/Arena03.tscn","texture":"arena03_backdrop_v2.svg"},
-	{"scene":"res://scenes/arenas/Arena04.tscn","texture":"arena04_backdrop_v2.svg"},
+	{"scene":"res://scenes/arenas/Arena02.tscn","texture":"arena02_mining_yard_v6.svg"},
+	{"scene":"res://scenes/arenas/Arena03.tscn","texture":"arena03_rail_explosives_v6.svg"},
+	{"scene":"res://scenes/arenas/Arena04.tscn","texture":"arena04_elite_canyon_v6.svg"},
 	{"scene":"res://scenes/arenas/Arena05.tscn","texture":"arena05_backdrop_v2.svg"},
 ]
 
