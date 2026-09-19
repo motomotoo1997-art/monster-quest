@@ -22,11 +22,14 @@ func _process(delta: float) -> void:
 	if arena_controller == null or arena_controller.current_arena == null:
 		stop_event()
 		return
-	_event_timer = maxf(_event_timer - delta,0.0)
+	# A loading hitch must never consume the whole warning window in one frame.
+	# Clamp hazard time advancement so every strike remains dodgeable and readable.
+	var safe_delta := minf(delta,0.10)
+	_event_timer = maxf(_event_timer - safe_delta,0.0)
 	if _event_timer <= 0.0:
 		_spawn_pattern()
 		_event_timer = float(_active_config.get("interval",3.2))
-	_tick_pending_strikes(delta)
+	_tick_pending_strikes(safe_delta)
 
 func get_event_config(arena_index: int, wave_number: int) -> Dictionary:
 	if arena_index == 3 and wave_number == 2:
