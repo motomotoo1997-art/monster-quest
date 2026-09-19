@@ -12,14 +12,17 @@ signal dash_cooldown_changed(remaining: float, maximum: float)
 @export_range(0.05, 2.0, 0.01) var dash_duration: float = 0.16
 @export_range(0.1, 10.0, 0.05) var dash_cooldown: float = 1.1
 @export_range(0.0, 2.0, 0.01) var dash_invulnerability: float = 0.18
+@export_range(0.02, 1.0, 0.01) var attack_pose_hold: float = 0.12
 
 var _input_enabled := true
 var _dash_remaining := 0.0
 var _dash_cooldown_remaining := 0.0
 var _invulnerability_remaining := 0.0
+var _attack_pose_remaining := 0.0
 var _dash_direction := Vector2.RIGHT
 var _dash_cooldown_multiplier := 1.0
 
+@onready var body_visual: AnimatedSprite2D = $BodyVisual
 @onready var visual_pivot: Node2D = $VisualPivot
 @onready var muzzle: Marker2D = $VisualPivot/Muzzle
 @onready var health_component: HealthComponent = $HealthComponent
@@ -31,6 +34,8 @@ var _dash_cooldown_multiplier := 1.0
 func _ready() -> void:
 	health_component.died.connect(_on_health_died)
 	hurtbox_component.knockback_requested.connect(_on_knockback_requested)
+	weapon_component.fired.connect(_on_weapon_fired)
+	body_visual.play(&"idle")
 
 
 func _physics_process(delta: float) -> void:
@@ -39,6 +44,7 @@ func _physics_process(delta: float) -> void:
 	if not _input_enabled:
 		velocity = velocity.move_toward(Vector2.ZERO, deceleration * delta)
 		move_and_slide()
+		_update_body_visual(Vector2.ZERO)
 		return
 	if Input.is_action_just_pressed("dash"):
 		request_dash()
@@ -46,6 +52,7 @@ func _physics_process(delta: float) -> void:
 		velocity = _dash_direction * dash_speed
 		move_and_slide()
 		_handle_fire()
+		_update_body_visual(_dash_direction)
 		return
 	var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var target_velocity := input_dir * move_speed
@@ -54,6 +61,7 @@ func _physics_process(delta: float) -> void:
 		velocity = velocity.move_toward(Vector2.ZERO, deceleration * delta)
 	move_and_slide()
 	_handle_fire()
+	_update_body_visual(input_dir)
 
 
 func get_aim_direction() -> Vector2:
@@ -130,6 +138,16 @@ func _update_aim() -> void:
 		visual_pivot.rotation = aim.angle()
 
 
+func _update_body_visual(input_dir: Vector2) -> void:
+	if _attack_pose_remaining > 0.0:
+		if body_visual.animation != &"attack":
+			body_visual.play(&"attack")
+		return
+	var next_animation: StringName = &"move" if not input_dir.is_zero_approx() else &"idle"
+	if body_visual.animation != next_animation:
+		body_visual.play(next_animation)
+
+
 func _update_timers(delta: float) -> void:
 	if _dash_remaining > 0.0:
 		_dash_remaining = maxf(_dash_remaining - delta, 0.0)
@@ -140,6 +158,12 @@ func _update_timers(delta: float) -> void:
 		_invulnerability_remaining = maxf(_invulnerability_remaining - delta, 0.0)
 		if _invulnerability_remaining <= 0.0:
 			hurtbox_component.monitorable = true
+	if _attack_pose_remaining > 0.0:
+		_attack_pose_remaining = maxf(_attack_pose_remaining - delta, 0.0)
+
+
+func _on_weapon_fired(_projectile: Node2D) -> void:
+	_attack_pose_remaining = attack_pose_hold
 
 
 func _on_health_died() -> void:
