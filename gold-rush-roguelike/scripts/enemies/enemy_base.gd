@@ -44,6 +44,10 @@ func _physics_process(delta: float) -> void:
 	_update_visual(delta)
 
 
+func is_alive() -> bool:
+	return health_component != null and is_instance_valid(health_component) and not health_component.is_dead()
+
+
 func set_targets(player: Node2D, core: Node2D) -> void:
 	player_target = player
 	core_target = core
