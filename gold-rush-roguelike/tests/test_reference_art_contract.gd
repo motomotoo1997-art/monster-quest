@@ -5,7 +5,7 @@ const ENEMIES := [
 	{"scene":"res://scenes/enemies/GoldCoinSentinel.tscn","atlas":"enemies_reference_v5.svg"},
 	{"scene":"res://scenes/enemies/FlyingGoldDisc.tscn","atlas":"enemies_reference_v5.svg"},
 	{"scene":"res://scenes/enemies/MoltenGoldSlime.tscn","atlas":"enemies_reference_v5.svg"},
-	{"scene":"res://scenes/enemies/GoldBarTank.tscn","atlas":"boss_reference_v5.svg"},
+	{"scene":"res://scenes/enemies/GoldBarTank.tscn","atlas":"boss_frontier_juggernaut_v6.svg"},
 ]
 
 func _init() -> void:
@@ -23,12 +23,17 @@ func _run_test() -> void:
 	if backdrop == null or backdrop.texture == null:
 		_fail("Arena01 reference backdrop missing")
 		return
-	if not backdrop.texture.resource_path.ends_with("arena01_reference_fidelity_v5.svg"):
+	if not backdrop.texture.resource_path.ends_with("arena01_frontier_street_v6.svg"):
 		_fail("Arena01 must use the high-fidelity western gold-mine reference rebuild")
 		return
 	if backdrop.texture.get_width() < 1200:
 		_fail("Arena01 reference backdrop must remain full-width")
 		return
+	for building_name in ["Saloon","SheriffOffice","FrontierBank","GeneralStore"]:
+		var building := arena.get_node_or_null(building_name) as Sprite2D
+		if building == null or building.texture == null or not building.visible:
+			_fail("Arena01 must expose a clear standalone western building: %s" % building_name)
+			return
 	arena.queue_free()
 	await process_frame
 
