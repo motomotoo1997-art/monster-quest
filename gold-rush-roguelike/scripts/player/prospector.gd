@@ -38,6 +38,8 @@ var _body_base_scale := Vector2.ONE
 
 
 func _ready() -> void:
+	# Ground actor render order is owned by the active arena Y-sort hierarchy.
+	z_index = 0
 	health_component.died.connect(_on_health_died)
 	health_component.health_changed.connect(_on_health_changed)
 	hurtbox_component.knockback_requested.connect(_on_knockback_requested)
