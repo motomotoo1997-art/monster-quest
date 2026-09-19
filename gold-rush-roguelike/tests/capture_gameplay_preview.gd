@@ -67,14 +67,26 @@ func _capture() -> void:
 		await process_frame
 
 	# Fire one real Prospector shot immediately before capture. The weapon signal drives the
-	# production attack pose, so the screenshot shows the authored rifle frame without a fake
-	# sprite swap, while avoiding thinning the ten-enemy opening wave just for presentation.
-	var target := _nearest_enemy_to(main.player.global_position)
+	# authored rifle pose and production muzzle VFX.
+	var target: EnemyBase = _nearest_enemy_to(main.player.global_position)
+	var death_vfx_spawned := false
 	if target != null:
 		var direction := main.player.muzzle.global_position.direction_to(target.global_position)
 		main.player.weapon_component.try_fire(main.player.muzzle.global_position, direction, main.player.team_component.team)
 		await physics_frame
 		await process_frame
+
+		# Trigger one lethal hit through the production Hurtbox -> Health -> enemy_died chain so
+		# the QA frame proves that real combat deaths create the authored shard/dust/light burst.
+		var lethal_damage: float = target.health_component.current_health + 1.0
+		target.hurtbox_component.receive_hit(lethal_damage, main.player.team_component.team)
+		await process_frame
+		death_vfx_spawned = not get_nodes_in_group("enemy_death_vfx").is_empty()
+
+	if not death_vfx_spawned:
+		_fail("Gameplay preview did not produce the production enemy death burst")
+		return
+
 	await RenderingServer.frame_post_draw
 
 	var enemy_count: int = main.wave_director.get_alive_enemy_count()
@@ -94,16 +106,16 @@ func _capture() -> void:
 	if err != OK:
 		_fail("Could not save gameplay preview: %s" % error_string(err))
 		return
-	print("PASS: gameplay preview saved with %d enemies, active Prospector rifle and %d production-built defenses to %s (%dx%d)" % [enemy_count,defenses.size(),OUTPUT_PATH,image.get_width(),image.get_height()])
+	print("PASS: gameplay preview saved with %d enemies, active Prospector rifle, production death burst and %d defenses to %s (%dx%d)" % [enemy_count,defenses.size(),OUTPUT_PATH,image.get_width(),image.get_height()])
 	main.queue_free()
 	quit(0)
 
-func _nearest_enemy_to(origin: Vector2) -> Node2D:
-	var nearest: Node2D
+func _nearest_enemy_to(origin: Vector2) -> EnemyBase:
+	var nearest: EnemyBase
 	var nearest_distance: float = INF
 	for node in get_nodes_in_group("enemies"):
-		if node is Node2D and is_instance_valid(node):
-			var candidate := node as Node2D
+		if node is EnemyBase and is_instance_valid(node):
+			var candidate := node as EnemyBase
 			var distance: float = origin.distance_squared_to(candidate.global_position)
 			if distance < nearest_distance:
 				nearest_distance = distance
