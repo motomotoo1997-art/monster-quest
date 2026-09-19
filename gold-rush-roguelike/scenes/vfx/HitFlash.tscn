@@ -1,13 +1,22 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/vfx/simple_burst.gd" id="1"]
 [ext_resource type="Texture2D" path="res://assets/vfx/radial_energy_light.svg" id="2_light"]
+[ext_resource type="Texture2D" path="res://assets/vfx/combat_feedback_v6.svg" id="3_v6"]
+
+[sub_resource type="AtlasTexture" id="V6ImpactTexture"]
+atlas = ExtResource("3_v6")
+region = Rect2(512,0,256,256)
 
 [node name="HitFlash" type="Node2D"]
 z_index = 22
 script = ExtResource("1")
 duration = 0.20
 end_scale = 1.75
+
+[node name="V6Impact" type="Sprite2D" parent="."]
+texture = SubResource("V6ImpactTexture")
+scale = Vector2(0.32,0.32)
 
 [node name="BurstLight" type="PointLight2D" parent="."]
 texture = ExtResource("2_light")
