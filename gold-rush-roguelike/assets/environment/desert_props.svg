@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="160" viewBox="0 0 640 160">
+<defs>
+ <linearGradient id="rock" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#9b5e35"/><stop offset="1" stop-color="#56301f"/></linearGradient>
+ <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#a65c2e"/><stop offset="1" stop-color="#5c2e1b"/></linearGradient>
+ <linearGradient id="ore" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff39c"/><stop offset=".45" stop-color="#f0bd35"/><stop offset="1" stop-color="#9a5b0a"/></linearGradient>
+</defs>
+<g transform="translate(0,0)">
+ <ellipse cx="80" cy="139" rx="35" ry="7" fill="#27170e" opacity=".22"/>
+ <path d="M70 135V65Q70 49 81 49Q92 49 92 65V84L106 73V59Q106 48 116 48Q126 48 126 60V82Q126 91 119 97L92 112V135Z" fill="#4a9e55" stroke="#255a31" stroke-width="6"/>
+ <path d="M70 103L55 94V79Q55 69 45 69Q35 69 35 80V101Q35 109 42 114L70 127" fill="#4a9e55" stroke="#255a31" stroke-width="6"/>
+ <g fill="#e9d58c"><circle cx="78" cy="71" r="2"/><circle cx="83" cy="94" r="2"/><circle cx="111" cy="67" r="2"/><circle cx="53" cy="90" r="2"/></g>
+</g>
+<g transform="translate(160,0)">
+ <ellipse cx="80" cy="137" rx="48" ry="8" fill="#27170e" opacity=".22"/>
+ <path d="M31 126L45 94L72 84L89 101L110 88L133 106L128 132L47 137Z" fill="url(#rock)" stroke="#4a291b" stroke-width="6"/>
+ <path d="M49 99L70 92L81 105L59 116Z" fill="#b97442" opacity=".7"/><path d="M105 96L121 108L111 122L93 113Z" fill="#794329"/>
+</g>
+<g transform="translate(320,0)">
+ <ellipse cx="80" cy="139" rx="49" ry="8" fill="#27170e" opacity=".22"/>
+ <rect x="35" y="82" width="88" height="51" rx="5" fill="url(#wood)" stroke="#3b2118" stroke-width="6"/>
+ <path d="M35 94H123M35 119H123M49 82V133M109 82V133" stroke="#d18b43" stroke-width="5"/>
+ <circle cx="46" cy="135" r="13" fill="#343338" stroke="#17181a" stroke-width="5"/><circle cx="113" cy="135" r="13" fill="#343338" stroke="#17181a" stroke-width="5"/>
+ <path d="M60 82L72 60L87 82Z" fill="url(#ore)" stroke="#7c4a08" stroke-width="4"/><path d="M82 82L96 53L110 82Z" fill="url(#ore)" stroke="#7c4a08" stroke-width="4"/>
+</g>
+<g transform="translate(480,0)">
+ <ellipse cx="80" cy="138" rx="43" ry="8" fill="#27170e" opacity=".2"/>
+ <path d="M52 130L44 99L63 72L76 98L88 56L99 98L114 78L124 106L113 132Z" fill="url(#ore)" stroke="#7f4c08" stroke-width="6"/>
+ <path d="M84 68L89 58L94 70L89 78Z" fill="#fff7bb"/><path d="M62 84L67 76L72 88L67 94Z" fill="#fff7bb"/>
+</g>
+</svg>
