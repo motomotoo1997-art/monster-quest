@@ -166,8 +166,9 @@ func _update_visual(delta: float) -> void:
 		State.SLAM:
 			var slam_pulse := 0.5 + 0.5 * sin(_visual_time * 12.0)
 			target_scale = Vector2(_visual_base_scale.x * (1.0 + slam_pulse * 0.07), _visual_base_scale.y * (1.0 - slam_pulse * 0.05))
-			slam_light.energy = 1.05 + slam_pulse * 1.45
-			slam_light.texture_scale = 1.35 + slam_pulse * 0.22
+			# Keep the warning readable without bleaching the boss silhouette on the dark foundry.
+			slam_light.energy = 0.75 + slam_pulse * 0.90
+			slam_light.texture_scale = 1.12 + slam_pulse * 0.22
 		_:
 			warning_line.default_color = Color(1.0, 0.56, 0.08, 0.46)
 			warning_line.width = 4.0
