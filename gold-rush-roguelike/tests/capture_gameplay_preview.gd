@@ -62,8 +62,9 @@ func _capture() -> void:
 		await process_frame
 		spawn_attempts += 1
 
-	# Let the production Cactus target and fire long enough to create a genuine battle frame.
-	for _i in range(44):
+	# Let the production Cactus acquire a target and visibly fire, but keep this window short
+	# enough that the 10-enemy opening composition is not thinned before the intentional QA kill.
+	for _i in range(20):
 		await process_frame
 
 	# Fire one real Prospector shot immediately before capture. The weapon signal drives the
