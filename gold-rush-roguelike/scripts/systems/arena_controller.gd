@@ -1,6 +1,7 @@
 extends Node
 class_name ArenaController
 
+signal arena_will_unload(arena: Node2D)
 signal arena_started(index: int)
 signal arena_completed(index: int)
 signal all_arenas_completed
@@ -16,6 +17,9 @@ func load_arena(index: int) -> bool:
 	if index < 1 or index > arena_scenes.size():
 		return false
 	if current_arena != null and is_instance_valid(current_arena):
+		# Persistent actors get one deterministic chance to leave the old arena
+		# before its Y-sort tree is destroyed.
+		arena_will_unload.emit(current_arena)
 		current_arena.queue_free()
 		current_arena = null
 	var scene := arena_scenes[index - 1]
