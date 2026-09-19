@@ -5,6 +5,7 @@ signal target_changed(target: Node2D)
 
 var _current_target: Node2D
 var _recoil := 0.0
+var _fire_visual_remaining := 0.0
 var _visual_time := 0.0
 var _visual_base_position := Vector2.ZERO
 var _visual_base_scale := Vector2.ONE
@@ -13,24 +14,29 @@ var _visual_base_scale := Vector2.ONE
 @onready var weapon_component: WeaponComponent = $WeaponComponent
 @onready var aim_pivot: Node2D = $AimPivot
 @onready var muzzle: Marker2D = $AimPivot/Muzzle
-@onready var visual: Sprite2D = $Visual
+@onready var visual: AnimatedSprite2D = $Visual
 
 
 func _ready() -> void:
 	super()
 	_visual_base_position = visual.position
 	_visual_base_scale = visual.scale
+	visual.play(&"idle")
 	weapon_component.fired.connect(_on_weapon_fired)
 
 
 func _physics_process(delta: float) -> void:
 	_visual_time += delta
 	_recoil = move_toward(_recoil, 0.0, delta * 6.5)
-	var hum := sin(_visual_time * 6.0) * 0.8
-	visual.position = _visual_base_position + Vector2(0.0, hum + _recoil * 3.0)
+	_fire_visual_remaining = maxf(_fire_visual_remaining - delta, 0.0)
+	var next_animation: StringName = &"fire" if _fire_visual_remaining > 0.0 else &"idle"
+	if visual.animation != next_animation:
+		visual.play(next_animation)
+	var hum := sin(_visual_time * 6.0) * 0.65
+	visual.position = _visual_base_position + Vector2(0.0, hum + _recoil * 2.0)
 	visual.scale = Vector2(
-		_visual_base_scale.x * (1.0 + _recoil * 0.04),
-		_visual_base_scale.y * (1.0 - _recoil * 0.05)
+		_visual_base_scale.x * (1.0 + _recoil * 0.025),
+		_visual_base_scale.y * (1.0 - _recoil * 0.035)
 	)
 	var target := targeting_component.get_nearest_hostile(global_position)
 	if target != _current_target:
@@ -45,3 +51,5 @@ func _physics_process(delta: float) -> void:
 
 func _on_weapon_fired(_projectile: Node2D) -> void:
 	_recoil = 1.0
+	_fire_visual_remaining = 0.24
+	visual.play(&"fire")
