@@ -74,7 +74,28 @@ func _run_test() -> void:
 	arena.queue_free()
 	await process_frame
 
-	print("PASS: reference-matched actor, defense, objective and Arena01 atmosphere visuals remain readable")
+	var hud_packed := load("res://scenes/ui/HUD.tscn") as PackedScene
+	if hud_packed == null:
+		_fail("HUD scene must load")
+		return
+	var hud := hud_packed.instantiate()
+	root.add_child(hud)
+	await process_frame
+	var top_left := hud.get_node_or_null("Root/TopLeftBackdrop") as Control
+	var bottom_center := hud.get_node_or_null("Root/BottomCenter") as Control
+	if top_left == null or bottom_center == null:
+		_fail("HUD compact panels are missing")
+		return
+	if top_left.size.x > 250.0:
+		_fail("Top-left HUD consumes too much combat view")
+		return
+	if bottom_center.size.x > 420.0:
+		_fail("Build HUD consumes too much horizontal combat view")
+		return
+	hud.queue_free()
+	await process_frame
+
+	print("PASS: reference-matched actors, objective, Arena01 atmosphere and compact HUD remain readable")
 	quit(0)
 
 func _fail(message: String) -> void:
