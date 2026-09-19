@@ -1,16 +1,30 @@
-[gd_scene load_steps=15 format=3]
+[gd_scene load_steps=20 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/environment/CactusProp.tscn" id="1_cactus"]
 [ext_resource type="PackedScene" path="res://scenes/environment/RockClusterProp.tscn" id="2_rocks"]
 [ext_resource type="PackedScene" path="res://scenes/environment/MineCartProp.tscn" id="3_cart"]
 [ext_resource type="PackedScene" path="res://scenes/environment/GoldVeinProp.tscn" id="4_gold"]
-[ext_resource type="Texture2D" path="res://assets/environment/arena01_reference_fidelity_v5.svg" id="5_backdrop"]
+[ext_resource type="Texture2D" path="res://assets/environment/arena01_frontier_street_v6.svg" id="5_backdrop"]
 [ext_resource type="PackedScene" path="res://scenes/environment/RailSegmentProp.tscn" id="6_rail"]
 [ext_resource type="PackedScene" path="res://scenes/environment/CrateStackProp.tscn" id="7_crates"]
 [ext_resource type="Texture2D" path="res://assets/vfx/dust_mote.svg" id="8_dust"]
 [ext_resource type="Texture2D" path="res://assets/environment/arena01_canyon_depth.svg" id="9_depth"]
 [ext_resource type="Texture2D" path="res://assets/environment/arena01_ground_detail_v3.svg" id="10_ground_detail"]
 [ext_resource type="Texture2D" path="res://assets/environment/arena01_foreground_depth_v3.svg" id="11_foreground"]
+[ext_resource type="Texture2D" path="res://assets/environment/western_buildings_v6.svg" id="12_buildings"]
+
+[sub_resource type="AtlasTexture" id="SaloonTexture"]
+atlas = ExtResource("12_buildings")
+region = Rect2(0,0,512,512)
+[sub_resource type="AtlasTexture" id="SheriffTexture"]
+atlas = ExtResource("12_buildings")
+region = Rect2(512,0,512,512)
+[sub_resource type="AtlasTexture" id="BankTexture"]
+atlas = ExtResource("12_buildings")
+region = Rect2(1024,0,512,512)
+[sub_resource type="AtlasTexture" id="StoreTexture"]
+atlas = ExtResource("12_buildings")
+region = Rect2(1536,0,512,512)
 
 [sub_resource type="RectangleShape2D" id="BuildShape"]
 size = Vector2(1120,560)
@@ -26,6 +40,30 @@ y_sort_enabled = true
 z_index = -50
 position = Vector2(640,360)
 texture = ExtResource("5_backdrop")
+
+[node name="Saloon" type="Sprite2D" parent="."]
+z_index = -18
+position = Vector2(175,158)
+texture = SubResource("SaloonTexture")
+scale = Vector2(0.48,0.48)
+
+[node name="SheriffOffice" type="Sprite2D" parent="."]
+z_index = -18
+position = Vector2(425,140)
+texture = SubResource("SheriffTexture")
+scale = Vector2(0.43,0.43)
+
+[node name="FrontierBank" type="Sprite2D" parent="."]
+z_index = -18
+position = Vector2(855,140)
+texture = SubResource("BankTexture")
+scale = Vector2(0.43,0.43)
+
+[node name="GeneralStore" type="Sprite2D" parent="."]
+z_index = -18
+position = Vector2(1105,158)
+texture = SubResource("StoreTexture")
+scale = Vector2(0.48,0.48)
 
 [node name="CanyonDepth" type="Sprite2D" parent="."]
 visible = false
@@ -110,7 +148,7 @@ position = Vector2(360,360)
 [node name="CoreSpawn" type="Marker2D" parent="." groups=["core_spawn"]]
 position = Vector2(520,360)
 [node name="EnemySpawnNorth" type="Marker2D" parent="." groups=["enemy_spawn"]]
-position = Vector2(850,155)
+position = Vector2(720,250)
 [node name="EnemySpawnEast" type="Marker2D" parent="." groups=["enemy_spawn"]]
 position = Vector2(1085,360)
 [node name="EnemySpawnSouth" type="Marker2D" parent="." groups=["enemy_spawn"]]
@@ -139,11 +177,11 @@ position = Vector2(760,485)
 rotation = 0.24
 scale = Vector2(0.92,0.92)
 [node name="RocksNorth" parent="." instance=ExtResource("2_rocks")]
-visible = true
+visible = false
 position = Vector2(600,145)
 scale = Vector2(0.95,0.95)
 [node name="RocksEast" parent="." instance=ExtResource("2_rocks")]
-visible = true
+visible = false
 position = Vector2(1100,485)
 scale = Vector2(0.82,0.82)
 [node name="RocksWest" parent="." instance=ExtResource("2_rocks")]
@@ -158,19 +196,19 @@ rotation = 0.16
 scale = Vector2(0.54,0.54)
 
 [node name="CactusNW" parent="." instance=ExtResource("1_cactus")]
-visible = true
+visible = false
 position = Vector2(175,202)
 scale = Vector2(0.96,0.96)
 [node name="CactusWest" parent="." instance=ExtResource("1_cactus")]
-visible = true
+visible = false
 position = Vector2(95,468)
 scale = Vector2(0.72,0.72)
 [node name="CactusSouth" parent="." instance=ExtResource("1_cactus")]
-visible = true
+visible = false
 position = Vector2(1085,558)
 scale = Vector2(0.86,0.86)
 [node name="CactusEast" parent="." instance=ExtResource("1_cactus")]
-visible = true
+visible = false
 position = Vector2(1180,230)
 scale = Vector2(0.68,0.68)
 [node name="CactusMid" parent="." instance=ExtResource("1_cactus")]
@@ -179,7 +217,7 @@ position = Vector2(900,530)
 scale = Vector2(0.55,0.55)
 
 [node name="RailA" parent="." instance=ExtResource("6_rail")]
-visible = true
+visible = false
 position = Vector2(250,540)
 rotation = -0.08
 scale = Vector2(1.08,1.08)
@@ -189,13 +227,13 @@ position = Vector2(420,526)
 rotation = -0.08
 scale = Vector2(0.95,0.95)
 [node name="MineCart" parent="." instance=ExtResource("3_cart")]
-visible = true
+visible = false
 position = Vector2(330,520)
 rotation = -0.10
 scale = Vector2(1.08,1.08)
 
 [node name="CratesNW" parent="." instance=ExtResource("7_crates")]
-visible = true
+visible = false
 position = Vector2(405,170)
 rotation = 0.04
 scale = Vector2(0.88,0.88)
@@ -206,11 +244,11 @@ rotation = -0.08
 scale = Vector2(0.72,0.72)
 
 [node name="GoldVein" parent="." instance=ExtResource("4_gold")]
-visible = true
+visible = false
 position = Vector2(975,170)
 scale = Vector2(0.92,0.92)
 [node name="GoldVeinSouth" parent="." instance=ExtResource("4_gold")]
-visible = true
+visible = false
 position = Vector2(915,590)
 scale = Vector2(0.62,0.62)
 [node name="GoldVeinWest" parent="." instance=ExtResource("4_gold")]
