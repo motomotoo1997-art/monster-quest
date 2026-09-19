@@ -1,0 +1,1 @@
+All required verified frame blob SHAs are now known. Next commit attaches split PNG frame blobs, removes the corrupt monolithic PNG, and rewrites Prospector.tscn to reference frame textures directly.
