@@ -38,13 +38,16 @@ func _update_visual(delta: float) -> void:
 	_visual_time += delta
 	if absf(velocity.x) > 2.0:
 		visual_sprite.flip_h = velocity.x < 0.0
+	var next_animation: StringName = &"move" if _hop_remaining > 0.0 else &"idle"
+	if visual_sprite.animation != next_animation:
+		visual_sprite.play(next_animation)
 	if _hop_remaining > 0.0:
 		var progress := clampf(1.0 - _hop_remaining / maxf(hop_duration, 0.001), 0.0, 1.0)
 		var arc := sin(progress * PI)
 		visual_sprite.position = _visual_base_position + Vector2(0.0, -24.0 * arc)
-		var stretch := 1.0 + 0.18 * arc
+		var stretch := 1.0 + 0.12 * arc
 		visual_sprite.scale = Vector2(_visual_base_scale.x / stretch, _visual_base_scale.y * stretch)
 	else:
 		var crouch := (sin(_visual_time * 5.5) + 1.0) * 0.5
-		visual_sprite.position = _visual_base_position + Vector2(0.0, 1.5 * crouch)
-		visual_sprite.scale = Vector2(_visual_base_scale.x * (1.0 + 0.05 * crouch), _visual_base_scale.y * (1.0 - 0.05 * crouch))
+		visual_sprite.position = _visual_base_position + Vector2(0.0, 1.25 * crouch)
+		visual_sprite.scale = Vector2(_visual_base_scale.x * (1.0 + 0.025 * crouch), _visual_base_scale.y * (1.0 - 0.025 * crouch))
