@@ -53,6 +53,8 @@ jobs:
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_full_run_progression.gd
       - name: Wave lifecycle regression
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_wave_lifecycle.gd
+      - name: Production enemy visibility regression
+        run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_production_enemy_visibility.gd
       - name: Wave spawn distribution regression
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_wave_spawn_distribution.gd
       - name: Gold Bar Tank laser regression
@@ -69,6 +71,8 @@ jobs:
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_depth_sorting_contract.gd
       - name: Prospector animation regression
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_prospector_animation_contract.gd
+      - name: Prospector idle and firing stability regression
+        run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_player_idle_fire_stability.gd
       - name: Enemy animation regression
         run: timeout 45s godot --headless --path gold-rush-roguelike --script res://tests/test_enemy_animation_contract.gd
       - name: Defense animation regression
