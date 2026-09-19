@@ -9,8 +9,6 @@ signal all_arenas_completed
 @export var arena_scenes: Array[PackedScene] = []
 @export var arena_container_path: NodePath
 @export var persistent_staging_path: NodePath
-@export var player_actor_path: NodePath
-@export var core_actor_path: NodePath
 
 var current_arena_index: int = 0
 var current_arena: Node2D
@@ -20,13 +18,15 @@ var _persistent_staging: Node2D
 
 func _ready() -> void:
 	_persistent_staging = get_node_or_null(persistent_staging_path) as Node2D
-	_register_persistent_actor(player_actor_path)
-	_register_persistent_actor(core_actor_path)
+	_register_staged_persistent_actors()
 
 
 func load_arena(index: int) -> bool:
 	if index < 1 or index > arena_scenes.size():
 		return false
+	# Refresh once more at the transition boundary so scene-tree ready ordering
+	# cannot prevent staged persistent actors from being discovered.
+	_register_staged_persistent_actors()
 	if current_arena != null and is_instance_valid(current_arena):
 		# Pull persistent actors out before destroying the old arena. This keeps
 		# references stable while still allowing actors to live inside the active
@@ -84,12 +84,16 @@ func get_first_marker(group_name: StringName) -> Node2D:
 	return markers[0] if not markers.is_empty() else null
 
 
-func _register_persistent_actor(actor_path: NodePath) -> void:
-	if actor_path.is_empty():
+func _register_staged_persistent_actors() -> void:
+	if _persistent_staging == null or not is_instance_valid(_persistent_staging):
+		_persistent_staging = get_node_or_null(persistent_staging_path) as Node2D
+	if _persistent_staging == null:
 		return
-	var actor := get_node_or_null(actor_path) as Node2D
-	if actor != null and not _persistent_actors.has(actor):
-		_persistent_actors.append(actor)
+	for child in _persistent_staging.get_children():
+		if child is Node2D:
+			var actor := child as Node2D
+			if not _persistent_actors.has(actor):
+				_persistent_actors.append(actor)
 
 
 func _stage_persistent_actors() -> void:
