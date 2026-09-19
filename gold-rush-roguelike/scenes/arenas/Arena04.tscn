@@ -1,10 +1,13 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/environment/CactusProp.tscn" id="1_cactus"]
 [ext_resource type="PackedScene" path="res://scenes/environment/RockClusterProp.tscn" id="2_rocks"]
 [ext_resource type="PackedScene" path="res://scenes/environment/MineCartProp.tscn" id="3_cart"]
 [ext_resource type="PackedScene" path="res://scenes/environment/GoldVeinProp.tscn" id="4_gold"]
-[ext_resource type="Texture2D" path="res://assets/environment/arena01_backdrop_v2.svg" id="5_backdrop"]
+[ext_resource type="Texture2D" path="res://assets/environment/arena04_backdrop_v2.svg" id="5_backdrop"]
+[ext_resource type="PackedScene" path="res://scenes/environment/RailSegmentProp.tscn" id="6_rail"]
+[ext_resource type="PackedScene" path="res://scenes/environment/CrateStackProp.tscn" id="7_crates"]
+[ext_resource type="Texture2D" path="res://assets/vfx/dust_mote.svg" id="8_dust"]
 
 [sub_resource type="RectangleShape2D" id="BuildShape"]
 size = Vector2(1120,560)
@@ -14,8 +17,6 @@ radius = 38.0
 size = Vector2(125,58)
 [sub_resource type="RectangleShape2D" id="RockShape2"]
 size = Vector2(72,135)
-[sub_resource type="Gradient" id="HeatGradient"]
-colors = PackedColorArray(1,0.75,0.2,0.18,1,0.2,0.03,0.0)
 
 [node name="Arena04" type="Node2D"]
 y_sort_enabled = true
@@ -23,19 +24,41 @@ y_sort_enabled = true
 z_index = -50
 position = Vector2(640,360)
 texture = ExtResource("5_backdrop")
-modulate = Color(0.88,0.73,0.64,1)
+
+[node name="HeatWash" type="Polygon2D" parent="."]
+z_index = -22
+polygon = PackedVector2Array(0,240,1280,224,1280,565,0,585)
+color = Color(1,0.29,0.04,0.028)
 [node name="DeepTrail" type="Polygon2D" parent="."]
 z_index = -20
 polygon = PackedVector2Array(75,310,410,276,610,316,790,260,1202,265,1205,446,805,442,612,400,430,452,77,420)
-color = Color(1,0.63,0.22,0.10)
+color = Color(1,0.63,0.22,0.045)
 [node name="MoltenSeamA" type="Polygon2D" parent="."]
 z_index = -19
 polygon = PackedVector2Array(795,160,822,172,835,201,819,228,841,252,826,274,811,248,820,218,804,196)
-color = Color(1,0.55,0.08,0.30)
+color = Color(1,0.55,0.08,0.18)
 [node name="MoltenSeamB" type="Polygon2D" parent="."]
 z_index = -19
 polygon = PackedVector2Array(1035,445,1064,459,1076,487,1057,514,1071,541,1051,559,1039,531,1049,500,1033,474)
-color = Color(1,0.48,0.05,0.28)
+color = Color(1,0.48,0.05,0.16)
+
+[node name="AmbientEmbers" type="CPUParticles2D" parent="."]
+z_index = 2
+position = Vector2(760,380)
+amount = 42
+lifetime = 3.2
+preprocess = 3.2
+texture = ExtResource("8_dust")
+emission_shape = 3
+emission_rect_extents = Vector2(520,245)
+direction = Vector2(0,-1)
+spread = 90.0
+gravity = Vector2(0,-6)
+initial_velocity_min = 8.0
+initial_velocity_max = 26.0
+scale_amount_min = 0.24
+scale_amount_max = 0.66
+color = Color(1,0.39,0.08,0.38)
 
 [node name="BuildZone" type="Area2D" parent="." groups=["build_zone"]]
 position = Vector2(640,360)
@@ -129,4 +152,21 @@ position = Vector2(1110,550)
 scale = Vector2(0.72,0.72)
 [node name="GoldVeinC" parent="." instance=ExtResource("4_gold")]
 position = Vector2(825,585)
+scale = Vector2(0.58,0.58)
+
+[node name="RailCollapsedA" parent="." instance=ExtResource("6_rail")]
+position = Vector2(350,585)
+rotation = -0.12
+scale = Vector2(0.82,0.82)
+[node name="RailCollapsedB" parent="." instance=ExtResource("6_rail")]
+position = Vector2(1050,620)
+rotation = 0.18
+scale = Vector2(0.72,0.72)
+[node name="CratesFurnace" parent="." instance=ExtResource("7_crates")]
+position = Vector2(1060,300)
+rotation = 0.06
+scale = Vector2(0.72,0.72)
+[node name="CratesWest" parent="." instance=ExtResource("7_crates")]
+position = Vector2(380,160)
+rotation = -0.08
 scale = Vector2(0.58,0.58)
