@@ -48,7 +48,7 @@ color = Color(0.04,0.025,0.015,0.29)
 position = Vector2(0,-40)
 sprite_frames = SubResource("SpriteFrames_enemy")
 animation = &"idle"
-scale = Vector2(0.48,0.48)
+scale = Vector2(0.34,0.34)
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_health")
 max_health = 36.0
