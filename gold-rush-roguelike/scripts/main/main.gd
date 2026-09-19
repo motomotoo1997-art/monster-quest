@@ -11,6 +11,7 @@ class_name GoldRushMain
 @export var muzzle_flash_scene: PackedScene
 @export var dust_burst_scene: PackedScene
 @export var enemy_death_burst_scene: PackedScene
+@export var boss_death_vfx_scene: PackedScene
 
 @onready var run_controller: RunController = $RunController
 @onready var arena_controller: ArenaController = $ArenaController
@@ -115,8 +116,6 @@ func _build_arena_waves(index: int) -> Array:
 	var waves: Array = []
 	match index:
 		1:
-			# Arena 1 now introduces the complete visual language immediately: nugget swarm,
-			# tall coin sentinel and flying disc silhouettes all appear in the opening fight.
 			waves = [
 				[
 					{"scene": hopper_scene, "count": 6, "interval": 0.34},
@@ -253,6 +252,11 @@ func _on_upgrade_chosen(_id: StringName) -> void:
 func _on_boss_died() -> void:
 	if not run_controller.is_run_active:
 		return
+	var death_position := Vector2.ZERO
+	if _active_boss != null and is_instance_valid(_active_boss):
+		death_position = _active_boss.global_position
+		_spawn_vfx(boss_death_vfx_scene, death_position)
+		camera_effects.shake(16.0, 0.72)
 	hud.show_boss(null)
 	arena_controller.complete_current_arena()
 	if core.is_alive():
