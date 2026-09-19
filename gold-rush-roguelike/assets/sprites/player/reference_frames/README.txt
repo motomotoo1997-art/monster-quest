@@ -1,0 +1,1 @@
+Prospector reference-frame runtime set. 192x192 transparent PNG frames, split from the detailed reference sprite sheet to avoid monolithic binary atlas corruption in CI. States: idle(3), move(4), attack(4), hit(2).
