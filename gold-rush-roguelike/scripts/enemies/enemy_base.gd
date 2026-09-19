@@ -16,16 +16,23 @@ var player_target: Node2D
 var core_target: Node2D
 var movement_enabled := true
 var _attack_cooldown_remaining := 0.0
+var _visual_time := 0.0
+var _visual_base_position := Vector2.ZERO
+var _visual_base_scale := Vector2.ONE
 
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var team_component: TeamComponent = $TeamComponent
 @onready var hurtbox_component: HurtboxComponent = $HurtboxComponent
+@onready var visual_sprite: AnimatedSprite2D = get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
 
 
 func _ready() -> void:
 	add_to_group("enemies")
 	health_component.died.connect(_on_health_died)
 	hurtbox_component.knockback_requested.connect(_on_knockback_requested)
+	if visual_sprite != null:
+		_visual_base_position = visual_sprite.position
+		_visual_base_scale = visual_sprite.scale
 
 
 func _physics_process(delta: float) -> void:
@@ -34,6 +41,7 @@ func _physics_process(delta: float) -> void:
 		return
 	_attack_cooldown_remaining = maxf(_attack_cooldown_remaining - delta, 0.0)
 	_tick_behavior(delta)
+	_update_visual(delta)
 
 
 func set_targets(player: Node2D, core: Node2D) -> void:
@@ -80,6 +88,18 @@ func _tick_behavior(_delta: float) -> void:
 		velocity = _get_separation_force()
 		_try_contact_attack(target)
 	move_and_slide()
+
+
+func _update_visual(delta: float) -> void:
+	if visual_sprite == null:
+		return
+	_visual_time += delta
+	if absf(velocity.x) > 2.0:
+		visual_sprite.flip_h = velocity.x < 0.0
+	var moving := velocity.length() > 8.0
+	var bob := sin(_visual_time * 8.5) * 1.6 if moving else sin(_visual_time * 3.5) * 0.45
+	visual_sprite.position = _visual_base_position + Vector2(0.0, bob)
+	visual_sprite.scale = _visual_base_scale
 
 
 func _move_toward(world_position: Vector2, speed_multiplier: float = 1.0) -> void:
