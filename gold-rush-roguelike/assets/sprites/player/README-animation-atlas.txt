@@ -1,0 +1,1 @@
+Prospector animation atlas source is generated from the approved transparent sprite sheet. Runtime integration uses the normalized 4x4 atlas produced by tools; frame rows are idle, move, attack, hit and share a ground-aligned pivot.
