@@ -27,6 +27,8 @@ attack_range = 30.0
 attack_cooldown = 0.9
 gold_value = 3
 prefer_core_weight = 0.45
+separation_radius = 38.0
+separation_strength = 150.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_enemy")
 [node name="Shadow" type="Polygon2D" parent="."]
