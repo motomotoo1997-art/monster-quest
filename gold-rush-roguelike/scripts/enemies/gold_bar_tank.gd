@@ -45,7 +45,9 @@ var _death_announced := false
 @onready var muzzle: Marker2D = $Muzzle
 @onready var charge_telegraph: Node2D = $ChargeTelegraph
 @onready var charge_beam: Polygon2D = $ChargeTelegraph/Beam
+@onready var charge_light: PointLight2D = $ChargeTelegraph/ChargeLight
 @onready var slam_telegraph: Node2D = $SlamTelegraph
+@onready var slam_light: PointLight2D = $SlamTelegraph/SlamLight
 @onready var slam_area: Area2D = $SlamArea
 
 
@@ -111,14 +113,22 @@ func _update_visual(delta: float) -> void:
 			var pulse := 0.5 + 0.5 * sin(_visual_time * 15.0)
 			target_scale = _visual_base_scale * (1.0 + pulse * 0.035)
 			charge_beam.color = Color(1.0, 0.26, 0.04, 0.24 + pulse * 0.22)
+			charge_light.energy = 1.25 + pulse * 1.15
+			charge_light.texture_scale = 0.90 + pulse * 0.18
 		State.CHARGE:
 			target_scale = Vector2(_visual_base_scale.x * 0.94, _visual_base_scale.y * 1.07)
 			charge_beam.color = Color(1.0, 0.58, 0.12, 0.82)
+			charge_light.energy = 2.55
+			charge_light.texture_scale = 1.12
 		State.SLAM:
 			var slam_pulse := 0.5 + 0.5 * sin(_visual_time * 12.0)
 			target_scale = Vector2(_visual_base_scale.x * (1.0 + slam_pulse * 0.07), _visual_base_scale.y * (1.0 - slam_pulse * 0.05))
+			slam_light.energy = 1.05 + slam_pulse * 1.45
+			slam_light.texture_scale = 1.35 + slam_pulse * 0.22
 		_:
 			charge_beam.color = Color(1.0, 0.22, 0.04, 0.26)
+			charge_light.energy = 1.0
+			slam_light.energy = 0.9
 	visual_sprite.position = _visual_base_position + Vector2(0.0, bob)
 	visual_sprite.scale = target_scale
 	visual_sprite.modulate = phase_tint
