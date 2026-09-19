@@ -1,6 +1,6 @@
 extends SceneTree
 
-const ATLAS_PATH := "res://assets/sprites/enemies/enemies_animation_v3.svg"
+const ATLAS_PATH := "res://assets/sprites/enemies/enemies_animation_v4.svg"
 const EXPECTED := [
 	{"scene":"res://scenes/enemies/GoldHopper.tscn","animations":{&"idle":2,&"move":4}},
 	{"scene":"res://scenes/enemies/GoldCoinSentinel.tscn","animations":{&"idle":3,&"move":3,&"attack":3}},
