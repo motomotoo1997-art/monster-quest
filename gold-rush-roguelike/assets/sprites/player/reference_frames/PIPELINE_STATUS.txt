@@ -1,0 +1,1 @@
+Reference-frame migration in progress. Monolithic PNG/WebP atlas is intentionally being replaced with individually verified 192x192 PNG frames because large binary atlas uploads were corrupted in CI. Only frames with verified Git blob SHA are to be referenced by Prospector.tscn.
