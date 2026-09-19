@@ -1,8 +1,8 @@
 extends SceneTree
 
 const OUTPUT_PATH := "/tmp/gold-rush-gameplay-preview.png"
-const MIN_ENEMIES_FOR_PREVIEW := 6
-const MAX_SPAWN_ATTEMPTS := 12
+const MIN_ENEMIES_FOR_PREVIEW := 10
+const MAX_SPAWN_ATTEMPTS := 14
 
 func _init() -> void:
 	call_deferred("_capture")
@@ -42,7 +42,7 @@ func _capture() -> void:
 		spawn_attempts += 1
 
 	# Let y-sort, enemy visual animation and the viewport render settle.
-	for _i in range(18):
+	for _i in range(22):
 		await process_frame
 	await RenderingServer.frame_post_draw
 
