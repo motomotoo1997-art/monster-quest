@@ -35,12 +35,19 @@ func _run_test() -> void:
 		return
 	var shards := death_vfx.get_node_or_null("GoldShards") as Node2D
 	var shock_ring := death_vfx.get_node_or_null("ShockRing") as Line2D
+	var echo_ring := death_vfx.get_node_or_null("EchoRing") as Line2D
 	var dust := death_vfx.get_node_or_null("Dust") as CPUParticles2D
-	if shards == null or shards.get_child_count() < 6:
-		_fail("Enemy death burst needs at least six authored gold shards")
+	if shards == null or shards.get_child_count() < 10:
+		_fail("Enemy death burst needs at least ten authored gold shards for a stronger breakup silhouette")
 		return
 	if shock_ring == null or shock_ring.width < 2.0:
 		_fail("Enemy death burst needs a readable shock ring")
+		return
+	if echo_ring == null or echo_ring.width < 2.0:
+		_fail("Enemy death burst needs a second delayed EchoRing for layered impact feedback")
+		return
+	if echo_ring.default_color == shock_ring.default_color:
+		_fail("Enemy death EchoRing must contrast with the primary cyan shock ring")
 		return
 	if dust == null or dust.amount < 8 or not dust.one_shot:
 		_fail("Enemy death burst needs one-shot dust particles")
