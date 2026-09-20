@@ -87,6 +87,7 @@ func _spawn_impact_feedback() -> void:
 	elif _piercing_shot:
 		impact.scale = Vector2.ONE * 1.08
 		impact.modulate = Color(0.62,0.96,1.0,1.0)
+	impact.rotation = direction.angle()
 	var target_parent := get_tree().current_scene
 	if target_parent == null:
 		target_parent = get_parent()
@@ -109,6 +110,10 @@ func _on_area_entered(area: Area2D) -> void:
 	_spawn_impact_feedback()
 	if pierce_remaining > 0:
 		pierce_remaining -= 1
+		if pierce_remaining <= 0:
+			_piercing_shot = false
+			if pierce_halo != null:
+				pierce_halo.visible = false
 		return
 	queue_free()
 
