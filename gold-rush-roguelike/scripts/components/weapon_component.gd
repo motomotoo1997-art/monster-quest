@@ -14,6 +14,7 @@ var fire_rate_multiplier: float = 1.0
 var speed_multiplier: float = 1.0
 var crit_chance: float = 0.0
 var crit_multiplier: float = 2.0
+var projectile_pierce: int = 0
 var _cooldown_remaining: float = 0.0
 
 
@@ -63,6 +64,7 @@ func try_fire(
 		shot_damage,
 		owner_team
 	)
+	projectile_component.pierce_remaining = projectile_pierce
 	mark_fired()
 	fired.emit(projectile)
 	return true
@@ -82,3 +84,7 @@ func set_projectile_speed_multiplier(value: float) -> void:
 
 func set_crit_chance(value: float) -> void:
 	crit_chance = clampf(value, 0.0, 1.0)
+
+
+func add_projectile_pierce(amount: int) -> void:
+	projectile_pierce = maxi(projectile_pierce + amount,0)
