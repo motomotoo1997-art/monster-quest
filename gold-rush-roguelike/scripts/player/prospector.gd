@@ -143,6 +143,14 @@ func add_crit_chance(amount: float) -> void:
 	weapon_component.set_crit_chance(weapon_component.crit_chance + amount)
 
 
+func multiply_move_speed(multiplier: float) -> void:
+	move_speed *= maxf(multiplier,0.1)
+
+
+func add_projectile_pierce(amount: int) -> void:
+	weapon_component.add_projectile_pierce(amount)
+
+
 func multiply_dash_recovery(multiplier: float) -> void:
 	_dash_cooldown_multiplier = maxf(_dash_cooldown_multiplier * multiplier, 0.1)
 
