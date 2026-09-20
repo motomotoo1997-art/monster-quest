@@ -14,6 +14,8 @@ const DEFAULT_UPGRADES: Array[UpgradeDefinition] = [
 	preload("res://data/upgrades/defense_max_hp.tres"),
 	preload("res://data/upgrades/gold_pickup_value.tres"),
 	preload("res://data/upgrades/crit_chance.tres"),
+	preload("res://data/upgrades/trailblazer.tres"),
+	preload("res://data/upgrades/piercing_rounds.tres"),
 ]
 
 @export var player_path: NodePath
@@ -94,6 +96,12 @@ func apply_upgrade(id: StringName) -> void:
 		&"crit_chance":
 			if player != null:
 				player.add_crit_chance(definition.amount)
+		&"move_speed":
+			if player != null:
+				player.multiply_move_speed(definition.amount)
+		&"projectile_pierce":
+			if player != null:
+				player.add_projectile_pierce(int(round(definition.amount)))
 		_:
 			return
 	upgrade_selected.emit(definition.id)
