@@ -62,6 +62,7 @@ func roll_choices(count: int = 3) -> Array[UpgradeDefinition]:
 
 
 func apply_upgrade(id: StringName) -> void:
+	_resolve_runtime_dependencies()
 	var definition := _find_definition(id)
 	if definition == null:
 		return
@@ -105,6 +106,21 @@ func apply_upgrade(id: StringName) -> void:
 		_:
 			return
 	upgrade_selected.emit(definition.id)
+
+
+func _resolve_runtime_dependencies() -> void:
+	if player == null or not is_instance_valid(player):
+		player = get_node_or_null(player_path) as Prospector
+		if player == null and get_parent() != null:
+			player = get_parent().find_child("Prospector",true,false) as Prospector
+	if economy == null or not is_instance_valid(economy):
+		economy = get_node_or_null(economy_path) as EconomyController
+		if economy == null and get_parent() != null:
+			economy = get_parent().get_node_or_null("EconomyController") as EconomyController
+	if build_controller == null or not is_instance_valid(build_controller):
+		build_controller = get_node_or_null(build_controller_path) as BuildController
+		if build_controller == null and get_parent() != null:
+			build_controller = get_parent().get_node_or_null("BuildController") as BuildController
 
 
 func _find_definition(id: StringName) -> UpgradeDefinition:
