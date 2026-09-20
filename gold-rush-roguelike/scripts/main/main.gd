@@ -310,7 +310,9 @@ func _on_enemy_died(enemy: Node, _gold_value: int) -> void:
 	var enemy_node := enemy as Node2D
 	if enemy_node == null:
 		return
-	_spawn_vfx(enemy_death_burst_scene, enemy_node.global_position)
+	var death_vfx := _spawn_vfx(enemy_death_burst_scene, enemy_node.global_position)
+	if death_vfx != null and enemy.is_in_group("elite_enemies") and death_vfx.has_method("configure_elite_variant"):
+		death_vfx.call("configure_elite_variant")
 
 
 func _bind_defense_feedback(defense: DefenseBase) -> void:
