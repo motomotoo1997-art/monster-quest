@@ -49,6 +49,11 @@ func _run_test() -> void:
 	if echo_ring.default_color == shock_ring.default_color:
 		_fail("Enemy death EchoRing must contrast with the primary cyan shock ring")
 		return
+	var echo_scale_before := echo_ring.scale.x
+	death_vfx.call("_process", 0.14)
+	if echo_ring.scale.x <= echo_scale_before:
+		_fail("Enemy death EchoRing must expand after the primary impact instead of remaining static")
+		return
 	if dust == null or dust.amount < 8 or not dust.one_shot:
 		_fail("Enemy death burst needs one-shot dust particles")
 		return
