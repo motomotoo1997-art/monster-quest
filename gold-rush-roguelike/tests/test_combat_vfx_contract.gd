@@ -92,7 +92,33 @@ func _run_test() -> void:
 		_fail("Enemy death signal must spawn production death VFX")
 		return
 
-	print("PASS: combat hits and enemy deaths produce layered production VFX")
+	# Clear the normal fixture, then verify that a late-run elite gets a stronger
+	# visual payoff without requiring extra camera shake or changing combat stats.
+	for effect in get_nodes_in_group("enemy_death_vfx"):
+		if effect is Node:
+			(effect as Node).queue_free()
+	await process_frame
+	var elite := hopper_packed.instantiate() as EnemyBase
+	main.add_child(elite)
+	await process_frame
+	elite.apply_elite_modifier()
+	main._bind_enemy_feedback(elite)
+	elite.enemy_died.emit(elite, elite.gold_value)
+	await process_frame
+	var elite_effects := get_nodes_in_group("enemy_death_vfx")
+	if elite_effects.is_empty():
+		_fail("Elite enemy death must spawn production death VFX")
+		return
+	var elite_vfx := elite_effects.back() as Node2D
+	var elite_light := elite_vfx.get_node_or_null("DeathLight") as PointLight2D if elite_vfx != null else null
+	if elite_vfx == null or elite_vfx.scale.x < 1.18:
+		_fail("Elite enemy death burst must be visibly larger than a normal death")
+		return
+	if elite_light == null or elite_light.energy <= 2.15:
+		_fail("Elite enemy death burst must receive a stronger local light accent")
+		return
+
+	print("PASS: combat hits, normal deaths and elite deaths have layered readable production VFX")
 	main.queue_free()
 	quit(0)
 
