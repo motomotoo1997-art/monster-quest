@@ -55,8 +55,10 @@ func try_fire(
 		projectile.queue_free()
 		return false
 	var shot_damage := projectile_damage * damage_multiplier
-	if crit_chance > 0.0 and randf() < clampf(crit_chance, 0.0, 1.0):
+	var is_critical := false
+	if crit_chance > 0.0 and randf() < clampf(crit_chance,0.0,1.0):
 		shot_damage *= crit_multiplier
+		is_critical = true
 	projectile_component.lifetime = projectile_lifetime
 	projectile_component.configure(
 		direction.normalized(),
@@ -64,7 +66,7 @@ func try_fire(
 		shot_damage,
 		owner_team
 	)
-	projectile_component.pierce_remaining = projectile_pierce
+	projectile_component.set_shot_traits(is_critical,projectile_pierce)
 	mark_fired()
 	fired.emit(projectile)
 	return true
