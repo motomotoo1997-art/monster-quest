@@ -7,8 +7,8 @@
 [node name="EnemyDeathBurst" type="Node2D" groups=["enemy_death_vfx"]]
 z_index = 24
 script = ExtResource("1_script")
-duration = 0.46
-shard_distance = 58.0
+duration = 0.50
+shard_distance = 64.0
 
 [node name="DeathLight" type="PointLight2D" parent="."]
 texture = ExtResource("3_light")
@@ -20,6 +20,13 @@ color = Color(0.98,0.68,0.16,1)
 points = PackedVector2Array(0,-24,17,-17,24,0,17,17,0,24,-17,17,-24,0,-17,-17)
 width = 4.5
 default_color = Color(0.18,0.91,1,0.94)
+closed = true
+antialiased = true
+
+[node name="EchoRing" type="Line2D" parent="."]
+points = PackedVector2Array(0,-19,13,-13,19,0,13,13,0,19,-13,13,-19,0,-13,-13)
+width = 2.8
+default_color = Color(1,0.76,0.18,0.82)
 closed = true
 antialiased = true
 
@@ -61,10 +68,18 @@ color = Color(0.88,0.48,0.05,1)
 position = Vector2(-3,-6)
 polygon = PackedVector2Array(-4,-5,6,-2,6,5,-2,8,-7,2)
 color = Color(1,0.74,0.12,1)
+[node name="Shard8" type="Polygon2D" parent="GoldShards"]
+position = Vector2(3,-7)
+polygon = PackedVector2Array(-4,-3,4,-6,7,0,3,6,-6,4)
+color = Color(1,0.94,0.52,1)
+[node name="Shard9" type="Polygon2D" parent="GoldShards"]
+position = Vector2(7,-1)
+polygon = PackedVector2Array(-3,-4,6,-4,8,2,1,7,-6,3)
+color = Color(0.96,0.60,0.08,1)
 
 [node name="Dust" type="CPUParticles2D" parent="."]
 emitting = true
-amount = 14
+amount = 16
 lifetime = 0.44
 one_shot = true
 explosiveness = 0.92
