@@ -25,7 +25,7 @@ func _run_test() -> void:
 		_fail("Projectile needs authored PierceHalo and CritCore feedback nodes")
 		return
 
-	projectile.configure(Vector2.RIGHT,900.0,24.0,TeamComponent.Team.PLAYER)
+	projectile.configure(Vector2(1.0,1.0),900.0,24.0,TeamComponent.Team.PLAYER)
 	projectile.call("set_shot_traits",true,1)
 	if not pierce_halo.visible or not crit_core.visible or projectile.pierce_remaining != 1:
 		_fail("Critical piercing shots must visibly advertise both traits")
@@ -40,14 +40,23 @@ func _run_test() -> void:
 	if projectile.pierce_remaining != 0 or projectile.is_queued_for_deletion():
 		_fail("First piercing hit must consume one pierce and keep the projectile alive")
 		return
+	if pierce_halo.visible:
+		_fail("Pierce halo must switch off after the final available pierce is consumed")
+		return
 
-	var impact_found := false
+	var impact_found: Node2D = null
 	for child in root.get_children():
 		if child.name.begins_with("HitFlash"):
-			impact_found = true
+			impact_found = child as Node2D
 			break
-	if not impact_found:
-		_fail("Successful projectile hits must spawn impact feedback")
+	if impact_found == null:
+		_fail("Successful trait projectile hits must spawn impact feedback")
+		return
+	if absf(wrapf(impact_found.rotation - projectile.rotation,-PI,PI)) > 0.02:
+		_fail("Trait impact feedback must align with projectile travel direction")
+		return
+	if impact_found.scale.x < 1.2 or impact_found.modulate.r <= impact_found.modulate.b:
+		_fail("Critical impact feedback must read larger and warmer than a normal hit")
 		return
 
 	projectile._on_area_entered(enemy.hurtbox_component)
@@ -57,7 +66,7 @@ func _run_test() -> void:
 
 	projectile.queue_free()
 	enemy.queue_free()
-	print("PASS: crit and piercing shots are readable and spawn hit feedback without changing hit semantics")
+	print("PASS: crit/pierce feedback tracks remaining pierce and aligns trait impacts with travel")
 	quit(0)
 
 func _fail(message: String) -> void:
