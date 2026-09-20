@@ -6,6 +6,7 @@ extends Node2D
 var _age: float = 0.0
 var _base_positions: Array[Vector2] = []
 var _directions: Array[Vector2] = []
+var _start_light_energy: float = 2.15
 
 @onready var gold_shards: Node2D = $GoldShards
 @onready var shock_ring: Line2D = $ShockRing
@@ -16,6 +17,7 @@ var _directions: Array[Vector2] = []
 
 
 func _ready() -> void:
+	_start_light_energy = death_light.energy
 	var shard_count: int = gold_shards.get_child_count()
 	for index in range(shard_count):
 		var shard: Node2D = gold_shards.get_child(index) as Node2D
@@ -29,6 +31,17 @@ func _ready() -> void:
 	echo_ring.modulate.a = 0.82
 	core_burst.scale = Vector2.ONE * 0.72
 	dust.restart()
+
+
+func configure_elite_variant() -> void:
+	# Elite deaths get one stronger cyan/gold punctuation layer, but no camera shake.
+	# The scale bump stays compact enough that dense Arena04 fights remain readable.
+	scale = Vector2.ONE * 1.24
+	_start_light_energy = 2.80
+	death_light.energy = _start_light_energy
+	core_burst.color = Color(1.0, 0.86, 0.32, 1.0)
+	echo_ring.width = 3.4
+	dust.amount = 20
 
 
 func _process(delta: float) -> void:
@@ -65,7 +78,7 @@ func _process(delta: float) -> void:
 	var core_color: Color = core_burst.modulate
 	core_color.a = 1.0 - t
 	core_burst.modulate = core_color
-	death_light.energy = lerpf(2.15, 0.0, t)
+	death_light.energy = lerpf(_start_light_energy, 0.0, t)
 
 	if t >= 1.0:
 		queue_free()
