@@ -193,6 +193,21 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
+      - name: Capture projectile feedback preview
+        shell: bash
+        run: |
+          set -euo pipefail
+          timeout 35s xvfb-run -a godot --path gold-rush-roguelike --rendering-method gl_compatibility --script res://tests/capture_projectile_feedback_preview.gd
+          test -s /tmp/gold-rush-projectile-feedback-preview.png
+
+      - name: Upload projectile feedback preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: GoldRushRoguelike-Projectile-Feedback-Preview
+          path: /tmp/gold-rush-projectile-feedback-preview.png
+          if-no-files-found: error
+          retention-days: 14
+
       - name: Install Godot export templates
         shell: bash
         run: |
