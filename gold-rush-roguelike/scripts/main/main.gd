@@ -90,10 +90,29 @@ func _on_arena_started(index: int) -> void:
 		build_controller.unlock_defense(3)
 	hud.set_arena(index)
 	_position_persistent_actors()
+	_configure_arena_combat_pacing(index)
 	if index == 5:
 		_start_boss_encounter()
 	else:
 		_start_arena_waves(index)
+
+
+func _configure_arena_combat_pacing(index: int) -> void:
+	# Later arenas open with more simultaneous pressure, while a wider deterministic
+	# spawn spread keeps silhouettes readable and avoids collision-body stacking.
+	match index:
+		1, 2:
+			wave_director.initial_spawn_burst = 3
+			wave_director.spawn_spread_radius = 24.0
+		3:
+			wave_director.initial_spawn_burst = 4
+			wave_director.spawn_spread_radius = 30.0
+		4:
+			wave_director.initial_spawn_burst = 5
+			wave_director.spawn_spread_radius = 36.0
+		_:
+			wave_director.initial_spawn_burst = 3
+			wave_director.spawn_spread_radius = 28.0
 
 
 func _position_persistent_actors() -> void:
@@ -182,11 +201,11 @@ func _build_arena_waves(index: int) -> Array:
 					{"scene": disc_scene, "count": 4, "interval": 0.58},
 				],
 				[
-					{"scene": slime_scene, "count": 5, "interval": 0.78},
-					{"scene": slime_scene, "count": 1, "interval": 0.92, "elite": true},
-					{"scene": sentinel_scene, "count": 4, "interval": 0.58},
-					{"scene": sentinel_scene, "count": 1, "interval": 0.70, "elite": true},
-					{"scene": disc_scene, "count": 5, "interval": 0.52},
+					{"scene": slime_scene, "count": 6, "interval": 0.72},
+					{"scene": slime_scene, "count": 1, "interval": 0.86, "elite": true},
+					{"scene": sentinel_scene, "count": 5, "interval": 0.54},
+					{"scene": sentinel_scene, "count": 1, "interval": 0.66, "elite": true},
+					{"scene": disc_scene, "count": 7, "interval": 0.46},
 				],
 			]
 	return waves
