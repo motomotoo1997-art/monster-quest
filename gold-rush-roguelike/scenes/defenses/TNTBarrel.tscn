@@ -46,7 +46,12 @@ position = Vector2(0,-47)
 sprite_frames = SubResource("Frames")
 animation = &"prearm"
 scale = Vector2(0.36,0.36)
-[node name="FuseGlow" type="Polygon2D" parent="."]\nposition = Vector2(14,-82)\npolygon = PackedVector2Array(-9,0,-6,-6,0,-10,6,-6,9,0,6,6,0,10,-6,6)\ncolor = Color(1,0.58,0.08,0.58)\n\n[node name="HealthComponent" type="Node" parent="."]
+[node name="FuseGlow" type="Polygon2D" parent="."]
+position = Vector2(14,-82)
+polygon = PackedVector2Array(-9,0,-6,-6,0,-10,6,-6,9,0,6,6,0,10,-6,6)
+color = Color(1,0.58,0.08,0.58)
+
+[node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_health")
 max_health = 45.0
 [node name="TeamComponent" type="Node" parent="."]
