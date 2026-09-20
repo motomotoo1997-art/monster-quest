@@ -17,6 +17,10 @@ func _run_test() -> void:
 			_fail("Defense scene must load: %s" % entry.scene)
 			return
 		var defense := packed.instantiate()
+		for component_path in ["HealthComponent", "TeamComponent", "HurtboxComponent"]:
+			if defense.get_node_or_null(component_path) == null:
+				_fail("Defense gameplay component missing before SceneTree entry: %s/%s" % [entry.scene, component_path])
+				return
 		root.add_child(defense)
 		await process_frame
 		var visual := defense.get_node_or_null("Visual") as AnimatedSprite2D
@@ -39,7 +43,7 @@ func _run_test() -> void:
 				return
 		defense.queue_free()
 		await process_frame
-	print("PASS: defenses use frontier v6 art and retain readable firing/arming accents")
+	print("PASS: defenses use frontier v6 art, intact gameplay components and readable firing/arming accents")
 	quit(0)
 
 func _fail(message: String) -> void:
