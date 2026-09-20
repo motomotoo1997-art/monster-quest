@@ -79,7 +79,6 @@ func _spawn_impact_feedback() -> void:
 	var impact := impact_scene.instantiate() as Node2D
 	if impact == null:
 		return
-	impact.global_position = global_position
 	if is_critical:
 		impact.scale = Vector2.ONE * 1.22
 		impact.modulate = Color(1.0,0.78,0.32,1.0)
@@ -91,6 +90,7 @@ func _spawn_impact_feedback() -> void:
 		target_parent = get_parent()
 	if target_parent != null:
 		target_parent.add_child(impact)
+		impact.global_position = global_position
 
 
 func _on_area_entered(area: Area2D) -> void:
