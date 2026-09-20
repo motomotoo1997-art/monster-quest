@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/components/projectile_component.gd" id="1_projectile"]
 [ext_resource type="Texture2D" path="res://assets/vfx/combat_feedback_v6.svg" id="2_v6"]
+[ext_resource type="PackedScene" path="res://scenes/vfx/HitFlash.tscn" id="3_hit"]
 
 [sub_resource type="AtlasTexture" id="V6BoltTexture"]
 atlas = ExtResource("2_v6")
@@ -17,6 +18,7 @@ collision_mask = 6
 monitoring = true
 monitorable = false
 script = ExtResource("1_projectile")
+impact_scene = ExtResource("3_hit")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_projectile")
@@ -40,3 +42,16 @@ color = Color(0.80,0.98,1,1)
 [node name="Core" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(-2,0,2,-2,8,0,2,2)
 color = Color(1,1,1,1)
+
+[node name="PierceHalo" type="Line2D" parent="."]
+visible = false
+points = PackedVector2Array(-11,-8,5,-8,13,0,5,8,-11,8,-18,0,-11,-8)
+width = 2.4
+default_color = Color(0.20,0.95,1,0.92)
+closed = true
+antialiased = true
+
+[node name="CritCore" type="Polygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-8,0,-2,-8,3,-3,13,0,3,3,-2,8)
+color = Color(1,0.72,0.16,0.92)
