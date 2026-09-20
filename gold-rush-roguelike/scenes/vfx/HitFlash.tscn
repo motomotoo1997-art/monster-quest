@@ -13,6 +13,7 @@ z_index = 22
 script = ExtResource("1")
 duration = 0.20
 end_scale = 1.75
+spin_speed = 0.0
 
 [node name="V6Impact" type="Sprite2D" parent="."]
 texture = SubResource("V6ImpactTexture")
