@@ -9,6 +9,8 @@ var direction: Vector2 = Vector2.RIGHT
 var owner_team: TeamComponent.Team = TeamComponent.Team.NEUTRAL
 var _remaining_lifetime: float = 2.0
 var _configured := false
+var pierce_remaining: int = 0
+var _hit_hurtboxes: Dictionary = {}
 
 
 func _ready() -> void:
@@ -45,9 +47,17 @@ func _on_area_entered(area: Area2D) -> void:
 	if not area is HurtboxComponent:
 		return
 	var hurtbox := area as HurtboxComponent
-	var knockback := direction * minf(speed * 0.08, 160.0)
-	if hurtbox.receive_hit(damage, owner_team, knockback):
-		queue_free()
+	var hurtbox_id := hurtbox.get_instance_id()
+	if _hit_hurtboxes.has(hurtbox_id):
+		return
+	var knockback := direction * minf(speed * 0.08,160.0)
+	if not hurtbox.receive_hit(damage,owner_team,knockback):
+		return
+	_hit_hurtboxes[hurtbox_id] = true
+	if pierce_remaining > 0:
+		pierce_remaining -= 1
+		return
+	queue_free()
 
 
 func _on_body_entered(_body: Node2D) -> void:
