@@ -74,7 +74,9 @@ func _update_trait_visuals() -> void:
 
 
 func _spawn_impact_feedback() -> void:
-	if impact_scene == null or not is_inside_tree():
+	# Main already provides the normal cyan hit flash. Only trait shots add a
+	# second accent burst so standard fire stays clean and inexpensive.
+	if (not is_critical and not _piercing_shot) or impact_scene == null or not is_inside_tree():
 		return
 	var impact := impact_scene.instantiate() as Node2D
 	if impact == null:
